@@ -6,6 +6,7 @@ import {
     getPrevSection,
     getNextSection,
     chapters,
+    getChapterByNum,
 } from "../../../data/tutorialData";
 
 const lang = "zh";
@@ -19,6 +20,9 @@ export function getStaticPaths() {
 
 const { slug } = Astro.params;
 const { section } = Astro.props;
+
+// 获取当前章节信息
+const currentChapter = getChapterByNum(section.chapterNum);
 
 const contentModules = import.meta.glob(
     "../../../components/tutorials/*.astro",
@@ -91,7 +95,7 @@ const groupedSections = chapters.map((chapter) => ({
                 <div class="breadcrumb">
                     <a href="/zh/tutorials">教程首页</a>
                     <span class="separator">›</span>
-                    <span>{section.chapter}</span>
+                    <span>{currentChapter?.title}</span>
                 </div>
 
                 <header class="section-header">
@@ -431,7 +435,6 @@ const groupedSections = chapters.map((chapter) => ({
         justify-content: space-between;
         gap: 1rem;
         padding: 1.5rem;
-        background: var(--bg-light);
         border-radius: 0 0 16px 16px;
         margin-top: 2rem;
     }
@@ -450,7 +453,7 @@ const groupedSections = chapters.map((chapter) => ({
         flex-direction: column;
         gap: 0.25rem;
         padding: 1rem 1.5rem;
-        background: white;
+        background: #e6f2ff;
         border-radius: 10px;
         text-decoration: none;
         transition: all 0.2s ease;
