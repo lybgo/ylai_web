@@ -34,7 +34,7 @@ const getContentModule = (slug: string) => {
 
 const contentModule = getContentModule(slug);
 const ContentComponent = contentModule?.default ?? null;
-const isDraft = contentModule ? (contentModule.isDraft ?? false) : true;
+const isDraft = contentModule?.isOK === true ? false : true;
 
 const prevSection = getPrevSection(slug);
 const nextSection = getNextSection(slug);
