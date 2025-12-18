@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0基础1天入门：无需编程的自动化控制与物联网应用教程 & 宜启智控Pro控制器使用教程</title>
+    <!-- 引入 Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 设置默认字体为 Noto Sans SC 和 Inter，以支持中文和英文 */
+        body {
+            font-family: 'Noto Sans SC', 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        /* 自定义滚动条，使其更美观 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        /* 章节内容折叠过渡效果 - 仅保留样式以防未来使用 */
+        .content-panel {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            overflow: hidden;
+            max-height: 1000px; /* 初始状态给一个足够大的值 */
+            opacity: 1;
+        }
+        .content-panel.hidden-content {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        /* ---------------------------------------------------- */
+        /* 动态标题栏样式 */
+        /* ---------------------------------------------------- */
+        .main-header {
+            height: 140px; /* 初始展开高度 */
+            overflow: hidden;
+            transition: height 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+        }
+
+        /* 新增：在点击目录链接时，临时禁用所有过渡效果 */
+        .main-header.no-transition {
+            transition: none !important; 
+        }
+
+        .main-header.scrolled {
+            height: 64px; /* 滚动后缩小高度 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* 缩小后增加阴影，增强浮动感 */
+        }
+
+        /* 展开内容区域的过渡效果 */
+        #expanded-header {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.2s, transform 0.3s;
+        }
+
+        /* 缩小内容区域的初始样式 */
+        #shrunken-header {
+            display: none; /* 初始隐藏 */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        /* 滚动后缩小内容区域的显示样式 */
+        .main-header.scrolled #expanded-header {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+            display: none; /* 滚动后完全隐藏展开内容 */
+        }
+
+        .main-header.scrolled #shrunken-header {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.3s 0.1s, transform 0.3s 0.1s; /* 略微延迟，使过渡更自然 */
+        }
+
+        /* ---------------------------------------------------- */
+        /* 侧边栏和主内容布局样式 (固定宽度) */
+        /* ---------------------------------------------------- */
+        #toc-sidebar {
+            /* 侧边栏固定宽度 */
+            width: 320px; /* 增加宽度到320px */
+            flex-shrink: 0; /* 防止侧边栏被压缩 */
+        }
+        #main-content {
+            /* 主内容区域占据剩余空间 */
+            min-width: 600px;
+        }
+        .toc-content {
+            /* 确保目录内容正确滚动 */
+            height: calc(100vh - 64px); /* 减去目录头部高度 */
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        /* 大节标题样式 */
+        .toc-link.chapter {
+            font-size: 1rem; /* 默认大小 */
+            font-weight: 700;
+        }
+        /* 小节标题样式 */
+        .toc-link.section {
+            font-size: 0.875rem; /* 比大节标题小一个档次 */
+        }
+        .toc-link:hover {
+            background-color: #e0f2fe; /* Light blue background on hover */
+        }
+        
+        /* 新增：为章节标题增加额外的上边距，以在章节之间创建更大的空白间隙 */
+        h2[id^="section-"] {
+            margin-top: 4rem !important; /* 增加上边距 */
+        }        .toc-link.active {
+            background-color: #bfdbfe; /* Blue background for active link */
+            color: #1e66af;
+            font-weight: 700;
+            border-left: 4px solid #3bb2f6;
+            padding-left: calc(1rem - 4px);
+        }    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div id="container" class="fixed inset-0 flex">
+
+        <!-- 目录侧边栏 -->
+        <div id="toc-sidebar" class="w-64 bg-white border-r border-gray-200 overflow-y-auto transition-all duration-300">
+            <div class="p-4 bg-blue-600 text-white shadow-md rounded-tr-lg h-16 flex items-center">
+                <h3 class="text-xl font-bold">教程章节</h3>
+            </div>
+            
+            <div id="toc-nav" class="p-4 toc-content">
+                <nav class="space-y-1">
+                <a href="#section-1" class="toc-link chapter block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200">第一章 理论与基础导论</a>
+                    <a href="#section-2" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">1. 课程导论与价值分析</a>
+                    <a href="#section-3" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">2. 自动化控制与物联网核心概念解析</a>
+                    <a href="#section-4" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">3. 宜启智控Pro的核心定位与优势</a>
+                    <a href="#section-5" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">4. 课程目标与能力培养</a>
+                    <a href="#section-6" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">5. 学习方法与课程结构</a>
+                <a href="#section-7" class="toc-link chapter block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200">第二章 硬件配置与快速部署</a>
+                    <a href="#section-8" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">6. 宜启智控Pro硬件型号选型指南</a>
+                    <a href="#section-9" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">7. 设备首次上电与APP连接配置</a>
+                    <a href="#section-10" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">8. 继电器/开关输出控制技术</a>
+                    <a href="#section-11" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">9. PWM脉冲宽度调制输出应用</a>
+                    <a href="#section-12" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">10. 时间控制：定时/循环定时等功能</a>
+                    <a href="#section-13" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">11. “一键执行”快速入门</a>
+                    <a href="#section-14" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">12. 开关量/NPN/频率 信号输入与温湿度传感器接入</a>
+                    <a href="#section-15" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">13. 涂鸦智能APP的使用</a>
+                    <a href="#section-16" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">14. MQTT协议基础与巴法云演示接入</a>
+                    <a href="#section-17" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">15. 接入ThingsCloud云平台</a>
+                    <a href="#section-18" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">16. “自动任务”自动化控制快速入门</a>
+                    <a href="#section-19" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">17. 任务的“运行日志”查看与分析</a>
+                    <a href="#section-20" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">18. 逻辑固件的导出与导入管理</a>
+                    <a href="#section-21" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">19. Mesh无线网络组网功能</a>
+                    <a href="#section-22" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">20. 433MHz无线射频接收与发射</a>
+                    <a href="#section-23" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">21. 设备维护与升级（重启/重置/OTA）</a>
+                    <a href="#section-24" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">22. 设备安全与权限管理</a>
+                    <a href="#section-25" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">23. 其它高级功能配置</a>
+                    <a href="#section-26" class="toc-link chapter block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200">第三章 深入学习传感器/受控设备/自动化/MQTT</a>
+                    <a href="#section-27" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">24. 模拟量传感器接入与数据处理</a>
+                    <a href="#section-28" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">25. RS485 Modbus RTU/DS18B20总线传感器应用</a>
+                    <a href="#section-29" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">26. “一键执行”与“自动任务”的任务执行机制详解</a>
+                    <a href="#section-30" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">27. “自动任务”的条件逻辑配置深入</a>
+                    <a href="#section-31" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">28. IIC数字接口传感器扩展应用</a>
+                    <a href="#section-32" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">29. PID闭环控制功能实战</a>
+                    <a href="#section-33" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">30. 步进电机精确驱动控制</a>
+                    <a href="#section-34" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">31. 舵机角度与位置控制</a>
+                    <a href="#section-35" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">32. PWM脉冲加减速功能在照明中的应用</a>
+                    <a href="#section-36" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">33. MQTT协议数据格式详解</a>
+                    <a href="#section-37" class="toc-link chapter block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200">第四章 工业/物联网平台与综合应用案例</a>
+                    <a href="#section-38" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">34. 接入ThingsBoard工业物联网平台</a>
+                    <a href="#section-39" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">35. 接入Home Assistant智能家居平台</a>
+                    <a href="#section-40" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">36. 接入EMQ X物联网消息平台</a>
+                    <a href="#section-41" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">37. 智能电表数据采集与多渠道报警系统</a>
+                    <a href="#section-42" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">38. 变频器远程控制与数据采集</a>
+                    <a href="#section-43" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">39. 常用传感器与执行设备选型指南</a>
+                    <a href="#section-44" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">40. 智慧农业应用场景案例实战</a>
+                    <a href="#section-45" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">41. 智慧楼宇应用场景案例实战</a>
+                    <a href="#section-46" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">42. 传统设备快速智能化升级改造案例</a>
+                    <a href="#section-47" class="toc-link section block p-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 ml-4">43. 创新型智能设备项目落地与实践</a>
+            </div>
+        </div>
+
+        <!-- 主内容区域 -->
+        <div id="main-content" class="flex-grow overflow-y-auto bg-white transition-all duration-300 shadow-xl">
+            
+            <!-- 动态 Header: 此元素将根据滚动状态伸缩 -->
+            <header id="main-document-header" class="main-header sticky top-0 z-10 bg-white border-b border-gray-200">
+                <div class="p-6 md:p-8 h-full flex flex-col justify-center">
+                    <!-- 展开状态的内容 (默认显示) -->
+                    <div id="expanded-header" class="space-y-2">
+                        <div class="flex items-center">
+                            <img src="img/logo_blue.png" alt="宜启智控Pro Logo" class="h-28 w-auto mr-4">
+                            <h1 class="text-3xl font-extrabold text-blue-700">
+                                0基础1天入门：<br />无需编程的自动化控制与物联网应用教程<br />
+                                & 宜启智控Pro控制器使用教程
+                            </h1>
+                        </div>
+                    </div>
+                    <!-- 缩小状态的内容 (滚动后显示) -->
+                    <div id="shrunken-header">
+                        <div class="flex items-center">
+                            <img src="img/logo_blue.png" alt="宜启智控Pro Logo" class="h-8 w-auto mr-4">
+                            <h2 class="text-xl font-bold text-blue-700">
+                                0基础1天入门：无需编程的自动化控制与物联网应用教程 & 宜启智控Pro控制器使用教程
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- 实际文档内容区域 -->
+            <div class="p-6 md:p-8">
+<div class="p-4 mb-6 bg-blue-50 border-l-4 border-blue-400 text-blue-800 rounded-lg">
+<p class="font-semibold text-lg">🎯 课程总目标：</p>
+<p class="mb-4 text-gray-700 leading-relaxed">通过宜启智控Pro演示套件，使学生或工程人员系统掌握无需编程的自动化控制逻辑配置、传感器数据采集、设备云端通信及多平台对接技术，具备快速搭建智慧项目或传统设备智能化升级的能力。</p>
+</div>
+
+
+
+<h1 class="text-2xl font-bold mt-10 mb-6 text-blue-600 border-b pb-2" id="section-1">第一章 理论与基础导论(30分钟)</h1>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-2">1. 课程导论与价值分析</h2><p class="mb-4 text-gray-700 leading-relaxed">建立对宜启智控Pro核心价值的认识，理解课程的必要性和独特性。</p>
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>课程价值定位：</strong> 自动化控制和物联网应用的门槛消除（无需编程）。</li>
+<li><strong>宜启智控的经济性与普适性：</strong> 阐述其平民化价格优势，以及在智慧农业、楼宇、工厂等各行各业的广泛应用场景。</li>
+<li><strong>高职院校教学与实训便利性：</strong> 作为教学演示套件，如何促进控制技术与物联网应用的融合教学。</li>
+<li><strong>课程定位：</strong> 兼具职业技能提升与《宜启智控Pro使用说明教程》的实用双重属性。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-3">2. 自动化控制与物联网核心概念解析</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握自动化控制与物联网的基本概念，为后续的实践操作奠定理论基础。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>自动化控制基础：</strong> 简单介绍开环控制、闭环控制及自动化系统的基本组成（传感器、控制器、执行器）。</li>
+<li><strong>传统控制实现方式对比：</strong> 通过PLC、开发板、单片机实现自动化控制的优缺点概述。</li>
+<li><strong>物联网（IoT）基础：</strong> 介绍物联网三层架构（感知层、网络层、应用层）及其核心作用。</li>
+<li><strong>传统物联网开发的技术栈：</strong> 了解嵌入式编程、网络通信（TCP/UDP）、服务器/云平台开发、移动APP开发等传统学习内容的难度与耗时。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-4">3. 宜启智控Pro的核心定位与优势</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">理解宜启智控Pro在功能、操作、部署上的核心优势。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>宜启智控Pro的产品定位：</strong> “一个智能物联网自动化万能控制器”。</li>
+<li><strong>对比传统PLC/单片机的核心优势：</strong> 无需编程、APP快速配置逻辑、自带物联网通信能力。</li>
+<li><strong>核心能力概览：</strong> 强大的I/O兼容性（支持市场上95%的传感器）、丰富的通信接口（WiFi/4G、RS485、IIC、433MHz）。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-5">4. 课程目标与能力培养</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">明确学习本课程后能达成的具体技能目标和工程能力。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>技能目标：</strong> 快速掌握自动化控制和物联网应用的配置与部署技能。</li>
+<li><strong>传感器应用能力：</strong> 掌握常用的数字量、模拟量、总线传感器（如温湿度、光照度、水位、DS18B20）的种类、型号及正确接线。</li>
+<li><strong>执行控制能力：</strong> 掌握常用受控设备（如继电器、交流接触器、步进电机、电磁阀）的使用与控制方法。</li>
+<li><strong>综合项目能力：</strong> 掌握创造智能设备、实现智慧项目或工程（如智慧农业系统）的整体解决方案能力。</li>
+<li><strong>实践技能：</strong> 掌握基本的电工安全知识、电路接线规范与故障排查技能。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-6">5. 学习方法与课程结构</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">引导学员以实践为主的学习方式，了解课程的进度安排和后续资源。</p>
+
+<ul class="list-decimal list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>实践先行：</strong> 强调“实践是提升能力的最快方法”，要求学员配备演示套件，同步跟进操作。</li>
+<li><strong>教学载体：</strong> 确认本课程以“宜启智控Pro演示板”为核心实训平台。</li>
+<li><strong>学习时间规划：</strong> 课程视频总时长（约13小时），目标实现“一天速成”的学习效率。</li>
+<li><strong>拓展资源：</strong> 介绍本视频账号的其它相关视频教程，鼓励持续学习。</li>
+<li><strong>课程大纲概览：</strong> 简要介绍本大纲结构和主要内容板块（快速入门、深入学习、应用案例）。</li>
+</ul>
+
+<h1 class="text-2xl font-bold mt-10 mb-6 text-blue-600 border-b pb-2" id="section-7">第二章 硬件配置与快速部署</h1>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-8">6. 宜启智控Pro硬件型号选型指南(15分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">了解宜启智控Pro硬件型号选型指南，为以后项目正确选择宜启智控Pro的硬件型号作准备。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>输入输出I/O点数型号：</strong> 根据项目需求选择合适的继电器路数、PWM路数、开关量输入路数等（如6+4路）。</li>
+<li><strong>网络通信方式：</strong> WiFi版、4G、BLE版等的选择与适用场景。</li>
+<li><strong>供电电压选择：</strong> 标准USB 5V/DC 5V供电、宽电压版（DC 7V\~36V）或交流220V版。</li>
+<li><strong>选配功能模块：</strong> RS485总线功能和433MHz无线射频模块的选配考量。</li>
+<li><strong>输出类型配置：</strong> PWM输出口的可选配类型（如0-10V/0-20mA模拟量输出）。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-9">7. 设备首次上电与APP连接配置(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">完成设备的初始化配置，确保设备与手机APP的可靠连接。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>供电与基础接线：</strong> 演示供电输入端接线、5V/3V辅助电源输出接口的使用与限制。</li>
+<li><strong>移动端应用准备：</strong> “源来智能APP”的下载、安装、注册与登录。</li>
+<li><strong>APP权限与连接：</strong> 蓝牙权限、网络权限等注意事项，蓝牙/Wi-Fi模式下的设备查找与添加。</li>
+<li><strong>设备指示灯状态解读：</strong> 运行灯、网络灯、蓝牙灯的正常及异常状态含义。</li>
+<li><strong>手控界面的基础操作：</strong> APP内对继电器、PWM等进行手动开关和参数调节。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-10">8. 继电器/开关输出控制技术(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握继电器输出的电气特性、安全接线规范及大功率负载的控制方法。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>继电器工作原理与功能：</strong> 介绍继电器（Relay）的结构、作用，以及能控制的常见设备类型（照明、水泵、电磁阀等）。</li>
+<li><strong>继电器电气参数：</strong> 最大阻性负载（如AC220V 9A / DC30V 9A）、感性负载的差异与选择。</li>
+<li><strong>继电器接线规范：</strong> 演示常开（NO）、常闭（NC）、公共端（COM）的接线方式，注意高低压分离。</li>
+<li><strong>大功率设备控制：</strong> 介绍继电器容量不足时，如何通过外部<strong>交流接触器</strong>实现对大功率负载（如三相电机、大功率加热棒）的安全控制。</li>
+<li><strong>交流接触器接线：</strong> 演示宜启智控继电器驱动交流接触器线圈的接线方法。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-11">9. PWM脉冲宽度调制输出应用(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握PWM输出的配置和应用，实现对灯光亮度、电机速度等的平滑调节。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>PWM工作原理：</strong> 解释脉冲宽度调制（PWM）的原理及其在控制中的作用。</li>
+<li><strong>PWM的电气参数：</strong> NMOS输出类型、最大开关负载（DC36V 10A）和PWM负载（DC36V 8A）的限制。</li>
+<li><strong>作为开关使用：</strong> 当占空比设为0或100%时，作为普通开关输出的使用。</li>
+<li><strong>调光应用实战：</strong> 通过调节占空比（Duty Cycle）实现LED灯的无级调光。</li>
+<li><strong>高级控制功能预告：</strong> 介绍频率、脉冲数、加减速速率等高级参数及其在电机控制中的应用。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-12">10. 时间控制：定时/循环定时等功能(10分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握设备内部时钟的管理和各种基于时间控制的应用配置。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>设备校时方式：</strong> 蓝牙校时、网络自动校时（NTP）的实现机制。</li>
+<li><strong>定时功能：</strong> 设置单次定时、每日定时、每周定时的开关操作。</li>
+<li><strong>循环定时功能：</strong> 设置周期性的工作/休息模式（如工作10分钟，停止5分钟）。</li>
+<li><strong>倒计时功能：</strong> 设定设备延时开启或延时关闭的配置。</li>
+<li><strong>点动功能：</strong> 实现设备短暂开启后自动关闭的功能配置。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-13">11. “一键执行”快速入门(30分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握“一键执行”任务的创建、编辑和调用，实现多设备协同控制。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>“一键执行”概念：</strong> 解释其作为手动触发或自动化任务调用的复合操作集。</li>
+<li><strong>创建“一键执行”任务：</strong> 配置多路输出（继电器、PWM）的联动操作。</li>
+<li><strong>虚拟开关绑定：</strong> 将“一键执行”任务绑定到APP界面的虚拟开关上，实现快捷操作。</li>
+<li><strong>计数器概念：</strong> 什么是计数器、断电保存（掉电保持）功能的作用。</li>
+<li><strong>计数器的使用与引用：</strong> 介绍计数器的<strong>加(+)</strong>、\*\*减(-)\*\*操作，以及如何在“一键执行”任务中引用计数器的值（例如，延时操作引用计数器值）。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-14">12. 开关量/NPN/频率 信号输入与温湿度传感器接入(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握数字量输入的类型、接线方式，并学会接入常用数字量传感器。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>开关量信号：</strong> 介绍无源开关量（干接点）和有源开关量（湿接点）的特性。</li>
+<li><strong>开关量传感器接线：</strong> 以水位传感器（浮球开关）、行程开关为例，演示无源/有源接线。</li>
+<li><strong>NPN（集电极开路）信号：</strong> 介绍NPN型输出传感器（如光电开关）的接线方法。</li>
+<li><strong>脉冲/频率输入：</strong> 解释如何接入脉冲输出的流量计或频率信号，进行计数或频率检测。</li>
+<li><strong>IIC数字通信接口：</strong> 演示IIC接口的硬件接入（SCL/SDA/GND/3V），接入IIC温湿度传感器（如SHT30）。</li>
+<li><strong>输入参数状态查看：</strong> 在APP中查看开关状态、频率值、温湿度等数据。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-15">13. 涂鸦智能APP的使用(30分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握将设备接入主流云平台（涂鸦）的方法，并使用其远程控制和自动化功能。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>涂鸦平台介绍：</strong> 涂鸦智能平台的市场地位与功能概览。</li>
+<li><strong>下载与安装：</strong> “涂鸦智能APP”的下载与设备添加流程（WIFI/4G）。</li>
+<li><strong>远程控制与数据查看：</strong> 通过涂鸦APP实现远程手控操作和设备参数（继电器状态、传感器值）的查看。</li>
+<li><strong>平台内计数器配置：</strong> 在涂鸦云端对宜启智控的计数器进行配置和管理。</li>
+<li><strong>云端“一键执行”与“智能场景”：</strong> 调用宜启智控的一键执行任务，并利用涂鸦的智能场景实现更复杂的跨设备联动。</li>
+<li><strong>高级报警功能：</strong> 配置短信、电话报警服务，实现关键状态的及时通知。</li>
+<li><strong>用户与设备管理：</strong> 设备分享给其他用户、设备分组管理、解除涂鸦账号绑定流程。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-16">14. MQTT协议基础与巴法云演示接入(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">了解MQTT协议原理，掌握宜启智控如何通过MQTT与云端进行数据交互。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>MQTT协议原理：</strong> 什么是MQTT，发布/订阅（Publish/Subscribe）模式、QoS等级。</li>
+<li><strong>支持平台与私有服务器：</strong> 介绍设备支持对接主流MQTT Broker（如阿里云、腾讯云、Emqx）和私有服务器。</li>
+<li><strong>巴法云演示接入：</strong> 以巴法云为例，演示MQTT连接参数（Broker地址、ClientID、用户名、密码）的配置。</li>
+<li><strong>云数据上报配置：</strong> 配置传感器数据（温湿度、模拟量、计数器）的主动上报周期和格式。</li>
+<li><strong>宜启智控MQTT数据格式：</strong> 初步介绍设备上报数据（JSON格式）和接收控制指令的格式。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-17">15. 接入ThingsCloud云平台(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握专业物联网云平台（ThingsCloud）的接入和数据可视化看板的构建。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>ThingsCloud平台介绍：</strong> 平台特点、费用模式及优势。</li>
+<li><strong>接入流程：</strong> 在ThingsCloud创建产品、设备，获取MQTT或HTTP连接信息，并在宜启智控APP内配置。</li>
+<li><strong>看板（Dashboard）的使用：</strong> 创建数据仪表盘，对传感器数据进行实时可视化展示。</li>
+<li><strong>小程序的使用：</strong> 了解ThingsCloud小程序，实现移动端远程监控。</li>
+<li><strong>预告：</strong> 提及ThingsBoard, Home Assistant等平台的深入学习将在后续章节进行。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-18">16. “自动任务”自动化控制快速入门(30分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握基于传感器输入和逻辑判断的自动化任务（If-Then）的快速创建。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>“自动任务”概念：</strong> 解释其作为条件驱动的自动化控制逻辑。</li>
+<li><strong>水位条件示例：</strong> 配置“当水位传感器输入为低时，打开水泵继电器”的简单逻辑。</li>
+<li><strong>温度条件示例：</strong> 配置“当温度高于阈值时，打开排风扇”的温控逻辑。</li>
+<li><strong>计数器条件示例：</strong> 配置“当计数器达到设定值时（如累计脉冲数），执行某一动作”的逻辑。</li>
+<li><strong>任务的启用与禁用管理。</strong></li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-19">17. 任务的“运行日志”查看与分析(10分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握通过查看运行日志，对自动化任务的执行情况进行监控和BUG排查。</p>
+
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-20">18. 逻辑固件的导出与导入管理(15分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握设备配置的备份、迁移和批量部署方法。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>导出功能：</strong> 导出当前设备的全部自动化配置逻辑（包括一键执行、自动任务、继电器名称等）。</li>
+<li><strong>导入功能：</strong> 通过文件选择导入已保存的逻辑配置。</li>
+<li><strong>微信分享导入：</strong> 通过微信或其它社交应用分享配置文件的快捷导入方法。</li>
+<li><strong>预告：</strong> 提及MQTT指令导入、OTA固件导入等高级导入方式将在后续课程深入讲解。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-21">19. Mesh无线网络组网功能(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握利用Mesh功能实现多设备协同控制和扩大通信范围的组网技术。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>Mesh网络原理：</strong> 什么是Mesh网络，特点（自组网、自愈合）和适用场景。</li>
+<li><strong>通信距离与中继：</strong> 讲解Mesh设备的有效通信距离和中继机制。</li>
+<li><strong>添加子设备：</strong> 演示如何将子设备加入到主设备的Mesh网络中。</li>
+<li><strong>主控与联动：</strong> 配置主设备控制子设备的继电器、PWM等输出。</li>
+<li><strong>跨设备自动化控制：</strong> 利用子设备采集的传感器数据作为条件，触发主设备或网络内其他设备的自动化控制。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-22">20. 433MHz无线射频接收与发射(15分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握433MHz无线遥控器的匹配、学习和信号发送技术。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>433MHz无线接收：</strong> 什么是433MHz接收，应用场景（无线遥控、门磁、烟感）。</li>
+<li><strong>匹配遥控器：</strong> 演示如何将433MHz无线遥控器与设备进行匹配。</li>
+<li><strong>遥控器作为条件：</strong> 配置“当按下遥控器某一按键时，执行自动化控制任务”。</li>
+<li><strong>433MHz无线发射：</strong> 什么是433MHz发射，学习功能的作用。</li>
+<li><strong>学习外部遥控器：</strong> 演示如何学习现有遥控器的信号，实现信号的克隆和发射。</li>
+<li><strong>发射遥控器信号：</strong> 通过自动化任务或一键执行功能，实现远程发射已学习的遥控器信号。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-23">21. 设备维护与升级（重启/重置/OTA）(10分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握设备的日常维护、故障处理和固件升级方法。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>设备重启：</strong> 演示APP内软重启和硬重启（断电重启）操作。</li>
+<li><strong>设备重置：</strong> 恢复出厂设置的流程，清除所有配置数据和网络连接信息。</li>
+<li><strong>OTA固件在线升级：</strong> 通过网络（Over The Air）进行设备固件升级的操作流程。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-24">22. 设备安全与权限管理(10分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">了解设备安全的重要性，掌握手机绑定和密码设置的流程。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>手机绑定设备：</strong> 实现设备与特定手机账号的绑定，防止被非授权用户连接与控制。</li>
+<li><strong>设置登录密码：</strong> 设置APP连接设备时所需的登录密码，进一步提高本地连接的安全性。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-25">23. 其它功能配置(10分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握设备的重命名、断电记忆、APP返回行为等实用配置。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>重命名：</strong> 对设备、输入、输出进行个性化名称设置。</li>
+<li><strong>断电记忆：</strong> 配置继电器/PWM输出的上电状态，如保持断电前状态或统一置为关闭。</li>
+<li><strong>禁用APP返回：</strong> 配置APP返回键的行为，避免误操作退出控制界面。</li>
+</ul>
+
+<h1 class="text-2xl font-bold mt-10 mb-6 text-blue-600 border-b pb-2" id="section-26">第三章 深入学习传感器/受控设备/自动化/MQTT</h1>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-27">24. 模拟量传感器接入与数据处理(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握模拟量传感器（电流、电压）的接线、量程转换和自动化应用。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>模拟量概念：</strong> 什么是模拟量信号，与数字量信号的区别。</li>
+<li><strong>4-20mA电流信号传感器：</strong> 接线方式（二线制、三线制）、4mA和20mA对应的物理量程设置。</li>
+<li><strong>0-10V电压信号传感器：</strong> 接线方式、0V和10V对应的物理量程设置。</li>
+<li><strong>自定义ADC（模数转换）：</strong> 介绍如何接入0-1.5V或其他定制电压信号，以及分压电阻的使用（如10KΩ和1.5KΩ）。</li>
+<li><strong>模拟量数据在自动化控制中的应用</strong></li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-28">25. RS485 Modbus RTU/DS18B20总线传感器应用(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握Modbus RTU协议的配置（作为主机）和数据读写操作。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>RS485 Modbus RTU基础：</strong> 什么是RS485、Modbus协议，主从机工作模式。</li>
+<li><strong>作为RS485主机：</strong> 宜启智控作为主机的性能和配置界面。</li>
+<li><strong>Modbus数据读取：</strong> 配置从机地址、功能码（如读取保持寄存器03H）、起始地址、寄存器数量。</li>
+<li><strong>Modbus数据写入：</strong> 配置功能码（如写入单寄存器06H），实现对变频器等设备的控制。</li>
+<li><strong>总线传感器应用：</strong> DS18B20单总线温度传感器的接线与数据读取（若未选配485功能）。</li>
+<li><strong>总线数据作为条件：</strong> 利用Modbus读取的温湿度、电表数据作为自动化控制的条件。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-29">26. “一键执行”与“自动任务”的可执行任务详解(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">熟悉掌握可执行任务项，以便进行复杂的逻辑任务配置。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>任务的串行与并行执行：</strong> 详解任务列表中各步骤的执行顺序和时间关系。</li>
+<li><strong>延时与循环引用：</strong> 详细讲解延时操作、延时引用的使用场景和配置方法。</li>
+<li><strong>任务的中止与恢复。</strong></li>
+<li><strong>优先级与冲突解决机制。</strong></li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-30">27. “自动任务”的条件项详解(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握复杂的条件判断、多条件组合和高级逻辑运算的配置。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>复合条件配置：</strong> 掌握AND、OR逻辑关系的组合使用，实现“满足A且满足B时触发”。</li>
+<li><strong>时间段条件：</strong> 配置“在某一时间段内”或“在日出/日落时间”触发任务。</li>
+<li><strong>循环条件：</strong> 配置“在一定时间间隔内重复执行”的循环任务。</li>
+<li><strong>状态保持条件：</strong> 配置“某条件持续满足一段时间后”才触发任务。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-31">28. IIC数字接口传感器扩展应用(15分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握IIC数字接口传感器（温湿度/光照度）的接线和数据读取配置。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>IIC接口协议详解：</strong> 介绍IIC（Inter-Integrated Circuit）通信协议，主从设备模式。</li>
+<li><strong>温湿度传感器：</strong> 接线与自动化应用。</li>
+<li><strong>光照度传感器：</strong> 配置光照度值的自动化应用。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-32">29. PID闭环控制功能实战(30分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握PID功能的基本配置，实现对温度、液位等参数的精确、稳定控制。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>PID控制原理：</strong> 介绍比例（P）、积分（I）、微分（D）的基本作用，以及闭环控制的优势。</li>
+<li><strong>PID参数配置：</strong> 设定值（SV）、比例系数（Kp）、积分时间（Ti）、微分时间（Td）的调节。</li>
+<li><strong>负载与执行器关联：</strong> 将PID输出关联到PWM输出，控制加热棒或比例阀。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-33">30. 步进电机精确驱动控制(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握利用PWM/脉冲输出控制步进电机的转速、方向和位移。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>步进电机原理：</strong> 步进电机的工作原理和驱动器（如脉冲/方向信号）要求。</li>
+<li><strong>脉冲信号输出配置：</strong> 配置宜启智控的PWM输出为脉冲信号模式。</li>
+<li><strong>脉冲数控制位移：</strong> 通过设置脉冲数量，实现步进电机的精确位置控制（如电动窗帘）。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-34">31. 舵机角度与位置控制(10分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握利用PWM输出控制舵机的角度和位置。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>舵机原理：</strong> 舵机的结构、工作原理和所需的控制信号（PWM占空比/脉冲宽度）。</li>
+<li><strong>PWM占空比与角度对应关系配置。</strong></li>
+<li><strong>舵机在自动化中的应用：</strong> 配合传感器实现云台、机械臂等功能。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-35">32. PWM脉冲加减速功能在照明中的应用(10分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握PWM的缓启缓停功能，实现平滑、舒适的照明控制效果。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>加减速功能原理：</strong> 介绍PWM占空比/频率的加减速速率配置。</li>
+<li><strong>调光中的缓启缓停：</strong> 配置PWM占空比加减速速率，模拟日出日落的效果。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-36">33. MQTT协议数据格式详解(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">深入理解设备上报与接收控制命令的完整MQTT协议格式。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>MQTT协议命令集：</strong> 详细解析宜启智控的MQTT控制命令格式（如JSON结构、method、params）。</li>
+<li><strong>控制指令详解：</strong> 继电器控制（setOut）、PWM控制（setPWM）、任务执行（ro）等指令的参数解析。</li>
+<li><strong>上报数据格式解析：</strong> 详细解析设备上报JSON数据结构（如o开关状态、p PWM状态、i输入状态、adc模拟量、cnt计数器）。</li>
+<li><strong>平台对接实践：</strong> 结合具体平台演示如何发送控制指令和解析上报数据。</li>
+</ul>
+
+<h1 class="text-2xl font-bold mt-10 mb-6 text-blue-600 border-b pb-2" id="section-37">第四章 物联网平台与综合应用案例</h1>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-38">34. 接入ThingsBoard物联网平台(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握接入ThingsBoard物联网平台的应用，实现设备数据的远程监控和控制。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>ThingsBoard介绍：</strong> 平台特点、价格。</li>
+<li><strong>2分钟快速接入：</strong> 介绍如何在2分钟内完成设备接入ThingsBoard物联网平台。</li>
+<li><strong>看板及自定义应用：</strong> 利用ThingsBoard的看板功能和自定义应用，实现设备数据的可视化和远程控制。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-39">35. 接入Home Assistant智能家居平台(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握宜启智控接入智能家居生态（HA）的配置。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>Home Assistant介绍：</strong> 开放源代码、本地控制、智能家居生态整合能力。</li>
+<li><strong>MQTT Discovery配置：</strong> 利用HA的MQTT自动发现功能快速集成宜启智控。</li>
+<li><strong>自动化与脚本：</strong> 在HA中配置基于宜启智控状态的自动化。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-40">36. 接入EMQX物联网消息平台(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握接入专业级MQTT Broker（EMQX）进行大规模设备管理和系统集成。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>EMQX介绍：</strong> 专业的分布式MQTT消息服务器，高性能、高可靠性。</li>
+<li><strong>EMQX连接配置与认证：</strong> 配置连接参数、用户认证与授权。</li>
+<li><strong>MQTT 主题配置及收发：</strong> 配置MQTT主题，实现设备数据的订阅与发布。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-41">37. 智能电表数据采集与多渠道报警系统(15分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握RS485设备的集成，并构建基于云端和短信的多渠道报警系统。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>智能电表接入：</strong> 通过RS485接口接入Modbus协议的智能电表，读取瞬时功率、电量等数据。</li>
+<li><strong>数据解析与存储。</strong></li>
+<li><strong>短信和电话报警配置：</strong> 利用涂鸦或ThingsCloud的报警功能，配置阈值超限时的短信/电话通知。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-42">38. 变频器远程控制与数据采集(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握通过宜启智控的RS485接口对工业变频器进行远程启停、调速和状态监控。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>变频器 Modbus 地址：</strong> 查找常用变频器的Modbus通信地址和参数寄存器。</li>
+<li><strong>RS485写入控制：</strong> 配置Modbus写入指令，远程控制变频器的启停（RUN/STOP）和频率设定。</li>
+<li><strong>RS485数据读取：</strong> 读取变频器的运行状态、输出频率、故障代码。</li>
+<li><strong>数据可视化与远程控制：</strong> 利用ThingsBoard或Home Assistant实现数据的可视化和远程控制。</li>
+
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-43">39. 常用传感器与执行设备介绍(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">掌握常用传感器与执行设备，了解其工作原理和应用。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>常用传感器介绍：</strong> 土壤温湿度、PH值、溶解氧、浊度、光电开关、人体传感器、水位、气象站等。</li>
+<li><strong>常用受控设备的介绍：</strong> 电磁阀、排气扇、电动卷帘门、三相电机、固态继电器等。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-44">40. 智慧农业应用场景案例实战(20分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">结合实际场景，综合运用所学知识搭建完整的自动化与物联网项目。</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>智慧灌溉系统：</strong> 基于土壤湿度、时控、天气预报的自动灌溉任务配置。</li>
+<li><strong>环境温控系统：</strong> 基于温湿度、光照度传感器的排风、遮阳、补光系统。</li>
+<li><strong>水产养殖：</strong> 基于液位、溶解氧传感器的自动增氧、换水任务配置。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-45">41. 智慧楼宇应用场景案例实战(20分钟)</h2>
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>楼宇照明控制：</strong> 基于人体的感应照明、时段照明和亮度调节。</li>
+<li><strong>设备监控：</strong> 利用Modbus RTU监控生产线设备的运行状态和能耗。</li>
+<li><strong>消防与安防联动：</strong> 接入烟雾、门磁等传感器，实现报警联动控制。</li>
+</ul>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-46">42. 传统设备快速智能化升级改造案例(15分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">智能鱼池过滤设备升级改造案例讲解</p>
+
+<h2 class="text-xl font-semibold mt-6 mb-3 text-gray-800 border-l-4 border-blue-400 pl-3" id="section-47">43. 创新型智能设备项目落地与实践(15分钟)</h2>
+<p class="mb-4 text-gray-700 leading-relaxed">智能宠物洗澡共享设备案例讲解</p>
+
+<ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+<li><strong>项目创意与可行性分析。</strong></li>
+<li><strong>软硬件选型与方案设计。</strong></li>
+<li><strong>项目演示与成果展示。</strong></li>
+</ul>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainContent = document.getElementById('main-content');
+            const header = document.getElementById('main-document-header');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            const scrollThreshold = 100; // 滚动超过 100px 后触发收缩
+            let isAnchorScrolling = false; // 标记是否为点击目录链接导致的平滑滚动
+
+            // ----------------------------------------------------
+            // 动态标题栏收缩逻辑 (在非平滑滚动时执行)
+            // ----------------------------------------------------
+
+            const handleHeaderCollapse = () => {
+                // 如果是点击目录链接触发的平滑滚动，则暂时忽略标题栏变化
+                if (isAnchorScrolling) return;
+
+                if (mainContent.scrollTop > scrollThreshold) {
+                    if (!header.classList.contains('scrolled')) {
+                        header.classList.add('scrolled');
+                    }
+                } else {
+                    if (header.classList.contains('scrolled')) {
+                        header.classList.remove('scrolled');
+                    }
+                }
+            };
+
+            // ----------------------------------------------------
+            // 目录活跃状态更新 (根据滚动位置)
+            // ----------------------------------------------------
+            const sectionIds = Array.from(tocLinks).map(link => link.getAttribute('href').substring(1));
+            const sections = sectionIds.map(id => document.getElementById(id)).filter(el => el);
+
+            const updateActiveLink = () => {
+                let activeId = '';
+                // 顶部偏移量：考虑标题栏当前可能的高度 (140px 或 64px) + 一点点容错空间
+                const headerHeight = header.classList.contains('scrolled') ? 64 : 140;
+                const scrollTop = mainContent.scrollTop + headerHeight + 10; 
+
+                // 找到第一个进入视图的章节
+                for (let i = 0; i < sections.length; i++) {
+                    // 使用 offsetTop < scrollTop 来判断是否已经滚过该章节的顶部
+                    if (sections[i].offsetTop <= scrollTop) {
+                        activeId = sections[i].id;
+                    } else {
+                        break;
+                    }
+                }
+
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + activeId) {
+                        link.classList.add('active');
+                    }
+                });
+            };
+
+            // ----------------------------------------------------
+            // 目录链接点击处理 (实现平滑滚动并防止抖动)
+            // ----------------------------------------------------
+            tocLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault(); // 阻止默认的即时跳转
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        isAnchorScrolling = true; // 开启标志
+
+                        // 1. 计算目标滚动位置。
+                        // 默认为目标元素的顶部减去收缩状态的头部高度 (64px)
+                        let targetScrollTop = targetElement.offsetTop - 64;
+
+                        // 2. 临时禁用 CSS 过渡，确保高度变化是瞬时的
+                        header.classList.add('no-transition');
+
+                        // 3. 预先设置正确的头部状态 (瞬时完成)
+                        if (targetScrollTop <= scrollThreshold) {
+                            // 目标是顶部或接近顶部，头部应该展开
+                            targetScrollTop = 0;
+                            header.classList.remove('scrolled');
+                        } else {
+                            // 目标在下方，头部应该收缩
+                            header.classList.add('scrolled');
+                        }
+                        
+                        // 4. 强制浏览器应用立即的高度变化，避免延迟
+                        // 访问 offsetHeight 会强制进行同步布局计算
+                        void header.offsetHeight; 
+
+                        // 5. 执行平滑滚动
+                        mainContent.scrollTo({
+                            top: targetScrollTop,
+                            behavior: 'smooth'
+                        });
+
+                        // 6. 滚动完成后，重新启用过渡，重置标志，并最终确定状态
+                        setTimeout(() => {
+                            // 重新启用 CSS 过渡
+                            header.classList.remove('no-transition'); 
+                            
+                            isAnchorScrolling = false;
+                            handleHeaderCollapse(); // 最终确定状态
+                            updateActiveLink(); 
+                        }, 600); // 确保等待平滑滚动完成
+                    }
+                });
+            });
+
+
+            if (mainContent && header) {
+                // 监听滚动事件：处理头部收缩和目录高亮
+                mainContent.addEventListener('scroll', () => {
+                    handleHeaderCollapse();
+                    // 仅在非平滑滚动时才连续更新高亮
+                    if (!isAnchorScrolling) {
+                        updateActiveLink();
+                    }
+                });
+                
+                // 初始加载时检查一次
+                updateActiveLink();
+            }
+        });
+    </script>
+
+</body>
+</html>
