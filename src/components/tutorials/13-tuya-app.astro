@@ -4,7 +4,89 @@
  * slug: 13-tuya-app
  */
 ---
+
 <section>
-    <h2>涂鸦智能APP的使用</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>掌握将设备接入主流云平台(涂鸦)的方法,并使用其远程控制和自动化功能。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                涂鸦平台介绍:涂鸦智能平台的市场地位与功能概览
+            </li>
+            <li>
+                下载与安装:"涂鸦智能APP"的下载与设备添加流程(WIFI/4G)
+            </li>
+            <li>
+                远程控制与数据查看:通过涂鸦APP实现远程手控操作和设备参数(继电器状态、传感器值)的查看
+            </li>
+            <li>
+                平台内计数器配置:在涂鸦云端对宜启智控的计数器进行配置和管理
+            </li>
+            <li>
+                云端"一键执行"与"智能场景":调用宜启智控的一键执行任务,并利用涂鸦的智能场景实现更复杂的跨设备联动
+            </li>
+            <li>
+                高级报警功能:配置短信、电话报警服务,实现关键状态的及时通知
+            </li>
+            <li>
+                用户与设备管理:设备分享给其他用户、设备分组管理、解除涂鸦账号绑定流程
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

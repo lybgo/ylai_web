@@ -4,7 +4,77 @@
  * slug: 40-smart-agriculture
  */
 ---
+
 <section>
-    <h2>智慧农业应用场景案例实战</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>结合实际场景,综合运用所学知识搭建完整的自动化与物联网项目。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                智慧灌溉系统:基于土壤湿度、时控、天气预报的自动灌溉任务配置
+            </li>
+            <li>
+                环境温控系统:基于温湿度、光照度传感器的排风、遮阳、补光系统
+            </li>
+            <li>
+                水产养殖:基于液位、溶解氧传感器的自动增氧、换水任务配置
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

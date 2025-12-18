@@ -4,7 +4,77 @@
  * slug: 30-stepper-motor
  */
 ---
+
 <section>
-    <h2>步进电机精确驱动控制</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>掌握利用PWM/脉冲输出控制步进电机的转速、方向和位移。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                步进电机原理:步进电机的工作原理和驱动器(如脉冲/方向信号)要求
+            </li>
+            <li>
+                脉冲信号输出配置:配置宜启智控的PWM输出为脉冲信号模式
+            </li>
+            <li>
+                脉冲数控制位移:通过设置脉冲数量,实现步进电机的精确位置控制(如电动窗帘)
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

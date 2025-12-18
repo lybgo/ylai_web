@@ -4,7 +4,86 @@
  * slug: 25-rs485-modbus
  */
 ---
+
 <section>
-    <h2>RS485 Modbus RTU/DS18B20总线传感器应用</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>掌握Modbus RTU协议的配置(作为主机)和数据读写操作。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                RS485 Modbus RTU基础:什么是RS485、Modbus协议,主从机工作模式
+            </li>
+            <li>
+                作为RS485主机:宜启智控作为主机的性能和配置界面
+            </li>
+            <li>
+                Modbus数据读取:配置从机地址、功能码(如读取保持寄存器03H)、起始地址、寄存器数量
+            </li>
+            <li>
+                Modbus数据写入:配置功能码(如写入单寄存器06H),实现对变频器等设备的控制
+            </li>
+            <li>
+                总线传感器应用:DS18B20单总线温度传感器的接线与数据读取(若未选配485功能)
+            </li>
+            <li>
+                总线数据作为条件:利用Modbus读取的温湿度、电表数据作为自动化控制的条件
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

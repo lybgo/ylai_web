@@ -4,7 +4,83 @@
  * slug: 04-course-goals
  */
 ---
+
 <section>
-    <h2>课程目标与能力培养</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>明确学习本课程后能达成的具体技能目标和工程能力。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                技能目标:快速掌握自动化控制和物联网应用的配置与部署技能
+            </li>
+            <li>
+                传感器应用能力:掌握常用的数字量、模拟量、总线传感器(如温湿度、光照度、水位、DS18B20)的种类、型号及正确接线
+            </li>
+            <li>
+                执行控制能力:掌握常用受控设备(如继电器、交流接触器、步进电机、电磁阀)的使用与控制方法
+            </li>
+            <li>
+                综合项目能力:掌握创造智能设备、实现智慧项目或工程(如智慧农业系统)的整体解决方案能力
+            </li>
+            <li>
+                实践技能:掌握基本的电工安全知识、电路接线规范与故障排查技能
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

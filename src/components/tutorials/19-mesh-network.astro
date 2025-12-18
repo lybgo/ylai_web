@@ -4,7 +4,83 @@
  * slug: 19-mesh-network
  */
 ---
+
 <section>
-    <h2>Mesh无线网络组网功能</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>掌握利用Mesh功能实现多设备协同控制和扩大通信范围的组网技术。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                Mesh网络原理:什么是Mesh网络,特点(自组网、自愈合)和适用场景
+            </li>
+            <li>
+                通信距离与中继:讲解Mesh设备的有效通信距离和中继机制
+            </li>
+            <li>
+                添加子设备:演示如何将子设备加入到主设备的Mesh网络中
+            </li>
+            <li>
+                主控与联动:配置主设备控制子设备的继电器、PWM等输出
+            </li>
+            <li>
+                跨设备自动化控制:利用子设备采集的传感器数据作为条件,触发主设备或网络内其他设备的自动化控制
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

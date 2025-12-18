@@ -4,7 +4,80 @@
  * slug: 33-mqtt-format
  */
 ---
+
 <section>
-    <h2>MQTT协议数据格式详解</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>深入理解设备上报与接收控制命令的完整MQTT协议格式。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                MQTT协议命令集:详细解析宜启智控的MQTT控制命令格式(如JSON结构、method、params)
+            </li>
+            <li>
+                控制指令详解:继电器控制(setOut)、PWM控制(setPWM)、任务执行(ro)等指令的参数解析
+            </li>
+            <li>
+                上报数据格式解析:详细解析设备上报JSON数据结构(如o开关状态、p PWM状态、i输入状态、adc模拟量、cnt计数器)
+            </li>
+            <li>
+                平台对接实践:结合具体平台演示如何发送控制指令和解析上报数据
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

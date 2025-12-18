@@ -4,7 +4,83 @@
  * slug: 15-thingscloud
  */
 ---
+
 <section>
-    <h2>接入ThingsCloud云平台</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>掌握专业物联网云平台(ThingsCloud)的接入和数据可视化看板的构建。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                ThingsCloud平台介绍:平台特点、费用模式及优势
+            </li>
+            <li>
+                接入流程:在ThingsCloud创建产品、设备,获取MQTT或HTTP连接信息,并在宜启智控APP内配置
+            </li>
+            <li>
+                看板(Dashboard)的使用:创建数据仪表盘,对传感器数据进行实时可视化展示
+            </li>
+            <li>
+                小程序的使用:了解ThingsCloud小程序,实现移动端远程监控
+            </li>
+            <li>
+                预告:提及ThingsBoard, Home Assistant等平台的深入学习将在后续章节进行
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

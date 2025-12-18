@@ -4,7 +4,86 @@
  * slug: 12-input-sensors
  */
 ---
+
 <section>
-    <h2>开关量/NPN/频率 信号输入与温湿度传感器接入</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>掌握数字量输入的类型、接线方式,并学会接入常用数字量传感器。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                开关量信号:介绍无源开关量(干接点)和有源开关量(湿接点)的特性
+            </li>
+            <li>
+                开关量传感器接线:以水位传感器(浮球开关)、行程开关为例,演示无源/有源接线
+            </li>
+            <li>
+                NPN(集电极开路)信号:介绍NPN型输出传感器(如光电开关)的接线方法
+            </li>
+            <li>
+                脉冲/频率输入:解释如何接入脉冲输出的流量计或频率信号,进行计数或频率检测
+            </li>
+            <li>
+                IIC数字通信接口:演示IIC接口的硬件接入(SCL/SDA/GND/3V),接入IIC温湿度传感器(如SHT30)
+            </li>
+            <li>
+                输入参数状态查看:在APP中查看开关状态、频率值、温湿度等数据
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

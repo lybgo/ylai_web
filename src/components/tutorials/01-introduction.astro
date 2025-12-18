@@ -2,10 +2,82 @@
 /**
  * 第 1 节 课程导论与价值分析
  * slug: 01-introduction
- * 在此编写本节的详细教程内容，可以自由排版。
  */
 ---
+
 <section>
-    <h2>课程导论与价值分析</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>建立对宜启智控Pro核心价值的认识,理解课程的必要性和独特性。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                课程价值定位:自动化控制和物联网应用的门槛消除(无需编程)
+            </li>
+            <li>
+                宜启智控的经济性与普适性:阐述其平民化价格优势,以及在智慧农业、楼宇、工厂等各行各业的广泛应用场景
+            </li>
+            <li>
+                高职院校教学与实训便利性:作为教学演示套件,如何促进控制技术与物联网应用的融合教学
+            </li>
+            <li>
+                课程定位:兼具职业技能提升与《宜启智控Pro使用说明教程》的实用双重属性
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

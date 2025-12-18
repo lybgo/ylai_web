@@ -1,10 +1,86 @@
 ---
 /**
- * 第 8 节 继电器/开关输出控制技术
+ * 第 08 节 继电器/开关输出控制技术
  * slug: 08-relay-control
  */
 ---
+
 <section>
-    <h2>继电器/开关输出控制技术</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>掌握继电器输出的电气特性、安全接线规范及大功率负载的控制方法。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                继电器工作原理与功能:介绍继电器(Relay)的结构、作用,以及能控制的常见设备类型(照明、水泵、电磁阀等)
+            </li>
+            <li>
+                继电器电气参数:最大阻性负载(如AC220V 9A / DC30V 9A)、感性负载的差异与选择
+            </li>
+            <li>
+                继电器接线规范:演示常开(NO)、常闭(NC)、公共端(COM)的接线方式,注意高低压分离
+            </li>
+            <li>
+                大功率设备控制:介绍继电器容量不足时,如何通过外部交流接触器实现对大功率负载(如三相电机、大功率加热棒)的安全控制
+            </li>
+            <li>
+                交流接触器接线:演示宜启智控继电器驱动交流接触器线圈的接线方法
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

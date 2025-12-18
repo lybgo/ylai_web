@@ -1,10 +1,86 @@
 ---
 /**
- * 第 9 节 PWM脉冲宽度调制输出应用
+ * 第 09 节 PWM脉冲宽度调制输出应用
  * slug: 09-pwm-control
  */
 ---
+
 <section>
-    <h2>PWM脉冲宽度调制输出应用</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>掌握PWM输出的配置和应用,实现对灯光亮度、电机速度等的平滑调节。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                PWM工作原理:解释脉冲宽度调制(PWM)的原理及其在控制中的作用
+            </li>
+            <li>
+                PWM的电气参数:NMOS输出类型、最大开关负载(DC36V 10A)和PWM负载(DC36V 8A)的限制
+            </li>
+            <li>
+                作为开关使用:当占空比设为0或100%时,作为普通开关输出的使用
+            </li>
+            <li>
+                调光应用实战:通过调节占空比(Duty Cycle)实现LED灯的无级调光
+            </li>
+            <li>
+                高级控制功能预告:介绍频率、脉冲数、加减速速率等高级参数及其在电机控制中的应用
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

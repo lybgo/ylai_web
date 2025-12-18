@@ -4,7 +4,83 @@
  * slug: 11-one-click
  */
 ---
+
 <section>
-    <h2>"一键执行"快速入门</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>掌握"一键执行"任务的创建、编辑和调用,实现多设备协同控制。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                "一键执行"概念:解释其作为手动触发或自动化任务调用的复合操作集
+            </li>
+            <li>
+                创建"一键执行"任务:配置多路输出(继电器、PWM)的联动操作
+            </li>
+            <li>
+                虚拟开关绑定:将"一键执行"任务绑定到APP界面的虚拟开关上,实现快捷操作
+            </li>
+            <li>
+                计数器概念:什么是计数器、断电保存(掉电保持)功能的作用
+            </li>
+            <li>
+                计数器的使用与引用:介绍计数器的加(+)、减(-)操作,以及如何在"一键执行"任务中引用计数器的值
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

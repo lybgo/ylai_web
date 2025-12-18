@@ -4,7 +4,83 @@
  * slug: 05-learning-methods
  */
 ---
+
 <section>
-    <h2>学习方法与课程结构</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>引导学员以实践为主的学习方式,了解课程的进度安排和后续资源。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                实践先行:强调"实践是提升能力的最快方法",要求学员配备演示套件,同步跟进操作
+            </li>
+            <li>
+                教学载体:确认本课程以"宜启智控Pro演示板"为核心实训平台
+            </li>
+            <li>
+                学习时间规划:课程视频总时长(约13小时),目标实现"一天速成"的学习效率
+            </li>
+            <li>
+                拓展资源:介绍本视频账号的其它相关视频教程,鼓励持续学习
+            </li>
+            <li>
+                课程大纲概览:简要介绍本大纲结构和主要内容板块(快速入门、深入学习、应用案例)
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

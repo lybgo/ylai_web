@@ -4,7 +4,83 @@
  * slug: 06-hardware-selection
  */
 ---
+
 <section>
-    <h2>宜启智控Pro硬件型号选型指南</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>了解宜启智控Pro硬件型号选型指南,为以后项目正确选择宜启智控Pro的硬件型号作准备。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                输入输出I/O点数型号:根据项目需求选择合适的继电器路数、PWM路数、开关量输入路数等(如6+4路)
+            </li>
+            <li>
+                网络通信方式:WiFi版、4G、BLE版等的选择与适用场景
+            </li>
+            <li>
+                供电电压选择:标准USB 5V/DC 5V供电、宽电压版(DC 7V~36V)或交流220V版
+            </li>
+            <li>
+                选配功能模块:RS485总线功能和433MHz无线射频模块的选配考量
+            </li>
+            <li>
+                输出类型配置:PWM输出口的可选配类型(如0-10V/0-20mA模拟量输出)
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

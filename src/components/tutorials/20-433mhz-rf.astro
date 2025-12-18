@@ -4,7 +4,86 @@
  * slug: 20-433mhz-rf
  */
 ---
+
 <section>
-    <h2>433MHz无线射频接收与发射</h2>
-    <p>TODO：编写本节的详细图文教程内容。</p>
+    <div class="description">
+        <p>掌握433MHz无线遥控器的匹配、学习和信号发送技术。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                433MHz无线接收:什么是433MHz接收,应用场景(无线遥控、门磁、烟感)
+            </li>
+            <li>
+                匹配遥控器:演示如何将433MHz无线遥控器与设备进行匹配
+            </li>
+            <li>
+                遥控器作为条件:配置"当按下遥控器某一按键时,执行自动化控制任务"
+            </li>
+            <li>
+                433MHz无线发射:什么是433MHz发射,学习功能的作用
+            </li>
+            <li>
+                学习外部遥控器:演示如何学习现有遥控器的信号,实现信号的克隆和发射
+            </li>
+            <li>
+                发射遥控器信号:通过自动化任务或一键执行功能,实现远程发射已学习的遥控器信号
+            </li>
+        </ul>
+    </div>
 </section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>
