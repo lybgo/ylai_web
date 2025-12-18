@@ -27,6 +27,7 @@ const navItems = {
     ],
 };
 
+const pathname = Astro.url.pathname.replace(/\/$/, "");
 const currentNav = navItems[lang as keyof typeof navItems] || navItems.zh;
 const switchLang = lang === "zh" ? "en" : "zh";
 const switchLabel = lang === "zh" ? "EN" : "中文";
@@ -43,11 +44,17 @@ const switchLabel = lang === "zh" ? "EN" : "中文";
         <!-- Desktop Navigation -->
         <nav class="nav-desktop">
             {
-                currentNav.map((item) => (
-                    <a href={item.href} class="nav-link">
-                        {item.label}
-                    </a>
-                ))
+                currentNav.map((item) => {
+                    const isActive = pathname === item.href.replace(/\/$/, "");
+                    return (
+                        <a
+                            href={item.href}
+                            class:list={["nav-link", { active: isActive }]}
+                        >
+                            {item.label}
+                        </a>
+                    );
+                })
             }
         </nav>
 
@@ -99,11 +106,17 @@ const switchLabel = lang === "zh" ? "EN" : "中文";
     <!-- Mobile Navigation -->
     <nav class="nav-mobile" x-show="mobileMenuOpen" x-transition>
         {
-            currentNav.map((item) => (
-                <a href={item.href} class="nav-link-mobile">
-                    {item.label}
-                </a>
-            ))
+            currentNav.map((item) => {
+                const isActive = pathname === item.href.replace(/\/$/, "");
+                return (
+                    <a
+                        href={item.href}
+                        class:list={["nav-link-mobile", { active: isActive }]}
+                    >
+                        {item.label}
+                    </a>
+                );
+            })
         }
     </nav>
 </header>
@@ -171,6 +184,12 @@ const switchLabel = lang === "zh" ? "EN" : "中文";
     .nav-link:hover {
         color: #0066cc;
         background: rgba(0, 102, 204, 0.08);
+    }
+
+    .nav-link.active {
+        color: #0066cc;
+        background: rgba(0, 102, 204, 0.08);
+        font-weight: 600;
     }
 
     .header-actions {
@@ -243,5 +262,12 @@ const switchLabel = lang === "zh" ? "EN" : "中文";
     .nav-link-mobile:hover {
         color: #0066cc;
         background: rgba(0, 102, 204, 0.08);
+    }
+
+    .nav-link-mobile.active {
+        color: #0066cc;
+        background: rgba(0, 102, 204, 0.08);
+        font-weight: 600;
+        border-left: 3px solid #0066cc;
     }
 </style>
