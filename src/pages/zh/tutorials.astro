@@ -16,14 +16,6 @@ const groupedSections = chapters.map((chapter) => ({
     description="0基础1天入门：无需编程的自动化控制与物联网应用教程，宜启智控Pro控制器使用教程"
     lang={lang}
 >
-    <div class="page-header">
-        <div class="container">
-            <h1 class="page-title">产品使用教程</h1>
-            <p class="page-subtitle">
-                0基础1天入门：无需编程的自动化控制与物联网应用教程
-            </p>
-        </div>
-    </div>
 
     <div class="content-wrapper">
         <nav class="sidebar">
@@ -52,6 +44,10 @@ const groupedSections = chapters.map((chapter) => ({
         <main class="main-content">
             <!-- Course Intro -->
             <section class="intro-section">
+                <div class="page-header">
+                        <h1 class="page-title">0基础1天入门：<br />自动化控制与物联网应用教程（无需编程）<br />
+                            & 宜启智控Pro控制器使用教程</h1>
+                </div>
                 <div class="intro-card">
                     <h2>🎯 课程目标</h2>
                     <p>
@@ -79,39 +75,6 @@ const groupedSections = chapters.map((chapter) => ({
                 </div>
             </section>
 
-            <!-- Chapters Overview -->
-            <section class="chapters-overview">
-                <h2>📚 课程大纲</h2>
-                {
-                    groupedSections.map((chapter, idx) => (
-                        <div class="chapter-card">
-                            <div class="chapter-header">
-                                <h3>{chapter.title}</h3>
-                                <span class="chapter-duration">
-                                    {chapter.duration}
-                                </span>
-                            </div>
-                            <div class="sections-list">
-                                {chapter.sections.map((section) => (
-                                    <a
-                                        href={`/zh/tutorials/${section.slug}`}
-                                        class="section-item"
-                                    >
-                                        <span class="section-num">
-                                            {section.num}
-                                        </span>
-                                        <span class="section-title">
-                                            {section.title}
-                                        </span>
-                                        <span class="section-arrow">→</span>
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
-                    ))
-                }
-            </section>
-
             <!-- CTA -->
             <section class="cta-section">
                 <h2>准备好开始学习了吗？</h2>
@@ -134,10 +97,7 @@ const groupedSections = chapters.map((chapter) => ({
 
 <style>
     .page-header {
-        background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
-        color: white;
         padding: 3rem 1.5rem;
-        text-align: center;
     }
 
     .container {
@@ -146,6 +106,7 @@ const groupedSections = chapters.map((chapter) => ({
     }
 
     .page-title {
+        color: #0066cc;
         font-size: 2rem;
         font-weight: 700;
         margin: 0 0 0.5rem;
