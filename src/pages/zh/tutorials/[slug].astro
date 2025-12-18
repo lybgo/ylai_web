@@ -48,7 +48,6 @@ const groupedSections = chapters.map((chapter) => ({
 
 <Layout
     title={`${section.title} - 产品使用教程 - 宜启智控Pro`}
-    description={section.description}
     lang={lang}
 >
     <div class="page-header">
@@ -367,6 +366,10 @@ const groupedSections = chapters.map((chapter) => ({
     .section-header {
         padding: 2rem;
         border-bottom: 1px solid var(--border-light);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
     }
 
     .section-number {
@@ -377,14 +380,14 @@ const groupedSections = chapters.map((chapter) => ({
         font-weight: 600;
         padding: 0.25rem 0.75rem;
         border-radius: 20px;
-        margin-bottom: 0.75rem;
+        margin: 0;
     }
 
     .section-header h1 {
         font-size: 1.75rem;
         font-weight: 700;
         color: var(--text-dark);
-        margin: 0 0 0.5rem;
+        margin: 0;
         line-height: 1.3;
     }
 
