@@ -1,0 +1,334 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const lang = "zh";
+
+const cases = [
+    {
+        id: "agriculture",
+        icon: "🌾",
+        title: "智慧农业",
+        subtitle: "让庄稼自己喝水",
+        description:
+            "通过传感器监测土壤湿度、温湿度、光照等环境参数，自动控制灌溉系统、温室卷帘、补光灯等设备，实现精准农业。",
+        features: [
+            "自动灌溉系统",
+            "温室环境调控",
+            "水产养殖监控",
+            "气象站数据采集",
+        ],
+        example:
+            "当土壤湿度<30%时自动开启水泵，湿度>60%时关闭；温度>35°C时开启排风扇。",
+    },
+    {
+        id: "building",
+        icon: "🏢",
+        title: "智慧楼宇",
+        subtitle: "让建筑自己思考",
+        description:
+            "实现建筑内照明、空调、设备的智能化管理，根据人员活动、时间段、环境条件自动调节，节能降耗。",
+        features: [
+            "人来亮灯系统",
+            "时段照明控制",
+            "设备能耗监测",
+            "消防安防联动",
+        ],
+        example:
+            "人体传感器检测到有人时打开照明，无人5分钟后自动关闭；下班后统一关闭非必要设备。",
+    },
+    {
+        id: "industrial",
+        icon: "🏭",
+        title: "工业控制",
+        subtitle: "让设备自己说话",
+        description:
+            "通过RS485 Modbus接入工业设备，采集运行数据、远程监控状态、实现故障报警和远程控制。",
+        features: [
+            "变频器远程控制",
+            "电表数据采集",
+            "设备运行监控",
+            "短信电话报警",
+        ],
+        example:
+            "读取变频器运行频率、故障码，远程启停控制；电表功率超限时发送报警短信。",
+    },
+    {
+        id: "education",
+        icon: "📚",
+        title: "教学实训",
+        subtitle: "让学习不再枯燥",
+        description:
+            "作为物联网、自动化控制教学实训平台，帮助学生快速理解控制原理和物联网架构，0基础1天入门。",
+        features: [
+            "物联网教学套件",
+            "传感器实验",
+            "控制逻辑实训",
+            "云平台对接练习",
+        ],
+        example:
+            "学生按照教程配置温控逻辑：温度>25°C开风扇，<20°C开加热器，观察闭环控制效果。",
+    },
+    {
+        id: "smarthome",
+        icon: "🏠",
+        title: "智能家居",
+        subtitle: "让生活更舒适",
+        description:
+            "DIY智能家居系统，控制灯光、窗帘、电器，接入涂鸦生态，语音控制，场景联动。",
+        features: ["灯光调节控制", "电动窗帘", "智能插座", "场景一键切换"],
+        example:
+            "回家场景：开门后自动开客厅灯、打开空调；离家场景：关闭所有灯光和电器。",
+    },
+    {
+        id: "retrofit",
+        icon: "🔧",
+        title: "设备改造",
+        subtitle: "让老旧设备焕发新生",
+        description:
+            "为传统设备增加联网能力和智能控制，无需改动原有电路，快速实现智能化升级。",
+        features: ["传统设备联网", "远程监控", "数据记录", "故障预警"],
+        example:
+            "为鱼池过滤系统加装宜启智控，实现远程监控水泵运行、定时循环过滤、低水位报警。",
+    },
+];
+---
+
+<Layout
+    title="应用场景 - 宜启智控Pro"
+    description="宜启智控Pro在智慧农业、智慧楼宇、工业控制、教学实训等领域的应用案例"
+    lang={lang}
+>
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">应用场景</h1>
+            <p class="page-subtitle">
+                宜启智控的无限可能，只有想不到，没有做不到
+            </p>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <div class="cases-grid">
+            {
+                cases.map((item) => (
+                    <section id={item.id} class="case-card">
+                        <div class="case-header">
+                            <span class="case-icon">{item.icon}</span>
+                            <div>
+                                <h2 class="case-title">{item.title}</h2>
+                                <p class="case-subtitle">{item.subtitle}</p>
+                            </div>
+                        </div>
+                        <p class="case-desc">{item.description}</p>
+
+                        <div class="case-features">
+                            {item.features.map((f) => (
+                                <span class="feature-tag">{f}</span>
+                            ))}
+                        </div>
+
+                        <div class="case-example">
+                            <h4>💡 应用示例</h4>
+                            <p>{item.example}</p>
+                        </div>
+                    </section>
+                ))
+            }
+        </div>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <h2>有创意，想实现？</h2>
+            <p>宜启智控Pro让您的想法变为现实</p>
+            <div class="cta-buttons">
+                <a href="/zh/tutorials" class="btn btn-primary btn-lg"
+                    >学习教程</a
+                >
+                <a href="/zh/buy" class="btn btn-accent btn-lg">立即购买</a>
+            </div>
+        </section>
+    </div>
+</Layout>
+
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
+        color: white;
+        padding: 4rem 1.5rem;
+        text-align: center;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0 0 1rem;
+    }
+
+    .page-subtitle {
+        font-size: 1.25rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    .content-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+    }
+
+    .cases-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    @media (max-width: 768px) {
+        .cases-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .case-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-light);
+        transition: all 0.3s ease;
+    }
+
+    .case-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 102, 204, 0.1);
+        border-color: var(--primary-light);
+    }
+
+    .case-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .case-icon {
+        font-size: 3rem;
+    }
+
+    .case-title {
+        font-size: 1.5rem;
+        margin: 0;
+        color: var(--text-dark);
+    }
+
+    .case-subtitle {
+        font-size: 1rem;
+        color: var(--primary);
+        margin: 0.25rem 0 0;
+        font-weight: 500;
+    }
+
+    .case-desc {
+        color: var(--text-muted);
+        line-height: 1.7;
+        margin: 0 0 1.5rem;
+    }
+
+    .case-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .feature-tag {
+        font-size: 0.875rem;
+        padding: 0.375rem 0.75rem;
+        background: var(--primary-light);
+        color: var(--primary);
+        border-radius: 20px;
+    }
+
+    .case-example {
+        background: var(--bg-light);
+        padding: 1.25rem;
+        border-radius: 12px;
+    }
+
+    .case-example h4 {
+        font-size: 0.95rem;
+        margin: 0 0 0.5rem;
+        color: var(--text-dark);
+    }
+
+    .case-example p {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* CTA */
+    .cta-section {
+        background: linear-gradient(
+            135deg,
+            var(--primary) 0%,
+            var(--primary-dark) 100%
+        );
+        border-radius: 24px;
+        padding: 4rem 2rem;
+        text-align: center;
+    }
+
+    .cta-section h2 {
+        font-size: 2rem;
+        color: white;
+        margin: 0 0 0.75rem;
+    }
+
+    .cta-section p {
+        font-size: 1.25rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin: 0 0 2rem;
+    }
+
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        display: inline-flex;
+        padding: 0.875rem 2rem;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn-lg {
+        padding: 1rem 2.5rem;
+        font-size: 1.125rem;
+    }
+
+    .btn-primary {
+        background: white;
+        color: var(--primary);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+    }
+
+    .btn-accent {
+        background: var(--accent);
+        color: white;
+    }
+
+    .btn-accent:hover {
+        transform: translateY(-2px);
+        color: white;
+    }
+</style>

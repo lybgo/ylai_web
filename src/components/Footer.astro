@@ -1,0 +1,228 @@
+---
+// Footer component
+const { lang = "zh" } = Astro.props;
+
+const content = {
+    zh: {
+        product: "产品",
+        links: [
+            { href: `/${lang}/hardware`, label: "硬件接口" },
+            { href: `/${lang}/mqtt`, label: "MQTT协议" },
+            { href: `/${lang}/tutorials`, label: "使用教程" },
+        ],
+        resources: "资源",
+        resourceLinks: [
+            { href: `/${lang}/download`, label: "APP下载" },
+            { href: `/${lang}/cases`, label: "应用场景" },
+            { href: `/${lang}/compare`, label: "对比选型" },
+        ],
+        company: "关于",
+        companyLinks: [
+            { href: `/${lang}/about`, label: "关于我们" },
+            { href: `/${lang}/buy`, label: "购买渠道" },
+        ],
+        copyright: "© 2025 宜启智控 版权所有",
+        tagline: "让控制变得简单 · 让万物互联触手可及",
+    },
+    en: {
+        product: "Product",
+        links: [
+            { href: `/${lang}/hardware`, label: "Hardware" },
+            { href: `/${lang}/mqtt`, label: "MQTT Protocol" },
+            { href: `/${lang}/tutorials`, label: "Tutorials" },
+        ],
+        resources: "Resources",
+        resourceLinks: [
+            { href: `/${lang}/download`, label: "Downloads" },
+            { href: `/${lang}/cases`, label: "Use Cases" },
+            { href: `/${lang}/compare`, label: "Comparison" },
+        ],
+        company: "Company",
+        companyLinks: [
+            { href: `/${lang}/about`, label: "About Us" },
+            { href: `/${lang}/buy`, label: "Where to Buy" },
+        ],
+        copyright: "© 2025 YiQi Smart Control. All rights reserved.",
+        tagline: "Making Control Simple · Connecting Everything",
+    },
+};
+
+const t = content[lang as keyof typeof content] || content.zh;
+---
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <!-- Brand Column -->
+            <div class="footer-brand">
+                <a href={`/${lang}/`} class="brand-logo">
+                    <img
+                        src="/images/logo.png"
+                        alt="宜启智控"
+                        class="brand-img"
+                    />
+                    <span class="brand-text">宜启智控Pro</span>
+                </a>
+                <p class="brand-tagline">{t.tagline}</p>
+            </div>
+
+            <!-- Product Links -->
+            <div class="footer-section">
+                <h4 class="footer-title">{t.product}</h4>
+                <ul class="footer-links">
+                    {
+                        t.links.map((link) => (
+                            <li>
+                                <a href={link.href}>{link.label}</a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <!-- Resources -->
+            <div class="footer-section">
+                <h4 class="footer-title">{t.resources}</h4>
+                <ul class="footer-links">
+                    {
+                        t.resourceLinks.map((link) => (
+                            <li>
+                                <a href={link.href}>{link.label}</a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <!-- Company -->
+            <div class="footer-section">
+                <h4 class="footer-title">{t.company}</h4>
+                <ul class="footer-links">
+                    {
+                        t.companyLinks.map((link) => (
+                            <li>
+                                <a href={link.href}>{link.label}</a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-bottom">
+            <p class="copyright">{t.copyright}</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .footer {
+        background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+        border-top: 1px solid rgba(0, 102, 204, 0.1);
+        padding: 3rem 0 1.5rem;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 3rem;
+    }
+
+    @media (max-width: 768px) {
+        .footer-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .footer-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+    }
+
+    .brand-img {
+        height: 36px;
+        width: auto;
+    }
+
+    .brand-text {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #0066cc;
+    }
+
+    .brand-tagline {
+        font-size: 0.9rem;
+        color: #64748b;
+        line-height: 1.6;
+    }
+
+    .footer-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .footer-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #1e293b;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0;
+    }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .footer-links a {
+        font-size: 0.9rem;
+        color: #64748b;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+        color: #0066cc;
+    }
+
+    .footer-bottom {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(0, 102, 204, 0.1);
+        text-align: center;
+    }
+
+    .copyright {
+        font-size: 0.875rem;
+        color: #94a3b8;
+        margin: 0;
+    }
+</style>

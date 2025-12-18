@@ -1,0 +1,836 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const lang = "zh";
+---
+
+<Layout
+    title="对比选型 - 宜启智控Pro vs PLC vs 单片机"
+    description="宜启智控Pro与传统PLC、单片机的全面对比，六维度雷达图分析，型号选型指南"
+    lang={lang}
+>
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">对比选型指南</h1>
+            <p class="page-subtitle">
+                一图看懂宜启智控的核心优势，选择最适合您的型号
+            </p>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <!-- Radar Chart Section -->
+        <section class="radar-section">
+            <h2 class="section-title">六维度对比分析</h2>
+            <div class="radar-container" x-data="radarChart()">
+                <!-- SVG Radar Chart -->
+                <div class="radar-chart">
+                    <svg viewBox="0 0 400 400" class="radar-svg">
+                        <!-- Background hexagons -->
+                        <g class="radar-grid">
+                            {
+                                [5, 4, 3, 2, 1].map((level) => (
+                                    <polygon
+                                        points={`200,${200 - level * 35} ${200 + level * 30.3},${200 - level * 17.5} ${200 + level * 30.3},${200 + level * 17.5} 200,${200 + level * 35} ${200 - level * 30.3},${200 + level * 17.5} ${200 - level * 30.3},${200 - level * 17.5}`}
+                                        fill="none"
+                                        stroke="#e2e8f0"
+                                        stroke-width="1"
+                                    />
+                                ))
+                            }
+                        </g>
+
+                        <!-- Axis lines -->
+                        <g class="radar-axes">
+                            <line
+                                x1="200"
+                                y1="200"
+                                x2="200"
+                                y2="25"
+                                stroke="#cbd5e1"
+                                stroke-width="1"></line>
+                            <line
+                                x1="200"
+                                y1="200"
+                                x2="351.5"
+                                y2="112.5"
+                                stroke="#cbd5e1"
+                                stroke-width="1"></line>
+                            <line
+                                x1="200"
+                                y1="200"
+                                x2="351.5"
+                                y2="287.5"
+                                stroke="#cbd5e1"
+                                stroke-width="1"></line>
+                            <line
+                                x1="200"
+                                y1="200"
+                                x2="200"
+                                y2="375"
+                                stroke="#cbd5e1"
+                                stroke-width="1"></line>
+                            <line
+                                x1="200"
+                                y1="200"
+                                x2="48.5"
+                                y2="287.5"
+                                stroke="#cbd5e1"
+                                stroke-width="1"></line>
+                            <line
+                                x1="200"
+                                y1="200"
+                                x2="48.5"
+                                y2="112.5"
+                                stroke="#cbd5e1"
+                                stroke-width="1"></line>
+                        </g>
+
+                        <!-- Labels -->
+                        <g
+                            class="radar-labels"
+                            font-size="14"
+                            fill="#374151"
+                            font-weight="500"
+                        >
+                            <text x="200" y="15" text-anchor="middle"
+                                >易用性</text
+                            >
+                            <text x="365" y="115" text-anchor="start"
+                                >物联网能力</text
+                            >
+                            <text x="365" y="295" text-anchor="start"
+                                >扩展性</text
+                            >
+                            <text x="200" y="395" text-anchor="middle"
+                                >部署速度</text
+                            >
+                            <text x="35" y="295" text-anchor="end">维护性</text>
+                            <text x="35" y="115" text-anchor="end"
+                                >成本效益</text
+                            >
+                        </g>
+
+                        <!-- Data areas -->
+                        <!-- YiQi Smart -->
+                        <polygon
+                            :class="{ 'active': activeProduct === 'yiqi' }"
+                            class="radar-area yiqi"
+                            points="200,30 344,108 344,287 200,370 56,287 56,108"
+                            @mouseenter="activeProduct = 'yiqi'"></polygon>
+                        <!-- PLC -->
+                        <polygon
+                            :class="{ 'active': activeProduct === 'plc' }"
+                            class="radar-area plc"
+                            points="200,100 275,155 310,252 200,300 90,252 125,155"
+                            @mouseenter="activeProduct = 'plc'"></polygon>
+                        <!-- MCU -->
+                        <polygon
+                            :class="{ 'active': activeProduct === 'mcu' }"
+                            class="radar-area mcu"
+                            points="200,165 245,178 280,230 200,265 120,230 155,178"
+                            @mouseenter="activeProduct = 'mcu'"></polygon>
+                    </svg>
+                </div>
+
+                <!-- Legend -->
+                <div class="radar-legend">
+                    <button
+                        :class="{ 'active': activeProduct === 'yiqi' }"
+                        @click="activeProduct = 'yiqi'"
+                        class="legend-item yiqi"
+                    >
+                        <span class="legend-dot"></span>
+                        宜启智控Pro
+                    </button>
+                    <button
+                        :class="{ 'active': activeProduct === 'plc' }"
+                        @click="activeProduct = 'plc'"
+                        class="legend-item plc"
+                    >
+                        <span class="legend-dot"></span>
+                        传统PLC
+                    </button>
+                    <button
+                        :class="{ 'active': activeProduct === 'mcu' }"
+                        @click="activeProduct = 'mcu'"
+                        class="legend-item mcu"
+                    >
+                        <span class="legend-dot"></span>
+                        单片机/开发板
+                    </button>
+                </div>
+
+                <!-- Details Panel -->
+                <div class="radar-details">
+                    <template x-if="activeProduct === 'yiqi'">
+                        <div class="detail-card yiqi">
+                            <h3>宜启智控Pro</h3>
+                            <ul>
+                                <li>
+                                    <strong>易用性</strong
+                                    >：无需编程，APP配置，小白友好
+                                </li>
+                                <li>
+                                    <strong>物联网</strong
+                                    >：内置WiFi/4G/MQTT，开箱即联
+                                </li>
+                                <li>
+                                    <strong>扩展性</strong
+                                    >：Mesh组网，RS485总线扩展
+                                </li>
+                                <li>
+                                    <strong>部署速度</strong>：1天上手，即插即用
+                                </li>
+                                <li>
+                                    <strong>维护性</strong
+                                    >：远程OTA升级，一键导入导出
+                                </li>
+                                <li>
+                                    <strong>成本效益</strong
+                                    >：软硬件一体，综合成本低
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                    <template x-if="activeProduct === 'plc'">
+                        <div class="detail-card plc">
+                            <h3>传统PLC</h3>
+                            <ul>
+                                <li>
+                                    <strong>易用性</strong
+                                    >：需学习梯形图编程，门槛较高
+                                </li>
+                                <li>
+                                    <strong>物联网</strong
+                                    >：需额外模块和网关，成本高
+                                </li>
+                                <li>
+                                    <strong>扩展性</strong
+                                    >：模块化设计，扩展灵活
+                                </li>
+                                <li>
+                                    <strong>部署速度</strong
+                                    >：需编程调试，周期较长
+                                </li>
+                                <li>
+                                    <strong>维护性</strong
+                                    >：需现场调试，依赖专业人员
+                                </li>
+                                <li>
+                                    <strong>成本效益</strong
+                                    >：硬件+软件+培训成本高
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                    <template x-if="activeProduct === 'mcu'">
+                        <div class="detail-card mcu">
+                            <h3>单片机/开发板</h3>
+                            <ul>
+                                <li>
+                                    <strong>易用性</strong
+                                    >：需嵌入式编程能力，门槛最高
+                                </li>
+                                <li>
+                                    <strong>物联网</strong>：需从零开发，周期长
+                                </li>
+                                <li>
+                                    <strong>扩展性</strong
+                                    >：高度灵活，但需自行设计
+                                </li>
+                                <li>
+                                    <strong>部署速度</strong>：开发周期数月起步
+                                </li>
+                                <li>
+                                    <strong>维护性</strong>：需源码，维护困难
+                                </li>
+                                <li>
+                                    <strong>成本效益</strong
+                                    >：硬件便宜，人力成本高
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="table-section">
+            <h2 class="section-title">详细对比表</h2>
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>对比维度</th>
+                            <th class="highlight">宜启智控Pro</th>
+                            <th>传统PLC</th>
+                            <th>单片机/开发板</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>编程要求</td>
+                            <td class="highlight">❌ 无需编程</td>
+                            <td>✅ 梯形图/指令表</td>
+                            <td>✅ C/C++/Python</td>
+                        </tr>
+                        <tr>
+                            <td>配置方式</td>
+                            <td class="highlight">📱 手机APP拖拽</td>
+                            <td>💻 专用软件</td>
+                            <td>💻 IDE开发</td>
+                        </tr>
+                        <tr>
+                            <td>学习曲线</td>
+                            <td class="highlight">⭐ 1天上手</td>
+                            <td>⭐⭐⭐ 数周~数月</td>
+                            <td>⭐⭐⭐⭐ 数月~数年</td>
+                        </tr>
+                        <tr>
+                            <td>物联网能力</td>
+                            <td class="highlight">✅ 内置WiFi/4G/MQTT</td>
+                            <td>❌ 需外接模块</td>
+                            <td>⚠️ 需自行开发</td>
+                        </tr>
+                        <tr>
+                            <td>远程控制</td>
+                            <td class="highlight">✅ 开箱即用</td>
+                            <td>⚠️ 需额外配置</td>
+                            <td>⚠️ 需开发云平台</td>
+                        </tr>
+                        <tr>
+                            <td>传感器兼容</td>
+                            <td class="highlight">95% 市场传感器</td>
+                            <td>品牌专用模块</td>
+                            <td>需自行适配</td>
+                        </tr>
+                        <tr>
+                            <td>维护难度</td>
+                            <td class="highlight">⬇️ APP远程维护</td>
+                            <td>⬆️ 需专业人员</td>
+                            <td>⬆️⬆️ 需源码维护</td>
+                        </tr>
+                        <tr>
+                            <td>综合成本</td>
+                            <td class="highlight">💰 经济实惠</td>
+                            <td>💰💰💰 较高</td>
+                            <td>💰💰 人力成本高</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Model Selection -->
+        <section class="models-section">
+            <h2 class="section-title">型号选型指南</h2>
+            <div class="models-grid">
+                <div class="model-card">
+                    <div class="model-header">
+                        <h3>2路款</h3>
+                        <span class="model-badge">入门首选</span>
+                    </div>
+                    <img
+                        src="/images/products/2路正面.png"
+                        alt="2路款"
+                        class="model-image"
+                    />
+                    <ul class="model-specs">
+                        <li>2路继电器输出</li>
+                        <li>2路PWM输出</li>
+                        <li>2路开关量输入</li>
+                        <li>1路模拟量输入</li>
+                    </ul>
+                    <p class="model-usage">适用：简单控制、DIY项目、学习入门</p>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <h3>3+2路款</h3>
+                        <span class="model-badge secondary">教学推荐</span>
+                    </div>
+                    <img
+                        src="/images/products/3+2路正面.png"
+                        alt="3+2路款"
+                        class="model-image"
+                    />
+                    <ul class="model-specs">
+                        <li>3路继电器输出</li>
+                        <li>2路PWM输出</li>
+                        <li>3路开关量输入</li>
+                        <li>2路模拟量输入</li>
+                    </ul>
+                    <p class="model-usage">
+                        适用：中型项目、教学实验、智能家居
+                    </p>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <h3>4路款</h3>
+                        <span class="model-badge">通用之选</span>
+                    </div>
+                    <img
+                        src="/images/products/4路正面.png"
+                        alt="4路款"
+                        class="model-image"
+                    />
+                    <ul class="model-specs">
+                        <li>4路继电器输出</li>
+                        <li>4路PWM输出</li>
+                        <li>4路开关量输入</li>
+                        <li>2路模拟量输入</li>
+                    </ul>
+                    <p class="model-usage">
+                        适用：通用控制、小型工程、智慧农业
+                    </p>
+                </div>
+
+                <div class="model-card featured">
+                    <div class="model-header">
+                        <h3>6+4路款</h3>
+                        <span class="model-badge accent">专业首选</span>
+                    </div>
+                    <img
+                        src="/images/products/6+4路正面.png"
+                        alt="6+4路款"
+                        class="model-image"
+                    />
+                    <ul class="model-specs">
+                        <li>6路继电器输出</li>
+                        <li>4路PWM输出</li>
+                        <li>6路开关量输入</li>
+                        <li>3路模拟量输入</li>
+                    </ul>
+                    <p class="model-usage">
+                        适用：复杂场景、工业控制、专业项目
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="cta-container">
+                <h2>还有疑问？联系我们获取专业建议</h2>
+                <div class="cta-buttons">
+                    <a href="/zh/buy" class="btn btn-accent btn-lg">立即购买</a>
+                    <a href="/zh/tutorials" class="btn btn-outline btn-lg"
+                        >查看教程</a
+                    >
+                </div>
+            </div>
+        </section>
+    </div>
+</Layout>
+
+<script>
+    function radarChart() {
+        return {
+            activeProduct: "yiqi",
+        };
+    }
+</script>
+
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
+        color: white;
+        padding: 4rem 1.5rem;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0 0 1rem;
+    }
+
+    .page-subtitle {
+        font-size: 1.25rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    .content-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        margin: 0 0 3rem;
+        color: var(--text-dark);
+    }
+
+    /* Radar Section */
+    .radar-section {
+        margin-bottom: 5rem;
+    }
+
+    .radar-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+        .radar-container {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .radar-chart {
+        display: flex;
+        justify-content: center;
+    }
+
+    .radar-svg {
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .radar-area {
+        transition: all 0.3s ease;
+    }
+
+    .radar-area.yiqi {
+        fill: rgba(0, 102, 204, 0.2);
+        stroke: #0066cc;
+        stroke-width: 2;
+    }
+
+    .radar-area.yiqi.active {
+        fill: rgba(0, 102, 204, 0.4);
+    }
+
+    .radar-area.plc {
+        fill: rgba(139, 92, 246, 0.15);
+        stroke: #8b5cf6;
+        stroke-width: 2;
+    }
+
+    .radar-area.plc.active {
+        fill: rgba(139, 92, 246, 0.35);
+    }
+
+    .radar-area.mcu {
+        fill: rgba(34, 197, 94, 0.15);
+        stroke: #22c55e;
+        stroke-width: 2;
+    }
+
+    .radar-area.mcu.active {
+        fill: rgba(34, 197, 94, 0.35);
+    }
+
+    .radar-legend {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        background: var(--bg-light);
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .legend-item:hover,
+    .legend-item.active {
+        border-color: currentColor;
+    }
+
+    .legend-item.yiqi {
+        color: #0066cc;
+    }
+
+    .legend-item.plc {
+        color: #8b5cf6;
+    }
+
+    .legend-item.mcu {
+        color: #22c55e;
+    }
+
+    .legend-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: currentColor;
+    }
+
+    .radar-details {
+        min-height: 300px;
+    }
+
+    .detail-card {
+        background: var(--bg-light);
+        border-radius: 16px;
+        padding: 2rem;
+        border-left: 4px solid;
+    }
+
+    .detail-card.yiqi {
+        border-color: #0066cc;
+    }
+
+    .detail-card.plc {
+        border-color: #8b5cf6;
+    }
+
+    .detail-card.mcu {
+        border-color: #22c55e;
+    }
+
+    .detail-card h3 {
+        margin: 0 0 1rem;
+        font-size: 1.25rem;
+        color: var(--text-dark);
+    }
+
+    .detail-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .detail-card li {
+        padding: 0.5rem 0;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .detail-card li:last-child {
+        border-bottom: none;
+    }
+
+    /* Comparison Table */
+    .table-section {
+        margin-bottom: 5rem;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+        padding: 1rem 1.25rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .comparison-table th {
+        background: var(--bg-light);
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+
+    .comparison-table th.highlight {
+        background: var(--primary);
+        color: white;
+    }
+
+    .comparison-table td {
+        color: var(--text-muted);
+    }
+
+    .comparison-table td.highlight {
+        background: rgba(0, 102, 204, 0.05);
+        color: var(--primary);
+        font-weight: 500;
+    }
+
+    /* Models Section */
+    .models-section {
+        margin-bottom: 5rem;
+    }
+
+    .models-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+        .models-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .models-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .model-card {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+    .model-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary-light);
+    }
+
+    .model-card.featured {
+        border-color: var(--primary);
+        box-shadow: 0 4px 20px rgba(0, 102, 204, 0.15);
+    }
+
+    .model-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .model-header h3 {
+        margin: 0;
+        font-size: 1.25rem;
+        color: var(--text-dark);
+    }
+
+    .model-badge {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        background: var(--primary);
+        color: white;
+    }
+
+    .model-badge.secondary {
+        background: #8b5cf6;
+    }
+
+    .model-badge.accent {
+        background: var(--accent);
+    }
+
+    .model-image {
+        width: 100%;
+        height: 150px;
+        object-fit: contain;
+        margin-bottom: 1rem;
+    }
+
+    .model-specs {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1rem;
+    }
+
+    .model-specs li {
+        padding: 0.375rem 0;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .model-specs li:last-child {
+        border-bottom: none;
+    }
+
+    .model-usage {
+        font-size: 0.875rem;
+        color: var(--primary);
+        margin: 0;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        background: linear-gradient(
+            135deg,
+            var(--primary) 0%,
+            var(--primary-dark) 100%
+        );
+        border-radius: 20px;
+        padding: 4rem 2rem;
+        text-align: center;
+    }
+
+    .cta-container h2 {
+        color: white;
+        margin: 0 0 2rem;
+        font-size: 1.75rem;
+    }
+
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        display: inline-flex;
+        padding: 0.875rem 2rem;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn-lg {
+        padding: 1rem 2.5rem;
+        font-size: 1.125rem;
+    }
+
+    .btn-accent {
+        background: var(--accent);
+        color: white;
+    }
+
+    .btn-accent:hover {
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+    }
+
+    .btn-outline:hover {
+        background: white;
+        color: var(--primary);
+    }
+</style>

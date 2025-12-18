@@ -1,0 +1,342 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const lang = "zh";
+---
+
+<Layout
+    title="APP下载 - 宜启智控Pro"
+    description="下载源来智能APP和涂鸦智能APP，开始控制您的宜启智控Pro设备"
+    lang={lang}
+>
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">APP下载</h1>
+            <p class="page-subtitle">下载官方APP，开启智能控制之旅</p>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <div class="apps-grid">
+            <!-- 源来智能 APP -->
+            <div class="app-card featured">
+                <div class="app-icon">📱</div>
+                <h2>源来智能</h2>
+                <p class="app-desc">
+                    宜启智控官方APP，支持蓝牙/WiFi连接，配置自动化逻辑、查看数据、远程控制
+                </p>
+
+                <div class="app-features">
+                    <span>✓ 蓝牙本地控制</span>
+                    <span>✓ WiFi远程控制</span>
+                    <span>✓ 自动化配置</span>
+                    <span>✓ 逻辑导入导出</span>
+                </div>
+
+                <div class="download-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                        >
+                            <path
+                                d="M17.523 15.34c-.5.7-.9 1.4-1.2 2.1-.7 1.4-2.1 2.7-3.8 2.7s-3.1-1.3-3.8-2.7c-.3-.7-.7-1.4-1.2-2.1-1.3-1.7-2.5-3.9-2.5-6.3C5.023 5.6 8.123 2.5 12.023 2.5s7 3.1 7 7.5c0 2.4-1.2 4.6-2.5 6.3z"
+                            ></path>
+                        </svg>
+                        APK直接下载
+                    </a>
+                    <a href="#" class="btn btn-secondary">华为应用市场</a>
+                    <a href="#" class="btn btn-secondary">小米应用商店</a>
+                </div>
+
+                <p class="app-note">* iOS用户请使用涂鸦智能APP</p>
+            </div>
+
+            <!-- 涂鸦智能 APP -->
+            <div class="app-card">
+                <div class="app-icon">🏠</div>
+                <h2>涂鸦智能</h2>
+                <p class="app-desc">
+                    全球领先的智能家居平台，支持远程控制、智能场景、云端联动、短信/电话报警
+                </p>
+
+                <div class="app-features">
+                    <span>✓ 全球远程控制</span>
+                    <span>✓ 智能场景联动</span>
+                    <span>✓ 短信电话报警</span>
+                    <span>✓ iOS/Android通用</span>
+                </div>
+
+                <div class="download-buttons">
+                    <a
+                        href="https://apps.apple.com/app/tuya-smart/id1034649547"
+                        class="btn btn-outline"
+                        target="_blank">App Store</a
+                    >
+                    <a
+                        href="https://play.google.com/store/apps/details?id=com.tuya.smart"
+                        class="btn btn-outline"
+                        target="_blank">Google Play</a
+                    >
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Guide -->
+        <section class="guide-section">
+            <h2 class="section-title">快速连接指南</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>下载安装</h3>
+                    <p>下载源来智能APP并完成安装</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>开启蓝牙</h3>
+                    <p>打开手机蓝牙和位置权限</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>设备上电</h3>
+                    <p>宜启智控通电，等待蓝牙灯闪烁</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>扫描连接</h3>
+                    <p>APP自动扫描并添加设备</p>
+                </div>
+            </div>
+            <div class="guide-cta">
+                <a href="/zh/tutorials" class="btn btn-primary btn-lg"
+                    >查看详细教程 →</a
+                >
+            </div>
+        </section>
+    </div>
+</Layout>
+
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
+        color: white;
+        padding: 4rem 1.5rem;
+        text-align: center;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0 0 1rem;
+    }
+
+    .page-subtitle {
+        font-size: 1.25rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    .content-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+    }
+
+    .apps-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-bottom: 5rem;
+    }
+
+    @media (max-width: 768px) {
+        .apps-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .app-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+    .app-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .app-card.featured {
+        border-color: var(--primary);
+        box-shadow: 0 4px 20px rgba(0, 102, 204, 0.15);
+    }
+
+    .app-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    .app-card h2 {
+        font-size: 1.75rem;
+        margin: 0 0 0.75rem;
+        color: var(--text-dark);
+    }
+
+    .app-desc {
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin: 0 0 1.5rem;
+    }
+
+    .app-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .app-features span {
+        font-size: 0.875rem;
+        color: var(--primary);
+        background: var(--primary-light);
+        padding: 0.375rem 0.75rem;
+        border-radius: 20px;
+    }
+
+    .download-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(
+            135deg,
+            var(--primary) 0%,
+            var(--primary-dark) 100%
+        );
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    .btn-secondary {
+        background: var(--bg-light);
+        color: var(--text-dark);
+    }
+
+    .btn-secondary:hover {
+        background: var(--primary-light);
+        color: var(--primary);
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: var(--text-dark);
+        border: 2px solid var(--border-light);
+    }
+
+    .btn-outline:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+    }
+
+    .btn-lg {
+        padding: 1rem 2rem;
+        font-size: 1.125rem;
+    }
+
+    .app-note {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin: 1rem 0 0;
+        font-style: italic;
+    }
+
+    /* Guide Section */
+    .guide-section {
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 0 3rem;
+        color: var(--text-dark);
+    }
+
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    @media (max-width: 768px) {
+        .steps-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .step-card {
+        background: var(--bg-light);
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+    }
+
+    .step-number {
+        width: 48px;
+        height: 48px;
+        background: var(--primary);
+        color: white;
+        font-size: 1.25rem;
+        font-weight: 700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+    }
+
+    .step-card h3 {
+        font-size: 1.125rem;
+        margin: 0 0 0.5rem;
+        color: var(--text-dark);
+    }
+
+    .step-card p {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin: 0;
+    }
+
+    .guide-cta {
+        margin-top: 2rem;
+    }
+</style>

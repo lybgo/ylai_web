@@ -1,0 +1,630 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const lang = "zh";
+---
+
+<Layout
+    title="硬件接口及电气参数 - 宜启智控Pro"
+    description="宜启智控Pro硬件接口详解，包括继电器输出、PWM输出、开关量输入、模拟量输入、RS485 Modbus、IIC等接口规格"
+    lang={lang}
+>
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">硬件接口及电气参数</h1>
+            <p class="page-subtitle">
+                了解宜启智控Pro的强大接口能力，满足95%传感器接入需求
+            </p>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <nav class="sidebar">
+            <h3 class="sidebar-title">目录</h3>
+            <ul class="sidebar-nav">
+                <li><a href="#overview">接口总览</a></li>
+                <li><a href="#relay">继电器输出</a></li>
+                <li><a href="#pwm">PWM输出</a></li>
+                <li><a href="#digital-input">开关量输入</a></li>
+                <li><a href="#analog-input">模拟量输入</a></li>
+                <li><a href="#communication">通信接口</a></li>
+                <li><a href="#models">型号规格对比</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section id="overview" class="doc-section">
+                <h2>接口总览</h2>
+                <div class="interface-diagram">
+                    <img
+                        src="/images/products/6+4路正面.png"
+                        alt="宜启智控Pro硬件接口图"
+                    />
+                </div>
+                <p>
+                    宜启智控Pro提供丰富的I/O接口，支持多种传感器和执行器接入，是实现自动化控制的理想选择。
+                </p>
+
+                <div class="specs-overview">
+                    <div class="spec-item">
+                        <span class="spec-label">供电电压</span>
+                        <span class="spec-value"
+                            >DC 7-36V / USB 5V / 可选AC 220V</span
+                        >
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">工作温度</span>
+                        <span class="spec-value">-20°C ~ 60°C</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">通信方式</span>
+                        <span class="spec-value">WiFi / 4G / 蓝牙 (可选)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Relay Output -->
+            <section id="relay" class="doc-section">
+                <h2>继电器输出</h2>
+                <p>
+                    继电器输出用于控制照明、水泵、电磁阀、交流接触器等负载设备。
+                </p>
+
+                <div class="info-card warning">
+                    <h4>⚠️ 安全注意</h4>
+                    <p>
+                        高压接线请由专业电工操作，确保高低压分离，避免触电风险。
+                    </p>
+                </div>
+
+                <h3>电气参数</h3>
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>参数</th>
+                            <th>规格</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>最大阻性负载</td>
+                            <td>AC 220V 9A / DC 30V 9A</td>
+                        </tr>
+                        <tr>
+                            <td>最大感性负载</td>
+                            <td>AC 220V 3A / DC 30V 3A</td>
+                        </tr>
+                        <tr>
+                            <td>触点类型</td>
+                            <td>常开(NO) + 公共端(COM)</td>
+                        </tr>
+                        <tr>
+                            <td>继电器寿命</td>
+                            <td>>10万次</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>接线说明</h3>
+                <ul class="feature-list">
+                    <li><strong>COM端</strong>：公共端，接电源（火线/正极）</li>
+                    <li><strong>NO端</strong>：常开端，接负载</li>
+                    <li>大功率负载需外接交流接触器进行扩展</li>
+                </ul>
+            </section>
+
+            <!-- PWM Output -->
+            <section id="pwm" class="doc-section">
+                <h2>PWM输出</h2>
+                <p>
+                    PWM输出用于LED调光、电机调速、步进电机驱动、舵机控制等需要精确控制的场景。
+                </p>
+
+                <h3>电气参数</h3>
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>参数</th>
+                            <th>规格</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>输出类型</td>
+                            <td>NMOS开漏输出</td>
+                        </tr>
+                        <tr>
+                            <td>最大开关负载</td>
+                            <td>DC 36V 10A</td>
+                        </tr>
+                        <tr>
+                            <td>最大PWM负载</td>
+                            <td>DC 36V 8A</td>
+                        </tr>
+                        <tr>
+                            <td>占空比范围</td>
+                            <td>0-100% (精度0.01%)</td>
+                        </tr>
+                        <tr>
+                            <td>频率范围</td>
+                            <td>1Hz - 100kHz</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>应用场景</h3>
+                <ul class="feature-list">
+                    <li><strong>LED调光</strong>：占空比调节实现无级调光</li>
+                    <li><strong>电机调速</strong>：配合电机驱动器调节转速</li>
+                    <li><strong>步进电机</strong>：脉冲+方向信号精确定位</li>
+                    <li><strong>舵机控制</strong>：脉宽调节角度位置</li>
+                </ul>
+            </section>
+
+            <!-- Digital Input -->
+            <section id="digital-input" class="doc-section">
+                <h2>开关量输入</h2>
+                <p>
+                    开关量输入支持无源干接点、有源湿接点、NPN传感器信号及频率/脉冲计数。
+                </p>
+
+                <h3>电气参数</h3>
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>参数</th>
+                            <th>规格</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>输入类型</td>
+                            <td>干接点 / NPN / 电平信号</td>
+                        </tr>
+                        <tr>
+                            <td>输入电压范围</td>
+                            <td>DC 3.3V - 24V</td>
+                        </tr>
+                        <tr>
+                            <td>最大频率采集</td>
+                            <td>20kHz</td>
+                        </tr>
+                        <tr>
+                            <td>脉冲计数</td>
+                            <td>32位计数器，断电保存</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>支持传感器类型</h3>
+                <ul class="feature-list">
+                    <li>浮球水位开关、行程开关</li>
+                    <li>光电开关、接近开关(NPN型)</li>
+                    <li>门磁、烟雾报警器</li>
+                    <li>流量计脉冲信号</li>
+                </ul>
+            </section>
+
+            <!-- Analog Input -->
+            <section id="analog-input" class="doc-section">
+                <h2>模拟量输入</h2>
+                <p>模拟量输入支持工业标准的4-20mA电流信号和0-10V电压信号。</p>
+
+                <h3>电气参数</h3>
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>通道类型</th>
+                            <th>输入范围</th>
+                            <th>精度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>电流输入</td>
+                            <td>4-20mA</td>
+                            <td>12位ADC</td>
+                        </tr>
+                        <tr>
+                            <td>电压输入</td>
+                            <td>0-10V</td>
+                            <td>12位ADC</td>
+                        </tr>
+                        <tr>
+                            <td>自定义ADC</td>
+                            <td>0-1.5V (需分压电阻)</td>
+                            <td>12位ADC</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>支持传感器</h3>
+                <ul class="feature-list">
+                    <li>4-20mA：压力传感器、液位传感器、温湿度变送器</li>
+                    <li>0-10V：光照度传感器、风速传感器</li>
+                    <li>可在APP中配置量程映射，直接显示物理量</li>
+                </ul>
+            </section>
+
+            <!-- Communication -->
+            <section id="communication" class="doc-section">
+                <h2>通信接口</h2>
+
+                <h3>RS485 Modbus</h3>
+                <p>支持RS485 Modbus RTU协议，可作为主机读写从机设备。</p>
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>参数</th>
+                            <th>规格</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>协议</td>
+                            <td>Modbus RTU</td>
+                        </tr>
+                        <tr>
+                            <td>波特率</td>
+                            <td>1200 - 115200 bps</td>
+                        </tr>
+                        <tr>
+                            <td>最大从机数</td>
+                            <td>32个</td>
+                        </tr>
+                        <tr>
+                            <td>功能码支持</td>
+                            <td>01H/02H/03H/04H/05H/06H/0FH/10H</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>IIC接口</h3>
+                <p>用于接入IIC协议的数字传感器。</p>
+                <ul class="feature-list">
+                    <li>SHT30/SHT40 温湿度传感器</li>
+                    <li>BH1750 光照度传感器</li>
+                    <li>其他IIC协议传感器（可定制）</li>
+                </ul>
+
+                <h3>433MHz无线</h3>
+                <p>可选配433MHz无线收发模块。</p>
+                <ul class="feature-list">
+                    <li>接收：匹配遥控器、门磁、烟感等设备</li>
+                    <li>发射：学习并发射遥控器信号</li>
+                    <li>通信距离：室内约50米，空旷约200米</li>
+                </ul>
+            </section>
+
+            <!-- Models Comparison -->
+            <section id="models" class="doc-section">
+                <h2>型号规格对比</h2>
+                <table class="spec-table models-table">
+                    <thead>
+                        <tr>
+                            <th>型号</th>
+                            <th>继电器输出</th>
+                            <th>PWM输出</th>
+                            <th>开关量输入</th>
+                            <th>模拟量输入</th>
+                            <th>适用场景</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>2路款</strong></td>
+                            <td>2路</td>
+                            <td>2路</td>
+                            <td>2路</td>
+                            <td>1路</td>
+                            <td>简单控制、DIY项目</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3+2路款</strong></td>
+                            <td>3路</td>
+                            <td>2路</td>
+                            <td>3路</td>
+                            <td>2路</td>
+                            <td>中型项目、教学实验</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4路款</strong></td>
+                            <td>4路</td>
+                            <td>4路</td>
+                            <td>4路</td>
+                            <td>2路</td>
+                            <td>通用控制、小型工程</td>
+                        </tr>
+                        <tr>
+                            <td><strong>6+4路款</strong></td>
+                            <td>6路</td>
+                            <td>4路</td>
+                            <td>6路</td>
+                            <td>3路</td>
+                            <td>复杂场景、工业应用</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="cta-box">
+                    <p>不确定选择哪个型号？</p>
+                    <a href="/zh/compare" class="btn btn-primary"
+                        >查看选型指南 →</a
+                    >
+                </div>
+            </section>
+        </main>
+    </div>
+</Layout>
+
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
+        color: white;
+        padding: 4rem 1.5rem;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0 0 1rem;
+    }
+
+    .page-subtitle {
+        font-size: 1.25rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    .content-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 3rem;
+        padding: 3rem 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+        .content-wrapper {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Sidebar */
+    .sidebar {
+        position: sticky;
+        top: 80px;
+        height: fit-content;
+    }
+
+    @media (max-width: 1024px) {
+        .sidebar {
+            position: static;
+        }
+    }
+
+    .sidebar-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0 0 1rem;
+    }
+
+    .sidebar-nav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar-nav li {
+        margin-bottom: 0.5rem;
+    }
+
+    .sidebar-nav a {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+    }
+
+    .sidebar-nav a:hover {
+        color: var(--primary);
+        background: var(--primary-light);
+    }
+
+    /* Main Content */
+    .main-content {
+        min-width: 0;
+    }
+
+    .doc-section {
+        margin-bottom: 4rem;
+    }
+
+    .doc-section h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0 0 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--primary-light);
+    }
+
+    .doc-section h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 2rem 0 1rem;
+    }
+
+    .doc-section p {
+        color: var(--text-muted);
+        line-height: 1.7;
+        margin: 0 0 1rem;
+    }
+
+    /* Interface Diagram */
+    .interface-diagram {
+        background: var(--bg-light);
+        border-radius: 16px;
+        padding: 2rem;
+        margin: 1.5rem 0;
+        text-align: center;
+    }
+
+    .interface-diagram img {
+        max-width: 100%;
+        max-height: 400px;
+        object-fit: contain;
+    }
+
+    /* Specs Overview */
+    .specs-overview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .spec-item {
+        background: var(--bg-light);
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .spec-label {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+    }
+
+    .spec-value {
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+
+    /* Info Cards */
+    .info-card {
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        margin: 1.5rem 0;
+    }
+
+    .info-card.warning {
+        background: #fff7ed;
+        border-left: 4px solid #f97316;
+    }
+
+    .info-card h4 {
+        margin: 0 0 0.5rem;
+        color: #c2410c;
+    }
+
+    .info-card p {
+        margin: 0;
+        color: #9a3412;
+    }
+
+    /* Tables */
+    .spec-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        font-size: 0.95rem;
+    }
+
+    .spec-table th,
+    .spec-table td {
+        padding: 0.875rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .spec-table th {
+        background: var(--bg-light);
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+
+    .spec-table td {
+        color: var(--text-muted);
+    }
+
+    .models-table td:first-child {
+        color: var(--primary);
+    }
+
+    /* Feature List */
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0;
+    }
+
+    .feature-list li {
+        padding: 0.5rem 0 0.5rem 1.5rem;
+        position: relative;
+        color: var(--text-muted);
+    }
+
+    .feature-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    /* CTA Box */
+    .cta-box {
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        padding: 2rem;
+        border-radius: 16px;
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .cta-box p {
+        font-size: 1.125rem;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .btn {
+        display: inline-flex;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+        background: linear-gradient(
+            135deg,
+            var(--primary) 0%,
+            var(--primary-dark) 100%
+        );
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        color: white;
+    }
+</style>

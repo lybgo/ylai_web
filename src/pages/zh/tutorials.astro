@@ -1,0 +1,383 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const lang = "zh";
+
+const chapters = [
+    {
+        title: "第一章 理论与基础导论",
+        duration: "30分钟",
+        sections: [
+            { num: 1, title: "课程导论与价值分析" },
+            { num: 2, title: "自动化控制与物联网核心概念解析" },
+            { num: 3, title: "宜启智控Pro的核心定位与优势" },
+            { num: 4, title: "课程目标与能力培养" },
+            { num: 5, title: "学习方法与课程结构" },
+        ],
+    },
+    {
+        title: "第二章 硬件配置与快速部署",
+        duration: "约4小时",
+        sections: [
+            { num: 6, title: "宜启智控Pro硬件型号选型指南" },
+            { num: 7, title: "设备首次上电与APP连接配置" },
+            { num: 8, title: "继电器/开关输出控制技术" },
+            { num: 9, title: "PWM脉冲宽度调制输出应用" },
+            { num: 10, title: "时间控制：定时/循环定时等功能" },
+            { num: 11, title: '"一键执行"快速入门' },
+            { num: 12, title: "开关量/NPN/频率 信号输入与温湿度传感器接入" },
+            { num: 13, title: "涂鸦智能APP的使用" },
+            { num: 14, title: "MQTT协议基础与巴法云演示接入" },
+            { num: 15, title: "接入ThingsCloud云平台" },
+            { num: 16, title: '"自动任务"自动化控制快速入门' },
+            { num: 17, title: '任务的"运行日志"查看与分析' },
+            { num: 18, title: "逻辑固件的导出与导入管理" },
+            { num: 19, title: "Mesh无线网络组网功能" },
+            { num: 20, title: "433MHz无线射频接收与发射" },
+            { num: 21, title: "设备维护与升级（重启/重置/OTA）" },
+            { num: 22, title: "设备安全与权限管理" },
+            { num: 23, title: "其它高级功能配置" },
+        ],
+    },
+    {
+        title: "第三章 深入学习传感器/受控设备/自动化/MQTT",
+        duration: "约4小时",
+        sections: [
+            { num: 24, title: "模拟量传感器接入与数据处理" },
+            { num: 25, title: "RS485 Modbus RTU/DS18B20总线传感器应用" },
+            { num: 26, title: '"一键执行"与"自动任务"的任务执行机制详解' },
+            { num: 27, title: '"自动任务"的条件逻辑配置深入' },
+            { num: 28, title: "IIC数字接口传感器扩展应用" },
+            { num: 29, title: "PID闭环控制功能实战" },
+            { num: 30, title: "步进电机精确驱动控制" },
+            { num: 31, title: "舵机角度与位置控制" },
+            { num: 32, title: "PWM脉冲加减速功能在照明中的应用" },
+            { num: 33, title: "MQTT协议数据格式详解" },
+        ],
+    },
+    {
+        title: "第四章 工业/物联网平台与综合应用案例",
+        duration: "约4小时",
+        sections: [
+            { num: 34, title: "接入ThingsBoard工业物联网平台" },
+            { num: 35, title: "接入Home Assistant智能家居平台" },
+            { num: 36, title: "接入EMQX物联网消息平台" },
+            { num: 37, title: "智能电表数据采集与多渠道报警系统" },
+            { num: 38, title: "变频器远程控制与数据采集" },
+            { num: 39, title: "常用传感器与执行设备选型指南" },
+            { num: 40, title: "智慧农业应用场景案例实战" },
+            { num: 41, title: "智慧楼宇应用场景案例实战" },
+            { num: 42, title: "传统设备快速智能化升级改造案例" },
+            { num: 43, title: "创新型智能设备项目落地与实践" },
+        ],
+    },
+];
+---
+
+<Layout
+    title="产品使用教程 - 宜启智控Pro"
+    description="0基础1天入门：无需编程的自动化控制与物联网应用教程，宜启智控Pro控制器使用教程"
+    lang={lang}
+>
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">产品使用教程</h1>
+            <p class="page-subtitle">
+                0基础1天入门：无需编程的自动化控制与物联网应用教程
+            </p>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <!-- Course Intro -->
+        <section class="intro-section">
+            <div class="intro-card">
+                <h2>🎯 课程目标</h2>
+                <p>
+                    通过宜启智控Pro演示套件，使学生或工程人员系统掌握无需编程的自动化控制逻辑配置、
+                    传感器数据采集、设备云端通信及多平台对接技术，具备快速搭建智慧项目或传统设备智能化升级的能力。
+                </p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-value">43</span>
+                    <span class="stat-label">节课程</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">4</span>
+                    <span class="stat-label">大章节</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">~13h</span>
+                    <span class="stat-label">视频时长</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">1天</span>
+                    <span class="stat-label">速成入门</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapters -->
+        <section class="chapters-section">
+            {
+                chapters.map((chapter, idx) => (
+                    <div class="chapter-card">
+                        <div class="chapter-header">
+                            <h2>{chapter.title}</h2>
+                            <span class="chapter-duration">
+                                {chapter.duration}
+                            </span>
+                        </div>
+                        <div class="sections-list">
+                            {chapter.sections.map((section) => (
+                                <div class="section-item">
+                                    <span class="section-num">
+                                        {section.num}
+                                    </span>
+                                    <span class="section-title">
+                                        {section.title}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))
+            }
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <h2>准备好开始学习了吗？</h2>
+            <p>获取宜启智控Pro演示套件，跟随教程实操练习</p>
+            <div class="cta-buttons">
+                <a href="/zh/download" class="btn btn-primary btn-lg"
+                    >下载APP开始</a
+                >
+                <a href="/zh/buy" class="btn btn-accent btn-lg">购买演示套件</a>
+            </div>
+        </section>
+    </div>
+</Layout>
+
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
+        color: white;
+        padding: 4rem 1.5rem;
+        text-align: center;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0 0 1rem;
+    }
+
+    .page-subtitle {
+        font-size: 1.25rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    .content-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+    }
+
+    /* Intro Section */
+    .intro-section {
+        margin-bottom: 3rem;
+    }
+
+    .intro-card {
+        background: var(--bg-light);
+        padding: 2rem;
+        border-radius: 16px;
+        margin-bottom: 2rem;
+        border-left: 4px solid var(--primary);
+    }
+
+    .intro-card h2 {
+        font-size: 1.25rem;
+        margin: 0 0 1rem;
+        color: var(--text-dark);
+    }
+
+    .intro-card p {
+        color: var(--text-muted);
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+
+    @media (max-width: 640px) {
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .stat-item {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-value {
+        display: block;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary);
+    }
+
+    .stat-label {
+        display: block;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin-top: 0.25rem;
+    }
+
+    /* Chapters */
+    .chapters-section {
+        margin-bottom: 4rem;
+    }
+
+    .chapter-card {
+        background: white;
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+
+    .chapter-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+        background: var(--primary);
+        color: white;
+    }
+
+    .chapter-header h2 {
+        font-size: 1.25rem;
+        margin: 0;
+    }
+
+    .chapter-duration {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+
+    .sections-list {
+        padding: 0.5rem 0;
+    }
+
+    .section-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.875rem 2rem;
+        border-bottom: 1px solid var(--border-light);
+        transition: background 0.2s ease;
+    }
+
+    .section-item:last-child {
+        border-bottom: none;
+    }
+
+    .section-item:hover {
+        background: var(--bg-light);
+    }
+
+    .section-num {
+        width: 32px;
+        height: 32px;
+        background: var(--primary-light);
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .section-title {
+        color: var(--text-dark);
+        font-size: 0.95rem;
+    }
+
+    /* CTA */
+    .cta-section {
+        background: linear-gradient(
+            135deg,
+            var(--primary) 0%,
+            var(--primary-dark) 100%
+        );
+        border-radius: 24px;
+        padding: 4rem 2rem;
+        text-align: center;
+    }
+
+    .cta-section h2 {
+        font-size: 2rem;
+        color: white;
+        margin: 0 0 0.75rem;
+    }
+
+    .cta-section p {
+        font-size: 1.125rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin: 0 0 2rem;
+    }
+
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        display: inline-flex;
+        padding: 0.875rem 2rem;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn-lg {
+        padding: 1rem 2.5rem;
+        font-size: 1.125rem;
+    }
+
+    .btn-primary {
+        background: white;
+        color: var(--primary);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+    }
+
+    .btn-accent {
+        background: var(--accent);
+        color: white;
+    }
+
+    .btn-accent:hover {
+        transform: translateY(-2px);
+        color: white;
+    }
+</style>

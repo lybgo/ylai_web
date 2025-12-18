@@ -1,0 +1,247 @@
+---
+// Header component with navigation and language switcher
+const { lang = "zh" } = Astro.props;
+
+const navItems = {
+    zh: [
+        { href: `/${lang}/`, label: "首页" },
+        { href: `/${lang}/tutorials`, label: "教程" },
+        { href: `/${lang}/mqtt`, label: "MQTT协议" },
+        { href: `/${lang}/hardware`, label: "硬件接口" },
+        { href: `/${lang}/cases`, label: "应用场景" },
+        { href: `/${lang}/compare`, label: "对比选型" },
+        { href: `/${lang}/download`, label: "下载" },
+        { href: `/${lang}/buy`, label: "购买" },
+        { href: `/${lang}/about`, label: "关于" },
+    ],
+    en: [
+        { href: `/${lang}/`, label: "Home" },
+        { href: `/${lang}/tutorials`, label: "Tutorials" },
+        { href: `/${lang}/mqtt`, label: "MQTT Protocol" },
+        { href: `/${lang}/hardware`, label: "Hardware" },
+        { href: `/${lang}/cases`, label: "Use Cases" },
+        { href: `/${lang}/compare`, label: "Comparison" },
+        { href: `/${lang}/download`, label: "Download" },
+        { href: `/${lang}/buy`, label: "Buy" },
+        { href: `/${lang}/about`, label: "About" },
+    ],
+};
+
+const currentNav = navItems[lang as keyof typeof navItems] || navItems.zh;
+const switchLang = lang === "zh" ? "en" : "zh";
+const switchLabel = lang === "zh" ? "EN" : "中文";
+---
+
+<header class="header" x-data="{ mobileMenuOpen: false }">
+    <div class="header-container">
+        <!-- Logo -->
+        <a href={`/${lang}/`} class="logo">
+            <img src="/images/logo.png" alt="宜启智控" class="logo-img" />
+            <span class="logo-text">宜启智控</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="nav-desktop">
+            {
+                currentNav.map((item) => (
+                    <a href={item.href} class="nav-link">
+                        {item.label}
+                    </a>
+                ))
+            }
+        </nav>
+
+        <!-- Language Switcher & Mobile Menu Button -->
+        <div class="header-actions">
+            <a
+                href={`/${switchLang}${Astro.url.pathname.replace(/^\/(zh|en)/, "")}`}
+                class="lang-switch"
+            >
+                {switchLabel}
+            </a>
+            <button
+                class="mobile-menu-btn"
+                @click="mobileMenuOpen = !mobileMenuOpen"
+                :aria-expanded="mobileMenuOpen"
+            >
+                <svg
+                    x-show="!mobileMenuOpen"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    class="menu-icon"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+                <svg
+                    x-show="mobileMenuOpen"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    class="menu-icon"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="nav-mobile" x-show="mobileMenuOpen" x-transition>
+        {
+            currentNav.map((item) => (
+                <a href={item.href} class="nav-link-mobile">
+                    {item.label}
+                </a>
+            ))
+        }
+    </nav>
+</header>
+
+<style>
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0, 102, 204, 0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+    }
+
+    .logo-img {
+        height: 40px;
+        width: auto;
+    }
+
+    .logo-text {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #0066cc;
+    }
+
+    .nav-desktop {
+        display: none;
+        gap: 0.25rem;
+    }
+
+    @media (min-width: 1024px) {
+        .nav-desktop {
+            display: flex;
+        }
+    }
+
+    .nav-link {
+        padding: 0.5rem 0.875rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #374151;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+        color: #0066cc;
+        background: rgba(0, 102, 204, 0.08);
+    }
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .lang-switch {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #0066cc;
+        background: rgba(0, 102, 204, 0.1);
+        border-radius: 6px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .lang-switch:hover {
+        background: rgba(0, 102, 204, 0.2);
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #374151;
+    }
+
+    @media (min-width: 1024px) {
+        .mobile-menu-btn {
+            display: none;
+        }
+    }
+
+    .menu-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .nav-mobile {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        background: white;
+        border-top: 1px solid rgba(0, 102, 204, 0.1);
+    }
+
+    @media (min-width: 1024px) {
+        .nav-mobile {
+            display: none !important;
+        }
+    }
+
+    .nav-link-mobile {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #374151;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .nav-link-mobile:hover {
+        color: #0066cc;
+        background: rgba(0, 102, 204, 0.08);
+    }
+</style>

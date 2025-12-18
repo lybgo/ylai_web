@@ -1,0 +1,369 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const lang = "zh";
+---
+
+<Layout
+    title="关于宜启智控 - 智能物联网自动化控制解决方案"
+    description="了解宜启智控Pro的产品理念、核心价值和团队愿景"
+    lang={lang}
+>
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">关于宜启智控</h1>
+            <p class="page-subtitle">让控制变得简单 · 让万物互联触手可及</p>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <!-- Mission -->
+        <section class="mission-section">
+            <h2>我们的愿景</h2>
+            <p class="mission-text">
+                宜启智控致力于打造<strong>无需编程</strong
+                >的智能物联网自动化控制解决方案，
+                让每个人都能轻松实现自动化控制和物联网应用，
+                降低技术门槛，推动智能化普及。
+            </p>
+        </section>
+
+        <!-- Values -->
+        <section class="values-section">
+            <h2 class="section-title">核心价值</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3>简单易用</h3>
+                    <p>无需编程，手机APP点击配置，小白也能快速上手</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🔌</div>
+                    <h3>广泛兼容</h3>
+                    <p>支持95%市场传感器，多种接口和通信方式，满足各类需求</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">💰</div>
+                    <h3>经济实惠</h3>
+                    <p>一体化解决方案，软硬件集成，综合成本远低于传统方案</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🚀</div>
+                    <h3>快速部署</h3>
+                    <p>即插即用，1天速成专业控制系统，大幅缩短项目周期</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product -->
+        <section class="product-section">
+            <div class="product-content">
+                <h2>宜启智控Pro</h2>
+                <p class="product-tagline">智能物联网自动化万能控制器</p>
+                <p>
+                    宜启智控Pro是一款创新的智能控制器，集成了继电器输出、PWM输出、
+                    开关量/模拟量输入、RS485 Modbus、433MHz无线等丰富接口，
+                    支持WiFi/4G/蓝牙多种联网方式，可接入涂鸦生态和各类物联网平台。
+                </p>
+                <p>
+                    通过专用的"源来智能"APP，用户无需编写任何代码，
+                    即可配置复杂的自动化控制逻辑，实现传感器数据采集、
+                    设备远程控制、定时循环任务、条件触发联动等功能。
+                </p>
+                <a href="/zh/tutorials" class="btn btn-primary">开始使用 →</a>
+            </div>
+            <div class="product-image">
+                <img
+                    src="/images/products/6+4路45度ok1.png"
+                    alt="宜启智控Pro"
+                />
+            </div>
+        </section>
+
+        <!-- Applications -->
+        <section class="applications-section">
+            <h2 class="section-title">应用领域</h2>
+            <div class="applications-grid">
+                <div class="app-item">🌾 智慧农业</div>
+                <div class="app-item">🏢 智慧楼宇</div>
+                <div class="app-item">🏭 工业控制</div>
+                <div class="app-item">📚 教学实训</div>
+                <div class="app-item">🏠 智能家居</div>
+                <div class="app-item">🔧 设备改造</div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="contact-section">
+            <h2 class="section-title">联系我们</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span>邮箱：contact@yiqizhikong.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🛒</span>
+                    <span>淘宝店铺：宜启智控官方店</span>
+                </div>
+            </div>
+            <div class="contact-cta">
+                <a href="/zh/buy" class="btn btn-accent">立即购买</a>
+                <a href="/zh/download" class="btn btn-outline">下载APP</a>
+            </div>
+        </section>
+    </div>
+</Layout>
+
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
+        color: white;
+        padding: 5rem 1.5rem;
+        text-align: center;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0 0 1rem;
+    }
+
+    .page-subtitle {
+        font-size: 1.5rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    .content-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+    }
+
+    /* Mission */
+    .mission-section {
+        text-align: center;
+        margin-bottom: 5rem;
+    }
+
+    .mission-section h2 {
+        font-size: 2rem;
+        margin: 0 0 1.5rem;
+        color: var(--text-dark);
+    }
+
+    .mission-text {
+        font-size: 1.25rem;
+        line-height: 1.8;
+        color: var(--text-muted);
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .mission-text strong {
+        color: var(--primary);
+    }
+
+    /* Values */
+    .values-section {
+        margin-bottom: 5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        margin: 0 0 2.5rem;
+        color: var(--text-dark);
+    }
+
+    .values-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+        .values-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .values-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .value-card {
+        text-align: center;
+        padding: 2rem;
+        background: var(--bg-light);
+        border-radius: 16px;
+        transition: transform 0.3s ease;
+    }
+
+    .value-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .value-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .value-card h3 {
+        font-size: 1.125rem;
+        margin: 0 0 0.75rem;
+        color: var(--text-dark);
+    }
+
+    .value-card p {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* Product */
+    .product-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        margin-bottom: 5rem;
+        background: var(--bg-light);
+        padding: 3rem;
+        border-radius: 24px;
+    }
+
+    @media (max-width: 768px) {
+        .product-section {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .product-content h2 {
+        font-size: 2rem;
+        margin: 0 0 0.5rem;
+        color: var(--text-dark);
+    }
+
+    .product-tagline {
+        font-size: 1.125rem;
+        color: var(--primary);
+        font-weight: 500;
+        margin: 0 0 1.5rem;
+    }
+
+    .product-content p {
+        color: var(--text-muted);
+        line-height: 1.7;
+        margin: 0 0 1rem;
+    }
+
+    .product-image img {
+        max-width: 100%;
+        height: auto;
+        filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
+    }
+
+    .btn {
+        display: inline-flex;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        margin-top: 1rem;
+    }
+
+    .btn-primary {
+        background: linear-gradient(
+            135deg,
+            var(--primary) 0%,
+            var(--primary-dark) 100%
+        );
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    .btn-accent {
+        background: var(--accent);
+        color: white;
+    }
+
+    .btn-accent:hover {
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: var(--text-dark);
+        border: 2px solid var(--border-light);
+    }
+
+    .btn-outline:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+    }
+
+    /* Applications */
+    .applications-section {
+        margin-bottom: 5rem;
+    }
+
+    .applications-grid {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .app-item {
+        padding: 1rem 1.5rem;
+        background: var(--primary-light);
+        color: var(--primary);
+        font-weight: 500;
+        border-radius: 30px;
+        font-size: 1rem;
+    }
+
+    /* Contact */
+    .contact-section {
+        text-align: center;
+        background: var(--bg-light);
+        padding: 3rem;
+        border-radius: 24px;
+    }
+
+    .contact-grid {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: var(--text-muted);
+    }
+
+    .contact-icon {
+        font-size: 1.5rem;
+    }
+
+    .contact-cta {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+</style>

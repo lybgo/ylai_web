@@ -1,0 +1,386 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const lang = "zh";
+---
+
+<Layout
+    title="购买渠道 - 宜启智控Pro"
+    description="通过淘宝、亚马逊、TikTok Shop购买宜启智控Pro智能物联网控制器"
+    lang={lang}
+>
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">购买渠道</h1>
+            <p class="page-subtitle">选择您方便的渠道，获取宜启智控Pro</p>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <div class="channels-grid">
+            <!-- 淘宝 -->
+            <a href="#" class="channel-card taobao" target="_blank">
+                <div class="channel-icon">🛒</div>
+                <h2>淘宝/天猫</h2>
+                <p>官方旗舰店，正品保障</p>
+                <span class="channel-tag">推荐</span>
+            </a>
+
+            <!-- 亚马逊 -->
+            <a href="#" class="channel-card amazon" target="_blank">
+                <div class="channel-icon">📦</div>
+                <h2>Amazon</h2>
+                <p>全球配送，海外用户首选</p>
+                <span class="channel-tag secondary">国际</span>
+            </a>
+
+            <!-- TikTok -->
+            <a href="#" class="channel-card tiktok" target="_blank">
+                <div class="channel-icon">🎵</div>
+                <h2>TikTok Shop</h2>
+                <p>直播优惠，限时特价</p>
+                <span class="channel-tag accent">优惠</span>
+            </a>
+        </div>
+
+        <!-- Product Models -->
+        <section class="products-section">
+            <h2 class="section-title">选择型号</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="/images/products/2路正面.png" alt="2路款" />
+                    <h3>2路款</h3>
+                    <p>2继电器 + 2PWM + 2输入</p>
+                    <span class="price">¥ 咨询价格</span>
+                </div>
+                <div class="product-card">
+                    <img src="/images/products/3+2路正面.png" alt="3+2路款" />
+                    <h3>3+2路款</h3>
+                    <p>3继电器 + 2PWM + 3输入</p>
+                    <span class="price">¥ 咨询价格</span>
+                </div>
+                <div class="product-card">
+                    <img src="/images/products/4路正面.png" alt="4路款" />
+                    <h3>4路款</h3>
+                    <p>4继电器 + 4PWM + 4输入</p>
+                    <span class="price">¥ 咨询价格</span>
+                </div>
+                <div class="product-card featured">
+                    <img src="/images/products/6+4路正面.png" alt="6+4路款" />
+                    <h3>6+4路款</h3>
+                    <p>6继电器 + 4PWM + 6输入</p>
+                    <span class="price">¥ 咨询价格</span>
+                    <span class="featured-tag">热销</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Options -->
+        <section class="options-section">
+            <h2 class="section-title">可选配置</h2>
+            <div class="options-grid">
+                <div class="option-item">
+                    <h4>通信方式</h4>
+                    <ul>
+                        <li>WiFi版（默认）</li>
+                        <li>4G版（+￥XX）</li>
+                        <li>纯蓝牙版</li>
+                    </ul>
+                </div>
+                <div class="option-item">
+                    <h4>供电电压</h4>
+                    <ul>
+                        <li>DC 5V USB（默认）</li>
+                        <li>DC 7-36V 宽电压</li>
+                        <li>AC 220V 版本</li>
+                    </ul>
+                </div>
+                <div class="option-item">
+                    <h4>扩展模块</h4>
+                    <ul>
+                        <li>RS485 Modbus</li>
+                        <li>433MHz 无线收发</li>
+                        <li>0-10V/4-20mA 输出</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <p>不确定选择哪个型号？</p>
+            <a href="/zh/compare" class="btn btn-primary btn-lg"
+                >查看选型指南 →</a
+            >
+        </section>
+    </div>
+</Layout>
+
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #ff6b35 0%, #e85a2c 100%);
+        color: white;
+        padding: 4rem 1.5rem;
+        text-align: center;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0 0 1rem;
+    }
+
+    .page-subtitle {
+        font-size: 1.25rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    .content-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+    }
+
+    .channels-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-bottom: 5rem;
+    }
+
+    @media (max-width: 768px) {
+        .channels-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .channel-card {
+        position: relative;
+        display: block;
+        background: white;
+        border-radius: 20px;
+        padding: 2.5rem;
+        text-align: center;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+    .channel-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary);
+    }
+
+    .channel-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .channel-card h2 {
+        font-size: 1.5rem;
+        margin: 0 0 0.5rem;
+        color: var(--text-dark);
+    }
+
+    .channel-card p {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        margin: 0;
+    }
+
+    .channel-tag {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        background: var(--primary);
+        color: white;
+    }
+
+    .channel-tag.secondary {
+        background: #8b5cf6;
+    }
+
+    .channel-tag.accent {
+        background: var(--accent);
+    }
+
+    /* Products Section */
+    .products-section {
+        margin-bottom: 4rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        margin: 0 0 2rem;
+        color: var(--text-dark);
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+        .products-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .products-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .product-card {
+        position: relative;
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+    .product-card:hover {
+        border-color: var(--primary-light);
+    }
+
+    .product-card.featured {
+        border-color: var(--accent);
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 120px;
+        object-fit: contain;
+        margin-bottom: 1rem;
+    }
+
+    .product-card h3 {
+        font-size: 1.25rem;
+        margin: 0 0 0.5rem;
+        color: var(--text-dark);
+    }
+
+    .product-card p {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin: 0 0 1rem;
+    }
+
+    .price {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--accent);
+    }
+
+    .featured-tag {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        background: var(--accent);
+        color: white;
+    }
+
+    /* Options Section */
+    .options-section {
+        margin-bottom: 4rem;
+    }
+
+    .options-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .options-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .option-item {
+        background: var(--bg-light);
+        border-radius: 16px;
+        padding: 2rem;
+    }
+
+    .option-item h4 {
+        font-size: 1.125rem;
+        margin: 0 0 1rem;
+        color: var(--text-dark);
+    }
+
+    .option-item ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .option-item li {
+        padding: 0.5rem 0;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .option-item li:last-child {
+        border-bottom: none;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        text-align: center;
+        background: var(--bg-light);
+        padding: 3rem;
+        border-radius: 20px;
+    }
+
+    .cta-section p {
+        font-size: 1.25rem;
+        color: var(--text-dark);
+        margin: 0 0 1.5rem;
+    }
+
+    .btn {
+        display: inline-flex;
+        padding: 0.875rem 2rem;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn-lg {
+        padding: 1rem 2.5rem;
+        font-size: 1.125rem;
+    }
+
+    .btn-primary {
+        background: linear-gradient(
+            135deg,
+            var(--primary) 0%,
+            var(--primary-dark) 100%
+        );
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        color: white;
+    }
+</style>
