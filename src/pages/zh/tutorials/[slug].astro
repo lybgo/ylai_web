@@ -1,0 +1,526 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import {
+    tutorialSections,
+    getSectionBySlug,
+    getPrevSection,
+    getNextSection,
+    chapters,
+} from "../../../data/tutorialData";
+
+const lang = "zh";
+
+export function getStaticPaths() {
+    return tutorialSections.map((section) => ({
+        params: { slug: section.slug },
+        props: { section },
+    }));
+}
+
+const { slug } = Astro.params;
+const { section } = Astro.props;
+
+const prevSection = getPrevSection(slug);
+const nextSection = getNextSection(slug);
+
+// 按章节分组
+const groupedSections = chapters.map((chapter) => ({
+    ...chapter,
+    sections: tutorialSections.filter((s) => s.chapterNum === chapter.num),
+}));
+---
+
+<Layout
+    title={`${section.title} - 产品使用教程 - 宜启智控Pro`}
+    description={section.description}
+    lang={lang}
+>
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">产品使用教程</h1>
+            <p class="page-subtitle">
+                0基础1天入门：无需编程的自动化控制与物联网应用教程
+            </p>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <nav class="sidebar">
+            <h3 class="sidebar-title">目录</h3>
+            <div class="sidebar-nav">
+                {
+                    groupedSections.map((chapter) => (
+                        <div class="chapter-group">
+                            <div class="chapter-title">{chapter.title}</div>
+                            <ul class="section-list">
+                                {chapter.sections.map((s) => (
+                                    <li>
+                                        <a
+                                            href={`/zh/tutorials/${s.slug}`}
+                                            class:list={[
+                                                "section-link",
+                                                { active: s.slug === slug },
+                                            ]}
+                                        >
+                                            <span class="section-num">
+                                                {s.num}
+                                            </span>
+                                            <span class="section-name">
+                                                {s.title}
+                                            </span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))
+                }
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <article class="tutorial-content">
+                <div class="breadcrumb">
+                    <a href="/zh/tutorials">教程首页</a>
+                    <span class="separator">›</span>
+                    <span>{section.chapter}</span>
+                </div>
+
+                <header class="section-header">
+                    <span class="section-number">第 {section.num} 节</span>
+                    <h1>{section.title}</h1>
+                    {
+                        section.duration && (
+                            <span class="duration">
+                                ⏱️ 预计时长：{section.duration}
+                            </span>
+                        )
+                    }
+                </header>
+
+                <div class="section-body">
+                    <div class="description">
+                        <p>{section.description}</p>
+                    </div>
+
+                    <div class="learning-points">
+                        <h2>📚 学习要点</h2>
+                        <ul>
+                            {section.points.map((point) => <li>{point}</li>)}
+                        </ul>
+                    </div>
+
+                    <div class="placeholder-note">
+                        <div class="note-icon">📝</div>
+                        <div class="note-content">
+                            <h3>内容编写中</h3>
+                            <p>
+                                本章节的详细内容正在编写中，敬请期待。您可以先浏览其他已完成的章节，或查看
+                                <a href="/zh/mqtt">MQTT协议文档</a>。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <nav class="section-nav">
+                <div class="nav-prev">
+                    {
+                        prevSection ? (
+                            <a
+                                href={`/zh/tutorials/${prevSection.slug}`}
+                                class="nav-link"
+                            >
+                                <span class="nav-direction">← 上一节</span>
+                                <span class="nav-title">
+                                    {prevSection.num}. {prevSection.title}
+                                </span>
+                            </a>
+                        ) : (
+                            <a href="/zh/tutorials" class="nav-link">
+                                <span class="nav-direction">← 返回</span>
+                                <span class="nav-title">教程首页</span>
+                            </a>
+                        )
+                    }
+                </div>
+                <div class="nav-next">
+                    {
+                        nextSection && (
+                            <a
+                                href={`/zh/tutorials/${nextSection.slug}`}
+                                class="nav-link"
+                            >
+                                <span class="nav-direction">下一节 →</span>
+                                <span class="nav-title">
+                                    {nextSection.num}. {nextSection.title}
+                                </span>
+                            </a>
+                        )
+                    }
+                </div>
+            </nav>
+        </main>
+    </div>
+</Layout>
+
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
+        color: white;
+        padding: 3rem 1.5rem;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .page-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 0 0.5rem;
+    }
+
+    .page-subtitle {
+        font-size: 1rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    .content-wrapper {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 2rem;
+        padding: 2rem 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+        .content-wrapper {
+            grid-template-columns: 1fr;
+        }
+        .sidebar {
+            position: static !important;
+            max-height: none;
+            border-right: none;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1rem;
+        }
+    }
+
+    /* Sidebar */
+    .sidebar {
+        position: sticky;
+        top: 80px;
+        height: fit-content;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        padding-right: 1rem;
+        border-right: 1px solid var(--border-light);
+    }
+
+    .sidebar-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0 0 1rem;
+        padding-left: 0.5rem;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .chapter-group {
+        margin-bottom: 0.5rem;
+    }
+
+    .chapter-title {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--primary);
+        padding: 0.5rem;
+        background: var(--primary-light);
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+    }
+
+    .section-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .section-list li {
+        margin-bottom: 2px;
+    }
+
+    .section-link {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        line-height: 1.4;
+        transition: all 0.2s ease;
+    }
+
+    .section-link:hover {
+        color: var(--primary);
+        background: var(--bg-light);
+    }
+
+    .section-link.active {
+        color: var(--primary);
+        background: var(--primary-light);
+        font-weight: 600;
+    }
+
+    .section-num {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        background: var(--border-light);
+        color: var(--text-muted);
+        font-size: 0.7rem;
+        font-weight: 600;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .section-link.active .section-num {
+        background: var(--primary);
+        color: white;
+    }
+
+    .section-name {
+        flex: 1;
+    }
+
+    /* Main Content */
+    .main-content {
+        min-width: 0;
+    }
+
+    .tutorial-content {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+
+    .breadcrumb {
+        padding: 1rem 2rem;
+        background: var(--bg-light);
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .breadcrumb a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+        text-decoration: underline;
+    }
+
+    .breadcrumb .separator {
+        margin: 0 0.5rem;
+        color: var(--border-light);
+    }
+
+    .section-header {
+        padding: 2rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .section-number {
+        display: inline-block;
+        background: var(--primary);
+        color: white;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        margin-bottom: 0.75rem;
+    }
+
+    .section-header h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0 0 0.5rem;
+        line-height: 1.3;
+    }
+
+    .duration {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    .section-body {
+        padding: 2rem;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .placeholder-note {
+        display: flex;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: #fffbeb;
+        border: 1px solid #fcd34d;
+        border-radius: 12px;
+        margin-top: 1rem;
+    }
+
+    .note-icon {
+        font-size: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .note-content h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #92400e;
+        margin: 0 0 0.5rem;
+    }
+
+    .note-content p {
+        font-size: 0.9rem;
+        color: #a16207;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    .note-content a {
+        color: #92400e;
+        font-weight: 600;
+    }
+
+    /* Navigation */
+    .section-nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: var(--bg-light);
+        border-radius: 0 0 16px 16px;
+        margin-top: 2rem;
+    }
+
+    .nav-prev,
+    .nav-next {
+        flex: 1;
+    }
+
+    .nav-next {
+        text-align: right;
+    }
+
+    .nav-link {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 1rem 1.5rem;
+        background: white;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-direction {
+        font-size: 0.8rem;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .nav-title {
+        font-size: 0.9rem;
+        color: var(--text-dark);
+        font-weight: 500;
+    }
+
+    @media (max-width: 640px) {
+        .section-nav {
+            flex-direction: column;
+        }
+        .nav-next {
+            text-align: left;
+        }
+        .nav-link {
+            width: 100%;
+        }
+    }
+</style>
