@@ -36,16 +36,9 @@ const groupedSections = chapters.map((chapter) => ({
                             <ul class="section-list">
                                 {chapter.sections.map((s) => (
                                     <li>
-                                        <a
-                                            href={`/zh/tutorials/${s.slug}`}
-                                            class="section-link"
-                                        >
-                                            <span class="section-num">
-                                                {s.num}
-                                            </span>
-                                            <span class="section-name">
-                                                {s.title}
-                                            </span>
+                                        <a href={`/zh/tutorials/${s.slug}`} class="section-link" >
+                                            <span class="section-num"> {s.num} </span>
+                                            <span class="section-name"> {s.title} </span>
                                         </a>
                                     </li>
                                 ))}

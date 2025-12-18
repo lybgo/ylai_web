@@ -1,0 +1,83 @@
+---
+/**
+ * 第 2 节 自动化控制与物联网核心概念解析
+ * slug: 02-automation-basics
+ */
+export const isDraft = true; // true 表示内容还在编写中
+---
+
+<section>
+    <div class="description">
+        <p>掌握自动化控制与物联网的基本概念，为后续的实践操作奠定理论基础。</p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 学习要点</h2>
+        <ul>
+            <li>
+                自动化控制基础：简单介绍开环控制、闭环控制及自动化系统的基本组成（传感器、控制器、执行器）
+            </li>
+            <li>
+                传统控制实现方式对比：通过PLC、开发板、单片机实现自动化控制的优缺点概述
+            </li>
+            <li>
+                物联网（IoT）基础：介绍物联网三层架构（感知层、网络层、应用层）及其核心作用
+            </li>
+            <li>
+                传统物联网开发的技术栈：了解嵌入式编程、网络通信（TCP/UDP）、服务器/云平台开发、移动APP开发等传统学习内容的难度与耗时
+            </li>
+        </ul>
+    </div>
+</section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

@@ -20,6 +20,22 @@ export function getStaticPaths() {
 const { slug } = Astro.params;
 const { section } = Astro.props;
 
+const contentModules = import.meta.glob(
+    "../../../components/tutorials/*.astro",
+    {
+        eager: true,
+    },
+);
+
+const getContentModule = (slug: string) => {
+    const path = `../../../components/tutorials/${slug}.astro`;
+    return contentModules[path] as any;
+};
+
+const contentModule = getContentModule(slug);
+const ContentComponent = contentModule?.default ?? null;
+const isDraft = contentModule ? (contentModule.isDraft ?? false) : true;
+
 const prevSection = getPrevSection(slug);
 const nextSection = getNextSection(slug);
 
@@ -63,10 +79,12 @@ const groupedSections = chapters.map((chapter) => ({
                                             ]}
                                         >
                                             <span class="section-num">
-                                                {s.num}
+                                                {" "}
+                                                {s.num}{" "}
                                             </span>
                                             <span class="section-name">
-                                                {s.title}
+                                                {" "}
+                                                {s.title}{" "}
                                             </span>
                                         </a>
                                     </li>
@@ -99,27 +117,29 @@ const groupedSections = chapters.map((chapter) => ({
                 </header>
 
                 <div class="section-body">
-                    <div class="description">
-                        <p>{section.description}</p>
-                    </div>
-
-                    <div class="learning-points">
-                        <h2>📚 学习要点</h2>
-                        <ul>
-                            {section.points.map((point) => <li>{point}</li>)}
-                        </ul>
-                    </div>
-
-                    <div class="placeholder-note">
-                        <div class="note-icon">📝</div>
-                        <div class="note-content">
-                            <h3>内容编写中</h3>
-                            <p>
-                                本章节的详细内容正在编写中，敬请期待。您可以先浏览其他已完成的章节，或查看
-                                <a href="/zh/mqtt">MQTT协议文档</a>。
-                            </p>
-                        </div>
-                    </div>
+                    {
+                        ContentComponent ? (
+                            <section class="detail-section">
+                                <ContentComponent />
+                            </section>
+                        ) : (
+                            ""
+                        )
+                    }
+                    {
+                        isDraft && (
+                            <div class="placeholder-note">
+                                <div class="note-icon">📝</div>
+                                <div class="note-content">
+                                    <h3>内容编写中</h3>
+                                    <p>
+                                        本章节的详细内容正在编写中，敬请期待。您可以先浏览其他已完成的章节，或查看
+                                        <a href="/zh/mqtt">MQTT协议文档</a>。
+                                    </p>
+                                </div>
+                            </div>
+                        )
+                    }
                 </div>
             </article>
 
@@ -375,58 +395,6 @@ const groupedSections = chapters.map((chapter) => ({
 
     .section-body {
         padding: 2rem;
-    }
-
-    .description {
-        font-size: 1.1rem;
-        color: var(--text-dark);
-        line-height: 1.7;
-        margin-bottom: 2rem;
-        padding: 1.5rem;
-        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
-        border-radius: 12px;
-        border-left: 4px solid var(--primary);
-    }
-
-    .description p {
-        margin: 0;
-    }
-
-    .learning-points {
-        margin-bottom: 2rem;
-    }
-
-    .learning-points h2 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--text-dark);
-        margin: 0 0 1rem;
-    }
-
-    .learning-points ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .learning-points li {
-        position: relative;
-        padding: 0.875rem 0.875rem 0.875rem 2rem;
-        color: var(--text-muted);
-        line-height: 1.6;
-        border-bottom: 1px solid var(--border-light);
-    }
-
-    .learning-points li:last-child {
-        border-bottom: none;
-    }
-
-    .learning-points li::before {
-        content: "✓";
-        position: absolute;
-        left: 0;
-        color: var(--primary);
-        font-weight: 600;
     }
 
     .placeholder-note {
