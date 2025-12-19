@@ -17,26 +17,6 @@ const lang = "zh";
     </header>
 
     <div class="content-container">
-        <!-- Company Profile -->
-        <section class="profile-section">
-            <div class="container">
-                <div class="section-content">
-                    <h2>公司简介</h2>
-                    <div class="profile-text">
-                        <p>
-                            <strong>深圳市源来智能设备有限公司</strong
-                            >成立于2019年1月，研发中心位于创新之城深圳。作为一家专注于物联网智能控制技术的科技研发型公司，我们是<strong
-                                >深圳市设施农业行业协会理事会会员</strong
-                            >。
-                        </p>
-                        <p>
-                            我们致力于研发先进的物联网控制技术，为各行各业提供软硬件一体化的智能化升级方案。通过深厚的技术积淀，让复杂的工业级控制变得简单、高效、可靠。
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Mission & Values -->
         <section class="mission-section">
             <div class="container">
@@ -70,6 +50,26 @@ const lang = "zh";
                         <div class="value-icon">🌍</div>
                         <h3>全球足迹</h3>
                         <p>产品远销美、英、菲、新及港澳台等多个国家和地区</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Company Profile -->
+        <section class="profile-section">
+            <div class="container">
+                <div class="section-content">
+                    <h2>公司简介</h2>
+                    <div class="profile-text">
+                        <p>
+                            <strong>深圳市源来智能设备有限公司</strong
+                            >成立于2019年1月，研发中心位于创新之城深圳。作为一家专注于物联网智能控制技术的科技研发型公司，我们是<strong
+                                >深圳市设施农业行业协会理事会会员</strong
+                            >。
+                        </p>
+                        <p>
+                            我们致力于研发先进的物联网控制技术，为各行各业提供软硬件一体化的智能化升级方案。通过深厚的技术积淀，让复杂的工业级控制变得简单、高效、可靠。
+                        </p>
                     </div>
                 </div>
             </div>
@@ -129,12 +129,12 @@ const lang = "zh";
                     <div class="info-group">
                         <div class="info-icon">👤</div>
                         <h3>技术支持</h3>
-                        <p>刘先生：13631528007</p>
+                        <p>刘先生：<br />+86-13631528007</p>
                     </div>
                     <div class="info-group">
                         <div class="info-icon">💼</div>
                         <h3>商务合作</h3>
-                        <p>张女士：18675562528</p>
+                        <p>张女士：<br />+86-18675562528</p>
                     </div>
                     <div class="info-group">
                         <div class="info-qr">
@@ -148,12 +148,15 @@ const lang = "zh";
                             <img src="/images/bilibili.png" alt="B站二维码" />
                         </div>
                         <h3>关注B站</h3>
-                        <p>搜索：源来智能</p>
+                        <p>搜索：宜启智控</p>
                     </div>
                     <div class="info-group">
                         <div class="info-icon">📍</div>
                         <h3>公司地址</h3>
-                        <p>深圳市龙华区民治街道澧水山庄一区27栋A单元1楼103</p>
+                        <p>
+                            中国广东省<br
+                            />深圳市龙华区民治街道滢水山庄一区27栋A单元1楼103
+                        </p>
                     </div>
                 </div>
             </div>
@@ -192,17 +195,17 @@ const lang = "zh";
     .content-container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 4rem 1.5rem;
+        padding: 2.5rem 1.5rem;
     }
 
     /* Profile Section */
     .profile-section {
-        margin-bottom: 5rem;
+        margin-bottom: 3rem;
     }
 
     .profile-section .section-content {
         background: linear-gradient(135deg, var(--bg-light) 0%, #f0f7ff 100%);
-        padding: 4rem;
+        padding: 3rem;
         border-radius: 32px;
         border: 1px solid var(--border-light);
     }
@@ -223,7 +226,7 @@ const lang = "zh";
     /* Mission */
     .mission-section {
         text-align: center;
-        margin-bottom: 5rem;
+        margin-bottom: 3rem;
     }
 
     .mission-section h2 {
@@ -294,7 +297,7 @@ const lang = "zh";
 
     /* Technical Team Section - Light Theme */
     .team-section {
-        margin-bottom: 6rem;
+        margin-bottom: 4rem;
     }
 
     .team-grid {
@@ -303,7 +306,7 @@ const lang = "zh";
         gap: 4rem;
         align-items: center;
         background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-        padding: 5rem;
+        padding: 3.5rem;
         border-radius: 48px;
         color: var(--text-dark);
         border: 1px solid var(--border-light);
@@ -424,7 +427,7 @@ const lang = "zh";
 
     .contact-section .container {
         background: var(--bg-light);
-        padding: 5rem 4rem;
+        padding: 3.5rem 3rem;
         border-radius: 40px;
         text-align: center;
     }
@@ -442,7 +445,7 @@ const lang = "zh";
     .info-qr {
         width: 160px; /* Enlarged size */
         height: 160px;
-        margin-bottom: 2rem;
+        margin-bottom: 0.5rem;
         padding: 0.75rem;
         background: white;
         border: 1px solid var(--border-light);
@@ -466,7 +469,7 @@ const lang = "zh";
 
     .info-group {
         background: white;
-        padding: 2.5rem 1.25rem;
+        padding: 1.5rem 1rem;
         border-radius: 28px;
         border: 1px solid var(--border-light);
         transition: all 0.3s ease;
@@ -482,7 +485,7 @@ const lang = "zh";
 
     .info-icon {
         font-size: 2.5rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.5rem;
         background: var(--bg-light);
         width: 80px;
         height: 80px;
@@ -495,7 +498,7 @@ const lang = "zh";
     .info-group h3 {
         font-size: 1.35rem;
         color: var(--text-dark);
-        margin: 0 0 1rem;
+        margin: 0 0 0.25rem;
         font-weight: 700;
     }
 
