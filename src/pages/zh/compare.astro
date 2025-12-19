@@ -436,10 +436,11 @@ const lang = "zh";
 
 <style>
     .page-header {
-        background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
-        color: white;
-        padding: 4rem 1.5rem;
+        background: var(--bg-light);
+        color: var(--text-dark);
+        padding: 1.25rem 1.5rem;
         text-align: center;
+        border-bottom: 1px solid var(--border-light);
     }
 
     .container {
@@ -776,18 +777,15 @@ const lang = "zh";
 
     /* CTA Section */
     .cta-section {
-        background: linear-gradient(
-            135deg,
-            var(--primary) 0%,
-            var(--primary-dark) 100%
-        );
-        border-radius: 20px;
-        padding: 4rem 2rem;
+        background: var(--bg-light);
+        border-radius: 16px;
+        padding: 2.5rem 2rem;
         text-align: center;
+        border: 1px solid var(--border-light);
     }
 
     .cta-container h2 {
-        color: white;
+        color: var(--text-dark);
         margin: 0 0 2rem;
         font-size: 1.75rem;
     }
@@ -814,23 +812,24 @@ const lang = "zh";
     }
 
     .btn-accent {
-        background: var(--accent);
+        background: var(--primary);
         color: white;
     }
 
     .btn-accent:hover {
         transform: translateY(-2px);
+        background: var(--primary-dark);
         color: white;
     }
 
     .btn-outline {
         background: transparent;
-        color: white;
-        border: 2px solid white;
+        color: var(--primary);
+        border: 2px solid var(--primary);
     }
 
     .btn-outline:hover {
-        background: white;
-        color: var(--primary);
+        background: var(--primary);
+        color: white;
     }
 </style>

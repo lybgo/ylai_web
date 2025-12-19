@@ -667,13 +667,10 @@ const lang = "zh";
 
     /* CTA Section */
     .cta-section {
-        padding: 5rem 1.5rem;
-        background: linear-gradient(
-            135deg,
-            var(--primary) 0%,
-            var(--primary-dark) 100%
-        );
+        padding: 3rem 1.5rem;
+        background: var(--bg-light);
         text-align: center;
+        border-top: 1px solid var(--border-light);
     }
 
     .cta-container {
@@ -684,13 +681,13 @@ const lang = "zh";
     .cta-title {
         font-size: 2rem;
         font-weight: 700;
-        color: white;
+        color: var(--text-dark);
         margin: 0 0 1rem;
     }
 
     .cta-subtitle {
         font-size: 1.25rem;
-        color: rgba(255, 255, 255, 0.9);
+        color: var(--text-muted);
         margin: 0 0 2rem;
     }
 
@@ -702,12 +699,12 @@ const lang = "zh";
     }
 
     .cta-section .btn-outline {
-        color: white;
-        border-color: white;
+        color: var(--primary);
+        border-color: var(--primary);
     }
 
     .cta-section .btn-outline:hover {
-        background: white;
-        color: var(--primary);
+        background: var(--primary);
+        color: white;
     }
 </style>
