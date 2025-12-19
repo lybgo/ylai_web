@@ -16,16 +16,19 @@ const lang = "zh";
         </div>
     </div>
 
-    <div class="content-container">
+    <div class="content-container" x-data="{ showModal: false, modalImg: '' }">
         <div class="channels-grid">
             <!-- 淘宝 -->
-            <a href="https://item.taobao.com/item.htm?id=839596046491" class="channel-card taobao" target="_blank">
+            <a
+                href="https://item.taobao.com/item.htm?id=839596046491"
+                class="channel-card taobao"
+                target="_blank"
+            >
                 <div class="channel-icon">
                     <img src="/images/logos/taobao.svg" alt="淘宝" />
                 </div>
-                <h2>淘宝/天猫</h2>
-                <p>官方旗舰店，正品保障</p>
-                <span class="channel-tag">推荐</span>
+                <h2>淘宝</h2>
+                <span class="channel-tag">中国</span>
             </a>
 
             <!-- 亚马逊 -->
@@ -34,7 +37,6 @@ const lang = "zh";
                     <img src="/images/logos/amazon.svg" alt="Amazon" />
                 </div>
                 <h2>Amazon</h2>
-                <p>全球配送，海外用户首选</p>
                 <span class="channel-tag secondary">国际</span>
             </a>
 
@@ -44,81 +46,198 @@ const lang = "zh";
                     <img src="/images/logos/tiktok.svg" alt="TikTok Shop" />
                 </div>
                 <h2>TikTok Shop</h2>
-                <p>直播优惠，限时特价</p>
-                <span class="channel-tag accent">优惠</span>
+                <span class="channel-tag accent">国际</span>
             </a>
         </div>
 
         <!-- Product Models -->
         <section class="products-section">
             <h2 class="section-title">选择型号</h2>
-            <div class="products-grid">
-                <div class="product-card">
-                    <img src="/images/products/2路正面.png" alt="2路款" />
-                    <h3>2路款</h3>
-                    <p>2继电器 + 2PWM + 2输入</p>
-                    <span class="price">¥ 咨询价格</span>
-                </div>
-                <div class="product-card">
-                    <img src="/images/products/3+2路正面.png" alt="3+2路款" />
-                    <h3>3+2路款</h3>
-                    <p>3继电器 + 2PWM + 3输入</p>
-                    <span class="price">¥ 咨询价格</span>
-                </div>
-                <div class="product-card">
-                    <img src="/images/products/4路正面.png" alt="4路款" />
-                    <h3>4路款</h3>
-                    <p>4继电器 + 4PWM + 4输入</p>
-                    <span class="price">¥ 咨询价格</span>
-                </div>
-                <div class="product-card featured">
-                    <img src="/images/products/6+4路正面.png" alt="6+4路款" />
-                    <h3>6+4路款</h3>
-                    <p>6继电器 + 4PWM + 6输入</p>
-                    <span class="price">¥ 咨询价格</span>
-                    <span class="featured-tag">热销</span>
-                </div>
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="spec-header">参数</th>
+                            <th>
+                                <a
+                                    href="/images/products/2路正面.png"
+                                    @click.prevent="modalImg = $el.href; showModal = true"
+                                >
+                                    <img
+                                        src="/images/products/2路正面.png"
+                                        alt="2路款"
+                                        class="table-thumb"
+                                    />
+                                </a>
+                                <div>2路/2o</div>
+                            </th>
+                            <th>
+                                <a
+                                    href="/images/products/4路正面.png"
+                                    @click.prevent="modalImg = $el.href; showModal = true"
+                                >
+                                    <img
+                                        src="/images/products/4路正面.png"
+                                        alt="4路款"
+                                        class="table-thumb"
+                                    />
+                                </a>
+                                <div>4路/4o</div>
+                            </th>
+                            <th>
+                                <a
+                                    href="/images/products/3+2路正面.png"
+                                    @click.prevent="modalImg = $el.href; showModal = true"
+                                >
+                                    <img
+                                        src="/images/products/3+2路正面.png"
+                                        alt="3+2路款"
+                                        class="table-thumb"
+                                    />
+                                </a>
+                                <div>3+2路/3o2w</div>
+                            </th>
+                            <th class="featured-col">
+                                <span class="hot-tag">热销</span>
+                                <a
+                                    href="/images/products/6+4路正面.png"
+                                    @click.prevent="modalImg = $el.href; showModal = true"
+                                >
+                                    <img
+                                        src="/images/products/6+4路正面.png"
+                                        alt="6+4路款"
+                                        class="table-thumb"
+                                    />
+                                </a>
+                                <div>6+4路/6o4w</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="spec-name">继电器输出</td>
+                            <td>2路</td>
+                            <td>4路</td>
+                            <td>3路</td>
+                            <td class="featured-col">6路</td>
+                        </tr>
+                        <tr>
+                            <td class="spec-name">PWM输出</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td
+                                >2路<br /><span class="spec-hint"
+                                    >可选配为0-10V/4-20mA输出</span
+                                ></td
+                            >
+                            <td class="featured-col"
+                                >4路<br /><span class="spec-hint"
+                                    >可选配为0-10V/4-20mA输出</span
+                                ></td
+                            >
+                        </tr>
+                        <tr>
+                            <td class="spec-name">开关量输入</td>
+                            <td>3路</td>
+                            <td>4路</td>
+                            <td>4路</td>
+                            <td class="featured-col">6路</td>
+                        </tr>
+                        <tr>
+                            <td class="spec-name">模拟量输入</td>
+                            <td>2路</td>
+                            <td colspan="3">3路</td>
+                        </tr>
+                        <tr>
+                            <td class="spec-name">温度传感器<br />DS18B20</td>
+                            <td colspan="4">1路(若选配RS485接口，则无此接口)</td
+                            >
+                        </tr>
+                        <tr>
+                            <td class="spec-name">IIC接口</td>
+                            <td colspan="4">1路</td>
+                        </tr>
+                        <tr class="category-row">
+                            <td colspan="5">可选配置 (全系支持)</td>
+                        </tr>
+                        <tr>
+                            <td class="spec-name">通信方式</td>
+                            <td colspan="4">
+                                <div class="tags-wrapper">
+                                    <span class="spec-tag"
+                                        >蓝牙版（默认标配）</span
+                                    >
+                                    <span class="spec-tag">WiFi+BLE</span>
+                                    <span class="spec-tag"
+                                        >4G(中国境内免费送5年流量)+BLE</span
+                                    >
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="spec-name">供电电压</td>
+                            <td colspan="4">
+                                <div class="tags-wrapper">
+                                    <span class="spec-tag"
+                                        >直流 DC 5V USB (默认标配)</span
+                                    >
+                                    <span class="spec-tag">9-48V 宽压</span>
+                                    <span class="spec-tag"
+                                        >交流 AC 110-220V</span
+                                    >
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="spec-name">其它选配</td>
+                            <td colspan="4">
+                                <div class="tags-wrapper">
+                                    <span class="spec-tag"
+                                        >RS485 Modbus接口</span
+                                    >
+                                    <span class="spec-tag"
+                                        >433MHz无线收发模块</span
+                                    >
+                                    <span class="spec-tag">定制外置天线</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="price-row">
+                            <td class="spec-name" rowspan="2">价格</td>
+                            <td><span class="price">¥229+</span></td>
+                            <td><span class="price">¥269+</span></td>
+                            <td><span class="price">¥279+</span></td>
+                            <td class="featured-col"
+                                ><span class="price">¥359+</span></td
+                            >
+                        </tr>
+                        <tr>
+                            <td colspan="4"
+                                >批量购买请联系商务，可提供更具“性价比”的价格</td
+                            >
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
-        <!-- Options -->
-        <section class="options-section">
-            <h2 class="section-title">可选配置</h2>
-            <div class="options-grid">
-                <div class="option-item">
-                    <h4>通信方式</h4>
-                    <ul>
-                        <li>WiFi版（默认）</li>
-                        <li>4G版（+￥XX）</li>
-                        <li>纯蓝牙版</li>
-                    </ul>
-                </div>
-                <div class="option-item">
-                    <h4>供电电压</h4>
-                    <ul>
-                        <li>DC 5V USB（默认）</li>
-                        <li>DC 7-36V 宽电压</li>
-                        <li>AC 220V 版本</li>
-                    </ul>
-                </div>
-                <div class="option-item">
-                    <h4>扩展模块</h4>
-                    <ul>
-                        <li>RS485 Modbus</li>
-                        <li>433MHz 无线收发</li>
-                        <li>0-10V/4-20mA 输出</li>
-                    </ul>
-                </div>
+        <!-- Image Modal -->
+        <div
+            class="image-modal"
+            x-show="showModal"
+            x-transition:enter="fade-in"
+            x-transition:leave="fade-out"
+            @click="showModal = false"
+            @keydown.escape.window="showModal = false"
+            style="display: none;"
+        >
+            <div class="modal-content" @click.stop>
+                <img :src="modalImg" alt="产品高清图" />
+                <button class="modal-close" @click="showModal = false"
+                    >&times;</button
+                >
             </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="cta-section">
-            <p>不确定选择哪个型号？</p>
-            <a href="/zh/compare" class="btn btn-primary btn-lg"
-                >查看选型指南 →</a
-            >
-        </section>
+        </div>
     </div>
 </Layout>
 
@@ -246,25 +365,15 @@ const lang = "zh";
         color: var(--text-dark);
     }
 
-    .products-grid {
+    /* Product Images Grid */
+    .products-images {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 1.5rem;
+        margin-bottom: 3rem;
     }
 
-    @media (max-width: 1024px) {
-        .products-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 640px) {
-        .products-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .product-card {
+    .product-image-item {
         position: relative;
         background: white;
         border-radius: 16px;
@@ -275,49 +384,336 @@ const lang = "zh";
         transition: all 0.3s ease;
     }
 
-    .product-card:hover {
+    .product-image-item:hover {
         border-color: var(--primary-light);
+        transform: translateY(-3px);
     }
 
-    .product-card.featured {
+    .product-image-item:hover img {
+        transform: scale(1.6);
+    }
+
+    .product-image-item.featured {
         border-color: var(--accent);
     }
 
-    .product-card img {
+    .product-image-item img {
         width: 100%;
-        height: 120px;
+        height: 100px;
         object-fit: contain;
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
+        transition: transform 0.25s ease-out;
+        cursor: zoom-in;
     }
 
-    .product-card h3 {
-        font-size: 1.25rem;
-        margin: 0 0 0.5rem;
+    .product-image-item h3 {
+        font-size: 1.1rem;
+        margin: 0;
         color: var(--text-dark);
+        font-weight: 700;
     }
 
-    .product-card p {
-        font-size: 0.875rem;
-        color: var(--text-muted);
-        margin: 0 0 1rem;
-    }
-
-    .price {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: var(--accent);
-    }
-
-    .featured-tag {
+    .hot-tag {
         position: absolute;
-        top: 0.75rem;
-        right: 0.75rem;
+        top: 0.5rem;
+        right: 0.5rem;
         font-size: 0.75rem;
         font-weight: 600;
         padding: 0.25rem 0.5rem;
         border-radius: 4px;
         background: var(--accent);
         color: white;
+    }
+
+    /* Comparison Table */
+    .comparison-table-wrapper {
+        overflow-x: auto;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        /* Allow zoom to overflow when hovered on desktop */
+    }
+
+    @media (min-width: 768px) {
+        .comparison-table-wrapper:hover {
+            overflow: visible;
+        }
+    }
+
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+    }
+
+    .comparison-table thead {
+        background: linear-gradient(135deg, var(--bg-light) 0%, #f0f7ff 100%);
+    }
+
+    .comparison-table th {
+        padding: 0.75rem 0.5rem;
+        text-align: center;
+        font-weight: 700;
+        color: var(--text-dark);
+        border-bottom: 2px solid var(--border-light);
+        border-left: 1px solid var(--border-light);
+    }
+
+    .comparison-table th:first-child {
+        border-left: none;
+    }
+
+    .comparison-table th.spec-header {
+        text-align: center;
+        vertical-align: bottom;
+        color: var(--primary);
+        font-size: 1.05rem;
+        width: 120px;
+        min-width: 120px;
+    }
+
+    .table-thumb {
+        width: 110px;
+        height: 110px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto 0.5rem;
+    }
+
+    .comparison-table th {
+        position: relative;
+        transition: z-index 0s;
+    }
+
+    .comparison-table th:hover {
+        z-index: 10;
+    }
+
+    .comparison-table th.featured-col {
+        background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+        color: var(--accent);
+    }
+
+    .comparison-table td {
+        padding: 0.6rem 0.5rem;
+        text-align: center;
+        border-bottom: 1px solid var(--border-light);
+        border-left: 1px solid var(--border-light);
+        color: var(--text-muted);
+    }
+
+    .comparison-table td:first-child {
+        border-left: none;
+    }
+
+    .comparison-table td.spec-name {
+        text-align: center;
+        font-weight: 600;
+        color: var(--text-dark);
+        background: var(--bg-light);
+    }
+
+    .comparison-table td.featured-col {
+        background: #fffbfb;
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+
+    .comparison-table tbody tr:hover {
+        background: #f8fafc;
+    }
+
+    .comparison-table tbody tr:hover td.featured-col {
+        background: #fff5f5;
+    }
+
+    .comparison-table .price-row {
+        background: var(--bg-light);
+    }
+
+    .comparison-table .price-row td {
+        padding: 1rem 0.5rem;
+        font-weight: 700;
+    }
+
+    .price {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--accent);
+    }
+
+    .spec-hint {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        font-weight: 400;
+        margin-top: 0.25rem;
+        line-height: 1.2;
+    }
+
+    .category-row td {
+        background: #f1f5f9 !important;
+        color: var(--primary) !important;
+        font-weight: 700 !important;
+        text-align: left !important;
+        padding-left: 1.25rem !important;
+        font-size: 0.9rem;
+        border-bottom: 2px solid var(--border-light);
+    }
+
+    .tags-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        padding: 0.25rem 0;
+    }
+
+    .spec-tag {
+        display: inline-block;
+        padding: 0.2rem 0.6rem;
+        background: #f1f5f9;
+        color: var(--text-muted);
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 400;
+        border: 1px solid var(--border-light);
+    }
+
+    .spec-tag.default {
+        background: var(--primary-light);
+        color: var(--primary);
+        border-color: rgba(0, 102, 204, 0.2);
+        font-weight: 500;
+    }
+
+    .price-hint-row td {
+        background: #fffafa;
+        color: var(--accent);
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 0.6rem 0.5rem !important;
+        border-top: none !important;
+        text-align: center;
+    }
+
+    .table-thumb {
+        height: 80px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto 0.5rem;
+        transition: transform 0.25s ease-out;
+        cursor: zoom-in;
+    }
+
+    .comparison-table th:hover .table-thumb {
+        transform: scale(3.5); /* Increased scale for better view */
+    }
+
+    @media (max-width: 1024px) {
+        .products-images {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .products-images {
+            grid-template-columns: 1fr;
+        }
+
+        .comparison-table {
+            font-size: 0.85rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.75rem 0.5rem;
+        }
+    }
+
+    /* Modal Styles */
+    .image-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(8px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        cursor: zoom-out;
+    }
+
+    .modal-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+        background: transparent;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+        cursor: default;
+    }
+
+    .modal-content img {
+        display: block;
+        max-width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+        border-radius: 10px;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: -1.5rem;
+        right: -1.5rem;
+        width: 3rem;
+        height: 3rem;
+        background: rgba(0, 0, 0, 0.6);
+        border: none;
+        border-radius: 50%;
+        font-size: 2rem;
+        line-height: 1;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        color: #fff;
+        transition: transform 0.2s ease;
+    }
+
+    .modal-close:hover {
+        transform: scale(1.1);
+        color: var(--accent);
+    }
+
+    .fade-in {
+        animation: fadeIn 0.3s ease-out forwards;
+    }
+    .fade-out {
+        animation: fadeOut 0.2s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
     }
 
     /* Options Section */
