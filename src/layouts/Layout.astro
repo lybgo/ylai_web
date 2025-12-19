@@ -43,6 +43,29 @@ const {
 			defer
 			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
 		></script>
+		<script>
+			if (typeof window !== "undefined") {
+				const STORAGE_KEY = "tutorialSidebarScroll";
+				window.addEventListener("load", () => {
+					if (!window.location.pathname.startsWith("/zh/tutorials")) return;
+					const sidebar = document.querySelector(".sidebar");
+					if (!(sidebar instanceof HTMLElement)) return;
+					const saved = window.sessionStorage.getItem(STORAGE_KEY);
+					if (saved !== null) {
+						const value = parseInt(saved, 10);
+						if (!Number.isNaN(value)) {
+							sidebar.scrollTop = value;
+						}
+					}
+					sidebar.addEventListener("scroll", () => {
+						window.sessionStorage.setItem(
+							STORAGE_KEY,
+							String(sidebar.scrollTop),
+						);
+					});
+				});
+			}
+		</script>
 	</head>
 	<body>
 		<Header lang={lang} />
