@@ -45,7 +45,12 @@ const switchLabel = lang === "zh" ? "EN" : "中文";
         <nav class="nav-desktop">
             {
                 currentNav.map((item) => {
-                    const isActive = pathname === item.href.replace(/\/$/, "");
+                    const baseHref = item.href.replace(/\/$/, "");
+                    const isHome = baseHref === `/${lang}`;
+                    const isActive = isHome
+                        ? pathname === baseHref
+                        : pathname === baseHref ||
+                          pathname.startsWith(baseHref + "/");
                     return (
                         <a
                             href={item.href}
@@ -60,12 +65,16 @@ const switchLabel = lang === "zh" ? "EN" : "中文";
 
         <!-- Language Switcher & Mobile Menu Button -->
         <div class="header-actions">
+            {
+                /* 暂时隐藏语言切换按钮
             <a
                 href={`/${switchLang}${Astro.url.pathname.replace(/^\/(zh|en)/, "")}`}
                 class="lang-switch"
             >
                 {switchLabel}
             </a>
+            */
+            }
             <button
                 class="mobile-menu-btn"
                 @click="mobileMenuOpen = !mobileMenuOpen"
@@ -107,7 +116,12 @@ const switchLabel = lang === "zh" ? "EN" : "中文";
     <nav class="nav-mobile" x-show="mobileMenuOpen" x-transition>
         {
             currentNav.map((item) => {
-                const isActive = pathname === item.href.replace(/\/$/, "");
+                const baseHref = item.href.replace(/\/$/, "");
+                const isHome = baseHref === `/${lang}`;
+                const isActive = isHome
+                    ? pathname === baseHref
+                    : pathname === baseHref ||
+                      pathname.startsWith(baseHref + "/");
                 return (
                     <a
                         href={item.href}
