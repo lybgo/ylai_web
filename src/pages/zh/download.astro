@@ -20,17 +20,26 @@ const lang = "zh";
         <div class="apps-grid">
             <!-- 源来智能 APP -->
             <div class="app-card featured">
-                <div class="app-icon">📱</div>
-                <h2>源来智能</h2>
+                <img
+                    src="/images/logos/ylai.svg"
+                    alt="源来智能"
+                    class="app-logo"
+                />
+
+                <h2>源来智能APP</h2>
                 <p class="app-desc">
-                    宜启智控官方APP，支持蓝牙/WiFi连接，配置自动化逻辑、查看数据、远程控制
+                    宜启智控官方APP，支持通过蓝牙连接设备，控制设备，配置自动化逻辑、查看设备/传感器数据。
                 </p>
 
                 <div class="app-features">
                     <span>✓ 蓝牙本地控制</span>
-                    <span>✓ WiFi远程控制</span>
+                    <span>✓ 本地时间控制</span>
+                    <span>✓ 一键执行配置</span>
                     <span>✓ 自动化配置</span>
                     <span>✓ 逻辑导入导出</span>
+                    <span>✓ Mesh组网配置</span>
+                    <span>✓ MQTT配置</span>
+                    <span>✓ 更多其它本地功能配置</span>
                 </div>
 
                 <div class="download-buttons">
@@ -173,6 +182,7 @@ const lang = "zh";
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         border: 2px solid transparent;
         transition: all 0.3s ease;
+        text-align: center;
     }
 
     .app-card:hover {
@@ -187,6 +197,16 @@ const lang = "zh";
     .app-icon {
         font-size: 4rem;
         margin-bottom: 1rem;
+    }
+
+    .app-logo {
+        width: 128px;
+        height: 128px;
+        border-radius: 12px;
+        margin: 0 auto 1.5rem;
+        display: block;
+        object-fit: contain;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
     }
 
     .app-card h2 {
@@ -206,6 +226,7 @@ const lang = "zh";
         flex-wrap: wrap;
         gap: 0.75rem;
         margin-bottom: 1.5rem;
+        justify-content: center;
     }
 
     .app-features span {
