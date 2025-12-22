@@ -14,24 +14,32 @@ const lang = "zh";
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-title animate-fade-in-up">
-                    让控制变得简单<br />
+                    让自动化控制变得简单<br />
                     <span class="hero-title-accent">让万物互联触手可及</span>
                 </h1>
                 <p
                     class="hero-subtitle animate-fade-in-up"
                     style="animation-delay: 0.1s"
                 >
-                    无需编程，手机APP轻松配置——宜启智控Pro，您的智能物联网自动化万能控制器
+                    无需编程，手机APP轻松配置<br />
+                    ——宜启智控Pro，您的智能物联网自动化万能控制器
                 </p>
+                <ul
+                    class="hero-benefits animate-fade-in-up"
+                    style="animation-delay: 0.15s"
+                >
+                    <li><span class="benefit-icon">🏭</span> 让传统设备 · 快速智能化</li>
+                    <li><span class="benefit-icon">💡</span> 让智能硬件创意 · 极速落地</li>
+                    <li><span class="benefit-icon">⚡</span> 让智慧工程项目 · 高效交付</li>
+                </ul>
                 <div
                     class="hero-cta animate-fade-in-up"
                     style="animation-delay: 0.2s"
                 >
-                    <a href="/zh/buy" class="btn btn-primary">立即购买</a>
+                    <a href="/zh/buy" class="btn btn-secondary">立即购买</a>
                     <a href="/zh/tutorials" class="btn btn-secondary"
                         >快速入门</a
                     >
-                    <a href="/zh/mqtt" class="btn btn-ghost">查看文档</a>
                 </div>
             </div>
             <div
@@ -46,38 +54,248 @@ const lang = "zh";
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features">
+    <!-- Detailed Feature Blocks -->
+    <section class="detailed-features">
         <div class="features-container">
-            <h2 class="section-title">为什么选择宜启智控</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3 class="feature-title">告别编程烦恼</h3>
-                    <p class="feature-desc">
-                        无需写代码，手机APP点击配置，小白也能秒变控制大师
+            <!-- 1. Sensor Compatibility -->
+            <div class="feature-block">
+                <div class="feature-content" data-aos="fade-right">
+                    <span class="feature-tag">万能接入</span>
+                    <h2 class="feature-heading">兼容市面 99% 的传感器</h2>
+                    <p class="feature-text">
+                        打破接口壁垒，原生支持多种工业标准信号。无论是农业大棚的温湿度探头，还是工厂的压力变送器，都能轻松接入。
                     </p>
+                    <ul class="feature-list">
+                        <li>
+                            <strong>模拟量输入</strong>：支持 4-20mA 电流型 /
+                            0-10V 电压型传感器
+                        </li>
+                        <li>
+                            <strong>数字通讯</strong>：标配 RS485 接口，支持
+                            Modbus RTU 协议
+                        </li>
+                        <li>
+                            <strong>特殊接口</strong>：集成 I2C、UART
+                            以及普通开关量输入 (Dry Contact)
+                        </li>
+                    </ul>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔌</div>
-                    <h3 class="feature-title">兼容万物传感</h3>
-                    <p class="feature-desc">
-                        支持市面95%传感器，4-20mA/0-10V/RS485/IIC通吃
-                    </p>
+                <div class="feature-visual" data-aos="fade-left">
+                    <div class="visual-placeholder glass-panel">
+                        <div class="sensor-grid">
+                            <div class="sensor-item">
+                                <div class="sensor-img-wrapper">
+                                    <img
+                                        src="/images/senser/senser_nitu.png"
+                                        alt="土壤检测"
+                                    />
+                                </div>
+                                <span>土壤检测</span>
+                            </div>
+                            <div class="sensor-item">
+                                <div class="sensor-img-wrapper">
+                                    <img
+                                        src="/images/senser/senser_air.png"
+                                        alt="气体监测"
+                                    />
+                                </div>
+                                <span>气体监测</span>
+                            </div>
+                            <div class="sensor-item">
+                                <div class="sensor-img-wrapper">
+                                    <img
+                                        src="/images/senser/senser_water.png"
+                                        alt="液位水浸"
+                                    />
+                                </div>
+                                <span>液位水浸</span>
+                            </div>
+                            <div class="sensor-item">
+                                <div class="sensor-img-wrapper">
+                                    <img
+                                        src="/images/senser/senser_light.png"
+                                        alt="光照强度"
+                                    />
+                                </div>
+                                <span>光照强度</span>
+                            </div>
+                            <div class="sensor-item">
+                                <div class="sensor-img-wrapper">
+                                    <img
+                                        src="/images/senser/senser_rs485.png"
+                                        alt="工业仪表"
+                                    />
+                                </div>
+                                <span>工业仪表</span>
+                            </div>
+                            <div class="sensor-item">
+                                <div class="sensor-img-wrapper">
+                                    <span style="font-size: 2rem; color: var(--primary);">+</span>
+                                </div>
+                                <span>更多类型</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3 class="feature-title">随时随地掌控</h3>
-                    <p class="feature-desc">
-                        WiFi/4G/蓝牙多种联网，涂鸦生态+自有APP，远程控制稳如老狗
+            </div>
+
+            <!-- 2. Device Control -->
+            <div class="feature-block reverse">
+                <div class="feature-content" data-aos="fade-left">
+                    <span class="feature-tag">强力输出</span>
+                    <h2 class="feature-heading">掌控各种电气设备</h2>
+                    <p class="feature-text">
+                        从微小的指示灯到大型工业电机，宜启智控Pro
+                        都能精准控制。多种输出类型满足复杂场景需求。
                     </p>
+                    <ul class="feature-list">
+                        <li>
+                            <strong>大功率继电器</strong>：直接驱动 AC 220V
+                            负载，单路支持 10A
+                        </li>
+                        <li>
+                            <strong>精准 PWM</strong>：0-100%
+                            无级调节，适用于电机调速、LED 调光
+                        </li>
+                        <li>
+                            <strong>模拟量输出</strong>：0-10V
+                            控制变频器频率、阀门开度
+                        </li>
+                    </ul>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3 class="feature-title">即插即用秒部署</h3>
-                    <p class="feature-desc">
-                        比传统PLC简单10倍，1天速成专业控制系统
+                <div class="feature-visual" data-aos="fade-right">
+                    <div class="visual-placeholder glass-panel">
+                        <div class="control-grid">
+                            <div class="control-item">
+                                <span class="control-icon">💡</span>
+                                <span>灯光照明</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="control-icon">❄️</span>
+                                <span>风机水泵</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="control-icon">🚪</span>
+                                <span>电磁阀门</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="control-icon">🏭</span>
+                                <span>变频器</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Automation Logic -->
+            <div class="feature-block">
+                <div class="feature-content" data-aos="fade-right">
+                    <span class="feature-tag">手机组态</span>
+                    <h2 class="feature-heading">APP 零代码逻辑编排</h2>
+                    <p class="feature-text">
+                        告别晦涩难懂的 PLC 梯形图和 C 语言。在手机 APP
+                        上像搭积木一样配置自动化逻辑，所见即所得。
                     </p>
+                    <ul class="feature-list">
+                        <li>
+                            <strong>条件联动</strong>：如果要 (传感器 > 数值)
+                            则执行 (开关动作)
+                        </li>
+                        <li>
+                            <strong>定时任务</strong
+                            >：支持周循环、日循环、倒计时等多种定时模式
+                        </li>
+                        <li>
+                            <strong>数值运算</strong
+                            >：支持加减乘除、逻辑与或非运算，处理复杂工况
+                        </li>
+                    </ul>
+                </div>
+                <div class="feature-visual" data-aos="fade-left">
+                    <img
+                        src="https://placehold.co/600x400/e6f0fa/0066cc?text=App+Logic+Config"
+                        alt="APP逻辑配置界面"
+                        class="feature-img shadow-lg"
+                    />
+                </div>
+            </div>
+
+            <!-- 4. Connectivity (Mesh & Remote) -->
+            <div class="feature-block reverse">
+                <div class="feature-content" data-aos="fade-left">
+                    <span class="feature-tag">连接无界</span>
+                    <h2 class="feature-heading">Mesh 组网与远程控制</h2>
+                    <p class="feature-text">
+                        无论是否有网络，都能稳定运行。支持蓝牙 Mesh
+                        本地自组网，设备间自动转发信号，覆盖更广阔区域。
+                    </p>
+                    <ul class="feature-list">
+                        <li>
+                            <strong>蓝牙 Mesh</strong
+                            >：设备间互联互通，无网络也能联动控制
+                        </li>
+                        <li>
+                            <strong>远程控制</strong>：通过 WiFi 或 4G
+                            接入云端，地球任何角落都能掌控
+                        </li>
+                        <li>
+                            <strong>断网运行</strong
+                            >：自动化逻辑存储在设备本地，网络中断依然自动执行
+                        </li>
+                    </ul>
+                </div>
+                <div class="feature-visual" data-aos="fade-right">
+                    <img
+                        src="https://placehold.co/600x400/fff5f5/e85a2c?text=Mesh+Network+Topology"
+                        alt="Mesh组网示意图"
+                        class="feature-img shadow-lg"
+                    />
+                </div>
+            </div>
+
+            <!-- 5. Ecosystem (Tuya & MQTT) -->
+            <div class="feature-block">
+                <div class="feature-content" data-aos="fade-right">
+                    <span class="feature-tag">开放生态</span>
+                    <h2 class="feature-heading">涂鸦生态 & MQTT 深度集成</h2>
+                    <p class="feature-text">
+                        不造封闭围墙，拥抱开放生态。原生支持全球领先的涂鸦智能平台，同时开放
+                        MQTT 协议对接第三方系统。
+                    </p>
+                    <ul class="feature-list">
+                        <li>
+                            <strong>涂鸦智能</strong
+                            >：使用“涂鸦智能”或“智能生活”
+                            APP，共享海量智能硬件生态
+                        </li>
+                        <li>
+                            <strong>MQTT 协议</strong
+                            >：提供标准协议文档，轻松接入 Home
+                            Assistant、ThingsBoard
+                        </li>
+                        <li>
+                            <strong>私有化部署</strong
+                            >：支持对接企业自有服务器，数据自主可控
+                        </li>
+                    </ul>
+                </div>
+                <div class="feature-visual" data-aos="fade-left">
+                    <div class="visual-placeholder glass-panel ecosystem-panel">
+                        <div class="ecosystem-logo">
+                            <span class="logo-text">Tuya</span>
+                            <span class="logo-sub">Smart</span>
+                        </div>
+                        <div class="ecosystem-divider">+</div>
+                        <div class="ecosystem-logo">
+                            <span class="logo-text">MQTT</span>
+                            <span class="logo-sub">Protocol</span>
+                        </div>
+                        <div class="ecosystem-divider">+</div>
+                        <div class="ecosystem-logo">
+                            <span class="logo-text">HA</span>
+                            <span class="logo-sub">Home Assistant</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -285,6 +503,48 @@ const lang = "zh";
         }
     }
 
+    .hero-benefits {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2rem;
+        display: grid;
+        grid-template-columns: max-content max-content;
+        gap: 0.8rem;
+    }
+
+    .hero-benefits li {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 0.6rem 1.2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        width: fit-content;
+        transition: all 0.2s ease;
+        backdrop-filter: blur(4px);
+    }
+
+    .hero-benefits li:hover {
+        transform: translateX(5px);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .benefit-icon {
+        font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+        .hero-benefits {
+            grid-template-columns: 1fr;
+            justify-items: center;
+        }
+    }
+
     .hero-image img {
         max-width: 100%;
         height: auto;
@@ -379,9 +639,9 @@ const lang = "zh";
         color: var(--text-dark);
     }
 
-    /* Features Section */
-    .features {
-        padding: 5rem 1.5rem;
+    /* Detailed Features Section */
+    .detailed-features {
+        padding: 6rem 1.5rem;
         background: white;
     }
 
@@ -390,56 +650,223 @@ const lang = "zh";
         margin: 0 auto;
     }
 
-    .features-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
+    .feature-block {
+        display: flex;
+        align-items: center;
+        gap: 4rem;
+        margin-bottom: 6rem;
     }
 
-    @media (max-width: 1024px) {
-        .features-grid {
-            grid-template-columns: repeat(2, 1fr);
+    .feature-block.reverse {
+        flex-direction: row-reverse;
+    }
+
+    .feature-block:last-child {
+        margin-bottom: 0;
+    }
+
+    @media (max-width: 900px) {
+        .feature-block,
+        .feature-block.reverse {
+            flex-direction: column;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .feature-content {
+            align-items: center;
+        }
+
+        .feature-list {
+            text-align: left;
+            display: inline-block;
         }
     }
 
-    @media (max-width: 640px) {
-        .features-grid {
-            grid-template-columns: 1fr;
-        }
+    .feature-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
-    .feature-card {
-        text-align: center;
-        padding: 2rem;
-        background: var(--bg-light);
-        border-radius: 16px;
-        transition:
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
-    }
-
-    .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0, 102, 204, 0.1);
-    }
-
-    .feature-icon {
-        font-size: 3rem;
+    .feature-tag {
+        display: inline-block;
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
         margin-bottom: 1rem;
+        background: rgba(0, 102, 204, 0.1);
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        width: fit-content;
     }
 
-    .feature-title {
-        font-size: 1.25rem;
-        font-weight: 600;
+    @media (max-width: 900px) {
+        .feature-tag {
+            margin: 0 auto 1rem;
+        }
+    }
+
+    .feature-heading {
+        font-size: 2.25rem;
+        font-weight: 700;
         color: var(--text-dark);
-        margin: 0 0 0.75rem;
+        margin: 0 0 1.5rem;
+        line-height: 1.2;
     }
 
-    .feature-desc {
-        font-size: 0.95rem;
+    .feature-text {
+        font-size: 1.1rem;
         color: var(--text-muted);
-        margin: 0;
+        margin: 0 0 2rem;
         line-height: 1.6;
+    }
+
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .feature-list li {
+        position: relative;
+        padding-left: 1.75rem;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        color: var(--text-dark);
+        line-height: 1.5;
+    }
+
+    .feature-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        font-weight: 700;
+    }
+
+    .feature-visual {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .feature-img {
+        width: 100%;
+        max-width: 600px;
+        border-radius: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .feature-img:hover {
+        transform: translateY(-5px);
+    }
+
+    .shadow-lg {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Abstract Visuals */
+    .glass-panel {
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.8),
+            rgba(255, 255, 255, 0.4)
+        );
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 24px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 102, 204, 0.1);
+        width: 100%;
+        max-width: 700px;
+    }
+
+    .sensor-grid,
+    .control-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .sensor-item,
+    .control-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-dark);
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+
+    .sensor-icon,
+    .control-icon {
+        font-size: 2.5rem;
+        background: white;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .sensor-img-wrapper {
+        width: 140px;
+        height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease;
+    }
+
+    .sensor-item:hover .sensor-img-wrapper {
+        transform: scale(1.05);
+    }
+
+    .sensor-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .ecosystem-panel {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 3rem 2rem;
+    }
+
+    .ecosystem-logo {
+        text-align: center;
+    }
+
+    .logo-text {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--primary);
+    }
+
+    .logo-sub {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .ecosystem-divider {
+        font-size: 1.5rem;
+        color: var(--border-light);
+        font-weight: 300;
     }
 
     /* Showcase Section */
