@@ -2,6 +2,43 @@
 import Layout from "../../layouts/Layout.astro";
 
 const lang = "zh";
+
+const ylaiApps = [
+    {
+        name: "App Store",
+        url: "https://apps.apple.com/app/%E6%BA%90%E6%9D%A5%E6%99%BA%E8%83%BD/id1662451516",
+    },
+    {
+        name: "Google Play",
+        url: "https://play.google.com/store/apps/details?id=com.yuanlai.app.yl_ai",
+    },
+    {
+        name: "应用宝",
+        url: "https://sj.qq.com/appdetail/com.yuanlai.app.yl_ai",
+    },
+    {
+        name: "APP操作指南",
+        url: "/zh/tutorials/07-initial-setup",
+    },
+];
+
+const tuyaApps = [
+    {
+        name: "涂鸦APP",
+        url: "https://smartapp.tuya.com/tuyasmart/",
+    },
+    {
+        name: "APP操作指南",
+        url: "/zh/tutorials/13-tuya-app",
+    },
+];
+
+const getQrUrl = (url: string) => {
+    // 如果 URL 以 / 开头，则它是相对路径，需要添加当前站点的 Host
+    // 在 Astro 模板中可以使用 Astro.url.origin
+    const absoluteUrl = url.startsWith("/") ? `${Astro.url.origin}${url}` : url;
+    return `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(absoluteUrl)}`;
+};
 ---
 
 <Layout
@@ -19,7 +56,7 @@ const lang = "zh";
     <div class="content-container">
         <div class="apps-grid">
             <!-- 源来智能 APP -->
-            <div class="app-card featured">
+            <div class="app-card">
                 <img
                     src="/images/logos/ylai.svg"
                     alt="源来智能"
@@ -42,89 +79,148 @@ const lang = "zh";
                     <span>✓ 更多其它本地功能配置</span>
                 </div>
 
+                <p class="search-hint">
+                    可在手机应用市场搜索 <strong>“源来智能”</strong> 安装
+                </p>
                 <div class="download-buttons">
-                    <a href="#" class="btn btn-primary">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                        >
-                            <path
-                                d="M17.523 15.34c-.5.7-.9 1.4-1.2 2.1-.7 1.4-2.1 2.7-3.8 2.7s-3.1-1.3-3.8-2.7c-.3-.7-.7-1.4-1.2-2.1-1.3-1.7-2.5-3.9-2.5-6.3C5.023 5.6 8.123 2.5 12.023 2.5s7 3.1 7 7.5c0 2.4-1.2 4.6-2.5 6.3z"
-                            ></path>
-                        </svg>
-                        APK直接下载
-                    </a>
-                    <a href="#" class="btn btn-secondary">华为应用市场</a>
-                    <a href="#" class="btn btn-secondary">小米应用商店</a>
+                    {
+                        ylaiApps.map((app) => (
+                            <div class="download-link-group">
+                                <a
+                                    href={app.url}
+                                    class="btn btn-outline"
+                                    target="_blank"
+                                >
+                                    {app.name}
+                                    <svg
+                                        class="icon-qr"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <rect
+                                            x="3"
+                                            y="3"
+                                            width="7"
+                                            height="7"
+                                        />
+                                        <rect
+                                            x="14"
+                                            y="3"
+                                            width="7"
+                                            height="7"
+                                        />
+                                        <rect
+                                            x="3"
+                                            y="14"
+                                            width="7"
+                                            height="7"
+                                        />
+                                        <path d="M14 14h7v7h-7z" />
+                                        <path d="M7 7l.01 0" />
+                                        <path d="M17 7l.01 0" />
+                                        <path d="M7 17l.01 0" />
+                                    </svg>
+                                </a>
+                                <div class="qr-popup">
+                                    <img
+                                        src={getQrUrl(app.url)}
+                                        alt={`${app.name} QR Code`}
+                                        loading="lazy"
+                                    />
+                                    <span>扫码下载</span>
+                                </div>
+                            </div>
+                        ))
+                    }
                 </div>
-
-                <p class="app-note">* iOS用户请使用涂鸦智能APP</p>
             </div>
 
             <!-- 涂鸦智能 APP -->
             <div class="app-card">
-                <div class="app-icon">🏠</div>
-                <h2>涂鸦智能</h2>
+                <img
+                    src="/images/logos/tuya.png"
+                    alt="涂鸦APP"
+                    class="app-logo"
+                />
+                <h2>涂鸦APP</h2>
                 <p class="app-desc">
-                    全球领先的智能家居平台，支持远程控制、智能场景、云端联动、短信/电话报警
+                    全球领先的物联网平台，支持远程控制、智能场景、云端联动、短信/电话报警
                 </p>
 
                 <div class="app-features">
                     <span>✓ 全球远程控制</span>
                     <span>✓ 智能场景联动</span>
                     <span>✓ 短信电话报警</span>
-                    <span>✓ iOS/Android通用</span>
                 </div>
 
+                <p class="search-hint">
+                    可在手机应用市场搜索 <strong>“涂鸦智能”</strong> 安装
+                </p>
                 <div class="download-buttons">
-                    <a
-                        href="https://apps.apple.com/app/tuya-smart/id1034649547"
-                        class="btn btn-outline"
-                        target="_blank">App Store</a
-                    >
-                    <a
-                        href="https://play.google.com/store/apps/details?id=com.tuya.smart"
-                        class="btn btn-outline"
-                        target="_blank">Google Play</a
-                    >
+                    {
+                        tuyaApps.map((app) => (
+                            <div class="download-link-group">
+                                <a
+                                    href={app.url}
+                                    class="btn btn-outline"
+                                    target="_blank"
+                                >
+                                    {app.name}
+                                    <svg
+                                        class="icon-qr"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <rect
+                                            x="3"
+                                            y="3"
+                                            width="7"
+                                            height="7"
+                                        />
+                                        <rect
+                                            x="14"
+                                            y="3"
+                                            width="7"
+                                            height="7"
+                                        />
+                                        <rect
+                                            x="3"
+                                            y="14"
+                                            width="7"
+                                            height="7"
+                                        />
+                                        <path d="M14 14h7v7h-7z" />
+                                        <path d="M7 7l.01 0" />
+                                        <path d="M17 7l.01 0" />
+                                        <path d="M7 17l.01 0" />
+                                    </svg>
+                                </a>
+                                <div class="qr-popup">
+                                    <img
+                                        src={getQrUrl(app.url)}
+                                        alt={`${app.name} QR Code`}
+                                        loading="lazy"
+                                    />
+                                    <span>扫码下载</span>
+                                </div>
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
         </div>
-
-        <!-- Quick Guide -->
-        <section class="guide-section">
-            <h2 class="section-title">快速连接指南</h2>
-            <div class="steps-grid">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3>下载安装</h3>
-                    <p>下载源来智能APP并完成安装</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3>开启蓝牙</h3>
-                    <p>打开手机蓝牙和位置权限</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3>设备上电</h3>
-                    <p>宜启智控通电，等待蓝牙灯闪烁</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3>扫描连接</h3>
-                    <p>APP自动扫描并添加设备</p>
-                </div>
-            </div>
-            <div class="guide-cta">
-                <a href="/zh/tutorials" class="btn btn-primary btn-lg"
-                    >查看详细教程 →</a
-                >
-            </div>
-        </section>
     </div>
 </Layout>
 
@@ -240,7 +336,84 @@ const lang = "zh";
     .download-buttons {
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 1rem;
+    }
+
+    .download-link-group {
+        position: relative;
+        width: 100%;
+    }
+
+    .qr-popup {
+        position: absolute;
+        left: 102%; /* 从 105% 减少到 102%，使其更靠近按钮 */
+        top: 50%;
+        transform: translateY(-50%) translateX(10px);
+        background: white;
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        z-index: 100;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        border: 1px solid var(--border-light);
+        min-width: 170px;
+    }
+
+    .download-link-group:hover .qr-popup {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-50%) translateX(0);
+    }
+
+    .qr-popup img {
+        width: 140px;
+        height: 140px;
+        display: block;
+        background: #f8fafc;
+        border-radius: 8px;
+    }
+
+    .qr-popup span {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        white-space: nowrap; /* 防止文字换行 */
+    }
+
+    .icon-qr {
+        margin-left: auto;
+        opacity: 0.5;
+        transition: opacity 0.2s ease;
+    }
+
+    .btn:hover .icon-qr {
+        opacity: 1;
+    }
+
+    /* 适应2列布局，右侧卡片的二维码向左弹出 */
+    .apps-grid .app-card:nth-child(even) .qr-popup {
+        left: auto; /* 重置 left 属性 */
+        right: 102%; /* 从 105% 减少到 102% */
+        transform: translateY(-50%) translateX(-10px);
+    }
+
+    .apps-grid .app-card:nth-child(even) .download-link-group:hover .qr-popup {
+        transform: translateY(-50%) translateX(0);
+    }
+
+    @media (max-width: 1024px) {
+        .qr-popup {
+            display: none;
+        }
+        .icon-qr {
+            display: none;
+        }
     }
 
     .btn {
@@ -254,6 +427,7 @@ const lang = "zh";
         border-radius: 10px;
         text-decoration: none;
         transition: all 0.2s ease;
+        width: 100%; /* 确保按钮填满容器宽度，从而保持一致 */
     }
 
     .btn svg {
@@ -308,64 +482,17 @@ const lang = "zh";
         font-style: italic;
     }
 
-    /* Guide Section */
-    .guide-section {
-        text-align: center;
-    }
-
-    .section-title {
-        font-size: 2rem;
-        font-weight: 700;
-        margin: 0 0 3rem;
-        color: var(--text-dark);
-    }
-
-    .steps-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.5rem;
-        margin-bottom: 3rem;
-    }
-
-    @media (max-width: 768px) {
-        .steps-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    .step-card {
-        background: var(--bg-light);
-        padding: 2rem 1.5rem;
-        border-radius: 16px;
-    }
-
-    .step-number {
-        width: 48px;
-        height: 48px;
-        background: var(--primary);
-        color: white;
-        font-size: 1.25rem;
-        font-weight: 700;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 1rem;
-    }
-
-    .step-card h3 {
-        font-size: 1.125rem;
-        margin: 0 0 0.5rem;
-        color: var(--text-dark);
-    }
-
-    .step-card p {
+    .search-hint {
         font-size: 0.9rem;
         color: var(--text-muted);
-        margin: 0;
+        margin-bottom: 1.25rem;
+        padding: 0.75rem;
+        background: var(--bg-light);
+        border-radius: 8px;
+        border: 1px dashed var(--border-light);
     }
 
-    .guide-cta {
-        margin-top: 2rem;
+    .search-hint strong {
+        color: var(--primary);
     }
 </style>
