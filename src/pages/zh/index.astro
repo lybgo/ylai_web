@@ -58,81 +58,144 @@ const lang = "zh";
     <section class="detailed-features">
         <div class="features-container">
             <!-- 1. Sensor Compatibility -->
-            <div class="feature-block">
-                <div class="feature-content" data-aos="fade-right">
-                    <span class="feature-tag">万能接入</span>
-                    <h2 class="feature-heading">兼容市面 99% 的传感器</h2>
-                    <p class="feature-text">
-                        打破接口壁垒，原生支持多种工业标准信号。无论是农业大棚的温湿度探头，还是工厂的压力变送器，都能轻松接入。
-                    </p>
-                    <ul class="feature-list">
-                        <li>
-                            <strong>模拟量输入</strong>：支持 4-20mA 电流型 /
-                            0-10V 电压型传感器
-                        </li>
-                        <li>
-                            <strong>数字通讯</strong>：标配 RS485 接口，支持
-                            Modbus RTU 协议
-                        </li>
-                        <li>
-                            <strong>特殊接口</strong>：集成 I2C、UART
-                            以及普通开关量输入 (Dry Contact)
-                        </li>
-                    </ul>
-                </div>
-                <div class="feature-visual" data-aos="fade-left">
-                    <div class="visual-placeholder glass-panel">
-                        <div class="sensor-grid">
-                            <div class="sensor-item">
-                                <div class="sensor-img-wrapper">
+            <div class="feature-block sensor-compat-block">
+                <div class="sensor-compat-container">
+                    <!-- 顶部：传感器展示区 -->
+                    <div class="sensor-showcase-top" data-aos="fade-down">
+                        <div class="irregular-border-wrapper">
+                            <div class="sensor-header">
+                                <h2 class="feature-heading"><span class="feature-tag">输入接口：</span>支持接入市面上95%的传感器</h2>
+                                <p class="feature-text">
+                                    全面兼容市面上主流的传感器，无需担心接口不匹配。随插即用，稳定可靠。
+                                </p>
+                            </div>
+                            <div class="sensor-grid-horizontal">
+                                <div class="sensor-item">
+                                    <div class="sensor-img-wrapper">
+                                        <img
+                                            src="/images/senser/senser_nitu.png"
+                                            alt="土壤检测"
+                                        />
+                                    </div>
+                                    <span>土壤检测</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <div class="sensor-img-wrapper">
+                                        <img
+                                            src="/images/senser/senser_air.png"
+                                            alt="气体监测"
+                                        />
+                                    </div>
+                                    <span>气体监测</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <div class="sensor-img-wrapper">
+                                        <img
+                                            src="/images/senser/senser_water.png"
+                                            alt="液位水浸"
+                                        />
+                                    </div>
+                                    <span>液位水浸</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <div class="sensor-img-wrapper">
+                                        <img
+                                            src="/images/senser/senser_light.png"
+                                            alt="光照强度"
+                                        />
+                                    </div>
+                                    <span>光照强度</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <div class="sensor-img-wrapper">
+                                        <img
+                                            src="/images/senser/senser_rs485.png"
+                                            alt="工业仪表"
+                                        />
+                                    </div>
+                                    <span>工业仪表</span>
+                                </div>
+                                <div class="sensor-item sensor-more">
+                                    <div class="sensor-img-wrapper">
+                                        <span class="more-icon">+</span>
+                                    </div>
+                                    <span>更多类型</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 底部：左侧产品图片 + 右侧文字说明和规格 -->
+                    <div class="sensor-bottom-section">
+                        <!-- 左侧：产品图片 -->
+                        <div class="sensor-product-image" data-aos="fade-right">
+                            <div class="product-image-wrapper" id="productImageWrapper">
+                                <img
+                                    src="/images/products/6+4路正面.png"
+                                    alt="传感器接口细节"
+                                    id="productImage"
+                                />
+                                <!-- 接口区域高亮框 -->
+                                <div class="interface-highlight-box"></div>
+                                <!-- 放大镜浮层 -->
+                                <div class="magnifier-overlay" id="magnifierOverlay">
                                     <img
-                                        src="/images/senser/senser_nitu.png"
-                                        alt="土壤检测"
+                                        src="/images/products/6+4路正面.png"
+                                        alt="传感器接口细节放大"
+                                        id="magnifierImage"
                                     />
                                 </div>
-                                <span>土壤检测</span>
                             </div>
-                            <div class="sensor-item">
-                                <div class="sensor-img-wrapper">
-                                    <img
-                                        src="/images/senser/senser_air.png"
-                                        alt="气体监测"
-                                    />
+                        </div>
+
+                        <script>
+                            (function() {
+                                const wrapper = document.getElementById('productImageWrapper');
+                                const productImage = document.getElementById('productImage');
+                                const magnifier = document.getElementById('magnifierOverlay');
+                                const magnifierImage = document.getElementById('magnifierImage');
+                                
+                                if (!wrapper || !productImage || !magnifier || !magnifierImage) return;
+
+                                wrapper.addEventListener('mouseenter', function() {
+                                    magnifier.style.opacity = '1';
+                                    magnifier.style.visibility = 'visible';
+                                });
+
+                                wrapper.addEventListener('mouseleave', function() {
+                                    magnifier.style.opacity = '0';
+                                    magnifier.style.visibility = 'hidden';
+                                });
+
+                                wrapper.addEventListener('mousemove', function(e) {
+                                    const rect = wrapper.getBoundingClientRect();
+                                    const x = e.clientX - rect.left;
+                                    const y = e.clientY - rect.top;
+                                    
+                                    // 计算鼠标在图片中的百分比位置
+                                    const xPercent = (x / rect.width) * 100;
+                                    const yPercent = (y / rect.height) * 100;
+                                    
+                                    // 设置放大镜显示的图片位置
+                                    magnifierImage.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+                                    magnifierImage.style.objectPosition = `${xPercent}% ${yPercent}%`;
+                                });
+                            })();
+                        </script>
+
+                        <!-- 右侧：文字说明 + 技术规格 -->
+                        <div class="sensor-info-section">
+                            <!-- 技术规格标签 -->
+                            <div class="sensor-specs-section" data-aos="fade-left">
+                                <div class="specs-grid">
+                                    <div class="spec-tag">TVPN</div>
+                                    <div class="spec-tag">RS485</div>
+                                    <div class="spec-tag">IIC</div>
+                                    <div class="spec-tag">0-10V</div>
+                                    <div class="spec-tag">4-20mA</div>
+                                    <div class="spec-tag">UART</div>
                                 </div>
-                                <span>气体监测</span>
-                            </div>
-                            <div class="sensor-item">
-                                <div class="sensor-img-wrapper">
-                                    <img
-                                        src="/images/senser/senser_water.png"
-                                        alt="液位水浸"
-                                    />
-                                </div>
-                                <span>液位水浸</span>
-                            </div>
-                            <div class="sensor-item">
-                                <div class="sensor-img-wrapper">
-                                    <img
-                                        src="/images/senser/senser_light.png"
-                                        alt="光照强度"
-                                    />
-                                </div>
-                                <span>光照强度</span>
-                            </div>
-                            <div class="sensor-item">
-                                <div class="sensor-img-wrapper">
-                                    <img
-                                        src="/images/senser/senser_rs485.png"
-                                        alt="工业仪表"
-                                    />
-                                </div>
-                                <span>工业仪表</span>
-                            </div>
-                            <div class="sensor-item">
-                                <div class="sensor-img-wrapper">
-                                    <span style="font-size: 2rem; color: var(--primary);">+</span>
-                                </div>
-                                <span>更多类型</span>
+                                <p class="specs-note">支持市面上 99% 以上传感器</p>
                             </div>
                         </div>
                     </div>
@@ -787,6 +850,333 @@ const lang = "zh";
         max-width: 700px;
     }
 
+    /* Sensor Compatibility Block - New Layout */
+    .sensor-compat-block {
+        display: block !important;
+    }
+
+    .sensor-compat-container {
+        padding: 0;
+        background: transparent;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    /* 顶部传感器展示区 */
+    .sensor-showcase-top {
+        margin-bottom: 0.8rem;
+    }
+
+    /* 红框容器 - 传感器区域 */
+    .irregular-border-wrapper {
+        position: relative;
+        padding: 2rem;
+        background: rgba(230, 240, 250, 0.5);
+        border: 1px dashed rgba(0, 102, 204, 0.5);
+        border-radius: 12px;
+    }
+
+    /* 传感器区域标题 */
+    .sensor-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .sensor-header .feature-tag {
+        display: inline-block;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+        background: rgba(0, 102, 204, 0.1);
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+    }
+
+    .sensor-header .feature-heading {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+        line-height: 1.2;
+    }
+
+    .sensor-header .feature-text {
+        font-size: 1rem;
+        color: var(--text-muted);
+        margin: 0;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .sensor-grid-horizontal {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1.5rem;
+        justify-items: center;
+    }
+
+    @media (max-width: 1024px) {
+        .sensor-grid-horizontal {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .sensor-grid-horizontal {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+    }
+
+    /* 底部区域：左右布局 */
+    .sensor-bottom-section {
+        display: flex;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    @media (max-width: 900px) {
+        .sensor-bottom-section {
+            flex-direction: column;
+            gap: 2rem;
+        }
+    }
+
+    /* 左侧产品图片 */
+    .sensor-product-image {
+        flex: 0 0 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .product-image-wrapper {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .sensor-product-image img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 4px 12px rgba(0, 102, 204, 0.15));
+    }
+
+    /* 接口区域高亮框 */
+    .interface-highlight-box {
+        position: absolute;
+        top: -5%;
+        right: 5%;
+        width: 45%;
+        height: 35%;
+        border: 1px dashed rgba(0, 102, 204, 0.5);
+        background: rgba(230, 240, 250, 0.5);
+        border-radius: 12px;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    .product-image-wrapper:hover .interface-highlight-box {
+        border-color: rgba(0, 102, 204, 0.8);
+        background: rgba(230, 240, 250, 0.7);
+    }
+
+    /* 放大镜浮层 */
+    .magnifier-overlay {
+        position: absolute;
+        top: 50%;
+        left: calc(100% + 1rem);
+        transform: translateY(-50%);
+        width: 700px;
+        height: 400px;
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+        z-index: 1000;
+        pointer-events: none;
+        overflow: hidden;
+        border: 2px solid rgba(0, 102, 204, 0.3);
+    }
+
+    @media (max-width: 1200px) {
+        .magnifier-overlay {
+            width: 320px;
+            height: 320px;
+        }
+    }
+
+    @media (max-width: 900px) {
+        .magnifier-overlay {
+            position: fixed;
+            left: 50%;
+            top: 10%;
+            transform: translateX(-50%);
+            width: 90vw;
+            max-width: 400px;
+            height: auto;
+            aspect-ratio: 1;
+        }
+    }
+
+    #magnifierImage {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain;
+        transform: scale(2.5);
+        border-radius: 12px;
+        transition: transform-origin 0.1s ease, object-position 0.1s ease;
+    }
+
+    @media (max-width: 900px) {
+        .sensor-product-image {
+            flex: 1;
+            max-width: 500px;
+            width: 100%;
+        }
+    }
+
+    /* 右侧信息区域（文字 + 规格） */
+    .sensor-info-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* 文字说明部分 */
+    .sensor-text-section {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .sensor-text-section .feature-tag {
+        display: inline-block;
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+        background: rgba(0, 102, 204, 0.1);
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+    }
+
+    .sensor-text-section .feature-heading {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+        line-height: 1.2;
+    }
+
+    .sensor-text-section .feature-text {
+        font-size: 1rem;
+        color: var(--text-muted);
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* 技术规格标签部分 */
+    .sensor-specs-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .specs-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+    }
+
+    @media (max-width: 640px) {
+        .specs-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .spec-tag {
+        padding: 0.75rem 1rem;
+        background: linear-gradient(
+            135deg,
+            rgba(0, 102, 204, 0.1),
+            rgba(0, 102, 204, 0.05)
+        );
+        color: var(--primary);
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 12px;
+        text-align: center;
+        border: 1px solid rgba(0, 102, 204, 0.2);
+        transition: all 0.2s ease;
+    }
+
+    .spec-tag:hover {
+        background: linear-gradient(
+            135deg,
+            rgba(0, 102, 204, 0.15),
+            rgba(0, 102, 204, 0.08)
+        );
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 102, 204, 0.15);
+    }
+
+    .specs-note {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-align: center;
+        margin: 0;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(0, 102, 204, 0.1);
+    }
+
+    .interface-preview-wrapper {
+        margin-bottom: 2rem;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        padding: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .interface-preview-label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        padding-left: 0.5rem;
+        font-weight: 600;
+    }
+
+    .interface-preview {
+        width: 100%;
+        height: 140px;
+        overflow: hidden;
+        border-radius: 12px;
+        position: relative;
+    }
+
+    .interface-preview img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: 100% 0%; /* Top Right Focus */
+        transform-origin: top right;
+        transform: scale(1.6);
+    }
+
     .sensor-grid,
     .control-grid {
         display: grid;
@@ -835,6 +1225,32 @@ const lang = "zh";
         width: 100%;
         height: 100%;
         object-fit: contain;
+    }
+
+    /* 更多类型图标样式 */
+    .sensor-more .sensor-img-wrapper {
+        background: linear-gradient(
+            135deg,
+            rgba(0, 102, 204, 0.1),
+            rgba(0, 102, 204, 0.05)
+        );
+        border: 2px dashed rgba(0, 102, 204, 0.3);
+        border-radius: 16px;
+    }
+
+    .more-icon {
+        font-size: 3rem;
+        color: var(--primary);
+        font-weight: 300;
+    }
+
+    .sensor-more:hover .sensor-img-wrapper {
+        background: linear-gradient(
+            135deg,
+            rgba(0, 102, 204, 0.15),
+            rgba(0, 102, 204, 0.08)
+        );
+        border-color: var(--primary);
     }
 
     .ecosystem-panel {
