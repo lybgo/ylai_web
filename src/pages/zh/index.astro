@@ -74,52 +74,72 @@ const lang = "zh";
                                     <div class="sensor-img-wrapper">
                                         <img
                                             src="/images/senser/senser_nitu.png"
-                                            alt="土壤检测"
+                                            alt="土壤综合传感器"
                                         />
                                     </div>
-                                    <span>土壤检测</span>
+                                    <span>土壤综合传感器(RS485)</span>
                                 </div>
                                 <div class="sensor-item">
                                     <div class="sensor-img-wrapper">
                                         <img
                                             src="/images/senser/senser_air.png"
-                                            alt="气体监测"
+                                            alt="温湿度传感器"
                                         />
                                     </div>
-                                    <span>气体监测</span>
+                                    <span>温湿度传感器(IIC)</span>
                                 </div>
                                 <div class="sensor-item">
                                     <div class="sensor-img-wrapper">
                                         <img
                                             src="/images/senser/senser_water.png"
-                                            alt="液位水浸"
+                                            alt="液位变送器"
                                         />
                                     </div>
-                                    <span>液位水浸</span>
+                                    <span>液位变送器(4-20mA)</span>
                                 </div>
                                 <div class="sensor-item">
                                     <div class="sensor-img-wrapper">
                                         <img
                                             src="/images/senser/senser_light.png"
-                                            alt="光照强度"
+                                            alt="光照度传感器"
                                         />
                                     </div>
-                                    <span>光照强度</span>
+                                    <span>光照度传感器(IIC)</span>
                                 </div>
                                 <div class="sensor-item">
                                     <div class="sensor-img-wrapper">
                                         <img
                                             src="/images/senser/senser_rs485.png"
-                                            alt="工业仪表"
+                                            alt="智能电表"
                                         />
                                     </div>
-                                    <span>工业仪表</span>
+                                    <span>智能电表(RS485)</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <div class="sensor-img-wrapper">
+                                        <img
+                                            src="/images/senser/water_switch.png"
+                                            alt="液位浮球开关"
+                                        />
+                                    </div>
+                                    <span>液位浮球开关(开关量)</span>
                                 </div>
                                 <div class="sensor-item sensor-more">
-                                    <div class="sensor-img-wrapper">
-                                        <span class="more-icon">+</span>
-                                    </div>
-                                    <span>更多类型</span>
+                                    <ul class="sensor-text-list two-columns">
+                                        <li>二氧化碳</li>
+                                        <li>液体pH值</li>
+                                        <li>溶解氧</li>
+                                        <li>浊度</li>
+                                        <li>光电开关</li>
+                                        <li>人体传感器</li>
+                                        <li>气象站</li>
+                                        <li>雨水传感器</li>
+                                        <li>流速传感器</li>
+                                        <li>风速传感器</li>
+                                        <li>可燃气体</li>
+                                        <li>氨氮传感器</li>
+                                    </ul>
+                                    <span>更多传感器...</span>
                                 </div>
                             </div>
                         </div>
@@ -187,15 +207,14 @@ const lang = "zh";
                         <div class="sensor-info-section">
                             <!-- 技术规格标签 -->
                             <div class="sensor-specs-section" data-aos="fade-left">
+                                <h3 class="specs-title">支持传感器的信号类型：</h3>
                                 <div class="specs-grid">
-                                    <div class="spec-tag">TVPN</div>
-                                    <div class="spec-tag">RS485</div>
+                                    <div class="spec-tag">开关量/NPN/频率/脉冲</div>
+                                    <div class="spec-tag">RS485 Modbus RTU</div>
                                     <div class="spec-tag">IIC</div>
-                                    <div class="spec-tag">0-10V</div>
-                                    <div class="spec-tag">4-20mA</div>
-                                    <div class="spec-tag">UART</div>
+                                    <div class="spec-tag">0-10V/4-20mA/自定义ADC</div>
+                                    <div class="spec-tag">433Mhz遥控信号</div>
                                 </div>
-                                <p class="specs-note">支持市面上 99% 以上传感器</p>
                             </div>
                         </div>
                     </div>
@@ -914,7 +933,7 @@ const lang = "zh";
 
     .sensor-grid-horizontal {
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(7, 1fr);
         gap: 1.5rem;
         justify-items: center;
     }
@@ -1096,6 +1115,13 @@ const lang = "zh";
         gap: 1rem;
     }
 
+    .specs-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 0.5rem 0;
+    }
+
     .specs-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -1192,7 +1218,7 @@ const lang = "zh";
         gap: 0.5rem;
         color: var(--text-dark);
         font-weight: 500;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
 
     .sensor-icon,
@@ -1242,6 +1268,26 @@ const lang = "zh";
         font-size: 3rem;
         color: var(--primary);
         font-weight: 300;
+    }
+
+    /* 传感器文字列表样式 */
+    .sensor-text-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 0.75rem;
+        line-height: 1.8;
+        color: var(--text-muted);
+    }
+
+    .sensor-text-list.two-columns {
+        column-count: 2;
+        column-gap: 15px;
+    }
+
+    .sensor-text-list li {
+        margin-bottom: 0.3rem;
+        text-align: left;
     }
 
     .sensor-more:hover .sensor-img-wrapper {
