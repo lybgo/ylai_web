@@ -4,6 +4,47 @@ import Layout from "../../layouts/Layout.astro";
 const lang = "zh";
 ---
 
+<!-- 可重用的放大镜功能脚本 - 必须在调用前定义 -->
+<script is:inline>
+    /**
+     * 初始化放大镜功能
+     * @param {string} wrapperId - 图片容器的ID
+     * @param {string} magnifierId - 放大镜浮层的ID
+     * @param {string} magnifierImageId - 放大镜图片的ID
+     */
+    function initMagnifier(wrapperId, magnifierId, magnifierImageId) {
+        const wrapper = document.getElementById(wrapperId);
+        const magnifier = document.getElementById(magnifierId);
+        const magnifierImage = document.getElementById(magnifierImageId);
+        
+        if (!wrapper || !magnifier || !magnifierImage) return;
+
+        wrapper.addEventListener('mouseenter', function() {
+            magnifier.style.opacity = '1';
+            magnifier.style.visibility = 'visible';
+        });
+
+        wrapper.addEventListener('mouseleave', function() {
+            magnifier.style.opacity = '0';
+            magnifier.style.visibility = 'hidden';
+        });
+
+        wrapper.addEventListener('mousemove', function(e) {
+            const rect = wrapper.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // 计算鼠标在图片中的百分比位置
+            const xPercent = (x / rect.width) * 100;
+            const yPercent = (y / rect.height) * 100;
+            
+            // 设置放大镜显示的图片位置
+            magnifierImage.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+            magnifierImage.style.objectPosition = `${xPercent}% ${yPercent}%`;
+        });
+    }
+</script>
+
 <Layout
     title="宜启智控Pro - 智能物联网自动化控制器 | 无需编程"
     description="无需编程的智能物联网自动化万能控制器，手机APP轻松配置，支持95%市场传感器，WiFi/4G/蓝牙多种联网方式"
@@ -156,7 +197,7 @@ const lang = "zh";
                                     id="productImage"
                                 />
                                 <!-- 接口区域高亮框 -->
-                                <div class="interface-highlight-box"></div>
+                                <div class="interface-highlight-box highlight-top-right"></div>
                                 <!-- 放大镜浮层 -->
                                 <div class="magnifier-overlay" id="magnifierOverlay">
                                     <img
@@ -168,39 +209,8 @@ const lang = "zh";
                             </div>
                         </div>
 
-                        <script>
-                            (function() {
-                                const wrapper = document.getElementById('productImageWrapper');
-                                const productImage = document.getElementById('productImage');
-                                const magnifier = document.getElementById('magnifierOverlay');
-                                const magnifierImage = document.getElementById('magnifierImage');
-                                
-                                if (!wrapper || !productImage || !magnifier || !magnifierImage) return;
-
-                                wrapper.addEventListener('mouseenter', function() {
-                                    magnifier.style.opacity = '1';
-                                    magnifier.style.visibility = 'visible';
-                                });
-
-                                wrapper.addEventListener('mouseleave', function() {
-                                    magnifier.style.opacity = '0';
-                                    magnifier.style.visibility = 'hidden';
-                                });
-
-                                wrapper.addEventListener('mousemove', function(e) {
-                                    const rect = wrapper.getBoundingClientRect();
-                                    const x = e.clientX - rect.left;
-                                    const y = e.clientY - rect.top;
-                                    
-                                    // 计算鼠标在图片中的百分比位置
-                                    const xPercent = (x / rect.width) * 100;
-                                    const yPercent = (y / rect.height) * 100;
-                                    
-                                    // 设置放大镜显示的图片位置
-                                    magnifierImage.style.transformOrigin = `${xPercent}% ${yPercent}%`;
-                                    magnifierImage.style.objectPosition = `${xPercent}% ${yPercent}%`;
-                                });
-                            })();
+                        <script is:inline>
+                            initMagnifier('productImageWrapper', 'magnifierOverlay', 'magnifierImage');
                         </script>
 
                         <!-- 右侧：文字说明 + 技术规格 -->
@@ -222,52 +232,144 @@ const lang = "zh";
             </div>
 
             <!-- 2. Device Control -->
-            <div class="feature-block reverse">
-                <div class="feature-content" data-aos="fade-left">
-                    <span class="feature-tag">强力输出</span>
-                    <h2 class="feature-heading">掌控各种电气设备</h2>
-                    <p class="feature-text">
-                        从微小的指示灯到大型工业电机，宜启智控Pro
-                        都能精准控制。多种输出类型满足复杂场景需求。
-                    </p>
-                    <ul class="feature-list">
-                        <li>
-                            <strong>大功率继电器</strong>：直接驱动 AC 220V
-                            负载，单路支持 10A
-                        </li>
-                        <li>
-                            <strong>精准 PWM</strong>：0-100%
-                            无级调节，适用于电机调速、LED 调光
-                        </li>
-                        <li>
-                            <strong>模拟量输出</strong>：0-10V
-                            控制变频器频率、阀门开度
-                        </li>
-                    </ul>
-                </div>
-                <div class="feature-visual" data-aos="fade-right">
-                    <div class="visual-placeholder glass-panel">
-                        <div class="control-grid">
-                            <div class="control-item">
-                                <span class="control-icon">💡</span>
-                                <span>灯光照明</span>
+             <div class="feature-block sensor-compat-block">
+                <div class="sensor-compat-container">
+                    <!-- 顶部：控制设备展示区 -->
+                    <div class="sensor-showcase-top" data-aos="fade-down">
+                        <div class="irregular-border-wrapper">
+                            <div class="sensor-header">
+                                <h2 class="feature-heading"><span class="feature-tag">输出接口：</span>能控制大部分的电气设备</h2>
+                                <p class="feature-text">
+                                    从微小的指示灯到大型工业电机，宜启智控Pro 都能精准控制。多种输出类型满足复杂场景需求。
+                                </p>
                             </div>
-                            <div class="control-item">
-                                <span class="control-icon">❄️</span>
-                                <span>风机水泵</span>
-                            </div>
-                            <div class="control-item">
-                                <span class="control-icon">🚪</span>
-                                <span>电磁阀门</span>
-                            </div>
-                            <div class="control-item">
-                                <span class="control-icon">🏭</span>
-                                <span>变频器</span>
+                            <div class="sensor-grid-horizontal">
+                                <div class="sensor-item">
+                                    <div class="sensor-img-wrapper">
+                                        <img
+                                            src="/images/dev/dev_dcf.png"
+                                            alt="电磁阀"
+                                        />
+                                    </div>
+                                    <span>电磁阀(开关)</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <div class="sensor-img-wrapper">
+                                        <img
+                                            src="/images/dev/dev_pqs.png"
+                                            alt="排气扇"
+                                        />
+                                    </div>
+                                    <span>排气扇(开关)</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <div class="sensor-img-wrapper">
+                                        <img
+                                            src="/images/dev/dev_bpq.png"
+                                            alt="变频器"
+                                        />
+                                    </div>
+                                    <span>变频器(频率)</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <div class="sensor-img-wrapper">
+                                        <img
+                                            src="/images/dev/dev_jcq.png"
+                                            alt="交流接触器"
+                                        />
+                                    </div>
+                                    <span>交流接触器(开关)</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <div class="sensor-img-wrapper">
+                                        <img
+                                            src="/images/dev/dev_zwd.png"
+                                            alt="植物灯"
+                                        />
+                                    </div>
+                                    <span>植物灯(0-10V)</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <div class="sensor-img-wrapper">
+                                        <img
+                                            src="/images/dev/dev_bjdj.png"
+                                            alt="步进电机"
+                                        />
+                                    </div>
+                                    <span>步进电机(频率)</span>
+                                </div>
+                                <div class="sensor-item sensor-more">
+                                    <ul class="sensor-text-list two-columns">
+                                        <li>三相电机</li>
+                                        <li>电动卷帘门</li>
+                                        <li>电热棒</li>
+                                        <li>蜂鸣器</li>
+                                        <li>无刷电机</li>
+                                        <li>比例阀</li>
+                                        <li>固态继电器</li>
+                                        <li>舵机</li>
+                                        <li>控制箱按钮</li>
+                                        <li>照明驱动器</li>
+                                        <li>增氧机</li>
+                                        <li>加湿机</li>
+                                        <li>喷雾机</li>
+                                        <li>电动推杆</li>
+                                        <li>降温水帘</li>
+                                        <li>电动遮阳帘</li>
+                                    </ul>
+                                    <span>更多设备...</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- 底部：左侧产品图片 + 右侧文字说明和规格 -->
+                    <div class="sensor-bottom-section">
+                        <!-- 左侧:文字说明 + 技术规格 -->
+                        <div class="sensor-info-section">
+                            <!-- 技术规格标签 -->
+                            <div class="sensor-specs-section" data-aos="fade-right">
+                                <h3 class="specs-title">支持控制设备类型:</h3>
+                                <div class="specs-grid">
+                                    <div class="spec-tag">继电器开关控制</div>
+                                    <div class="spec-tag">RS485 Modbus RTU</div>
+                                    <div class="spec-tag">PWM/脉冲/频率/占空比</div>
+                                    <div class="spec-tag">IIC</div>
+                                    <div class="spec-tag">0-10V/4-20mA</div>
+                                    <div class="spec-tag">433Mhz遥控信号</div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- 右侧:产品图片 -->
+                        <div class="sensor-product-image" data-aos="fade-left">
+                            <div class="product-image-wrapper" id="productImageWrapper2">
+                                <img
+                                    src="/images/products/6+4路正面.png"
+                                    alt="控制设备接口细节"
+                                    id="productImage2"
+                                />
+                                <!-- 接口区域高亮框 -->
+                                <div class="interface-highlight-box highlight-top-left"></div>
+                                <div class="interface-highlight-box highlight-bottom"></div>
+                                <!-- 放大镜浮层 -->
+                                <div class="magnifier-overlay" id="magnifierOverlay2">
+                                    <img
+                                        src="/images/products/6+4路正面.png"
+                                        alt="控制设备接口细节放大"
+                                        id="magnifierImage2"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <script is:inline>
+                            initMagnifier('productImageWrapper2', 'magnifierOverlay2', 'magnifierImage2');
+                        </script>
+                    </div>
                 </div>
             </div>
+
 
             <!-- 3. Automation Logic -->
             <div class="feature-block">
@@ -991,15 +1093,35 @@ const lang = "zh";
     /* 接口区域高亮框 */
     .interface-highlight-box {
         position: absolute;
-        top: -5%;
-        right: 5%;
-        width: 45%;
-        height: 35%;
         border: 1px dashed rgba(0, 102, 204, 0.5);
         background: rgba(230, 240, 250, 0.5);
         border-radius: 12px;
         pointer-events: none;
         transition: all 0.3s ease;
+    }
+
+    /* 右上角高亮框（第一个传感器区域）*/
+    .interface-highlight-box.highlight-top-right {
+        top: -2%;
+        right: 12%;
+        width: 35%;
+        height: 35%;
+    }
+
+    /* 左上角高亮框（第二个控制设备区域）*/
+    .interface-highlight-box.highlight-top-left {
+        top: -3%;
+        left: 26%;
+        width: 20%;
+        height: 35%;
+    }
+
+    /* 底部高亮框（第二个控制设备区域）*/
+    .interface-highlight-box.highlight-bottom {
+        bottom: -4%;
+        left: 15%;
+        width: 70%;
+        height: 38%;
     }
 
     .product-image-wrapper:hover .interface-highlight-box {
@@ -1028,6 +1150,12 @@ const lang = "zh";
         border: 2px solid rgba(0, 102, 204, 0.3);
     }
 
+    /* 第二个放大镜显示在左侧 */
+    #productImageWrapper2 .magnifier-overlay {
+        left: auto;
+        right: calc(100% + 1rem);
+    }
+
     @media (max-width: 1200px) {
         .magnifier-overlay {
             width: 320px;
@@ -1048,12 +1176,13 @@ const lang = "zh";
         }
     }
 
-    #magnifierImage {
+    #magnifierImage,
+    #magnifierImage2 {
         width: 100%;
         height: 100%;
         display: block;
         object-fit: contain;
-        transform: scale(2.5);
+        transform: scale(2.2);
         border-radius: 12px;
         transition: transform-origin 0.1s ease, object-position 0.1s ease;
     }
@@ -1595,5 +1724,76 @@ const lang = "zh";
     .cta-section .btn-outline:hover {
         background: var(--primary);
         color: white;
+    }
+
+    /* 设备控制区域绿色主题覆盖 */
+    .feature-block.sensor-compat-block:nth-of-type(2) .irregular-border-wrapper {
+        background: rgba(240, 253, 244, 0.4);
+        border: 1px dashed rgba(21, 128, 61, 0.5);
+    }
+
+    .feature-block.sensor-compat-block:nth-of-type(2) .sensor-header .feature-tag {
+        color: rgb(21, 128, 61);
+        background: rgba(21, 128, 61, 0.1);
+    }
+
+    .feature-block.sensor-compat-block:nth-of-type(2) .sensor-product-image img {
+        filter: drop-shadow(0 4px 12px rgba(21, 128, 61, 0.15));
+    }
+
+    .feature-block.sensor-compat-block:nth-of-type(2) .interface-highlight-box {
+        border: 1px dashed rgba(21, 128, 61, 0.6);
+        background: rgba(240, 253, 244, 0.5);
+    }
+
+    .feature-block.sensor-compat-block:nth-of-type(2) .product-image-wrapper:hover .interface-highlight-box {
+        border-color: rgba(21, 128, 61, 0.9);
+        background: rgba(240, 253, 244, 0.7);
+    }
+
+    .feature-block.sensor-compat-block:nth-of-type(2) .magnifier-overlay {
+        border: 2px solid rgba(21, 128, 61, 0.3);
+    }
+
+    .feature-block.sensor-compat-block:nth-of-type(2) .spec-tag {
+        background: linear-gradient(
+            135deg,
+            rgba(240, 253, 244, 0.8),
+            rgba(240, 253, 244, 0.4)
+        );
+        color: rgb(21, 128, 61);
+        border: 1px solid rgba(21, 128, 61, 0.2);
+    }
+
+    .feature-block.sensor-compat-block:nth-of-type(2) .spec-tag:hover {
+        background: linear-gradient(
+            135deg,
+            rgba(240, 253, 244, 1),
+            rgba(240, 253, 244, 0.6)
+        );
+        border-color: rgb(21, 128, 61);
+        box-shadow: 0 4px 8px rgba(21, 128, 61, 0.15);
+    }
+
+    .feature-block.sensor-compat-block:nth-of-type(2) .sensor-more .sensor-img-wrapper {
+        background: linear-gradient(
+            135deg,
+            rgba(21, 128, 61, 0.1),
+            rgba(21, 128, 61, 0.05)
+        );
+        border: 2px dashed rgba(21, 128, 61, 0.3);
+    }
+
+    .feature-block.sensor-compat-block:nth-of-type(2) .sensor-more:hover .sensor-img-wrapper {
+        background: linear-gradient(
+            135deg,
+            rgba(21, 128, 61, 0.15),
+            rgba(21, 128, 61, 0.08)
+        );
+        border-color: rgb(21, 128, 61);
+    }
+
+    .feature-block.sensor-compat-block:nth-of-type(2) .more-icon {
+        color: rgb(21, 128, 61);
     }
 </style>
