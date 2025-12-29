@@ -46,7 +46,7 @@ const lang = "zh";
 </script>
 
 <Layout
-    title="宜启智控Pro - 智能物联网自动化控制器 | 无需编程"
+    title="宜启智控 - 智能物联网自动化控制器 | 无需编程"
     description="无需编程的智能物联网自动化万能控制器，手机APP轻松配置，支持95%市场传感器，WiFi/4G/蓝牙多种联网方式"
     lang={lang}
 >
@@ -63,7 +63,7 @@ const lang = "zh";
                     style="animation-delay: 0.1s"
                 >
                     无需编程，手机APP轻松配置<br />
-                    ——宜启智控Pro，您的智能物联网自动化万能控制器
+                    ——宜启智控，您的智能物联网自动化万能控制器
                 </p>
                 <ul
                     class="hero-benefits animate-fade-in-up"
@@ -95,14 +95,14 @@ const lang = "zh";
             >
                 <img
                     src="/images/products/6+4路45度ok1.png"
-                    alt="宜启智控Pro 6+4路控制器"
+                    alt="宜启智控 6+4路控制器"
                 />
             </div>
         </div>
     </section>
 
-    <!-- Detailed Feature Blocks -->
-    <section class="detailed-features">
+    <!-- 1. Input Interface Section -->
+    <section class="feature-section section-bg-alt">
         <div class="features-container">
             <!-- 1. Sensor Compatibility -->
             <div class="feature-block sensor-compat-block">
@@ -261,9 +261,16 @@ const lang = "zh";
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
+    <!-- 2. Output Interface Section -->
+    <section class="feature-section section-bg-white">
+        <div class="features-container">
             <!-- 2. Device Control -->
-            <div class="feature-block sensor-compat-block">
+            <div
+                class="feature-block sensor-compat-block output-interface-block"
+            >
                 <div class="sensor-compat-container">
                     <!-- 顶部：控制设备展示区 -->
                     <div class="sensor-showcase-top" data-aos="fade-down">
@@ -274,7 +281,7 @@ const lang = "zh";
                                     >能控制大部分的电气设备
                                 </h2>
                                 <p class="feature-text">
-                                    从微小的指示灯到大型工业电机，宜启智控Pro
+                                    从微小的指示灯到大型工业电机，宜启智控
                                     都能精准控制。多种输出类型满足复杂场景需求。
                                 </p>
                             </div>
@@ -425,7 +432,12 @@ const lang = "zh";
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
+    <!-- 3. Automation Logic Section -->
+    <section class="feature-section section-bg-alt section-bottom-compact">
+        <div class="features-container">
             <!-- 3. Automation Logic -->
             <div class="logic-section-wrapper">
                 <div class="main-container">
@@ -564,7 +576,12 @@ const lang = "zh";
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
+    <!-- 4. Mesh Networking Section -->
+    <section class="feature-section section-bg-white section-bottom-compact">
+        <div class="features-container">
             <!-- 4. Connectivity (Mesh & Remote) -->
             <div class="feature-block reverse">
                 <div class="feature-content" data-aos="fade-left">
@@ -596,7 +613,12 @@ const lang = "zh";
                     />
                 </div>
             </div>
+        </div>
+    </section>
 
+    <!-- 5. Ecosystem & Others Section -->
+    <section class="detailed-features-remainder">
+        <div class="features-container">
             <!-- 5. Ecosystem (Tuya OR MQTT) -->
             <div class="ecosystem-choice-section">
                 <div class="ecosystem-header" data-aos="fade-up">
@@ -605,7 +627,8 @@ const lang = "zh";
                         支持涂鸦智能 <span class="or-badge">或</span> MQTT协议
                     </h2>
                     <p class="ecosystem-subtitle">
-                        根据您的需求和使用场景 —— 两种版本任选其一，总有一款适合您
+                        根据您的需求和使用场景 ——
+                        两种版本任选其一，总有一款适合您
                     </p>
                 </div>
 
@@ -689,7 +712,10 @@ const lang = "zh";
                             <ul class="ecosystem-features">
                                 <li>
                                     <span class="check-icon">✓</span>
-                                    提供完整<a href="/zh/mqtt" class="inline-link">MQTT协议文档</a>
+                                    提供完整<a
+                                        href="/zh/mqtt"
+                                        class="inline-link">MQTT协议文档</a
+                                    >
                                 </li>
                                 <li>
                                     <span class="check-icon">✓</span>
@@ -714,74 +740,121 @@ const lang = "zh";
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Product Showcase -->
-    <section class="showcase">
-        <div class="showcase-container">
-            <h2 class="section-title">产品展示</h2>
-            <div class="product-gallery" x-data="{ activeIndex: 0 }">
-                <div class="gallery-main">
-                    <img
-                        x-show="activeIndex === 0"
-                        src="/images/products/6+4路45度ok1.png"
-                        alt="6+4路型号"
-                    />
-                    <img
-                        x-show="activeIndex === 1"
-                        src="/images/products/4路45度.png"
-                        alt="4路型号"
-                    />
-                    <img
-                        x-show="activeIndex === 2"
-                        src="/images/products/3+2路45度.png"
-                        alt="3+2路型号"
-                    />
-                    <img
-                        x-show="activeIndex === 3"
-                        src="/images/products/2路45度.png"
-                        alt="2路型号"
-                    />
+            <!-- 6. Communication Versions -->
+            <div class="comm-versions-section">
+                <div class="comm-header" data-aos="fade-up">
+                    <h2 class="feature-heading">
+                        <span class="feature-tag">通信版本</span>
+                        满足各种应用场景的联网需求
+                    </h2>
+                    <p class="comm-subtitle">
+                        从近场控制到全球监控，宜启智控 提供多种通信版本供您选择
+                    </p>
                 </div>
-                <div class="gallery-thumbs">
-                    <button
-                        @click="activeIndex = 0"
-                        :class="{ active: activeIndex === 0 }"
+
+                <div class="comm-grid">
+                    <!-- 蓝牙版 -->
+                    <div
+                        class="comm-card"
+                        data-aos="fade-up"
+                        style="animation-delay: 0.1s"
                     >
-                        <img src="/images/products/6+4路正面.png" alt="6+4路" />
-                        <span>6+4路</span>
-                    </button>
-                    <button
-                        @click="activeIndex = 1"
-                        :class="{ active: activeIndex === 1 }"
+                        <div class="comm-card-header">
+                            <div class="comm-card-icon">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="bluetooth-svg"
+                                >
+                                    <path d="m7 7 10 10-5 5V1l5 5L7 17"></path>
+                                </svg>
+                            </div>
+                            <div class="comm-card-title-box">
+                                <h3 class="comm-version-title">蓝牙本地版</h3>
+                                <p class="comm-version-subtitle">
+                                    纯本地运行 · 极致交互
+                                </p>
+                            </div>
+                        </div>
+                        <p class="comm-version-desc">
+                            专为无需远程干预的自动化场景设计。逻辑存储于本地芯片，无网亦能稳定运行，满足高隐私与极速响应需求。
+                        </p>
+                        <ul class="comm-feature-list">
+                            <li><span>⚡</span> 毫秒级极速响应</li>
+                            <li>
+                                <span>🔒</span> 100% 物理隐私安全
+                            </li>
+                            <li>
+                                <span>🛠️</span> 无需配网，开箱即用
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- WIFI+蓝牙版 -->
+                    <div
+                        class="comm-card"
+                        data-aos="fade-up"
+                        style="animation-delay: 0.2s"
                     >
-                        <img src="/images/products/4路正面.png" alt="4路" />
-                        <span>4路</span>
-                    </button>
-                    <button
-                        @click="activeIndex = 2"
-                        :class="{ active: activeIndex === 2 }"
+                        <div class="comm-card-header">
+                            <div class="comm-card-icon">📶</div>
+                            <div class="comm-card-title-box">
+                                <h3 class="comm-version-title">WIFI+蓝牙版</h3>
+                                <p class="comm-version-subtitle">
+                                    室内场景 · 远程智控
+                                </p>
+                            </div>
+                        </div>
+                        <p class="comm-version-desc">
+                            针对家庭、办公室及工厂等室内环境场景。依托现有WIFI网络实现全球范围实时监测与远程下令，管理游刃有余。
+                        </p>
+                        <ul class="comm-feature-list">
+                            <li>
+                                <span>📱</span> 全球范围远程控制
+                            </li>
+                            <li>
+                                <span>☁️</span> 兼容涂鸦/MQTT双平台
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 4G+蓝牙版 -->
+                    <div
+                        class="comm-card"
+                        data-aos="fade-up"
+                        style="animation-delay: 0.3s"
                     >
-                        <img src="/images/products/3+2路正面.png" alt="3+2路" />
-                        <span>3+2路</span>
-                    </button>
-                    <button
-                        @click="activeIndex = 3"
-                        :class="{ active: activeIndex === 3 }"
-                    >
-                        <img src="/images/products/2路正面.png" alt="2路" />
-                        <span>2路</span>
-                    </button>
+                        <div class="comm-card-header">
+                            <div class="comm-card-icon">🌍</div>
+                            <div class="comm-card-title-box">
+                                <h3 class="comm-version-title">4G+蓝牙版</h3>
+                                <p class="comm-version-subtitle">
+                                    户外部署 · 野外首选
+                                </p>
+                            </div>
+                        </div>
+                        <p class="comm-version-desc">
+                            专为智慧农业、偏远监测等无网络环境设计。内置工业级4G模组，开机即连。
+                        </p>
+                        <ul class="comm-feature-list">
+                            <li>
+                                <span>📡</span> 真正意义插电即连
+                            </li>
+                            <li>
+                                <span>🎁</span> 赠送5年4G流量套餐(中国境内)
+                            </li>
+                            <li>
+                                <span>☁️</span> 兼容涂鸦/MQTT双平台
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="product-specs">
-                <span class="spec-badge">6路继电器</span>
-                <span class="spec-badge">4路PWM</span>
-                <span class="spec-badge">6路输入</span>
-                <span class="spec-badge">RS485</span>
-                <span class="spec-badge">433MHz</span>
-                <span class="spec-badge">IIC</span>
             </div>
         </div>
     </section>
@@ -852,9 +925,7 @@ const lang = "zh";
     <section class="cta-section">
         <div class="cta-container">
             <h2 class="cta-title">还在为复杂的控制逻辑发愁？</h2>
-            <p class="cta-subtitle">
-                宜启智控Pro，让自动化控制像发朋友圈一样简单
-            </p>
+            <p class="cta-subtitle">宜启智控，让自动化控制像发朋友圈一样简单</p>
             <div class="cta-buttons">
                 <a href="/zh/buy" class="btn btn-accent btn-lg">立即购买</a>
                 <a href="/zh/compare" class="btn btn-outline btn-lg">对比选型</a
@@ -1055,10 +1126,34 @@ const lang = "zh";
         color: var(--text-dark);
     }
 
-    /* Detailed Features Section */
     .detailed-features {
         padding: 6rem 1.5rem;
         background: white;
+    }
+
+    .detailed-features-remainder {
+        padding: 2rem 1.5rem 6rem 1.5rem;
+        background: white;
+    }
+
+    .feature-section {
+        padding: 6rem 1.5rem;
+        width: 100%;
+        position: relative;
+    }
+
+    .section-bottom-compact {
+        padding-bottom: 4.5rem !important;
+    }
+
+    .section-bg-white {
+        background-color: #ffffff;
+    }
+
+    .section-bg-alt {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        border-top: 1px solid #e2e8f0;
+        border-bottom: 1px solid #e2e8f0;
     }
 
     .features-container {
@@ -1668,7 +1763,7 @@ const lang = "zh";
     .ecosystem-choice-section {
         padding: 4rem 1.5rem;
         background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-        margin-top: 3rem;
+        margin-top: 0;
         /* 全屏宽度背景 */
         width: 100vw;
         margin-left: calc(-50vw + 50%);
@@ -1994,90 +2089,6 @@ const lang = "zh";
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     }
 
-    /* Showcase Section */
-    .showcase {
-        padding: 5rem 1.5rem;
-        background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-    }
-
-    .showcase-container {
-        max-width: 1000px;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    .product-gallery {
-        margin-bottom: 2rem;
-    }
-
-    .gallery-main {
-        background: white;
-        border-radius: 20px;
-        padding: 2rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    }
-
-    .gallery-main img {
-        max-height: 400px;
-        width: auto;
-        margin: 0 auto;
-    }
-
-    .gallery-thumbs {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        flex-wrap: wrap;
-    }
-
-    .gallery-thumbs button {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.75rem;
-        background: white;
-        border: 2px solid transparent;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
-    .gallery-thumbs button:hover,
-    .gallery-thumbs button.active {
-        border-color: var(--primary);
-        box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
-    }
-
-    .gallery-thumbs button img {
-        width: 60px;
-        height: 60px;
-        object-fit: contain;
-    }
-
-    .gallery-thumbs button span {
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: var(--text-muted);
-    }
-
-    .product-specs {
-        display: flex;
-        justify-content: center;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-    }
-
-    .spec-badge {
-        padding: 0.5rem 1rem;
-        background: var(--primary-light);
-        color: var(--primary);
-        font-size: 0.875rem;
-        font-weight: 500;
-        border-radius: 20px;
-    }
-
     /* Use Cases Section */
     .use-cases {
         padding: 5rem 1.5rem;
@@ -2261,42 +2272,44 @@ const lang = "zh";
     }
 
     /* 设备控制区域绿色主题覆盖 */
-    .feature-block.sensor-compat-block:nth-of-type(2)
+    .feature-block.sensor-compat-block.output-interface-block
         .irregular-border-wrapper {
         background: rgba(240, 253, 244, 0.4);
         border: 1px dashed rgba(21, 128, 61, 0.5);
     }
 
-    .feature-block.sensor-compat-block:nth-of-type(2)
+    .feature-block.sensor-compat-block.output-interface-block
         .sensor-header
         .feature-tag {
         color: rgb(21, 128, 61);
         background: rgba(21, 128, 61, 0.1);
     }
 
-    .feature-block.sensor-compat-block:nth-of-type(2)
+    .feature-block.sensor-compat-block.output-interface-block
         .sensor-product-image
         img {
         filter: drop-shadow(0 4px 12px rgba(21, 128, 61, 0.15));
     }
 
-    .feature-block.sensor-compat-block:nth-of-type(2) .interface-highlight-box {
+    .feature-block.sensor-compat-block.output-interface-block
+        .interface-highlight-box {
         border: 1px dashed rgba(21, 128, 61, 0.6);
         background: rgba(240, 253, 244, 0.5);
     }
 
-    .feature-block.sensor-compat-block:nth-of-type(2)
+    .feature-block.sensor-compat-block.output-interface-block
         .product-image-wrapper:hover
         .interface-highlight-box {
         border-color: rgba(21, 128, 61, 0.9);
         background: rgba(240, 253, 244, 0.7);
     }
 
-    .feature-block.sensor-compat-block:nth-of-type(2) .magnifier-overlay {
+    .feature-block.sensor-compat-block.output-interface-block
+        .magnifier-overlay {
         border: 2px solid rgba(21, 128, 61, 0.3);
     }
 
-    .feature-block.sensor-compat-block:nth-of-type(2) .spec-tag {
+    .feature-block.sensor-compat-block.output-interface-block .spec-tag {
         background: linear-gradient(
             135deg,
             rgba(240, 253, 244, 0.8),
@@ -2306,7 +2319,7 @@ const lang = "zh";
         border: 1px solid rgba(21, 128, 61, 0.2);
     }
 
-    .feature-block.sensor-compat-block:nth-of-type(2) .spec-tag:hover {
+    .feature-block.sensor-compat-block.output-interface-block .spec-tag:hover {
         background: linear-gradient(
             135deg,
             rgba(240, 253, 244, 1),
@@ -2316,7 +2329,7 @@ const lang = "zh";
         box-shadow: 0 4px 8px rgba(21, 128, 61, 0.15);
     }
 
-    .feature-block.sensor-compat-block:nth-of-type(2)
+    .feature-block.sensor-compat-block.output-interface-block
         .sensor-more
         .sensor-img-wrapper {
         background: linear-gradient(
@@ -2327,7 +2340,7 @@ const lang = "zh";
         border: 2px dashed rgba(21, 128, 61, 0.3);
     }
 
-    .feature-block.sensor-compat-block:nth-of-type(2)
+    .feature-block.sensor-compat-block.output-interface-block
         .sensor-more:hover
         .sensor-img-wrapper {
         background: linear-gradient(
@@ -2338,7 +2351,7 @@ const lang = "zh";
         border-color: rgb(21, 128, 61);
     }
 
-    .feature-block.sensor-compat-block:nth-of-type(2) .more-icon {
+    .feature-block.sensor-compat-block.output-interface-block .more-icon {
         color: rgb(21, 128, 61);
     }
 
@@ -2355,7 +2368,7 @@ const lang = "zh";
         flex-direction: column;
         gap: 1.5rem;
         padding: 0;
-        margin-bottom: 6rem;
+        margin-bottom: 0;
     }
 
     /* 桌面端左右布局 */
@@ -2365,7 +2378,7 @@ const lang = "zh";
             align-items: center;
             padding: 0;
             gap: 3rem;
-            margin-bottom: 6rem;
+            margin-bottom: 0;
         }
 
         .main-container > .showcase-track {
@@ -2555,6 +2568,164 @@ const lang = "zh";
         to {
             opacity: 1;
             transform: translateY(0);
+        }
+    }
+
+    /* Communication Versions Section */
+    .comm-versions-section {
+        padding: 6rem 1.5rem;
+        background: linear-gradient(180deg, #f5f8fb 0%, #f1f5f9 100%);
+        /* 全屏宽度背景 */
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        box-sizing: border-box;
+        border-top: 1px solid rgba(0, 102, 204, 0.05);
+    }
+
+    .comm-header {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 4rem;
+    }
+
+    .comm-header .feature-tag {
+        display: inline-block;
+        background: linear-gradient(
+            135deg,
+            rgba(0, 102, 204, 0.1),
+            rgba(0, 102, 204, 0.05)
+        );
+        color: var(--primary);
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-right: 0.5rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .comm-subtitle {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        margin: 0;
+    }
+
+    .comm-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .comm-card {
+        background: white;
+        padding: 2.5rem 2rem;
+        border-radius: 24px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .comm-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary);
+    }
+
+    .comm-card-header {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .comm-card-icon {
+        font-size: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 3.5rem;
+        height: 3.5rem;
+        flex-shrink: 0;
+    }
+
+    .bluetooth-svg {
+        width: 2.8rem;
+        height: 2.8rem;
+        color: #0082fc;
+        filter: drop-shadow(0 2px 4px rgba(0, 130, 252, 0.2));
+    }
+
+    .comm-card-title-box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .comm-version-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0;
+    }
+
+    .comm-version-subtitle {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--primary);
+        margin: 0;
+        background: rgba(0, 102, 204, 0.05);
+        padding: 0.1rem 0.6rem;
+        border-radius: 6px;
+    }
+
+    .comm-version-desc {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        text-align: left;
+    }
+
+    .comm-feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        text-align: left;
+    }
+
+    .comm-feature-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.9rem;
+        color: var(--text-dark);
+        padding: 0.4rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .comm-feature-list li:last-child {
+        border-bottom: none;
+    }
+
+    .comm-feature-list li span {
+        font-size: 1.1rem;
+        width: 24px;
+        display: flex;
+        justify-content: center;
+    }
+
+    @media (max-width: 900px) {
+        .comm-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
         }
     }
 </style>
