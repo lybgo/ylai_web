@@ -1,0 +1,289 @@
+---
+interface Item {
+    img: string;
+    name: string;
+}
+
+interface Highlight {
+    top?: string;
+    left?: string;
+    right?: string;
+    bottom?: string;
+    width: string;
+    height: string;
+}
+
+interface Props {
+    badge: string;
+    title: string;
+    description: string;
+    items: Item[];
+    moreItems: string[];
+    productImg: string;
+    specsTitle: string;
+    specs: string[];
+    theme?: "blue" | "green";
+    highlights: Highlight[];
+    reverseBottom?: boolean;
+}
+
+const {
+    badge,
+    title,
+    description,
+    items,
+    moreItems,
+    productImg,
+    specsTitle,
+    specs,
+    theme = "blue",
+    highlights,
+    reverseBottom = false,
+} = Astro.props;
+
+const isGreen = theme === "green";
+
+const themeColors = {
+    blue: {
+        bg: "bg-[#f8fafc] border-y border-slate-100", // section-bg-alt
+        borderWrapperBg: "bg-[#e6f0fa]/50",
+        borderWrapperBorder: "border-[#0066cc]/50",
+        badgeBg: "bg-[#0066cc]/10",
+        badgeText: "text-[#0066cc]",
+        highlightBg: "bg-[#e6f0fa]/50",
+        highlightBorder:
+            "border-[#0066cc]/50 hover:border-[#0066cc]/80 hover:bg-[#e6f0fa]/70",
+        specTagBg:
+            "bg-gradient-to-br from-[rgba(0,102,204,0.1)] to-[rgba(0,102,204,0.05)]",
+        specTagBorder: "border-[rgba(0,102,204,0.2)]",
+        specTagText: "text-[#0066cc]",
+        specTagHover:
+            "hover:bg-gradient-to-br hover:from-[rgba(0,102,204,0.15)] hover:to-[rgba(0,102,204,0.08)] hover:border-[#0066cc]",
+        moreItemBg:
+            "bg-gradient-to-br from-[rgba(0,102,204,0.1)] to-[rgba(0,102,204,0.05)]",
+        moreItemBorder: "border-[rgba(0,102,204,0.3)]",
+        moreItemHover:
+            "group-hover:bg-gradient-to-br group-hover:from-[rgba(0,102,204,0.15)] group-hover:to-[rgba(0,102,204,0.08)] group-hover:border-[#0066cc]",
+        moreContentText: "text-[#0066cc]",
+    },
+    green: {
+        bg: "bg-white",
+        borderWrapperBg: "bg-[rgba(240,253,244,0.4)]",
+        borderWrapperBorder: "border-[rgba(21,128,61,0.5)]",
+        badgeBg: "bg-[rgba(21,128,61,0.1)]",
+        badgeText: "text-[rgb(21,128,61)]",
+        highlightBg: "bg-[rgba(240,253,244,0.5)]",
+        highlightBorder:
+            "border-[rgba(21,128,61,0.6)] hover:border-[rgba(21,128,61,0.9)] hover:bg-[rgba(240,253,244,0.7)]",
+        specTagBg:
+            "bg-gradient-to-br from-[rgba(240,253,244,0.8)] to-[rgba(240,253,244,0.4)]",
+        specTagBorder: "border-[rgba(21,128,61,0.2)]",
+        specTagText: "text-[rgb(21,128,61)]",
+        specTagHover:
+            "hover:bg-gradient-to-br hover:from-[rgba(240,253,244,1)] hover:to-[rgba(240,253,244,0.6)] hover:border-[#15803d]",
+        moreItemBg:
+            "bg-gradient-to-br from-[rgba(21,128,61,0.1)] to-[rgba(21,128,61,0.05)]",
+        moreItemBorder: "border-[rgba(21,128,61,0.3)]",
+        moreItemHover:
+            "group-hover:bg-gradient-to-br group-hover:from-[rgba(21,128,61,0.15)] group-hover:to-[rgba(21,128,61,0.08)] group-hover:border-[#15803d]",
+        moreContentText: "text-[rgb(21,128,61)]",
+    },
+};
+
+const t = themeColors[theme];
+const uid = Math.random().toString(36).slice(2, 11);
+const wrapperId = `wrapper-${uid}`;
+const magnifierId = `magnifier-${uid}`;
+const magnifierImgId = `magnifier-img-${uid}`;
+---
+
+<section class={`relative w-full py-24 px-4 sm:px-6 ${t.bg}`}>
+    <div class="mx-auto max-w-[1200px]">
+        <div class="block">
+            <!-- Top Section -->
+            <div class="mb-8 md:mb-12" data-aos="fade-down">
+                <div
+                    class={`relative rounded-xl border border-dashed p-4 md:p-8 ${t.borderWrapperBg} ${t.borderWrapperBorder}`}
+                >
+                    <div class="mb-8 text-center">
+                        <h2
+                            class="mb-4 text-2xl font-bold leading-tight text-[#1e293b] md:text-4xl"
+                        >
+                            <span
+                                class={`inline-block rounded-full px-3 py-1 text-sm md:text-2xl font-bold uppercase tracking-wider ${t.badgeBg} ${t.badgeText} mr-2 align-middle`}
+                            >
+                                {badge}
+                            </span>
+                            <span class="align-middle">{title}</span>
+                        </h2>
+                        <p
+                            class="mx-auto max-w-[800px] text-base md:text-lg text-[#64748b] leading-relaxed"
+                        >
+                            {description}
+                        </p>
+                    </div>
+
+                    <!-- Grid -->
+                    <div
+                        class="grid grid-cols-2 gap-4 md:gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 justify-items-center"
+                    >
+                        {
+                            items.map((item) => (
+                                <div
+                                    class={`flex flex-col items-center text-sm font-medium text-[#1e293b] group ${
+                                        isGreen ? "gap-6" : "gap-2"
+                                    }`}
+                                >
+                                    <div
+                                        class={`flex items-center justify-center transition-transform duration-300 group-hover:scale-250 ${
+                                            isGreen
+                                                ? "h-[100px] w-[100px] md:h-[120px] md:w-[120px]"
+                                                : "h-[120px] w-[120px] md:h-[140px] md:w-[140px]"
+                                        }`}
+                                    >
+                                        <img
+                                            src={item.img}
+                                            alt={item.name}
+                                            class="h-full w-full object-contain"
+                                        />
+                                    </div>
+                                    <span class="text-center">{item.name}</span>
+                                </div>
+                            ))
+                        }
+
+                        <!-- More Items -->
+                        <div
+                            class="flex flex-col items-center gap-2 text-sm font-medium text-[#1e293b] group cursor-default"
+                        >
+                            <div
+                                class="flex h-[120px] w-[120px] md:h-[140px] md:w-[140px] flex-col justify-center overflow-hidden rounded-2xl transition-all px-1 pb-1 pt-0 md:px-2 md:pb-2 md:pt-0"
+                            >
+                                <ul
+                                    class="columns-2 gap-x-2 text-[10px] md:text-xs leading-[1.8] text-[#64748b] text-left w-full"
+                                >
+                                    {
+                                        moreItems.map((m) => (
+                                            <li class="mb-0.5 whitespace-nowrap">
+                                                {m}
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
+                            <span class={t.moreContentText}>更多...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div
+                class={`flex flex-col gap-8 md:gap-12 items-center ${reverseBottom ? "md:flex-row-reverse" : "md:flex-row"}`}
+            >
+                <!-- Image Section -->
+                <div
+                    class="flex w-full md:w-[400px] shrink-0 items-center justify-center"
+                    data-aos={reverseBottom ? "fade-left" : "fade-right"}
+                >
+                    <div
+                        class="relative flex w-full justify-center group"
+                        id={wrapperId}
+                    >
+                        <img
+                            src={productImg}
+                            alt="Detail"
+                            class={`w-full h-auto object-contain ${isGreen ? "drop-shadow-[0_4px_12px_rgba(21,128,61,0.15)]" : "drop-shadow-[0_4px_12px_rgba(0,102,204,0.15)]"}`}
+                        />
+
+                        {
+                            highlights.map((h) => (
+                                <div
+                                    class={`absolute pointer-events-none rounded-xl border border-dashed transition-all duration-300 ${t.highlightBg} ${t.highlightBorder}`}
+                                    style={{
+                                        top: h.top,
+                                        left: h.left,
+                                        right: h.right,
+                                        bottom: h.bottom,
+                                        width: h.width,
+                                        height: h.height,
+                                    }}
+                                />
+                            ))
+                        }
+
+                        <!-- Magnifier -->
+                        <div
+                            id={magnifierId}
+                            class={`hidden md:block pointer-events-none absolute top-1/2 z-50 h-[320px] w-[320px] -translate-y-1/2 overflow-hidden rounded-2xl border-2 bg-white/98 p-6 opacity-0 shadow-2xl transition-all duration-200 md:h-[400px] md:w-[700px] ${reverseBottom ? "right-[calc(100%+1rem)]" : "left-[calc(100%+1rem)]"} ${isGreen ? "border-[rgba(21,128,61,0.3)]" : "border-[rgba(0,102,204,0.3)]"}`}
+                        >
+                            <img
+                                id={magnifierImgId}
+                                src={productImg}
+                                alt="Magnified"
+                                class="block h-full w-full object-contain rounded-xl"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Section -->
+                <div
+                    class="flex flex-1 flex-col gap-8 w-full"
+                    data-aos={reverseBottom ? "fade-right" : "fade-left"}
+                >
+                    <div>
+                        <h3 class="mb-4 text-lg font-semibold text-[#1e293b]">
+                            {specsTitle}
+                        </h3>
+                        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                            {
+                                specs.map((spec) => (
+                                    <div
+                                        class={`rounded-xl border px-4 py-3 text-center text-[0.9rem] font-semibold transition-all hover:-translate-y-0.5 hover:shadow-md cursor-default ${t.specTagBg} ${t.specTagBorder} ${t.specTagText} ${t.specTagHover}`}
+                                    >
+                                        {spec}
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script is:inline define:vars={{ wrapperId, magnifierId, magnifierImgId }}>
+    (() => {
+        const wrapper = document.getElementById(wrapperId);
+        const magnifier = document.getElementById(magnifierId);
+        const magnifierImage = document.getElementById(magnifierImgId);
+
+        if (wrapper && magnifier && magnifierImage) {
+            // Only enable on desktop/non-touch mostly, but CSS hides it on mobile via hidden md:block
+            wrapper.addEventListener("mouseenter", function () {
+                magnifier.style.opacity = "1";
+                magnifier.style.visibility = "visible";
+            });
+
+            wrapper.addEventListener("mouseleave", function () {
+                magnifier.style.opacity = "0";
+                magnifier.style.visibility = "hidden";
+            });
+
+            wrapper.addEventListener("mousemove", function (e) {
+                const rect = wrapper.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xPercent = (x / rect.width) * 100;
+                const yPercent = (y / rect.height) * 100;
+
+                magnifierImage.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+                magnifierImage.style.objectPosition = `${xPercent}% ${yPercent}%`;
+                // Need to apply scale again
+                magnifierImage.style.transform = "scale(2.2)";
+            });
+        }
+    })();
+</script>
