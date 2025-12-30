@@ -16,7 +16,6 @@ const groupedSections = chapters.map((chapter) => ({
     description="0基础1天入门：无需编程的自动化控制与物联网应用教程，宜启智控Pro控制器使用教程"
     lang={lang}
 >
-
     <div class="content-wrapper">
         <nav class="sidebar">
             <h3 class="sidebar-title">目录</h3>
@@ -28,9 +27,18 @@ const groupedSections = chapters.map((chapter) => ({
                             <ul class="section-list">
                                 {chapter.sections.map((s) => (
                                     <li>
-                                        <a href={`/zh/tutorials/${s.slug}`} class="section-link" >
-                                            <span class="section-num"> {s.num} </span>
-                                            <span class="section-name"> {s.title} </span>
+                                        <a
+                                            href={`/zh/tutorials/${s.slug}`}
+                                            class="section-link"
+                                        >
+                                            <span class="section-num">
+                                                {" "}
+                                                {s.num}{" "}
+                                            </span>
+                                            <span class="section-name">
+                                                {" "}
+                                                {s.title}{" "}
+                                            </span>
                                         </a>
                                     </li>
                                 ))}
@@ -45,8 +53,11 @@ const groupedSections = chapters.map((chapter) => ({
             <!-- Course Intro -->
             <section class="intro-section">
                 <div class="page-header">
-                        <h1 class="page-title">0基础1天入门：<br />自动化控制与物联网应用教程（无需编程）<br />
-                            & 宜启智控Pro控制器使用教程</h1>
+                    <h1 class="page-title">
+                        0基础1天入门：<br
+                        />自动化控制与物联网应用教程（无需编程）<br />
+                        & 宜启智控Pro控制器使用教程
+                    </h1>
                 </div>
                 <div class="intro-card">
                     <h2>🎯 课程目标</h2>
@@ -71,6 +82,184 @@ const groupedSections = chapters.map((chapter) => ({
                     <div class="stat-item">
                         <span class="stat-value">1天</span>
                         <span class="stat-label">速成入门</span>
+                    </div>
+                </div>
+            </section>
+            <!-- Showcase Section -->
+            <section class="kit-section">
+                <div class="kit-container">
+                    <!-- Left Side: Text Content (参考首页 Mesh 组网风格) -->
+                    <div class="kit-info-side">
+                        <h2 class="section-title">🛠️ 演示套件概览</h2>
+                        <p class="section-desc">
+                            配套丰富的传感器与执行设备，助你快速完成实战练习。
+                        </p>
+
+                        <div class="info-groups">
+                            <div class="info-group input-group">
+                                <h3 class="group-title">
+                                    <span class="dot input"></span> 传感器与输入 (Input)
+                                </h3>
+                                <ul class="device-list">
+                                    {
+                                        [
+                                            {
+                                                name: "水位开关传感器",
+                                                model: "输入1(开关量)",
+                                            },
+                                            {
+                                                name: "雨水传感器",
+                                                model: "输入2(NPN)",
+                                            },
+                                            {
+                                                name: "震动传感器",
+                                                model: "输入3(NPN)",
+                                            },
+                                            {
+                                                name: "光电开关",
+                                                model: "输入4(NPN)",
+                                            },
+                                            {
+                                                name: "步进电机左限位",
+                                                model: "输入5(开关量)",
+                                            },
+                                            {
+                                                name: "步进电机右限位",
+                                                model: "输入6(开关量)",
+                                            },
+                                            {
+                                                name: "可燃气体传感器",
+                                                model: "模拟量1(0-10V)",
+                                            },
+                                            {
+                                                name: "光照度传感器",
+                                                model: "IIC接口",
+                                            },
+                                            {
+                                                name: "温湿度传感器",
+                                                model: "IIC接口",
+                                            },
+                                            {
+                                                name: "遥控器",
+                                                model: "433MHz射频信号",
+                                            },
+                                        ].map((item) => (
+                                            <li>
+                                                <span class="device-name">
+                                                    <span class="check-icon">
+                                                        ✓
+                                                    </span>{" "}
+                                                    {item.name}
+                                                </span>
+                                                <span class="device-model">
+                                                    {item.model}
+                                                </span>
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
+
+                            <div class="info-group output-group">
+                                <h3 class="group-title">
+                                    <span class="dot output"></span> 控制设备与输出
+                                    (Output)
+                                </h3>
+                                <ul class="device-list">
+                                    {
+                                        [
+                                            {
+                                                name: "LED灯1",
+                                                model: "开关1(DC12V)",
+                                            },
+                                            {
+                                                name: "LED灯2",
+                                                model: "开关2(DC12V)",
+                                            },
+                                            {
+                                                name: "蜂鸣器",
+                                                model: "开关3(DC12V)",
+                                            },
+                                            {
+                                                name: "风扇",
+                                                model: "开关4(DC12V)",
+                                            },
+                                            {
+                                                name: "无刷电机方向",
+                                                model: "开关5(GND)",
+                                            },
+                                            {
+                                                name: "步进电机方向",
+                                                model: "开关6(GND)",
+                                            },
+                                            {
+                                                name: "舵机(5V)",
+                                                model: "PWM1(角度控制/占空比)",
+                                            },
+                                            {
+                                                name: "无刷电机",
+                                                model: "PWM2(速度控制/占空比)",
+                                            },
+                                            {
+                                                name: "步进电机",
+                                                model: "PWM3(速度频率控制)",
+                                            },
+                                            {
+                                                name: "LED灯3",
+                                                model: "PWM4(亮度/占空比控制)",
+                                            },
+                                        ].map((item) => (
+                                            <li>
+                                                <span class="device-name">
+                                                    <span class="check-icon">
+                                                        ✓
+                                                    </span>{" "}
+                                                    {item.name}
+                                                </span>
+                                                <span class="device-model">
+                                                    {item.model}
+                                                </span>
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Image + Side Magnifier (参考首页输入接口放大镜风格) -->
+                    <div class="kit-image-side">
+                        <div class="image-wrapper" id="kit-wrapper">
+                            <img
+                                src="/images/ystj.jpg"
+                                alt="演示套件展示"
+                                class="main-kit-image"
+                            />
+
+                            <!-- Magnifier Box (Side View) -->
+                            <div id="kit-magnifier" class="kit-magnifier-box">
+                                <img
+                                    id="kit-magnifier-img"
+                                    src="/images/ystj.jpg"
+                                    alt="放大细节"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wiring Diagram (Keep and optimize) -->
+                <div class="wiring-section">
+                    <div class="wiring-header">
+                        <h3>🔌 演示套件接线概览</h3>
+                        <div class="wiring-divider"></div>
+                    </div>
+                    <div class="wiring-card">
+                        <img
+                            src="/images/ystj_jx.jpg"
+                            alt="演示套件接线图"
+                            class="wiring-img"
+                        />
                     </div>
                 </div>
             </section>
@@ -445,4 +634,304 @@ const groupedSections = chapters.map((chapter) => ({
         transform: translateY(-2px);
         color: white;
     }
+
+    /* Kit Showcase Styles (参考首页 Mesh 组网风格) */
+    .kit-section {
+        margin: 4rem 0;
+        background: transparent;
+        padding: 2rem 0;
+    }
+
+    .kit-container {
+        display: flex;
+        flex-direction: row;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    @media (max-width: 1024px) {
+        .kit-container {
+            flex-direction: column-reverse;
+            gap: 3rem;
+        }
+        .kit-section {
+            padding: 3rem 1.5rem;
+        }
+    }
+
+    .section-title {
+        font-size: 2.25rem;
+        font-weight: 800;
+        color: #1e293b;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: #64748b;
+        margin-bottom: 2.5rem;
+    }
+
+    /* Info Side */
+    .kit-info-side {
+        flex: 1.2;
+    }
+
+    .info-groups {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 640px) {
+        .info-groups {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .group-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+    .dot.input {
+        background: #ff6b35;
+        box-shadow: 0 0 10px rgba(255, 107, 53, 0.4);
+    }
+    .dot.output {
+        background: #0066cc;
+        box-shadow: 0 0 10px rgba(0, 102, 204, 0.4);
+    }
+
+    .device-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .device-list li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .device-name {
+        font-size: 0.95rem;
+        color: #1e293b;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .input-group .check-icon {
+        color: #ff6b35;
+        font-weight: 800;
+        font-size: 1.1rem;
+    }
+
+    .output-group .check-icon {
+        color: #0066cc;
+        font-weight: 800;
+        font-size: 1.1rem;
+    }
+
+    .device-model {
+        font-size: 0.8rem;
+        color: #94a3b8;
+        font-weight: 400;
+    }
+
+    .kit-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 1.5rem;
+        background: #f8fafc;
+        border-radius: 16px;
+        color: #1e293b;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border: 1px solid #e2e8f0;
+    }
+
+    .check-svg {
+        color: #10b981;
+    }
+
+    /* Image Side & Magnifier */
+    .kit-image-side {
+        flex: 1;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .image-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        cursor: crosshair;
+    }
+
+    .main-kit-image {
+        width: 100%;
+        height: auto;
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .image-wrapper:hover .main-kit-image {
+        transform: translateY(-5px);
+    }
+
+    .kit-magnifier-box {
+        position: absolute;
+        top: 50%;
+        right: calc(100% + 2rem);
+        transform: translateY(-50%);
+        width: 700px;
+        height: 500px;
+        background: white;
+        border: 2px solid rgba(0, 102, 204, 0.2);
+        border-radius: 24px;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 100;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+        transition:
+            opacity 0.2s ease,
+            visibility 0.2s ease;
+        pointer-events: none;
+    }
+
+    @media (max-width: 1280px) {
+        .kit-magnifier-box {
+            width: 500px;
+            height: 400px;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .kit-magnifier-box {
+            display: none !important;
+        }
+    }
+
+    #kit-magnifier-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transform: scale(2.5); /* 降低放大倍率以获得更自然的细节展示 */
+    }
+
+    .img-hint {
+        margin-top: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: #94a3b8;
+    }
+
+    /* Wiring Section */
+    .wiring-section {
+        margin-top: 4rem;
+        padding-top: 1rem;
+    }
+
+    .wiring-header {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .wiring-header h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .wiring-divider {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, #e2e8f0, transparent);
+    }
+
+    .wiring-card {
+        background: transparent;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+    }
+
+    .wiring-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        cursor: pointer;
+    }
+
+    .wiring-img:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+    }
 </style>
+
+<script is:inline>
+    (() => {
+        const wrapper = document.getElementById("kit-wrapper");
+        const magnifier = document.getElementById("kit-magnifier");
+        const magnifierImage = document.getElementById("kit-magnifier-img");
+
+        if (wrapper && magnifier && magnifierImage) {
+            wrapper.addEventListener("mouseenter", () => {
+                magnifier.style.opacity = "1";
+                magnifier.style.visibility = "visible";
+            });
+
+            wrapper.addEventListener("mouseleave", () => {
+                magnifier.style.opacity = "0";
+                magnifier.style.visibility = "hidden";
+            });
+
+            wrapper.addEventListener("mousemove", (e) => {
+                const rect = wrapper.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xPercent = (x / rect.width) * 100;
+                const yPercent = (y / rect.height) * 100;
+
+                magnifierImage.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+                magnifierImage.style.objectPosition = `${xPercent}% ${yPercent}%`;
+            });
+        }
+    })();
+</script>
+```
