@@ -2,6 +2,220 @@
 import Layout from "../../layouts/Layout.astro";
 
 const lang = "zh";
+
+const interfaces = [
+    {
+        id: "power",
+        name: "1、供电接口",
+        area: { top: "0%", left: "16.5%", width: "9.8%", height: "15%" },
+        labelPos: { top: "5%", left: "0%" },
+        align: "left",
+        vAlign: "up",
+        desc: "支持 DC 7-36V 宽压输入，提供防反接保护。",
+        detail: `
+            <div class="detail-content">
+                <p>主要的电源输入接口，适配常见的工业电源适配器。</p>
+                <ul class="detail-list">
+                    <li>电压范围：DC 7-36V</li>
+                    <li>保护机制：内置防反接、过压保护</li>
+                </ul>
+            </div>
+        `,
+    },
+    {
+        id: "pwm",
+        name: "2、PWM输出",
+        area: { top: "0%", left: "26.6%", width: "19%", height: "15%" },
+        labelPos: { top: "-18%", left: "30%" },
+        align: "center",
+        vAlign: "up",
+        desc: "4路 PWM 输出，用于 LED 调光或电机调速。",
+        detail: `
+            <div class="detail-content">
+                <p>基于 N-MOS 开漏输出，单路支持最高 36V 10A 开关负载。</p>
+                <div class="detail-grid-inner">
+                    <div class="inner-item"><strong>精度</strong><span>0.01%</span></div>
+                    <div class="inner-item"><strong>频率</strong><span>1Hz-100kHz</span></div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "pwmled",
+        name: "3、PWM指示灯",
+        area: { top: "0%", left: "46.8%", width: "2%", height: "15%" },
+        labelPos: { top: "30%", left: "0%" },
+        align: "left",
+        vAlign: "down",
+        desc: "4路 PWM 输出，用于 LED 调光或电机调速。",
+        detail: `
+            <div class="detail-content">
+                <p>基于 N-MOS 开漏输出，单路支持最高 36V 10A 开关负载。</p>
+                <div class="detail-grid-inner">
+                    <div class="inner-item"><strong>精度</strong><span>0.01%</span></div>
+                    <div class="inner-item"><strong>频率</strong><span>1Hz-100kHz</span></div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "usb",
+        name: "4、USB供电口",
+        area: { top: "0%", left: "49.1%", width: "5%", height: "12%" },
+        labelPos: { top: "45%", left: "0%" },
+        align: "left",
+        vAlign: "down",
+        desc: "4路 PWM 输出，用于 LED 调光或电机调速。",
+        detail: `
+            <div class="detail-content">
+                <p>基于 N-MOS 开漏输出，单路支持最高 36V 10A 开关负载。</p>
+                <div class="detail-grid-inner">
+                    <div class="inner-item"><strong>精度</strong><span>0.01%</span></div>
+                    <div class="inner-item"><strong>频率</strong><span>1Hz-100kHz</span></div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "reset",
+        name: "5、重置按钮",
+        area: { top: "13%", left: "50%", width: "3%", height: "4%" },
+        labelPos: { top: "60%", left: "0%" },
+        align: "left",
+        vAlign: "down",
+        desc: "系统硬重启。",
+        detail: `
+            <div class="detail-content">
+                <p>短按：系统硬件复位（重启）。</p>
+                <p>长按(5s+)：恢复出厂设置。</p>
+            </div>
+        `,
+    },
+    {
+        id: "ledrun",
+        name: "6、电源/运行/网络指示灯",
+        area: { top: "0%", left: "54.2%", width: "2%", height: "15%" },
+        labelPos: { top: "75%", left: "0%" },
+        align: "left",
+        vAlign: "down",
+        desc: "电源/运行/网络指示灯",
+        detail: `
+            <div class="detail-content">
+                <p>基于 N-MOS 开漏输出，单路支持最高 36V 10A 开关负载。</p>
+                <div class="detail-grid-inner">
+                    <div class="inner-item"><strong>精度</strong><span>0.01%</span></div>
+                    <div class="inner-item"><strong>频率</strong><span>1Hz-100kHz</span></div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "di",
+        name: "7、开关量输入",
+        area: { top: "-1%", left: "57.1%", width: "11.4%", height: "18%" },
+        labelPos: { top: "-8%", left: "53%" },
+        align: "center",
+        vAlign: "up",
+        desc: "支持干接点及 NPN 传感器。",
+        detail: `
+            <div class="detail-content">
+                <p>光耦隔离输入，最高支持 24V 电平采集。</p>
+                <ul class="detail-list">
+                    <li>支持高速计数(20kHz)</li>
+                    <li>内置上拉电阻</li>
+                </ul>
+            </div>
+        `,
+    },
+    {
+        id: "ai",
+        name: "8、模拟量输入",
+        area: { top: "-1%", left: "68.3%", width: "5.5%", height: "18%" },
+        labelPos: { top: "-18%", left: "73%" },
+        align: "right",
+        vAlign: "up",
+        desc: "4-20mA 或 0-10V 采集。",
+        detail: `
+            <div class="detail-content">
+                <p>集成高精度 ADC 芯片，工业级抗干扰设计。</p>
+                <p>可采集压力、液位、温湿度变送器等模拟信号。</p>
+            </div>
+        `,
+    },
+    {
+        id: "rs485",
+        name: "9、RS485/DS18B20",
+        area: { top: "-1%", left: "74%", width: "3.5%", height: "18%" },
+        labelPos: { top: "35%", left: "100%" },
+        align: "right",
+        vAlign: "down",
+        desc: "RS485、IIC、3V 输出信号。",
+        detail: `
+            <div class="detail-content">
+                <p>支持 Modbus RTU 协议，主从机模式自由切换。</p>
+                <p>IIC 接口可接温湿度等数字传感器。</p>
+            </div>
+        `,
+    },
+    {
+        id: "iic",
+        name: "10、IIC接口",
+        area: { top: "-1%", left: "77.5%", width: "3.5%", height: "18%" },
+        labelPos: { top: "20%", left: "100%" },
+        align: "right",
+        vAlign: "down",
+        desc: "RS485、IIC、3V 输出信号。",
+        detail: `
+            <div class="detail-content">
+                <p>支持 Modbus RTU 协议，主从机模式自由切换。</p>
+                <p>IIC 接口可接温湿度等数字传感器。</p>
+            </div>
+        `,
+    },
+    {
+        id: "dc3v",
+        name: "11、3V电源输出",
+        area: { top: "-1%", left: "81%", width: "3.5%", height: "18%" },
+        labelPos: { top: "-3%", left: "100%" },
+        align: "right",
+        vAlign: "up",
+        desc: "RS485、IIC、3V 输出信号。",
+        detail: `
+            <div class="detail-content">
+                <p>支持 Modbus RTU 协议，主从机模式自由切换。</p>
+                <p>IIC 接口可接温湿度等数字传感器。</p>
+            </div>
+        `,
+    },
+    {
+        id: "relay",
+        name: "12、继电器输出",
+        area: { top: "85%", left: "15.5%", width: "64%", height: "18%" },
+        labelPos: { top: "113%", left: "45%" },
+        align: "center",
+        vAlign: "down",
+        desc: "控制强弱电负载。",
+        detail: `
+            <div class="detail-content">
+                <p>高品质大功率继电器，AC 220V 10A 支持。</p>
+            </div>
+        `,
+    },
+    {
+        id: "outled",
+        name: "13、继电器指示灯",
+        area: { top: "85%", left: "79.5%", width: "5%", height: "18%" },
+        labelPos: { top: "113%", left: "82%" },
+        align: "center",
+        vAlign: "down",
+        desc: "控制强弱电负载。",
+        detail: `
+            <div class="detail-content">
+                <p>高品质大功率继电器，AC 220V 10A 支持。</p>
+            </div>
+        `,
+    },
+];
 ---
 
 <Layout
@@ -19,30 +233,85 @@ const lang = "zh";
     </div>
 
     <div class="content-wrapper">
-        <nav class="sidebar">
-            <h3 class="sidebar-title">目录</h3>
-            <ul class="sidebar-nav">
-                <li><a href="#overview">接口总览</a></li>
-                <li><a href="#relay">继电器输出</a></li>
-                <li><a href="#pwm">PWM输出</a></li>
-                <li><a href="#digital-input">开关量输入</a></li>
-                <li><a href="#analog-input">模拟量输入</a></li>
-                <li><a href="#communication">通信接口</a></li>
-                <li><a href="#models">型号规格对比</a></li>
-            </ul>
-        </nav>
-
         <main class="main-content">
             <!-- Overview Section -->
             <section id="overview" class="doc-section">
                 <h2>接口总览</h2>
-                <div class="interface-diagram">
-                    <img
-                        src="/images/products/6+4路正面.png"
-                        alt="宜启智控Pro硬件接口图"
-                    />
+                <div class="interface-container">
+                    <div class="interface-map" id="hardware-map">
+                        <img
+                            src="/images/products/6o4wzm.png"
+                            alt="宜启智控Pro硬件接口图"
+                        />
+
+                        {/* SVG 引线层 */}
+                        <svg
+                            class="leader-lines-svg"
+                            viewBox="0 0 100 100"
+                            preserveAspectRatio="none"
+                        >
+                            {
+                                interfaces.map((item) => {
+                                    const startX =
+                                        parseFloat(item.area.left) +
+                                        parseFloat(item.area.width) / 2;
+                                    const startY =
+                                        parseFloat(item.area.top) +
+                                        parseFloat(item.area.height) / 2;
+                                    const endX = parseFloat(item.labelPos.left);
+                                    const endY = parseFloat(item.labelPos.top);
+                                    return (
+                                        <line
+                                            x1={startX}
+                                            y1={startY}
+                                            x2={endX}
+                                            y2={endY}
+                                            class="leader-line-path"
+                                            id={`line-${item.id}`}
+                                        />
+                                    );
+                                })
+                            }
+                        </svg>
+
+                        {/* 交互标注层 */}
+                        {
+                            interfaces.map((item) => (
+                                <div
+                                    class={`interface-marker v-align-${item.vAlign || "up"}`}
+                                    data-id={item.id}
+                                    onmouseenter={`document.getElementById('line-${item.id}').classList.add('active')`}
+                                    onmouseleave={`document.getElementById('line-${item.id}').classList.remove('active')`}
+                                >
+                                    {/* 接口矩形区域 */}
+                                    <div
+                                        class="interface-area"
+                                        style={`top: ${item.area.top}; left: ${item.area.left}; width: ${item.area.width}; height: ${item.area.height};`}
+                                    />
+
+                                    {/* 外围标签及浮层 */}
+                                    <div
+                                        class={`external-label align-${item.align}`}
+                                        style={`top: ${item.labelPos.top}; left: ${item.labelPos.left};`}
+                                    >
+                                        <div class="label-text">
+                                            {item.name}
+                                        </div>
+                                        <div class="point-tooltip">
+                                            <h5>{item.name}</h5>
+                                            <div
+                                                class="tooltip-body"
+                                                set:html={item.detail}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
                 </div>
-                <p>
+
+                <p class="overview-intro">
                     宜启智控Pro提供丰富的I/O接口，支持多种传感器和执行器接入，是实现自动化控制的理想选择。
                 </p>
 
@@ -61,6 +330,25 @@ const lang = "zh";
                         <span class="spec-label">通信方式</span>
                         <span class="spec-value">WiFi / 4G / 蓝牙 (可选)</span>
                     </div>
+                </div>
+            </section>
+
+            <!-- Detailed Interface List -->
+            <section id="interface-details" class="doc-section">
+                <h2>接口详细说明</h2>
+                <div class="details-grid">
+                    {
+                        interfaces.map((item) => (
+                            <div class="detail-card" id={`detail-${item.id}`}>
+                                <h3>{item.name}</h3>
+                                <p class="detail-desc">{item.desc}</p>
+                                <div
+                                    class="detail-full"
+                                    set:html={item.detail}
+                                />
+                            </div>
+                        ))
+                    }
                 </div>
             </section>
 
@@ -359,6 +647,10 @@ const lang = "zh";
 </Layout>
 
 <style>
+    :root {
+        --primary-rgb: 0, 102, 204;
+    }
+
     .page-header {
         background: var(--bg-light);
         color: var(--text-dark);
@@ -387,63 +679,7 @@ const lang = "zh";
     .content-wrapper {
         max-width: 1200px;
         margin: 0 auto;
-        display: grid;
-        grid-template-columns: 250px 1fr;
-        gap: 3rem;
         padding: 3rem 1.5rem;
-    }
-
-    @media (max-width: 1024px) {
-        .content-wrapper {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    /* Sidebar */
-    .sidebar {
-        position: sticky;
-        top: 80px;
-        height: fit-content;
-    }
-
-    @media (max-width: 1024px) {
-        .sidebar {
-            position: static;
-        }
-    }
-
-    .sidebar-title {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin: 0 0 1rem;
-    }
-
-    .sidebar-nav {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .sidebar-nav li {
-        margin-bottom: 0.5rem;
-    }
-
-    .sidebar-nav a {
-        display: block;
-        padding: 0.5rem 1rem;
-        color: var(--text-muted);
-        text-decoration: none;
-        border-radius: 6px;
-        font-size: 0.95rem;
-        transition: all 0.2s ease;
-    }
-
-    .sidebar-nav a:hover {
-        color: var(--primary);
-        background: var(--primary-light);
     }
 
     /* Main Content */
@@ -453,6 +689,12 @@ const lang = "zh";
 
     .doc-section {
         margin-bottom: 4rem;
+        position: relative;
+    }
+
+    /* 确保当前正在交互的章节处于最顶层，防止浮层被后续章节的标题遮挡 */
+    .doc-section:has(.interface-marker:hover) {
+        z-index: 1000;
     }
 
     .doc-section h2 {
@@ -477,19 +719,298 @@ const lang = "zh";
         margin: 0 0 1rem;
     }
 
-    /* Interface Diagram */
-    .interface-diagram {
-        background: var(--bg-light);
-        border-radius: 16px;
-        padding: 2rem;
-        margin: 1.5rem 0;
-        text-align: center;
+    /* Interface Map & Interactive UI */
+    .interface-container {
+        position: relative;
+        z-index: 10;
+        margin: 4rem 0; /* 增加上下间距给外围标签留空间 */
+        padding: 5rem 3rem; /* 增加内边距 */
     }
 
-    .interface-diagram img {
-        max-width: 100%;
-        max-height: 400px;
-        object-fit: contain;
+    .interface-container:hover {
+        z-index: 500;
+    }
+
+    .interface-map {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .interface-map img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .interface-marker {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    .interface-marker:hover {
+        z-index: 1000;
+    }
+
+    /* SVG Leader Lines */
+    .leader-lines-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+        pointer-events: none;
+        overflow: visible;
+    }
+
+    .leader-line-path {
+        stroke: var(--primary);
+        stroke-width: 1.5px;
+        vector-effect: non-scaling-stroke;
+        stroke-dasharray: 4 4;
+        opacity: 0.4;
+        transition: all 0.3s ease;
+    }
+
+    .leader-line-path.active {
+        stroke-width: 2.5px;
+        stroke-dasharray: 0;
+        opacity: 1;
+        filter: drop-shadow(0 0 3px var(--primary));
+    }
+
+    /* Interface Area Styling */
+    .interface-area {
+        position: absolute;
+        background: rgba(var(--primary-rgb), 0.1);
+        border: 1.5px dashed rgba(var(--primary-rgb), 0.4);
+        border-radius: 4px;
+        pointer-events: auto;
+        cursor: help;
+        transition: all 0.3s ease;
+    }
+
+    .interface-area:hover,
+    .interface-marker:hover .interface-area {
+        background: rgba(var(--primary-rgb), 0.2);
+        border: 2.5px solid var(--primary);
+        box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.4);
+    }
+
+    /* External Labels */
+    .external-label {
+        position: absolute;
+        background: white;
+        color: var(--primary);
+        border: 1.5px solid var(--primary);
+        padding: 4px 16px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        white-space: nowrap;
+        pointer-events: auto;
+        cursor: pointer;
+        z-index: 40;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.1);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .external-label:hover,
+    .interface-marker:hover .external-label {
+        background: var(--primary);
+        color: white;
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.4);
+    }
+
+    /* Highlight line on hover */
+    .interface-marker[data-id]:hover ~ .leader-lines-svg .leader-line-path,
+    .interface-area:hover ~ .leader-line-path,
+    .external-label:hover ~ .leader-line-path {
+        /* CSS alone can't easily target a specific line by id from another sibling context 
+           if the line is inside the SVG. We'll use JS if necessary, but for now 
+           let's make all lines slightly more visible or use a general rule. */
+    }
+
+    .point-tooltip {
+        position: absolute;
+        width: 320px;
+        background: white;
+        color: var(--text-dark);
+        padding: 1.25rem;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1100;
+        border: 1px solid var(--border-light);
+    }
+
+    .external-label:hover .point-tooltip,
+    .interface-marker:hover .point-tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Improved Alignment Logic */
+    .external-label.align-left .point-tooltip {
+        left: 0;
+        transform: translateX(0) translateY(0);
+    }
+    .external-label.align-center .point-tooltip {
+        left: 50%;
+        transform: translateX(-50%) translateY(0);
+    }
+    .external-label.align-right .point-tooltip {
+        right: 0;
+        transform: translateX(0) translateY(0);
+    }
+
+    .interface-marker.v-align-up .point-tooltip {
+        bottom: 100%;
+        margin-bottom: 15px;
+    }
+    .interface-marker.v-align-down .point-tooltip {
+        top: 100%;
+        margin-top: 15px;
+    }
+
+    /* Hover animation per alignment */
+    .interface-marker.v-align-up:hover .external-label .point-tooltip {
+        transform: translateX(0) translateY(-10px);
+    }
+    .interface-marker.v-align-up:hover
+        .external-label.align-center
+        .point-tooltip {
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    .interface-marker.v-align-down:hover .external-label .point-tooltip {
+        transform: translateX(0) translateY(10px);
+    }
+    .interface-marker.v-align-down:hover
+        .external-label.align-center
+        .point-tooltip {
+        transform: translateX(-50%) translateY(10px);
+    }
+
+    .point-tooltip h5 {
+        margin: 0 0 0.75rem;
+        color: var(--primary);
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-bottom: 2px solid var(--primary-light);
+        padding-bottom: 0.5rem;
+    }
+
+    .tooltip-body {
+        text-align: left;
+    }
+
+    .detail-content p {
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .detail-list {
+        padding-left: 1.25rem;
+        margin: 0.5rem 0;
+    }
+
+    .detail-list li {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-bottom: 0.25rem;
+        list-style-type: disc;
+    }
+
+    .detail-grid-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        background: var(--bg-light);
+        padding: 0.75rem;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+    }
+
+    .inner-item {
+        font-size: 0.8rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .inner-item strong {
+        color: var(--text-dark);
+        font-size: 0.75rem;
+    }
+
+    .hint {
+        color: #f59e0b !important;
+        font-weight: 600;
+        font-size: 0.8rem !important;
+    }
+
+    /* Details Grid */
+    .details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .detail-card {
+        background: white;
+        border: 1px solid var(--border-light);
+        padding: 1.5rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .detail-card:hover {
+        border-color: var(--primary);
+        box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.1);
+        transform: translateY(-2px);
+    }
+
+    .detail-card h3 {
+        margin: 0 0 0.75rem;
+        font-size: 1.125rem;
+        color: var(--text-dark);
+    }
+
+    .detail-desc {
+        font-weight: 600;
+        color: var(--primary) !important;
+        margin-bottom: 0.5rem !important;
+        font-size: 0.9rem;
+    }
+
+    .detail-full {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .overview-intro {
+        text-align: center;
+        max-width: 800px;
+        margin: 2rem auto !important;
+        font-size: 1.1rem !important;
+    }
+
+    /* Fix image centering in diagram */
+    .interface-diagram {
+        display: none; /* Replaced by interface-container */
     }
 
     /* Specs Overview */
