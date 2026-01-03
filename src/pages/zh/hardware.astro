@@ -43,7 +43,7 @@ const interfaces = [
         detail: `
             <div class="detail-content">
                 <div class="power-group">
-                    <strong class="group-title">1、标准 PWM 开路输出版</strong>
+                    <strong class="group-title">2.1、标准 PWM</strong>
                     <div class="config-block">
                         <p>基于 N-MOS 开漏输出，Pn 端口上拉 DC 5V。支持频率：0.025Hz ~ 150kHz，占空比：0.00% ~ 100.00%。</p>
                         <p><span class="config-label">端口定义:</span> ·Pn 表示 PWM 输出正极，·Gn 表示负极 (GND)。</p>
@@ -56,8 +56,8 @@ const interfaces = [
                             <span class="example-title">PWM接口内部简化电路图</span>
                         </div>
                         <div class="example-item">
-                            <img src="/images/pwm_led.jpg" alt="LED灯明亮/直流电机快慢 接线示例" loading="lazy" />
-                            <span class="example-title">LED灯明亮/直流电机快慢 接线示例</span>
+                            <img src="/images/pwm_led.jpg" alt="LED灯明亮/直流电机快慢控制 接线示例" loading="lazy" />
+                            <span class="example-title">LED灯明亮/直流电机快慢控制 接线示例</span>
                         </div>
                         <div class="example-item">
                             <img src="/images/pwm_steper.jpg" alt="步进电机速度控制 接线示例" loading="lazy" />
@@ -70,15 +70,27 @@ const interfaces = [
                     </div>
                 </div>
                 <div class="power-group" style="margin-top: 1rem;">
-                    <strong class="group-title">2、0-10V 信号输出版 (支持定制)</strong>
+                    <strong class="group-title">2.2、0-10V 信号输出(定制)</strong>
                     <div class="config-block">
                         <p>Pn 为输出电压正极，Gn 为电压负极，最大负载电流为 10mA。</p>
                     </div>
+                    <div class="wiring-examples">
+                        <div class="example-item">
+                            <img src="/images/pwm_10v.jpg" alt="0-10V控制变频器 接线示例" loading="lazy" />
+                            <span class="example-title">0-10V控制变频器 接线示例</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="power-group" style="margin-top: 1rem;">
-                    <strong class="group-title">3、0-20mA 信号输出版 (支持定制)</strong>
+                    <strong class="group-title">2.3、0-20mA 信号输出(定制)</strong>
                     <div class="config-block">
                         <p>Pn 为电流输出端口，Gn 为电流输入端口。</p>
+                    </div>
+                    <div class="wiring-examples">
+                        <div class="example-item">
+                            <img src="/images/pwm_20ma.jpg" alt="0-20mA设备控制 接线示例" loading="lazy" />
+                            <span class="example-title">0-20mA设备控制 接线示例</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -94,7 +106,7 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>实时显示 PWM 通道的输出电平状态。</p>
+                <p>实时显示 PWM1~4通道的输出状态。可观察开关和明暗状态。</p>
             </div>
         `,
     },
@@ -108,7 +120,7 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>集成串口芯片，支持固件烧录及运行日志查看。</p>
+                <p>Micro USB接口(旧版)/Type-C接口(新版)，用于便捷的给设备提供5V电源供电，电源电流要求大于1.5A。<br /> 注意：供电线材请使用好的线材，避免因线材质量问题压降大导致设备供电电压不足，无法正常工作。</p>
             </div>
         `,
     },
@@ -122,8 +134,8 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>短按：系统硬件复位（重启）。</p>
-                <p>长按(5s+)：恢复出厂设置。</p>
+                <p>短按1次：设备断电重启。</p>
+                <p>短按7次：恢复出厂设置。连续短按7次，每次按下1秒，松开1秒。即可完成恢复出厂设置。<br /> 请谨慎操作，恢复出厂设置后，设备将恢复到出厂默认状态，所有配置将被清空。</p>
             </div>
         `,
     },
@@ -750,7 +762,7 @@ const interfaces = [
     .interface-container {
         position: relative;
         z-index: 10;
-        margin: 4rem 0; /* 增加上下间距给外围标签留空间 */
+        margin: 6rem 0 4rem 0; /* 增加顶部间距给上方标签留出空间 */
         padding: 5rem 3rem; /* 增加内边距 */
     }
 
@@ -885,7 +897,9 @@ const interfaces = [
 
     .point-tooltip {
         position: absolute;
-        width: 620px; /* 进一步增加宽度，支持更详尽的内容展示 */
+        width: 650px;
+        max-height: 350px; /* 添加最大高度限制 */
+        overflow-y: auto; /* 超出高度出现滚动条 */
         background: white;
         color: var(--text-dark);
         padding: 1.5rem;
@@ -896,8 +910,23 @@ const interfaces = [
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1100;
         border: 1px solid var(--border-light);
-        white-space: normal; /* 强制覆盖父级的 nowrap 属性 */
-        font-weight: normal; /* 消除父级 .external-label 的 700 字重继承 */
+        white-space: normal;
+        font-weight: normal;
+    }
+
+    /* 自定义浮层滚动条样式 */
+    .point-tooltip::-webkit-scrollbar {
+        width: 5px;
+    }
+    .point-tooltip::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .point-tooltip::-webkit-scrollbar-thumb {
+        background: var(--primary-light);
+        border-radius: 10px;
+    }
+    .point-tooltip::-webkit-scrollbar-thumb:hover {
+        background: var(--primary);
     }
 
     .external-label:hover .point-tooltip,
