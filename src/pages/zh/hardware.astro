@@ -7,29 +7,39 @@ const interfaces = [
     {
         id: "power",
         name: "1、供电接口",
+        labelName: "·L/36V ·N/GND ·5V ·GND",
         area: { top: "0%", left: "16.5%", width: "9.8%", height: "15%" },
         labelPos: { top: "5%", left: "0%" },
         align: "left",
         vAlign: "up",
-        desc: "支持 DC 7-36V 宽压输入，提供防反接保护。",
         detail: `
             <div class="detail-content">
-                <p>主要的电源输入接口，适配常见的工业电源适配器。</p>
-                <ul class="detail-list">
-                    <li>电压范围：DC 7-36V</li>
-                    <li>保护机制：内置防反接、过压保护</li>
-                </ul>
+                <div class="power-group">
+                    <strong class="group-title">· L/36V · N/GND 端口</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">AC 版 (选配):</span> 接入 交流AC 70-270V (47-63Hz) 或 直流DC 100-380V。不区分零火线序。</p>
+                        <p><span class="config-label">宽压版 (选配):</span> 支持 直流DC 9-60V (>9W)。L/36V端接正极，N/GND端接负极。</p>
+                        <p><span class="config-label">5V 标配版:</span> 此端口组无作用。</p>
+                    </div>
+                </div>
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· 5V · GND 端口</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">输入模式:</span> 标配直流5V版使用。直流 5V (电流>1A)，GND 接负极。</p>
+                        <p><span class="config-label">输出模式:</span> AC/宽压版此口输出 5V (电流<100mA)，可为小功率传感器供电。</p>
+                    </div>
+                </div>
             </div>
         `,
     },
     {
         id: "pwm",
         name: "2、PWM输出",
+        labelName: "·P4 ·G4 ·P3 ·G3 ·P2 ·G2 ·P1 ·G1",
         area: { top: "0%", left: "26.6%", width: "19%", height: "15%" },
         labelPos: { top: "-18%", left: "30%" },
         align: "center",
         vAlign: "up",
-        desc: "4路 PWM 输出，用于 LED 调光或电机调速。",
         detail: `
             <div class="detail-content">
                 <p>基于 N-MOS 开漏输出，单路支持最高 36V 10A 开关负载。</p>
@@ -43,47 +53,39 @@ const interfaces = [
     {
         id: "pwmled",
         name: "3、PWM指示灯",
+        labelName: "·P1 ·P2 ·P3 ·P4",
         area: { top: "0%", left: "46.8%", width: "2%", height: "15%" },
         labelPos: { top: "30%", left: "0%" },
         align: "left",
         vAlign: "down",
-        desc: "4路 PWM 输出，用于 LED 调光或电机调速。",
         detail: `
             <div class="detail-content">
-                <p>基于 N-MOS 开漏输出，单路支持最高 36V 10A 开关负载。</p>
-                <div class="detail-grid-inner">
-                    <div class="inner-item"><strong>精度</strong><span>0.01%</span></div>
-                    <div class="inner-item"><strong>频率</strong><span>1Hz-100kHz</span></div>
-                </div>
+                <p>实时显示 PWM 通道的输出电平状态。</p>
             </div>
         `,
     },
     {
         id: "usb",
         name: "4、USB供电口",
+        labelName: "·USB供电",
         area: { top: "0%", left: "49.1%", width: "5%", height: "12%" },
         labelPos: { top: "45%", left: "0%" },
         align: "left",
         vAlign: "down",
-        desc: "4路 PWM 输出，用于 LED 调光或电机调速。",
         detail: `
             <div class="detail-content">
-                <p>基于 N-MOS 开漏输出，单路支持最高 36V 10A 开关负载。</p>
-                <div class="detail-grid-inner">
-                    <div class="inner-item"><strong>精度</strong><span>0.01%</span></div>
-                    <div class="inner-item"><strong>频率</strong><span>1Hz-100kHz</span></div>
-                </div>
+                <p>集成串口芯片，支持固件烧录及运行日志查看。</p>
             </div>
         `,
     },
     {
         id: "reset",
         name: "5、重置按钮",
+        labelName: "·重启/重置 RST",
         area: { top: "13%", left: "50%", width: "3%", height: "4%" },
         labelPos: { top: "60%", left: "0%" },
         align: "left",
         vAlign: "down",
-        desc: "系统硬重启。",
         detail: `
             <div class="detail-content">
                 <p>短按：系统硬件复位（重启）。</p>
@@ -94,29 +96,27 @@ const interfaces = [
     {
         id: "ledrun",
         name: "6、电源/运行/网络指示灯",
+        labelName: "·电源 ·运行 ·网络",
         area: { top: "0%", left: "54.2%", width: "2%", height: "15%" },
         labelPos: { top: "75%", left: "0%" },
         align: "left",
         vAlign: "down",
-        desc: "电源/运行/网络指示灯",
         detail: `
             <div class="detail-content">
-                <p>基于 N-MOS 开漏输出，单路支持最高 36V 10A 开关负载。</p>
-                <div class="detail-grid-inner">
-                    <div class="inner-item"><strong>精度</strong><span>0.01%</span></div>
-                    <div class="inner-item"><strong>频率</strong><span>1Hz-100kHz</span></div>
-                </div>
+                <p>PWR (红)：供电指示</p>
+                <p>RUN (蓝)：系统运行</p>
+                <p>NET (绿)：网络/Mesh连接状态</p>
             </div>
         `,
     },
     {
         id: "di",
         name: "7、开关量输入",
+        labelName: "·输入1 ·输入2 ·输入3 ·输入4 ·输入5 ·输入6",
         area: { top: "-1%", left: "57.1%", width: "11.4%", height: "18%" },
         labelPos: { top: "-8%", left: "53%" },
         align: "center",
         vAlign: "up",
-        desc: "支持干接点及 NPN 传感器。",
         detail: `
             <div class="detail-content">
                 <p>光耦隔离输入，最高支持 24V 电平采集。</p>
@@ -130,11 +130,11 @@ const interfaces = [
     {
         id: "ai",
         name: "8、模拟量输入",
+        labelName: "·模拟1 ·模拟2 ·模拟3",
         area: { top: "-1%", left: "68.3%", width: "5.5%", height: "18%" },
         labelPos: { top: "-18%", left: "73%" },
         align: "right",
         vAlign: "up",
-        desc: "4-20mA 或 0-10V 采集。",
         detail: `
             <div class="detail-content">
                 <p>集成高精度 ADC 芯片，工业级抗干扰设计。</p>
@@ -144,57 +144,55 @@ const interfaces = [
     },
     {
         id: "rs485",
-        name: "9、RS485/DS18B20",
+        name: "9、RS485/温度",
+        labelName: "·485B- ·A+/温度",
         area: { top: "-1%", left: "74%", width: "3.5%", height: "18%" },
         labelPos: { top: "35%", left: "100%" },
         align: "right",
         vAlign: "down",
-        desc: "RS485、IIC、3V 输出信号。",
         detail: `
             <div class="detail-content">
                 <p>支持 Modbus RTU 协议，主从机模式自由切换。</p>
-                <p>IIC 接口可接温湿度等数字传感器。</p>
+                <p>复用 DS18B20 数字温度传感器接口。</p>
             </div>
         `,
     },
     {
         id: "iic",
         name: "10、IIC接口",
+        labelName: "·SCL ·SDA",
         area: { top: "-1%", left: "77.5%", width: "3.5%", height: "18%" },
         labelPos: { top: "20%", left: "100%" },
         align: "right",
         vAlign: "down",
-        desc: "RS485、IIC、3V 输出信号。",
         detail: `
             <div class="detail-content">
-                <p>支持 Modbus RTU 协议，主从机模式自由切换。</p>
-                <p>IIC 接口可接温湿度等数字传感器。</p>
+                <p>IIC 接口可接温湿度、光照、屏幕等数字模块。</p>
             </div>
         `,
     },
     {
         id: "dc3v",
         name: "11、3V电源输出",
+        labelName: "·公共地 ·3V输出",
         area: { top: "-1%", left: "81%", width: "3.5%", height: "18%" },
         labelPos: { top: "-3%", left: "100%" },
         align: "right",
         vAlign: "up",
-        desc: "RS485、IIC、3V 输出信号。",
         detail: `
             <div class="detail-content">
-                <p>支持 Modbus RTU 协议，主从机模式自由切换。</p>
-                <p>IIC 接口可接温湿度等数字传感器。</p>
+                <p>为小功率传感器或外部显示屏提供 3.3V 供电。</p>
             </div>
         `,
     },
     {
         id: "relay",
         name: "12、继电器输出",
+        labelName: "·常开1 ·公共1 ·常闭1 ... ·常开6 ·公共6 ·常闭6",
         area: { top: "85%", left: "15.5%", width: "64%", height: "18%" },
         labelPos: { top: "113%", left: "45%" },
         align: "center",
         vAlign: "down",
-        desc: "控制强弱电负载。",
         detail: `
             <div class="detail-content">
                 <p>高品质大功率继电器，AC 220V 10A 支持。</p>
@@ -204,14 +202,14 @@ const interfaces = [
     {
         id: "outled",
         name: "13、继电器指示灯",
+        labelName: "·O1 ·O2 ·O3 ·O4 ·O5 ·O6",
         area: { top: "85%", left: "79.5%", width: "5%", height: "18%" },
         labelPos: { top: "113%", left: "82%" },
         align: "center",
         vAlign: "down",
-        desc: "控制强弱电负载。",
         detail: `
             <div class="detail-content">
-                <p>高品质大功率继电器，AC 220V 10A 支持。</p>
+                <p>实时指示 6 路继电器的当前动作状态。</p>
             </div>
         `,
     },
@@ -284,13 +282,16 @@ const interfaces = [
                                     onmouseleave={`document.getElementById('line-${item.id}').classList.remove('active')`}
                                 >
                                     {/* 接口矩形区域 */}
-                                    <div
+                                    <a
+                                        href={`#detail-${item.id}`}
                                         class="interface-area"
                                         style={`top: ${item.area.top}; left: ${item.area.left}; width: ${item.area.width}; height: ${item.area.height};`}
+                                        title={`点击查看 ${item.name} 详情`}
                                     />
 
                                     {/* 外围标签及浮层 */}
-                                    <div
+                                    <a
+                                        href={`#detail-${item.id}`}
                                         class={`external-label align-${item.align}`}
                                         style={`top: ${item.labelPos.top}; left: ${item.labelPos.left};`}
                                     >
@@ -299,36 +300,22 @@ const interfaces = [
                                         </div>
                                         <div class="point-tooltip">
                                             <h5>{item.name}</h5>
+                                            {item.labelName && (
+                                                <div class="tooltip-port-row">
+                                                    <span class="tooltip-badge">
+                                                        {item.labelName}
+                                                    </span>
+                                                </div>
+                                            )}
                                             <div
                                                 class="tooltip-body"
                                                 set:html={item.detail}
                                             />
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                             ))
                         }
-                    </div>
-                </div>
-
-                <p class="overview-intro">
-                    宜启智控Pro提供丰富的I/O接口，支持多种传感器和执行器接入，是实现自动化控制的理想选择。
-                </p>
-
-                <div class="specs-overview">
-                    <div class="spec-item">
-                        <span class="spec-label">供电电压</span>
-                        <span class="spec-value"
-                            >DC 7-36V / USB 5V / 可选AC 220V</span
-                        >
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">工作温度</span>
-                        <span class="spec-value">-20°C ~ 60°C</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">通信方式</span>
-                        <span class="spec-value">WiFi / 4G / 蓝牙 (可选)</span>
                     </div>
                 </div>
             </section>
@@ -340,8 +327,14 @@ const interfaces = [
                     {
                         interfaces.map((item) => (
                             <div class="detail-card" id={`detail-${item.id}`}>
-                                <h3>{item.name}</h3>
-                                <p class="detail-desc">{item.desc}</p>
+                                <h3>
+                                    {item.name}
+                                    {item.labelName && (
+                                        <span class="card-badge">
+                                            {item.labelName}
+                                        </span>
+                                    )}
+                                </h3>
                                 <div
                                     class="detail-full"
                                     set:html={item.detail}
@@ -820,13 +813,30 @@ const interfaces = [
         transform: translate(-50%, -50%);
         box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.1);
         transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .port-badge {
+        font-size: 0.7rem;
+        background: var(--primary-light);
+        color: var(--primary);
+        padding: 1px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+    }
+
+    .external-label:hover .port-badge,
+    .interface-marker:hover .port-badge {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
     }
 
     .external-label:hover,
     .interface-marker:hover .external-label {
         background: var(--primary);
         color: white;
-        transform: translate(-50%, -50%) scale(1.1);
         box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.4);
     }
 
@@ -841,10 +851,10 @@ const interfaces = [
 
     .point-tooltip {
         position: absolute;
-        width: 320px;
+        width: 620px; /* 进一步增加宽度，支持更详尽的内容展示 */
         background: white;
         color: var(--text-dark);
-        padding: 1.25rem;
+        padding: 1.5rem;
         border-radius: 12px;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
         opacity: 0;
@@ -852,6 +862,8 @@ const interfaces = [
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1100;
         border: 1px solid var(--border-light);
+        white-space: normal; /* 强制覆盖父级的 nowrap 属性 */
+        font-weight: normal; /* 消除父级 .external-label 的 700 字重继承 */
     }
 
     .external-label:hover .point-tooltip,
@@ -903,16 +915,64 @@ const interfaces = [
     }
 
     .point-tooltip h5 {
-        margin: 0 0 0.75rem;
+        margin: 0 0 0.5rem;
         color: var(--primary);
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 700;
+        border: none;
+        padding: 0;
+    }
+
+    .detail-card h3 {
+        margin: 0 0 1.25rem;
+        color: var(--primary);
+        font-size: 1.125rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .tooltip-port-row {
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
         border-bottom: 2px solid var(--primary-light);
-        padding-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .tooltip-badge {
+        font-size: 0.75rem;
+        background: var(--primary-light);
+        color: var(--primary);
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-family: monospace;
+        font-weight: 700;
+    }
+
+    .card-badge {
+        font-size: 0.8rem;
+        background: var(--primary-light);
+        color: var(--primary);
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-family: monospace;
+        font-weight: 700;
     }
 
     .tooltip-body {
         text-align: left;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .detail-full {
+        text-align: left;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.6;
     }
 
     .detail-content p {
@@ -954,6 +1014,37 @@ const interfaces = [
         font-size: 0.75rem;
     }
 
+    /* 使用 :global() 以确保样式能应用到通过 set:html 注入的动态 HTML 中 */
+    :global(.group-title) {
+        display: block;
+        font-size: 0.95rem;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+    }
+
+    :global(.config-block) {
+        background: var(--bg-light);
+        padding: 0.75rem;
+        border-radius: 8px;
+        border-left: 3px solid var(--primary-light);
+    }
+
+    :global(.config-block) p {
+        margin-bottom: 0.4rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    :global(.config-block) p:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    :global(.config-label) {
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-right: 4px;
+    }
+
     .hint {
         color: #f59e0b !important;
         font-weight: 600;
@@ -963,29 +1054,29 @@ const interfaces = [
     /* Details Grid */
     .details-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
-        margin-top: 1.5rem;
+        grid-template-columns: 1fr;
+        gap: 0;
+        margin-top: 1rem;
     }
 
     .detail-card {
-        background: white;
-        border: 1px solid var(--border-light);
-        padding: 1.5rem;
-        border-radius: 12px;
+        background: transparent;
+        border: none;
+        padding: 2rem 1.5rem;
+        margin: 0 -1.5rem;
         transition: all 0.3s ease;
+        scroll-margin-top: 100px;
+        text-decoration: none;
+        display: block;
+        border-radius: 8px;
     }
 
     .detail-card:hover {
-        border-color: var(--primary);
-        box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.1);
-        transform: translateY(-2px);
+        background: rgba(var(--primary-rgb), 0.05);
     }
 
     .detail-card h3 {
-        margin: 0 0 0.75rem;
-        font-size: 1.125rem;
-        color: var(--text-dark);
+        /* Styles unified above */
     }
 
     .detail-desc {
@@ -993,12 +1084,6 @@ const interfaces = [
         color: var(--primary) !important;
         margin-bottom: 0.5rem !important;
         font-size: 0.9rem;
-    }
-
-    .detail-full {
-        font-size: 0.9rem;
-        color: var(--text-muted);
-        line-height: 1.6;
     }
 
     .overview-intro {
