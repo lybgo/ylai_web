@@ -301,7 +301,7 @@ const interfaces = [
                     <strong class="group-title">· 信号类型</strong>
                     <div class="config-block">
                         <p>支持 0-20mA / 0-10V / 自定义ADC 等多种模拟量信号的传感器接入。</p>
-                        <p><span class="config-label">应用场景:</span> 液位变送器、压力变送器、电流变送器、温度变送器、位移传感器、风速传感器等。</p>
+                        <p><span class="config-label">如:</span> 液位变送器、压力变送器、电流变送器、温度变送器、位移传感器、风速传感器等。</p>
                     </div>
                 </div>
         
@@ -327,16 +327,20 @@ const interfaces = [
                 </div>
                 <div class="wiring-examples">
                     <div class="example-item">
-                        <img src="/images/input_btn.jpg" alt="开关/按钮 接线示例" loading="lazy" />
-                        <span class="example-title">开关/按钮 接线示例</span>
+                        <img src="/images/adc2.jpg" alt="2线制4-20mA传感器" loading="lazy" />
+                        <span class="example-title">2线制4-20mA传感器 接线示例</span>
                     </div>
                     <div class="example-item">
-                        <img src="/images/input_npn.jpg" alt="NPN信号传感器 接线示例" loading="lazy" />
-                        <span class="example-title">NPN信号传感器 接线示例</span>
+                        <img src="/images/adc3.jpg" alt="3线制4-20mA或0-10V传感器" loading="lazy" />
+                        <span class="example-title">3线制4-20mA或0-10V传感器</span>
                     </div>
                     <div class="example-item">
-                        <img src="/images/input_reply.jpg" alt="继电器作为输入 接线示例" loading="lazy" />
-                        <span class="example-title">继电器作为输入 接线示例</span>
+                        <img src="/images/adc4.jpg" alt="4线制4-20mA传感器" loading="lazy" />
+                        <span class="example-title">4线制4-20mA传感器</span>
+                    </div>
+                    <div class="example-item">
+                        <img src="/images/adc1_5.jpg" alt="检测48V电池电压(自定义ADC)" loading="lazy" />
+                        <span class="example-title">检测48V电池电压(自定义ADC)-电阻分压到1.5V</span>
                     </div>
                 </div>
                 <div class="power-group mt-4">
@@ -349,36 +353,26 @@ const interfaces = [
                             <!-- 高亮区域 -->
                             <div style="position: absolute; top: 92%; left: 30%; width: 23%; height: 8%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
                             <div style="position: absolute; top: 12%; left: 54%; width: 26%; height: 6%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
-                            <div style="position: absolute; top: 19%; left: 43%; width: 57%; height: 13%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                            <div style="position: absolute; top: 53%; left: 1%; width: 98%; height: 15%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
                         </div>
                         <!-- 局部放大图 -->
                         <div style="background: white; border-radius: 18px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border: 3px solid #4ecdc4; padding: 0.5rem; width: 35%; flex-shrink: 0;">
-                            <div style="overflow: hidden; position: relative; width: 100%; aspect-ratio: 50 / 25;">
-                                <img src="/images/screenshot/params.jpg" alt="输入状态局部放大" loading="lazy" 
-                                     style="position: absolute; width: 100%; height: auto; top: 23%; left: -39%; transform: scale(1.8);" />
+                            <div style="overflow: hidden; position: relative; width: 100%; aspect-ratio: 50 / 15;">
+                                <img src="/images/screenshot/params.jpg" alt="模拟量状态局部放大" loading="lazy" 
+                                     style="position: absolute; width: 100%; height: auto; display: block; top: -400%; left: 0%" />
                             </div>
                             <div class="mt-2 py-1 text-center">
                                 <div class="text-left bg-gray-50 p-2 px-3 rounded-md mt-2">
-                                    <div class="mb-1.5">
-                                        <span class="desc-text">1. 此区域可以左右滑动,查看更多输入状态。</span>
-                                    </div>
-                                    <div class="mb-1.5">
-                                        <span class="desc-text-highlight">2. </span>
-                                        <span class="desc-text">以第二块输入状态为例,内容 </span>
-                                        <code class="desc-code">"2~4 82"</code>
-                                        <span class="desc-text"> 表示输入2,当前输入频率为4Hz,累计脉冲数82个。</span>
-                                    </div>
-                                    <div class="mb-0">
-                                        <span class="desc-text-highlight">3. </span>
-                                        <span class="desc-text">方块背景 </span>
-
-                                        <span style="display: inline-block; width: 1.2rem; height: 1rem; border-radius: 0.125rem; vertical-align: middle; background: #87ceeb;"></span>
-                                        <span class="desc-text"> 蓝色表示输入"激活"状态,</span>
-                                        <span style="display: inline-block; width: 1.2rem; height: 1rem; border-radius: 0.125rem; vertical-align: middle; background: white; border: 1px solid #d1d5db;"></span>
-                                        <span class="desc-text"> 白色表示输入"静默"状态。</span>
-                                    </div>
+                                    <div class="desc-text">1. 此区域有三列数据对应模拟量输入1~3。</div>
+                                    <div class="desc-text">2. 以第一列数据(模拟量1)为例,内容："5.84 1.17mA" 表示模拟量1的量程值(实际值)：5.84, 物理输入原始数据值：1.17mA。</div>
+                                    <div class="desc-text">3. 点击每列右边的“齿轮”图标进入对应的参数设置界面(如右图)。</div>
+                                    <div class="desc-text">4. 右图中的“模式”设置要与设备上的物理挡位切换开关一致。</div>
                                 </div>
                             </div>
+                        </div>
+                        <div style="position: relative; width: 20%; flex-shrink: 0;">
+                            <img src="/images/adc_setting.jpg" alt="模拟量输入参数设置" loading="lazy" 
+                                 style="width: 100%; height: auto; display: block; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);" />
                         </div>
                     </div>
                 </div>
