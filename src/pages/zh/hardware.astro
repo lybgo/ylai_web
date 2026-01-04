@@ -142,7 +142,7 @@ const interfaces = [
                 </div>
         
                 <div class="power-group" style="margin-top: 1rem;">
-                    <strong class="group-title">· 重置：短按7次</strong>
+                    <strong class="group-title">· 重置：连续短按7次</strong>
                     <div class="config-block">
                         <p><span class="config-label">操作方法:</span> 连续短按7次,每次按下1秒,松开1秒。</p>
                         <p><span class="config-label">功能:</span> 恢复出厂设置,设备将恢复到出厂默认状态,所有配置将被清空。</p>
@@ -241,6 +241,49 @@ const interfaces = [
                         <span class="example-title">继电器作为输入 接线示例</span>
                     </div>
                 </div>
+                <div class="power-group mt-4">
+                    <strong class="group-title">· APP中查看输入状态</strong>
+                    <div class="flex items-start gap-6">
+                        <!-- 图片容器 -->
+                        <div style="position: relative; width: 20%; flex-shrink: 0;">
+                            <img src="/images/screenshot/params.jpg" alt="开关量输入状态" loading="lazy" 
+                                 style="width: 100%; height: auto; display: block; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);" />
+                            <!-- 高亮区域 -->
+                            <div style="position: absolute; top: 92%; left: 30%; width: 23%; height: 8%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                            <div style="position: absolute; top: 12%; left: 54%; width: 26%; height: 6%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                            <div style="position: absolute; top: 19%; left: 43%; width: 57%; height: 13%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                        </div>
+                        <!-- 局部放大图 -->
+                        <div style="background: white; border-radius: 18px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border: 3px solid #4ecdc4; padding: 0.5rem; width: 35%; flex-shrink: 0;">
+                            <div style="overflow: hidden; position: relative; width: 100%; aspect-ratio: 50 / 25;">
+                                <img src="/images/screenshot/params.jpg" alt="输入状态局部放大" loading="lazy" 
+                                     style="position: absolute; width: 100%; height: auto; top: 23%; left: -39%; transform: scale(1.8);" />
+                            </div>
+                            <div class="mt-2 py-1 text-center">
+                                <div class="text-left bg-gray-50 p-2 px-3 rounded-md mt-2">
+                                    <div class="mb-1.5">
+                                        <span class="desc-text">1. 此区域可以左右滑动,查看更多输入状态。</span>
+                                    </div>
+                                    <div class="mb-1.5">
+                                        <span class="desc-text-highlight">2. </span>
+                                        <span class="desc-text">以第二块输入状态为例,内容 </span>
+                                        <code class="desc-code">"2~4 82"</code>
+                                        <span class="desc-text"> 表示输入2,当前输入频率为4Hz,累计脉冲数82个。</span>
+                                    </div>
+                                    <div class="mb-0">
+                                        <span class="desc-text-highlight">3. </span>
+                                        <span class="desc-text">方块背景 </span>
+
+                                        <span style="display: inline-block; width: 1.2rem; height: 1rem; border-radius: 0.125rem; vertical-align: middle; background: #87ceeb;"></span>
+                                        <span class="desc-text"> 蓝色表示输入"激活"状态,</span>
+                                        <span style="display: inline-block; width: 1.2rem; height: 1rem; border-radius: 0.125rem; vertical-align: middle; background: white; border: 1px solid #d1d5db;"></span>
+                                        <span class="desc-text"> 白色表示输入"静默"状态。</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         `,
     },
@@ -254,8 +297,91 @@ const interfaces = [
         vAlign: "up",
         detail: `
             <div class="detail-content">
-                <p>集成高精度 ADC 芯片，工业级抗干扰设计。</p>
-                <p>可采集压力、液位、温湿度变送器等模拟信号。</p>
+                <div class="power-group">
+                    <strong class="group-title">· 信号类型</strong>
+                    <div class="config-block">
+                        <p>支持 0-20mA / 0-10V / 自定义ADC 等多种模拟量信号的传感器接入。</p>
+                        <p><span class="config-label">应用场景:</span> 液位变送器、压力变送器、电流变送器、温度变送器、位移传感器、风速传感器等。</p>
+                    </div>
+                </div>
+        
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· 挡位支持的参数范围信号输入</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">0-20mA 挡位:</span> 支持 0-20mA, 4-20mA, 0-40mA(新版硬件)</p>
+                        <p><span class="config-label">0-10V 挡位:</span> 支持 0-10V, 0-5V, 1-10V, 0-24V(新版硬件)</p>
+                        <p><span class="config-label">自定义ADC 挡位:</span> 支持 0-1.5V, 0-3V(新版硬件)电压采样</p>
+                    </div>
+                </div>
+        
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· 挡位切换物理操作</strong>
+                    <div class="config-block">
+                        <p>设备上边侧面有三档切换滑动开关,用于切换不同信号类型。</p>
+                        <p><span class="config-label">如图所示:</span> 模拟量1为自定义ADC挡位,模拟量2为0-10V挡位,模拟量3为0-20mA挡位。</p>
+                        <img src="/images/adc.jpg" alt="模拟量挡位切换示例" loading="lazy" style="width: 100%; max-width: 500px; margin-top: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+                    </div>
+                </div>
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· 接线示例</strong>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item">
+                        <img src="/images/input_btn.jpg" alt="开关/按钮 接线示例" loading="lazy" />
+                        <span class="example-title">开关/按钮 接线示例</span>
+                    </div>
+                    <div class="example-item">
+                        <img src="/images/input_npn.jpg" alt="NPN信号传感器 接线示例" loading="lazy" />
+                        <span class="example-title">NPN信号传感器 接线示例</span>
+                    </div>
+                    <div class="example-item">
+                        <img src="/images/input_reply.jpg" alt="继电器作为输入 接线示例" loading="lazy" />
+                        <span class="example-title">继电器作为输入 接线示例</span>
+                    </div>
+                </div>
+                <div class="power-group mt-4">
+                    <strong class="group-title">· APP中查看输入状态</strong>
+                    <div class="flex items-start gap-6">
+                        <!-- 图片容器 -->
+                        <div style="position: relative; width: 20%; flex-shrink: 0;">
+                            <img src="/images/screenshot/params.jpg" alt="开关量输入状态" loading="lazy" 
+                                 style="width: 100%; height: auto; display: block; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);" />
+                            <!-- 高亮区域 -->
+                            <div style="position: absolute; top: 92%; left: 30%; width: 23%; height: 8%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                            <div style="position: absolute; top: 12%; left: 54%; width: 26%; height: 6%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                            <div style="position: absolute; top: 19%; left: 43%; width: 57%; height: 13%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                        </div>
+                        <!-- 局部放大图 -->
+                        <div style="background: white; border-radius: 18px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border: 3px solid #4ecdc4; padding: 0.5rem; width: 35%; flex-shrink: 0;">
+                            <div style="overflow: hidden; position: relative; width: 100%; aspect-ratio: 50 / 25;">
+                                <img src="/images/screenshot/params.jpg" alt="输入状态局部放大" loading="lazy" 
+                                     style="position: absolute; width: 100%; height: auto; top: 23%; left: -39%; transform: scale(1.8);" />
+                            </div>
+                            <div class="mt-2 py-1 text-center">
+                                <div class="text-left bg-gray-50 p-2 px-3 rounded-md mt-2">
+                                    <div class="mb-1.5">
+                                        <span class="desc-text">1. 此区域可以左右滑动,查看更多输入状态。</span>
+                                    </div>
+                                    <div class="mb-1.5">
+                                        <span class="desc-text-highlight">2. </span>
+                                        <span class="desc-text">以第二块输入状态为例,内容 </span>
+                                        <code class="desc-code">"2~4 82"</code>
+                                        <span class="desc-text"> 表示输入2,当前输入频率为4Hz,累计脉冲数82个。</span>
+                                    </div>
+                                    <div class="mb-0">
+                                        <span class="desc-text-highlight">3. </span>
+                                        <span class="desc-text">方块背景 </span>
+
+                                        <span style="display: inline-block; width: 1.2rem; height: 1rem; border-radius: 0.125rem; vertical-align: middle; background: #87ceeb;"></span>
+                                        <span class="desc-text"> 蓝色表示输入"激活"状态,</span>
+                                        <span style="display: inline-block; width: 1.2rem; height: 1rem; border-radius: 0.125rem; vertical-align: middle; background: white; border: 1px solid #d1d5db;"></span>
+                                        <span class="desc-text"> 白色表示输入"静默"状态。</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         `,
     },
@@ -787,6 +913,93 @@ const interfaces = [
 <style>
     :root {
         --primary-rgb: 0, 102, 204;
+    }
+
+    /* Screenshot Highlight Area Styles */
+    .highlight-area {
+        position: absolute;
+        border: 3px solid #4ecdc4;
+        background: rgba(78, 205, 196, 0.3);
+        border-radius: 0.25rem;
+        pointer-events: none;
+        z-index: 10;
+        box-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+    }
+
+    /* Zoom Box Styles */
+    .zoom-box {
+        position: absolute;
+        z-index: 100;
+        background: white;
+        border-radius: 18px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border: 3px solid #4ecdc4;
+        padding: 0.5rem;
+    }
+
+    .zoom-box-inline {
+        background: white;
+        border-radius: 18px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border: 3px solid #4ecdc4;
+        padding: 0.5rem;
+        width: 30%;
+        flex-shrink: 0;
+    }
+
+    .zoom-img-container {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+    }
+
+    .zoom-img {
+        position: absolute;
+        width: 175%;
+        height: auto;
+        display: block;
+        transform: scale(2);
+    }
+
+    /* Description Text Styles */
+    .desc-text {
+        font-size: 0.7rem;
+        color: #555;
+        line-height: 1.625;
+    }
+
+    .desc-text-highlight {
+        font-size: 0.7rem;
+        color: #4ecdc4;
+        font-weight: 700;
+    }
+
+    .desc-code {
+        font-size: 0.65rem;
+        background: #e8f5f3;
+        color: #4ecdc4;
+        padding: 0.125rem 0.25rem;
+        border-radius: 0.25rem;
+        font-family: monospace;
+    }
+
+    /* Status Indicator Box */
+    .status-indicator {
+        display: inline-block;
+        width: 1rem;
+        height: 0.625rem;
+        border-radius: 0.125rem;
+        vertical-align: middle;
+        margin: 0 0.125rem;
+    }
+
+    .status-indicator-active {
+        background: #4ecdc4;
+    }
+
+    .status-indicator-inactive {
+        background: white;
+        border: 1px solid #d1d5db;
     }
 
     .page-header {
