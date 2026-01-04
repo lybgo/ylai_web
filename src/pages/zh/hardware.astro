@@ -17,9 +17,9 @@ const interfaces = [
                 <div class="power-group">
                     <strong class="group-title">· L/36V · N/GND 端口</strong>
                     <div class="config-block">
-                        <p><span class="config-label">AC 版 (选配):</span> 接入 交流AC 70-270V (47-63Hz) 或 直流DC 100-380V。不区分零火线序。</p>
-                        <p><span class="config-label">宽压版 (选配):</span> 支持 直流DC 9-60V (>9W)。L/36V端接正极，N/GND端接负极。</p>
-                        <p><span class="config-label">5V 标配版:</span> 此端口组无作用。</p>
+                        <p><span class="config-label">交流版 (选配):</span> 接入 交流AC 70-270V (47-63Hz) 或 直流DC 100-380V。不区分零火线序。</p>
+                        <p><span class="config-label">直流宽电压版 (选配):</span> 支持 直流DC 9-60V (>9W)。L/36V端接正极，N/GND端接负极。</p>
+                        <p><span class="config-label">直流5V标配版:</span> 此端口组无作用。</p>
                     </div>
                 </div>
                 <div class="power-group" style="margin-top: 1rem;">
@@ -45,7 +45,7 @@ const interfaces = [
                 <div class="power-group">
                     <strong class="group-title">2.1、标准 PWM</strong>
                     <div class="config-block">
-                        <p>基于 N-MOS 开漏输出，Pn 端口上拉 DC 5V。支持频率：0.025Hz ~ 150kHz，占空比：0.00% ~ 100.00%。</p>
+                        <p>基于 N-MOS 开漏输出，Pn 端口上拉 DC 5V。支持频率：0.025Hz ~ 150kHz，占空比：0.00% ~ 100.00%</p>
                         <p><span class="config-label">端口定义:</span> ·Pn 表示 PWM 输出正极，·Gn 表示负极 (GND)。</p>
                         <p><span class="config-label">负载能力:</span> 单路支持最高 DC 36V 10A 开关负载或 DC 36V 8A PWM 负载。</p>
                     </div>
@@ -134,8 +134,28 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>短按1次：设备断电重启。</p>
-                <p>短按7次：恢复出厂设置。连续短按7次，每次按下1秒，松开1秒。即可完成恢复出厂设置。<br /> 请谨慎操作，恢复出厂设置后，设备将恢复到出厂默认状态，所有配置将被清空。</p>
+                <div class="power-group">
+                    <strong class="group-title">· 重启：短按1次</strong>
+                    <div class="config-block">
+                        <p>设备断电重启。</p>
+                    </div>
+                </div>
+        
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· 重置：短按7次</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">操作方法:</span> 连续短按7次,每次按下1秒,松开1秒。</p>
+                        <p><span class="config-label">功能:</span> 恢复出厂设置,设备将恢复到出厂默认状态,所有配置将被清空。</p>
+                        <p class="hint">⚠️ 请谨慎操作此功能</p>
+                    </div>
+                </div>
+        
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· APP操作</strong>
+                    <div class="config-block">
+                        <p>在"源来智能"APP中,点击设备名称进入设备详情页,在"设置"界面中有"重置"和"重启"按钮,方便操作。</p>
+                    </div>
+                </div>
             </div>
         `,
     },
@@ -149,15 +169,37 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>PWR (红)：供电指示</p>
-                <p>RUN (蓝)：系统运行</p>
-                <p>NET (绿)：网络/Mesh连接状态</p>
+                <div class="power-group">
+                    <strong class="group-title">· 电源指示 (PWR)</strong>
+                    <div class="config-block">
+                        <p>亮灯表示设备供电正常。</p>
+                    </div>
+                </div>
+
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· 运行状态 (RUN)</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">2秒闪一次:</span> 系统运行正常。</p>
+                        <p><span class="config-label">快闪(0.5s/次):</span> 蓝牙连接中 (APP 交互中)。</p>
+                        <p><span class="config-label">双闪(每2s快闪2次):</span> MQTT 版网络连接成功。</p>
+                        <p><span class="config-label">常亮/常灭:</span> 运行异常，请尝试重新上电；若依旧常亮/灭，提示硬件故障。</p>
+                    </div>
+                </div>
+
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· 网络状态 (NET)</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">涂鸦 WIFI 版:</span> 快闪=待配网；常亮=已联网；常灭=联网失败/连接中。</p>
+                        <p><span class="config-label">涂鸦 4G 版 / 4G MQTT 版:</span> 慢闪=已连接基站；常灭=搜索中或网络异常。</p>
+                        <p><span class="config-label">WIFI MQTT 版:</span> 无物理逻辑作用。</p>
+                    </div>
+                </div>
             </div>
         `,
     },
     {
         id: "di",
-        name: "7、开关量输入",
+        name: "7、开关量/NPN/频率/脉冲输入",
         labelName: "·输入1 ·输入2 ·输入3 ·输入4 ·输入5 ·输入6",
         area: { top: "-1%", left: "57.1%", width: "11.4%", height: "18%" },
         labelPos: { top: "-8%", left: "53%" },
@@ -165,11 +207,40 @@ const interfaces = [
         vAlign: "up",
         detail: `
             <div class="detail-content">
-                <p>光耦隔离输入，最高支持 24V 电平采集。</p>
-                <ul class="detail-list">
-                    <li>支持高速计数(20kHz)</li>
-                    <li>内置上拉电阻</li>
-                </ul>
+                <div class="power-group">
+                    <strong class="group-title">· 信号类型</strong>
+                    <div class="config-block">
+                        <p>支持开关量、NPN、频率、脉冲等多种信号输入。</p>
+                        <p><span class="config-label">信号特性:</span> 低电平/负极/GND信号有效。</p>
+                        <p><span class="config-label">高速计数:</span> 支持20kHz频率输入。</p>
+                        <p><span class="config-label">耐压能力:</span> 输入端口耐压1KV。</p>
+                    </div>
+                </div>
+
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· 支持设备</strong>
+                    <div class="config-block">
+                        <p>继电器、按钮、开关、人体传感器、限位开关、光电开关、磁性开关、水位开关、接近开关、红外对射传感器等。</p>
+                    </div>
+                </div>
+
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· 接线示例</strong>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item">
+                        <img src="/images/input_btn.jpg" alt="开关/按钮 接线示例" loading="lazy" />
+                        <span class="example-title">开关/按钮 接线示例</span>
+                    </div>
+                    <div class="example-item">
+                        <img src="/images/input_npn.jpg" alt="NPN信号传感器 接线示例" loading="lazy" />
+                        <span class="example-title">NPN信号传感器 接线示例</span>
+                    </div>
+                    <div class="example-item">
+                        <img src="/images/input_reply.jpg" alt="继电器作为输入 接线示例" loading="lazy" />
+                        <span class="example-title">继电器作为输入 接线示例</span>
+                    </div>
+                </div>
             </div>
         `,
     },
@@ -256,6 +327,34 @@ const interfaces = [
         detail: `
             <div class="detail-content">
                 <p>实时指示 6 路继电器的当前动作状态。</p>
+            </div>
+        `,
+    },
+    {
+        id: "rf433Tx",
+        name: "14、遥控信号(433MHz)发送",
+        labelName: "·433MHz发送",
+        area: { top: "30%", left: "75%", width: "10%", height: "5%" },
+        labelPos: { top: "50%", left: "100%" },
+        align: "right",
+        vAlign: "down",
+        detail: `
+            <div class="detail-content">
+                <p>发送433MHz遥控信号。</p>
+            </div>
+        `,
+    },
+    {
+        id: "rf433Rx",
+        name: "15、遥控信号(433MHz)接收",
+        labelName: "·433MHz接收",
+        area: { top: "45%", left: "75%", width: "10%", height: "5%" },
+        labelPos: { top: "65%", left: "100%" },
+        align: "right",
+        vAlign: "down",
+        detail: `
+            <div class="detail-content">
+                <p>接收433MHz遥控信号。</p>
             </div>
         `,
     },
