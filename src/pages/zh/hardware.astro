@@ -408,7 +408,9 @@ const interfaces = [
                 <div class="power-group" style="margin-top: 1rem;">
                     <strong class="group-title">· RS485 Modbus RTU (选配)</strong>
                     <div class="config-block">
+                        <p>宜启智控作为RS485主机,支持读取和控制各种RS485从机设备。</p>
                         <p><span class="config-label">协议标准:</span> Modbus RTU 标准协议</p>
+                        <p><span class="config-label">波特率:</span> 1200~38400bps</p>
                         <p><span class="config-label">读取功能码:</span> 01H、02H、03H、04H</p>
                         <p><span class="config-label">写入功能码:</span> 05H、06H、0FH、10H</p>
                         <p><span class="config-label">设备容量:</span> 最多16个从机,可读取32个数据值和32个状态值(线圈/离散)</p>
@@ -517,7 +519,7 @@ const interfaces = [
         vAlign: "up",
         detail: `
             <div class="detail-content">
-                <p>为小功率传感器或外部显示屏提供 3.3V 供电。</p>
+                <p>为小功率传感器提供直流 3V 供电。输出最大负载电流30mA, "·3V输出"端口为正极, "·公共地"端口为负极</p>
             </div>
         `,
     },
