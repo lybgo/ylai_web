@@ -45,7 +45,7 @@ const interfaces = [
                 <div class="power-group">
                     <strong class="group-title">2.1、标准 PWM</strong>
                     <div class="config-block">
-                        <p>基于 N-MOS 开漏输出，Pn 端口上拉 DC 5V。支持频率：0.025Hz ~ 150kHz，占空比：0.00% ~ 100.00%</p>
+                        <p>基于 N-MOS 开漏输出，Pn 端口上拉 DC 5V。支持频率控制：0.025Hz ~ 150kHz，占空比控制：0.00% ~ 100.00%，支持线性加减速控制</p>
                         <p><span class="config-label">端口定义:</span> ·Pn 表示 PWM 输出正极，·Gn 表示负极 (GND)。</p>
                         <p><span class="config-label">负载能力:</span> 单路支持最高 DC 36V 10A 开关负载或 DC 36V 8A PWM 负载。</p>
                     </div>
@@ -266,9 +266,9 @@ const interfaces = [
                                     </div>
                                     <div class="mb-1.5">
                                         <span class="desc-text-highlight">2. </span>
-                                        <span class="desc-text">以第二块输入状态为例,内容 </span>
-                                        <code class="desc-code">"2~4 82"</code>
-                                        <span class="desc-text"> 表示输入2,当前输入频率为4Hz,累计脉冲数82个。</span>
+                                        <span class="desc-text">以第三块输入状态为例,内容 </span>
+                                        <code class="desc-code">"3~0 2546"</code>
+                                        <span class="desc-text"> 表示输入3,当前输入的频率为0Hz,累计脉冲数2546个。</span>
                                     </div>
                                     <div class="mb-0">
                                         <span class="desc-text-highlight">3. </span>
@@ -364,7 +364,7 @@ const interfaces = [
                             <div class="mt-2 py-1 text-center">
                                 <div class="text-left bg-gray-50 p-2 px-3 rounded-md mt-2">
                                     <div class="desc-text">1. 此区域有三列数据对应模拟量输入1~3。</div>
-                                    <div class="desc-text">2. 以第一列数据(模拟量1)为例,内容："5.84 1.17mA" 表示模拟量1的量程值(实际值)：5.84, 物理输入原始数据值：1.17mA。</div>
+                                    <div class="desc-text">2. 以第一列数据(模拟量1)为例,内容："14.74 0.74V" 表示模拟量1的量程值(实际值)：14.74, 物理输入原始数据值：0.74V。</div>
                                     <div class="desc-text">3. 点击每列右边的“齿轮”图标进入对应的参数设置界面(如右图)。</div>
                                     <div class="desc-text">4. 右图中的“模式”设置要与设备上的物理挡位切换开关一致。</div>
                                 </div>
@@ -467,7 +467,43 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>IIC 接口可接温湿度、光照、屏幕等数字模块。</p>
+                <p>支持IIC设备读写操作，内置SHT30温湿度传感器和光照度传感器的协议解析，即插即用；其中SHT30的温度值对应APP中的“温度2”; IIC通信电平为3.3V</p>
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· 接线示例</strong>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item">
+                        <img src="/images/iict.jpg" alt="SHT30温湿度传感器" loading="lazy" />
+                        <span class="example-title">SHT30温湿度传感器</span>
+                    </div>
+                    <div class="example-item">
+                        <img src="/images/iicl.jpg" alt="光照度传感器" loading="lazy" />
+                        <span class="example-title">光照度传感器</span>
+                    </div>
+                    <div class="example-item  example-item-wide">
+                        <img src="/images/iicn.jpg" alt="多路IIC传感器" loading="lazy" />
+                        <span class="example-title">多路IIC传感器</span>
+                    </div>
+                </div>
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· App中IIC相关界面:</strong>
+                </div>
+                <div class="screenshot-gallery">
+                    <div class="gallery-item">
+                        <img src="/images/screenshot/params.jpg" alt="IIC设备参数界面" loading="lazy" />
+                        <div style="position: absolute; top: 92%; left: 30%; width: 23%; height: 8%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;" ></div>
+                        <div style="position: absolute; top: 12%; left: 54%; width: 26%; height: 6%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                        <div style="position: absolute; top: 31%; left: 2%; width: 41%; height: 11%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                        <div style="position: absolute; top: 46.5%; left: 16.5%; width: 12%; height: 7%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                        <div style="position: absolute; top: 41%; left: 44%; width: 55%; height: 13%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/images/iics1.jpg" alt="IIC数据读取界面" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/images/iics2.jpg" alt="IIC数据写入界面" loading="lazy" />
+                    </div>
+                </div>
             </div>
         `,
     },
@@ -1764,5 +1800,13 @@ const interfaces = [
     .btn-primary:hover {
         transform: translateY(-2px);
         color: white;
+    }
+
+    .imagecover {
+        position: absolute;
+        border: 3px solid #4ecdc4;
+        background: rgba(78,205,196,0.1);
+        border-radius: 0.25rem;
+        z-index: 10;
     }
 </style>
