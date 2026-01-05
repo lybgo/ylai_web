@@ -75,7 +75,7 @@ const interfaces = [
                         <p>Pn 为输出电压正极，Gn 为电压负极，最大负载电流为 10mA。</p>
                     </div>
                     <div class="wiring-examples">
-                        <div class="example-item">
+                        <div class="example-item example-item-wide">
                             <img src="/images/pwm_10v.jpg" alt="0-10V控制变频器 接线示例" loading="lazy" />
                             <span class="example-title">0-10V控制变频器 接线示例</span>
                         </div>
@@ -87,7 +87,7 @@ const interfaces = [
                         <p>Pn 为电流输出端口，Gn 为电流输入端口。</p>
                     </div>
                     <div class="wiring-examples">
-                        <div class="example-item">
+                        <div class="example-item example-item-wide">
                             <img src="/images/pwm_20ma.jpg" alt="0-20mA设备控制 接线示例" loading="lazy" />
                             <span class="example-title">0-20mA设备控制 接线示例</span>
                         </div>
@@ -232,7 +232,7 @@ const interfaces = [
                         <img src="/images/input_btn.jpg" alt="开关/按钮 接线示例" loading="lazy" />
                         <span class="example-title">开关/按钮 接线示例</span>
                     </div>
-                    <div class="example-item">
+                    <div class="example-item  example-item-wide">
                         <img src="/images/input_npn.jpg" alt="NPN信号传感器 接线示例" loading="lazy" />
                         <span class="example-title">NPN信号传感器 接线示例</span>
                     </div>
@@ -387,10 +387,73 @@ const interfaces = [
         labelPos: { top: "35%", left: "100%" },
         align: "right",
         vAlign: "down",
-        detail: `
+       detail: `
             <div class="detail-content">
-                <p>支持 Modbus RTU 协议，主从机模式自由切换。</p>
-                <p>复用 DS18B20 数字温度传感器接口。</p>
+                <div class="power-group">
+                    <strong class="group-title">· A+/温度 端口</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">默认功能:</span> 支持 DS18B20 型温度传感器,读取值对应 APP 中的"温度1"。</p>
+                        <p><span class="config-label">注意事项:</span> 传感器线长应≤2米,超长易受干扰导致读取失败。</p>
+                        <p><span class="config-label">选配RS485时:</span> 此端口作为 RS485 A+ 端口,DS18B20功能失效。</p>
+                        <div class="wiring-examples">
+                            <div class="example-item example-item-wide">
+                                <img src="/images/ds18b20.jpg" alt="DS18B20温度传感器" loading="lazy" />
+                                <span class="example-title">DS18B20温度传感器 接线示例</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+       
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· RS485 Modbus RTU (选配)</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">协议标准:</span> Modbus RTU 标准协议</p>
+                        <p><span class="config-label">读取功能码:</span> 01H、02H、03H、04H</p>
+                        <p><span class="config-label">写入功能码:</span> 05H、06H、0FH、10H</p>
+                        <p><span class="config-label">设备容量:</span> 最多16个从机,可读取32个数据值和32个状态值(线圈/离散)</p>
+                        <p><span class="config-label">读取周期:</span> 每0.5秒自动循环读取</p>
+                        <p><span class="config-label">从机地址:</span> 写入命令支持地址范围 1-31</p>
+                        <p><span class="config-label">支持设备:</span> PLC、工控触摸屏、智能电表、气象站、继电器模块、伺服电机、变频器、PH传感器、溶解氧传感器等</p>
+                        <p><span class="config-label">正确接线示例:</span></p>
+                        <div class="wiring-examples">
+                            <div class="example-item example-item-wide">
+                                <img src="/images/rs485_1.jpg" alt="单个RS485设备接线示例" loading="lazy" />
+                                <span class="example-title">单个RS485设备接线示例</span>
+                            </div>
+                            <div class="example-item example-item-wide">
+                                <img src="/images/rs485_n.jpg" alt="多个RS485设备接线示例" loading="lazy" />
+                                <span class="example-title">多个RS485设备—手牵手接线(正确)</span>
+                            </div>
+                        </div>
+                        <p><span class="config-label"><br/>不建议(容易受干扰)接线示例:</span></p>
+                        <div class="wiring-examples">
+                            <div class="example-item example-item-wide">
+                                <img src="/images/rs485_ne1.jpg" alt="多个RS485设备接线示例" loading="lazy" />
+                                <span class="example-title">多个RS485设备-T型接线（不建议，容易受干扰）</span>
+                            </div>
+                            <div class="example-item example-item-wide">
+                                <img src="/images/rs485_ne2.jpg" alt="多个RS485设备接线示例" loading="lazy" />
+                                <span class="example-title">多个RS485设备-星型接线（不建议，容易受干扰）</span>
+                            </div>
+                        </div>
+                        <p><span class="config-label"><br/>App中RS485相关界面:</span></p>
+                        <div class="screenshot-gallery">
+                            <div class="gallery-item">
+                                <img src="/images/rs485s1.jpg" alt="RS485设备配置界面" loading="lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <img src="/images/rs485s2.jpg" alt="RS485数据读取界面" loading="lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <img src="/images/rs485s3.jpg" alt="RS485参数设置" loading="lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <img src="/images/rs485s4.jpg" alt="RS485状态监控" loading="lazy" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         `,
     },
@@ -1456,14 +1519,66 @@ const interfaces = [
         transition: transform 0.3s ease;
     }
 
+    /* RS485接线图专用样式 - 更宽的宽高比 */
+    :global(.example-item-wide) {
+        grid-column: span 2; /* 占据2列宽度 */
+    }
+
     :global(.example-item:hover) {
         transform: translateY(-4px);
         box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.15);
     }
 
+    /* Screenshot Gallery - 可放大的截图画廊 */
+    :global(.screenshot-gallery) {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    :global(.gallery-item) {
+        position: relative;
+        background: #fdfdfd;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        padding: 8px;
+        overflow: visible;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    :global(.gallery-item img) {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+
+    :global(.gallery-item:hover) {
+        z-index: 1000;
+    }
+
+    :global(.gallery-item:hover img) {
+        transform: scale(1.5);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        position: relative;
+        z-index: 1001;
+    }
+
     @media (max-width: 768px) {
         :global(.wiring-examples) {
             grid-template-columns: 1fr;
+        }
+        
+        :global(.screenshot-gallery) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        :global(.gallery-item:hover img) {
+            transform: scale(2);
         }
     }
 
