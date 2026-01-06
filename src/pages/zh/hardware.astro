@@ -65,6 +65,7 @@ const interfaces = [
                         <p>基于 N-MOS 开漏输出，Pn 端口上拉 DC 5V。支持频率控制：0.025Hz ~ 150kHz，占空比控制：0.00% ~ 100.00%，支持线性加减速控制</p>
                         <p><span class="config-label">端口定义:</span> ·Pn 表示 PWM 输出正极，·Gn 表示负极 (GND)。</p>
                         <p><span class="config-label">负载能力:</span> 单路支持最高 DC 36V 10A 开关负载或 DC 36V 8A PWM 负载。</p>
+                        <p><span class="config-label">常用于控制:</span> 直流电机速度、步进电机速度、伺服电机速度、舵机角度、照明明暗、变频器频率、电动阀门开度等。</p>
                     </div>
                     <div class="power-group" style="margin-top: 1rem;">
                         <strong class="group-title">· 接线示例</strong>
@@ -75,18 +76,18 @@ const interfaces = [
                             <span class="example-title">PWM接口内部简化电路图</span>
                         </div>
                         <div class="example-item example-item-wide">
-                            <img src="/images/pwm_led.jpg" alt="LED灯明亮/直流电机快慢控制 接线示例" loading="lazy" />
-                            <span class="example-title">LED灯明亮/直流电机快慢控制 接线示例</span>
+                            <img src="/images/pwm_led.jpg" alt="LED灯明亮/直流电机快慢控制" loading="lazy" />
+                            <span class="example-title">LED灯明亮/直流电机快慢控制</span>
                         </div>
                     </div>
                     <div class="wiring-examples">
                         <div class="example-item example-item-wide">
-                            <img src="/images/pwm_steper.jpg" alt="步进电机速度控制 接线示例" loading="lazy" />
-                            <span class="example-title">步进电机速度控制 接线示例</span>
+                            <img src="/images/pwm_steper.jpg" alt="步进电机速度控制" loading="lazy" />
+                            <span class="example-title">步进电机速度控制</span>
                         </div>
                         <div class="example-item example-item-wide">
-                            <img src="/images/pwm_steper2.jpg" alt="舵机角度控制 接线示例" loading="lazy" />
-                            <span class="example-title">舵机角度控制 接线示例</span>
+                            <img src="/images/pwm_steper2.jpg" alt="舵机角度控制" loading="lazy" />
+                            <span class="example-title">舵机角度控制</span>
                         </div>
                     </div>
                 </div>
@@ -127,7 +128,7 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>实时显示 PWM1~4通道的输出状态。可观察开关和明暗状态。</p>
+                <p>实时显示 PWM1~4通道的输出状态。可观察开关和明暗状态。<br />·P1表示PWM1通道的输出状态，P2表示PWM2通道的输出状态，依此类推。</p>
             </div>
         `,
     },
@@ -649,13 +650,13 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>实时指示 6 路继电器的当前动作状态。</p>
+                <p>实时显示各路继电器的当前开关状态。·O1表示继电器1/开关1，·O2表示继电器2/开关2，依此类推。</p>
             </div>
         `,
     },
     {
         id: "rf433Tx",
-        name: "14、遥控信号(433MHz)发送",
+        name: "14、遥控信号(433MHz)发送(选配)",
         labelName: "·433MHz发送",
         area: { top: "30%", left: "75%", width: "10%", height: "5%" },
         labelPos: { top: "50%", left: "100%" },
@@ -663,13 +664,25 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>发送433MHz遥控信号。</p>
+                <p>此功能为选配，用于支持发送433MHz标准的遥控信号。</p>
+                <p><span class="config-label">常用于控制:</span> 无线开关、电动车库门、电动道闸、无线推杆等设备。</p>
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· App中433MHz信号发送相关界面:</strong>
+                </div>
+                <div class="screenshot-gallery">
+                    <div class="gallery-item">
+                        <img src="/images/433rt.jpg" alt="遥控器配置界面" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/images/433t.jpg" alt="作为自动化逻辑的执行任务" loading="lazy" />
+                    </div>
+                </div>
             </div>
         `,
     },
     {
         id: "rf433Rx",
-        name: "15、遥控信号(433MHz)接收",
+        name: "15、遥控信号(433MHz)接收(选配)",
         labelName: "·433MHz接收",
         area: { top: "45%", left: "75%", width: "10%", height: "5%" },
         labelPos: { top: "65%", left: "100%" },
@@ -677,7 +690,23 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>接收433MHz遥控信号。</p>
+                <p>此功能为选配，用于支持接收433MHz标准的遥控信号。</p>
+                <p><span class="config-label">常用于接收:</span> 433MHz遥控器、随意贴开关、433MHz无线传感器等设备的信号。根据这些信号配置执行相关的控制逻辑。</p>
+                <p><span class="config-label">方便老人、小孩通过遥控器控制相关设备</span>。</p>
+                <div class="screenshot-gallery">
+                    <div class="gallery-item">
+                        <img src="/images/screenshot/params.jpg" alt="433MHz信号接收界面" loading="lazy" />
+                        <div style="position: absolute; top: 92%; left: 30%; width: 23%; height: 8%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;" ></div>
+                        <div style="position: absolute; top: 12%; left: 54%; width: 26%; height: 6%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                        <div style="position: absolute; top: 31%; left: 43%; width: 56%; height: 11%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/images/433rt.jpg" alt="遥控器配置界面" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/images/433r.jpg" alt="作为自动化逻辑的条件" loading="lazy" />
+                    </div>
+                </div>
             </div>
         `,
     },
@@ -810,297 +839,6 @@ const interfaces = [
                             </div>
                         ))
                     }
-                </div>
-            </section>
-
-            <!-- Relay Output -->
-            <section id="relay" class="doc-section">
-                <h2>继电器输出</h2>
-                <p>
-                    继电器输出用于控制照明、水泵、电磁阀、交流接触器等负载设备。
-                </p>
-
-                <div class="info-card warning">
-                    <h4>⚠️ 安全注意</h4>
-                    <p>
-                        高压接线请由专业电工操作，确保高低压分离，避免触电风险。
-                    </p>
-                </div>
-
-                <h3>电气参数</h3>
-                <table class="spec-table">
-                    <thead>
-                        <tr>
-                            <th>参数</th>
-                            <th>规格</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>最大阻性负载</td>
-                            <td>AC 220V 9A / DC 30V 9A</td>
-                        </tr>
-                        <tr>
-                            <td>最大感性负载</td>
-                            <td>AC 220V 3A / DC 30V 3A</td>
-                        </tr>
-                        <tr>
-                            <td>触点类型</td>
-                            <td>常开(NO) + 公共端(COM)</td>
-                        </tr>
-                        <tr>
-                            <td>继电器寿命</td>
-                            <td>>10万次</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>接线说明</h3>
-                <ul class="feature-list">
-                    <li><strong>COM端</strong>：公共端，接电源（火线/正极）</li>
-                    <li><strong>NO端</strong>：常开端，接负载</li>
-                    <li>大功率负载需外接交流接触器进行扩展</li>
-                </ul>
-            </section>
-
-            <!-- PWM Output -->
-            <section id="pwm" class="doc-section">
-                <h2>PWM输出</h2>
-                <p>
-                    PWM输出用于LED调光、电机调速、步进电机驱动、舵机控制等需要精确控制的场景。
-                </p>
-
-                <h3>电气参数</h3>
-                <table class="spec-table">
-                    <thead>
-                        <tr>
-                            <th>参数</th>
-                            <th>规格</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>输出类型</td>
-                            <td>NMOS开漏输出</td>
-                        </tr>
-                        <tr>
-                            <td>最大开关负载</td>
-                            <td>DC 36V 10A</td>
-                        </tr>
-                        <tr>
-                            <td>最大PWM负载</td>
-                            <td>DC 36V 8A</td>
-                        </tr>
-                        <tr>
-                            <td>占空比范围</td>
-                            <td>0-100% (精度0.01%)</td>
-                        </tr>
-                        <tr>
-                            <td>频率范围</td>
-                            <td>1Hz - 100kHz</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>应用场景</h3>
-                <ul class="feature-list">
-                    <li><strong>LED调光</strong>：占空比调节实现无级调光</li>
-                    <li><strong>电机调速</strong>：配合电机驱动器调节转速</li>
-                    <li><strong>步进电机</strong>：脉冲+方向信号精确定位</li>
-                    <li><strong>舵机控制</strong>：脉宽调节角度位置</li>
-                </ul>
-            </section>
-
-            <!-- Digital Input -->
-            <section id="digital-input" class="doc-section">
-                <h2>开关量输入</h2>
-                <p>
-                    开关量输入支持无源干接点、有源湿接点、NPN传感器信号及频率/脉冲计数。
-                </p>
-
-                <h3>电气参数</h3>
-                <table class="spec-table">
-                    <thead>
-                        <tr>
-                            <th>参数</th>
-                            <th>规格</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>输入类型</td>
-                            <td>干接点 / NPN / 电平信号</td>
-                        </tr>
-                        <tr>
-                            <td>输入电压范围</td>
-                            <td>DC 3.3V - 24V</td>
-                        </tr>
-                        <tr>
-                            <td>最大频率采集</td>
-                            <td>20kHz</td>
-                        </tr>
-                        <tr>
-                            <td>脉冲计数</td>
-                            <td>32位计数器，断电保存</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>支持传感器类型</h3>
-                <ul class="feature-list">
-                    <li>浮球水位开关、行程开关</li>
-                    <li>光电开关、接近开关(NPN型)</li>
-                    <li>门磁、烟雾报警器</li>
-                    <li>流量计脉冲信号</li>
-                </ul>
-            </section>
-
-            <!-- Analog Input -->
-            <section id="analog-input" class="doc-section">
-                <h2>模拟量输入</h2>
-                <p>模拟量输入支持工业标准的4-20mA电流信号和0-10V电压信号。</p>
-
-                <h3>电气参数</h3>
-                <table class="spec-table">
-                    <thead>
-                        <tr>
-                            <th>通道类型</th>
-                            <th>输入范围</th>
-                            <th>精度</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>电流输入</td>
-                            <td>4-20mA</td>
-                            <td>12位ADC</td>
-                        </tr>
-                        <tr>
-                            <td>电压输入</td>
-                            <td>0-10V</td>
-                            <td>12位ADC</td>
-                        </tr>
-                        <tr>
-                            <td>自定义ADC</td>
-                            <td>0-1.5V (需分压电阻)</td>
-                            <td>12位ADC</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>支持传感器</h3>
-                <ul class="feature-list">
-                    <li>4-20mA：压力传感器、液位传感器、温湿度变送器</li>
-                    <li>0-10V：光照度传感器、风速传感器</li>
-                    <li>可在APP中配置量程映射，直接显示物理量</li>
-                </ul>
-            </section>
-
-            <!-- Communication -->
-            <section id="communication" class="doc-section">
-                <h2>通信接口</h2>
-
-                <h3>RS485 Modbus</h3>
-                <p>支持RS485 Modbus RTU协议，可作为主机读写从机设备。</p>
-                <table class="spec-table">
-                    <thead>
-                        <tr>
-                            <th>参数</th>
-                            <th>规格</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>协议</td>
-                            <td>Modbus RTU</td>
-                        </tr>
-                        <tr>
-                            <td>波特率</td>
-                            <td>1200 - 115200 bps</td>
-                        </tr>
-                        <tr>
-                            <td>最大从机数</td>
-                            <td>32个</td>
-                        </tr>
-                        <tr>
-                            <td>功能码支持</td>
-                            <td>01H/02H/03H/04H/05H/06H/0FH/10H</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>IIC接口</h3>
-                <p>用于接入IIC协议的数字传感器。</p>
-                <ul class="feature-list">
-                    <li>SHT30/SHT40 温湿度传感器</li>
-                    <li>BH1750 光照度传感器</li>
-                    <li>其他IIC协议传感器（可定制）</li>
-                </ul>
-
-                <h3>433MHz无线</h3>
-                <p>可选配433MHz无线收发模块。</p>
-                <ul class="feature-list">
-                    <li>接收：匹配遥控器、门磁、烟感等设备</li>
-                    <li>发射：学习并发射遥控器信号</li>
-                    <li>通信距离：室内约50米，空旷约200米</li>
-                </ul>
-            </section>
-
-            <!-- Models Comparison -->
-            <section id="models" class="doc-section">
-                <h2>型号规格对比</h2>
-                <table class="spec-table models-table">
-                    <thead>
-                        <tr>
-                            <th>型号</th>
-                            <th>继电器输出</th>
-                            <th>PWM输出</th>
-                            <th>开关量输入</th>
-                            <th>模拟量输入</th>
-                            <th>适用场景</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>2路款</strong></td>
-                            <td>2路</td>
-                            <td>2路</td>
-                            <td>2路</td>
-                            <td>1路</td>
-                            <td>简单控制、DIY项目</td>
-                        </tr>
-                        <tr>
-                            <td><strong>3+2路款</strong></td>
-                            <td>3路</td>
-                            <td>2路</td>
-                            <td>3路</td>
-                            <td>2路</td>
-                            <td>中型项目、教学实验</td>
-                        </tr>
-                        <tr>
-                            <td><strong>4路款</strong></td>
-                            <td>4路</td>
-                            <td>4路</td>
-                            <td>4路</td>
-                            <td>2路</td>
-                            <td>通用控制、小型工程</td>
-                        </tr>
-                        <tr>
-                            <td><strong>6+4路款</strong></td>
-                            <td>6路</td>
-                            <td>4路</td>
-                            <td>6路</td>
-                            <td>3路</td>
-                            <td>复杂场景、工业应用</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="cta-box">
-                    <p>不确定选择哪个型号？</p>
-                    <a href="/zh/compare" class="btn btn-primary"
-                        >查看选型指南 →</a
-                    >
                 </div>
             </section>
         </main>
