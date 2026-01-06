@@ -17,16 +17,16 @@ const interfaces = [
                 <div class="power-group">
                     <strong class="group-title">· L/36V · N/GND 端口</strong>
                     <div class="config-block">
-                        <p><span class="config-label">交流版 (选配):</span> 接入 交流AC 70-270V (47-63Hz) 或 直流DC 100-380V。不区分零火线序。</p>
-                        <p><span class="config-label">直流宽电压版 (选配):</span> 支持 直流DC 9-60V (>9W)。L/36V端接正极，N/GND端接负极。</p>
-                        <p><span class="config-label">直流5V标配版:</span> 此端口组无作用。</p>
+                        <p><span class="config-label">交流版 (选配):</span> 接入交流 AC 70-270V (47-63Hz) 或 直流 DC 100-380V。不区分零火线。</p>
+                        <p><span class="config-label">直流宽电压版 (选配):</span> 支持直流 DC 9-60V (功率 >9W)。L/36V 端接正极，N/GND 端接负极。</p>
+                        <p><span class="config-label">直流 5V 标配版:</span> 此端口无效。</p>
                     </div>
                 </div>
-                <div class="power-group" style="margin-top: 1rem;">
+                <div class="power-group">
                     <strong class="group-title">· 5V · GND 端口</strong>
                     <div class="config-block">
-                        <p><span class="config-label">输入模式:</span> 标配直流5V版使用。直流 5V (电流>1A)，GND 接负极。</p>
-                        <p><span class="config-label">输出模式:</span> AC/宽压版此口输出 5V (电流<100mA)，可为小功率传感器供电。</p>
+                        <p><span class="config-label">输入模式:</span> 标配直流 5V 版使用。直流 5V (电流 >1A)，GND 接负极。</p>
+                        <p><span class="config-label">输出模式:</span> AC / 宽压版此端口输出 5V (电流 <100mA)，可为小功率传感器供电。</p>
                     </div>
                 </div>
                 <strong class="group-title"><br/>· 接线示例：</strong>
@@ -62,12 +62,12 @@ const interfaces = [
                 <div class="power-group">
                     <strong class="group-title">· 标准 PWM</strong>
                     <div class="config-block">
-                        <p>基于 N-MOS 开漏输出，Pn 端口上拉 DC 5V。支持频率控制：0.025Hz ~ 150kHz，占空比控制：0.00% ~ 100.00%，支持线性加减速控制</p>
+                        <p>采用 N-MOS 开漏输出，Pn 端口上拉 DC 5V。支持频率控制：0.025Hz ~ 150kHz，占空比控制：0.00% ~ 100.00%，支持线性加减速控制。</p>
                         <p><span class="config-label">端口定义:</span> ·Pn 表示 PWM 输出正极，·Gn 表示负极 (GND)。</p>
                         <p><span class="config-label">负载能力:</span> 单路支持最高 DC 36V 10A 开关负载或 DC 36V 8A PWM 负载。</p>
-                        <p><span class="config-label">常用于控制:</span> 直流电机速度、步进电机速度、伺服电机速度、舵机角度、照明明暗、变频器频率、电动阀门开度等。</p>
+                        <p><span class="config-label">常用于控制:</span> 直流电机调速、步进/伺服电机脉冲控制、舵机角度、灯光亮度调节、变频器频率、阀门开度等。</p>
                     </div>
-                    <div class="power-group" style="margin-top: 1rem;">
+                    <div class="power-group">
                         <strong class="group-title">· 接线示例</strong>
                     </div>
                     <div class="wiring-examples">
@@ -91,7 +91,7 @@ const interfaces = [
                         </div>
                     </div>
                 </div>
-                <div class="power-group" style="margin-top: 1rem;">
+                <div class="power-group">
                     <strong class="group-title">2.2、0-10V 信号输出(定制)</strong>
                     <div class="config-block">
                         <p>Pn 为输出电压正极，Gn 为电压负极，最大负载电流为 10mA。</p>
@@ -103,7 +103,7 @@ const interfaces = [
                         </div>
                     </div>
                 </div>
-                <div class="power-group" style="margin-top: 1rem;">
+                <div class="power-group">
                     <strong class="group-title">2.3、0-20mA 信号输出(定制)</strong>
                     <div class="config-block">
                         <p>Pn 为电流输出端口，Gn 为电流输入端口。</p>
@@ -142,7 +142,7 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>Micro USB接口(旧版)/Type-C接口(新版)，用于便捷的给设备提供5V电源供电，电源电流要求大于1.5A。<br /> 注意：供电线材请使用好的线材，避免因线材质量问题压降大导致设备供电电压不足，无法正常工作。</p>
+                <p>Micro USB (旧版) / Type-C (新版) 接口，用于便捷地为设备提供 5V 供电，要求电流大于 1.5A。<br /> <span class="hint">注意：请选用优质线材，以免因线阻过大导致压降过高，造成设备供电不足而无法正常工作。</span></p>
             </div>
         `,
     },
@@ -157,25 +157,25 @@ const interfaces = [
         detail: `
             <div class="detail-content">
                 <div class="power-group">
-                    <strong class="group-title">· 重启：短按1次</strong>
+                    <strong class="group-title">· 重启：短按 1 次</strong>
                     <div class="config-block">
                         <p>设备断电重启。</p>
                     </div>
                 </div>
         
-                <div class="power-group" style="margin-top: 1rem;">
-                    <strong class="group-title">· 重置：连续短按7次</strong>
+                <div class="power-group">
+                    <strong class="group-title">· 重置：连续短按 7 次</strong>
                     <div class="config-block">
-                        <p><span class="config-label">操作方法:</span> 连续短按7次,每次按下1秒,松开1秒。</p>
-                        <p><span class="config-label">功能:</span> 恢复出厂设置,设备将恢复到出厂默认状态,所有配置将被清空。</p>
+                        <p><span class="config-label">操作方法:</span> 连续短按 7 次：每次按下 1 秒，松开 1 秒。</p>
+                        <p><span class="config-label">功能:</span> 恢复出厂设置，清除所有用户配置，设备恢复至出厂默认状态。</p>
                         <p class="hint">⚠️ 请谨慎操作此功能</p>
                     </div>
                 </div>
         
-                <div class="power-group" style="margin-top: 1rem;">
-                    <strong class="group-title">· APP操作</strong>
+                <div class="power-group">
+                    <strong class="group-title">· APP 操作</strong>
                     <div class="config-block">
-                        <p>在"源来智能"APP中,点击设备名称进入设备详情页,在"设置"界面中有"重置"和"重启"按钮,方便操作。</p>
+                        <p>在“源来智能”APP 中，进入设备详情页，在“设置”界面中可点击“重置”或“重启”按钮进行操作。</p>
                     </div>
                 </div>
             </div>
@@ -194,26 +194,26 @@ const interfaces = [
                 <div class="power-group">
                     <strong class="group-title">· 电源指示 (PWR)</strong>
                     <div class="config-block">
-                        <p>亮灯表示设备供电正常。</p>
+                        <p>常亮表示设备供电正常。</p>
                     </div>
                 </div>
 
-                <div class="power-group" style="margin-top: 1rem;">
+                <div class="power-group">
                     <strong class="group-title">· 运行状态 (RUN)</strong>
                     <div class="config-block">
-                        <p><span class="config-label">2秒闪一次:</span> 系统运行正常。</p>
-                        <p><span class="config-label">快闪(0.5s/次):</span> 蓝牙连接中 (APP 交互中)。</p>
-                        <p><span class="config-label">双闪(每2s快闪2次):</span> MQTT 版网络连接成功。</p>
-                        <p><span class="config-label">常亮/常灭:</span> 运行异常，请尝试重新上电；若依旧常亮/灭，提示硬件故障。</p>
+                        <p><span class="config-label">慢闪 (2秒/次):</span> 系统运行正常。</p>
+                        <p><span class="config-label">快闪 (0.5秒/次):</span> 蓝牙连接中 (APP 交互中)。</p>
+                        <p><span class="config-label">双闪 (每2秒快闪2次):</span> MQTT 版网络连接成功。</p>
+                        <p><span class="config-label">常亮/常灭:</span> 运行异常，请尝试重新上电；若依旧异常，可能为硬件故障。</p>
                     </div>
                 </div>
 
-                <div class="power-group" style="margin-top: 1rem;">
+                <div class="power-group">
                     <strong class="group-title">· 网络状态 (NET)</strong>
                     <div class="config-block">
                         <p><span class="config-label">涂鸦 WIFI 版:</span> 快闪=待配网；常亮=已联网；常灭=联网失败/连接中。</p>
                         <p><span class="config-label">涂鸦 4G 版 / 4G MQTT 版:</span> 慢闪=已连接基站；常灭=搜索中或网络异常。</p>
-                        <p><span class="config-label">WIFI MQTT 版:</span> 无物理逻辑作用。</p>
+                        <p><span class="config-label">WIFI MQTT 版:</span> 预留 (无实际功能)。</p>
                     </div>
                 </div>
             </div>
@@ -233,9 +233,9 @@ const interfaces = [
                     <strong class="group-title">· 信号类型</strong>
                     <div class="config-block">
                         <p>支持开关量、NPN、频率、脉冲等多种信号输入。</p>
-                        <p><span class="config-label">信号特性:</span> 低电平/负极/GND信号有效。</p>
-                        <p><span class="config-label">高速计数:</span> 支持20kHz频率输入。</p>
-                        <p><span class="config-label">耐压能力:</span> 输入端口耐压1KV。</p>
+                        <p><span class="config-label">信号特性:</span> 低电平 / 负极 / GND 信号有效。</p>
+                        <p><span class="config-label">高速计数:</span> 支持 20kHz 频率输入。</p>
+                        <p><span class="config-label">耐压能力:</span> 输入端口耐压 1KV。</p>
                     </div>
                 </div>
 
@@ -267,41 +267,41 @@ const interfaces = [
                 </div>
                 <div class="power-group mt-4">
                     <strong class="group-title">· APP中查看输入状态</strong>
-                    <div class="flex items-start gap-6">
+                    <div class="params-flex">
                         <!-- 图片容器 -->
-                        <div style="position: relative; width: 20%; flex-shrink: 0;">
+                        <div class="screenshot-thumb">
                             <img src="/images/screenshot/params.jpg" alt="开关量输入状态" loading="lazy" 
                                  style="width: 100%; height: auto; display: block; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);" />
                             <!-- 高亮区域 -->
-                            <div style="position: absolute; top: 92%; left: 30%; width: 23%; height: 8%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
-                            <div style="position: absolute; top: 12%; left: 54%; width: 26%; height: 6%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
-                            <div style="position: absolute; top: 19%; left: 43%; width: 57%; height: 13%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                            <div class="highlight-box" style="top: 92%; left: 30%; width: 23%; height: 8%;"></div>
+                            <div class="highlight-box" style="top: 12%; left: 54%; width: 26%; height: 6%;"></div>
+                            <div class="highlight-box" style="top: 19%; left: 43%; width: 57%; height: 13%;"></div>
                         </div>
                         <!-- 局部放大图 -->
-                        <div style="background: white; border-radius: 18px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border: 3px solid #4ecdc4; padding: 0.5rem; width: 35%; flex-shrink: 0;">
-                            <div style="overflow: hidden; position: relative; width: 100%; aspect-ratio: 50 / 25;">
-                                <img src="/images/screenshot/params.jpg" alt="输入状态局部放大" loading="lazy" 
-                                     style="position: absolute; width: 100%; height: auto; top: 23%; left: -39%; transform: scale(1.8);" />
+                        <div class="zoom-detail-card">
+                            <div class="zoom-viewport" style="aspect-ratio: 50 / 25;">
+                                <img src="/images/screenshot/params.jpg" alt="输入状态局部放大" loading="lazy" class="zoom-image"
+                                     style="top: 23%; left: -39%; transform: scale(1.8);" />
                             </div>
                             <div class="mt-2 py-1 text-center">
                                 <div class="text-left bg-gray-50 p-2 px-3 rounded-md mt-2">
                                     <div class="mb-1.5">
-                                        <span class="desc-text">1. 此区域可以左右滑动,查看更多输入状态。</span>
+                                        <span class="desc-text">1. 此区域可以左右滑动，查看更多输入状态。</span>
                                     </div>
                                     <div class="mb-1.5">
                                         <span class="desc-text-highlight">2. </span>
-                                        <span class="desc-text">以第三块输入状态为例,内容 </span>
+                                        <span class="desc-text">以第三块输入状态为例，内容 </span>
                                         <code class="desc-code">"3~0 2546"</code>
-                                        <span class="desc-text"> 表示输入3,当前输入的频率为0Hz,累计脉冲数2546个。</span>
+                                        <span class="desc-text"> 表示输入 3，当前频率为 0Hz，累计脉冲数 2546 个。</span>
                                     </div>
                                     <div class="mb-0">
                                         <span class="desc-text-highlight">3. </span>
-                                        <span class="desc-text">方块背景 </span>
+                                        <span class="desc-text">状态指示颜色：</span>
 
-                                        <span style="display: inline-block; width: 1.2rem; height: 1rem; border-radius: 0.125rem; vertical-align: middle; background: #87ceeb;"></span>
-                                        <span class="desc-text"> 蓝色表示输入"激活"状态,</span>
-                                        <span style="display: inline-block; width: 1.2rem; height: 1rem; border-radius: 0.125rem; vertical-align: middle; background: white; border: 1px solid #d1d5db;"></span>
-                                        <span class="desc-text"> 白色表示输入"静默"状态。</span>
+                                        <span class="status-dot active"></span>
+                                        <span class="desc-text"> 蓝色表示"激活" (有信号)，</span>
+                                        <span class="status-dot inactive"></span>
+                                        <span class="desc-text"> 白色表示"静默" (无信号)。</span>
                                     </div>
                                 </div>
                             </div>
@@ -324,8 +324,8 @@ const interfaces = [
                 <div class="power-group">
                     <strong class="group-title">· 信号类型</strong>
                     <div class="config-block">
-                        <p>支持 0-20mA / 0-10V / 自定义ADC 等多种模拟量信号的传感器接入。</p>
-                        <p><span class="config-label">如:</span> 液位变送器、压力变送器、电流变送器、温度变送器、位移传感器、风速传感器等。</p>
+                        <p>支持 0-20mA / 0-10V / 自定义 ADC 等多种模拟量信号接入。</p>
+                        <p><span class="config-label">适用设备:</span> 液位变送器、压力变送器、电流变送器、温度变送器、位移传感器、风速传感器等。</p>
                     </div>
                 </div>
         
@@ -339,10 +339,10 @@ const interfaces = [
                 </div>
         
                 <div class="power-group" style="margin-top: 1rem;">
-                    <strong class="group-title">· 挡位切换物理操作</strong>
+                    <strong class="group-title">· 挡位切换 (物理操作)</strong>
                     <div class="config-block">
-                        <p>设备上边侧面有三档切换滑动开关,用于切换不同信号类型。</p>
-                        <p><span class="config-label">如图所示:</span> 模拟量1为自定义ADC挡位,模拟量2为0-10V挡位,模拟量3为0-20mA挡位。</p>
+                        <p>设备顶部侧面设有三档拨动开关，用于切换不同信号类型。</p>
+                        <p><span class="config-label">如图所示:</span> 模拟量 1 为自定义 ADC 挡位，模拟量 2 为 0-10V 挡位，模拟量 3 为 0-20mA 挡位。</p>
                         <img src="/images/adc.jpg" alt="模拟量挡位切换示例" loading="lazy" style="width: 100%; max-width: 500px; margin-top: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
                     </div>
                 </div>
@@ -371,32 +371,32 @@ const interfaces = [
                 </div>
                 <div class="power-group mt-4">
                     <strong class="group-title">· APP中查看输入状态</strong>
-                    <div class="flex items-start gap-6">
+                    <div class="params-flex">
                         <!-- 图片容器 -->
-                        <div style="position: relative; width: 20%; flex-shrink: 0;">
+                        <div class="screenshot-thumb">
                             <img src="/images/screenshot/params.jpg" alt="开关量输入状态" loading="lazy" 
                                  style="width: 100%; height: auto; display: block; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);" />
                             <!-- 高亮区域 -->
-                            <div style="position: absolute; top: 92%; left: 30%; width: 23%; height: 8%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
-                            <div style="position: absolute; top: 12%; left: 54%; width: 26%; height: 6%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
-                            <div style="position: absolute; top: 53%; left: 1%; width: 98%; height: 15%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                            <div class="highlight-box" style="top: 92%; left: 30%; width: 23%; height: 8%;"></div>
+                            <div class="highlight-box" style="top: 12%; left: 54%; width: 26%; height: 6%;"></div>
+                            <div class="highlight-box" style="top: 53%; left: 1%; width: 98%; height: 15%;"></div>
                         </div>
                         <!-- 局部放大图 -->
-                        <div style="background: white; border-radius: 18px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border: 3px solid #4ecdc4; padding: 0.5rem; width: 35%; flex-shrink: 0;">
-                            <div style="overflow: hidden; position: relative; width: 100%; aspect-ratio: 50 / 15;">
-                                <img src="/images/screenshot/params.jpg" alt="模拟量状态局部放大" loading="lazy" 
-                                     style="position: absolute; width: 100%; height: auto; display: block; top: -400%; left: 0%" />
+                        <div class="zoom-detail-card">
+                            <div class="zoom-viewport" style="aspect-ratio: 50 / 15;">
+                                <img src="/images/screenshot/params.jpg" alt="模拟量状态局部放大" loading="lazy" class="zoom-image"
+                                     style="top: -400%; left: 0%" />
                             </div>
                             <div class="mt-2 py-1 text-center">
                                 <div class="text-left bg-gray-50 p-2 px-3 rounded-md mt-2">
-                                    <div class="desc-text">1. 此区域有三列数据对应模拟量输入1~3。</div>
-                                    <div class="desc-text">2. 以第一列数据(模拟量1)为例,内容："14.74 0.74V" 表示模拟量1的量程值(实际值)：14.74, 物理输入原始数据值：0.74V。</div>
-                                    <div class="desc-text">3. 点击每列右边的“齿轮”图标进入对应的参数设置界面(如右图)。</div>
-                                    <div class="desc-text">4. 右图中的“模式”设置要与设备上的物理挡位切换开关一致。</div>
+                                    <div class="desc-text">1. 此区域有三列数据，分别对应模拟量输入 1 ~ 3。</div>
+                                    <div class="desc-text">2. 以第一列数据 (模拟量 1) 为例，内容："14.74 0.74V" 表示模拟量 1 的换算值 (工程量) 为 14.74，原始电压值为 0.74V。</div>
+                                    <div class="desc-text">3. 点击每列右边的“齿轮”图标，可进入对应的参数设置界面 (如右图)。</div>
+                                    <div class="desc-text">4. <span class="hint">注意：APP 中的“模式”设置需与设备上的物理拨动开关挡位保持一致。</span></div>
                                 </div>
                             </div>
                         </div>
-                        <div style="position: relative; width: 20%; flex-shrink: 0;">
+                        <div class="screenshot-thumb">
                             <img src="/images/adc_setting.jpg" alt="模拟量输入参数设置" loading="lazy" 
                                  style="width: 100%; height: auto; display: block; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);" />
                         </div>
@@ -418,31 +418,31 @@ const interfaces = [
                 <div class="power-group">
                     <strong class="group-title">· A+/温度 端口</strong>
                     <div class="config-block">
-                        <p><span class="config-label">默认功能:</span> 支持 DS18B20 型温度传感器,读取值对应 APP 中的"温度1"。</p>
-                        <p><span class="config-label">注意事项:</span> 传感器线长应≤2米,超长易受干扰导致读取失败。</p>
-                        <p><span class="config-label">选配RS485时:</span> 此端口作为 RS485 A+ 端口,DS18B20功能失效。</p>
+                        <p><span class="config-label">默认功能:</span> 支持 DS18B20 温度传感器，读取值对应 APP 中的 "温度1"。</p>
+                        <p><span class="config-label">注意事项:</span> 传感器线长建议 ≤2 米，过长易受干扰导致读取失败。</p>
+                        <p><span class="config-label">选配 RS485 时:</span> 此端口作为 RS485 A+ 端口，DS18B20 功能不可用。</p>
                         <div class="wiring-examples">
                             <div class="example-item example-item-wide">
                                 <img src="/images/ds18b20.jpg" alt="DS18B20温度传感器" loading="lazy" />
-                                <span class="example-title">DS18B20温度传感器 接线示例</span>
+                                <span class="example-title">DS18B20 温度传感器 接线示例</span>
                             </div>
                         </div>
                     </div>
                     
                 </div>
        
-                <div class="power-group" style="margin-top: 1rem;">
+                <div class="power-group mt-4">
                     <strong class="group-title">· RS485 Modbus RTU (选配)</strong>
                     <div class="config-block">
-                        <p>宜启智控作为RS485主机,支持读取和控制各种RS485从机设备。</p>
-                        <p><span class="config-label">协议标准:</span> Modbus RTU 标准协议</p>
-                        <p><span class="config-label">波特率:</span> 1200~38400bps</p>
-                        <p><span class="config-label">读取功能码:</span> 01H、02H、03H、04H</p>
-                        <p><span class="config-label">写入功能码:</span> 05H、06H、0FH、10H</p>
-                        <p><span class="config-label">设备容量:</span> 最多16个从机,可读取32个数据值和32个状态值(线圈/离散)</p>
-                        <p><span class="config-label">读取周期:</span> 每0.5秒自动循环读取</p>
-                        <p><span class="config-label">从机地址:</span> 写入命令支持地址范围 1-31</p>
-                        <p><span class="config-label">支持设备:</span> PLC、工控触摸屏、智能电表、气象站、继电器模块、伺服电机、变频器、PH传感器、溶解氧传感器等</p>
+                        <p>宜启智控作为 RS485 主站 (Master)，支持读取和控制各类 RS485 从站 (Slave) 设备。</p>
+                        <p><span class="config-label">协议标准:</span> Modbus RTU</p>
+                        <p><span class="config-label">波特率:</span> 1200 ~ 38400bps</p>
+                        <p><span class="config-label">读取功能码:</span> 01H, 02H, 03H, 04H</p>
+                        <p><span class="config-label">写入功能码:</span> 05H, 06H, 0FH, 10H</p>
+                        <p><span class="config-label">设备容量:</span> 最多支持 16 个从站。支持读取 32 个数据寄存器和 32 个状态位 (线圈/离散)。</p>
+                        <p><span class="config-label">读取周期:</span> 每 0.5 秒自动循环读取。</p>
+                        <p><span class="config-label">从机地址:</span> 支持地址范围 1 ~ 31。</p>
+                        <p><span class="config-label">支持设备:</span> PLC、工控触摸屏、智能电表、气象站、继电器模块、伺服电机、变频器、PH 传感器、溶解氧传感器等。</p>
                         <p><span class="config-label">正确接线示例:</span></p>
                         <div class="wiring-examples">
                             <div class="example-item example-item-wide">
@@ -451,7 +451,7 @@ const interfaces = [
                             </div>
                             <div class="example-item example-item-wide">
                                 <img src="/images/rs485_n.jpg" alt="多个RS485设备接线示例" loading="lazy" />
-                                <span class="example-title">多个RS485设备—手牵手接线(正确)</span>
+                                <span class="example-title">多个 RS485 设备 — 手牵手 (总线型) 接线 (正确)</span>
                             </div>
                         </div>
                         <p><span class="config-label"><br/>不建议(容易受干扰)接线示例:</span></p>
@@ -495,8 +495,8 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>支持IIC设备读写操作，内置SHT30温湿度传感器和光照度传感器的协议解析，即插即用；其中SHT30的温度值对应APP中的“温度2”; IIC通信电平为3.3V</p>
-                <div class="power-group" style="margin-top: 1rem;">
+                <p>支持 IIC 设备读写。内置 SHT30 温湿度传感器和光照度传感器协议解析，即插即用。<br/>SHT30 检测的温度值对应 APP 中的“温度2”。IIC 通信电平为 3.3V。</p>
+                <div class="power-group mt-4">
                     <strong class="group-title">· 接线示例</strong>
                 </div>
                 <div class="wiring-examples">
@@ -515,17 +515,17 @@ const interfaces = [
                         <span class="example-title">多路IIC传感器</span>
                     </div>
                 </div>
-                <div class="power-group" style="margin-top: 1rem;">
+                <div class="power-group mt-4">
                     <strong class="group-title">· App中IIC相关界面:</strong>
                 </div>
                 <div class="screenshot-gallery">
                     <div class="gallery-item">
                         <img src="/images/screenshot/params.jpg" alt="IIC设备参数界面" loading="lazy" />
-                        <div style="position: absolute; top: 92%; left: 30%; width: 23%; height: 8%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;" ></div>
-                        <div style="position: absolute; top: 12%; left: 54%; width: 26%; height: 6%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
-                        <div style="position: absolute; top: 31%; left: 2%; width: 41%; height: 11%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
-                        <div style="position: absolute; top: 46.5%; left: 16.5%; width: 12%; height: 7%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
-                        <div style="position: absolute; top: 41%; left: 44%; width: 55%; height: 13%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                        <div class="highlight-box" style="top: 92%; left: 30%; width: 23%; height: 8%;"></div>
+                        <div class="highlight-box" style="top: 12%; left: 54%; width: 26%; height: 6%;"></div>
+                        <div class="highlight-box" style="top: 31%; left: 2%; width: 41%; height: 11%;"></div>
+                        <div class="highlight-box" style="top: 46.5%; left: 16.5%; width: 12%; height: 7%;"></div>
+                        <div class="highlight-box" style="top: 41%; left: 44%; width: 55%; height: 13%;"></div>
                     </div>
                     <div class="gallery-item">
                         <img src="/images/iics1.jpg" alt="IIC数据读取界面" loading="lazy" />
@@ -547,7 +547,7 @@ const interfaces = [
         vAlign: "up",
         detail: `
             <div class="detail-content">
-                <p>为小功率传感器提供直流 3V 供电。输出最大负载电流30mA, "·3V输出"端口为正极, "·公共地"端口为负极</p>
+                <p>为小功率传感器提供直流 3V 供电。最大负载电流 30mA。<br/>"·3V输出" 端为正极，"·公共地" 端为负极。</p>
                 <div class="wiring-examples">
                     <div class="example-item example-item-wide">
                         <img src="/images/o3v.jpg" alt="直流3V输出" loading="lazy" />
@@ -570,26 +570,27 @@ const interfaces = [
                 <div class="power-group">
                     <strong class="group-title">· 继电器输出定义</strong>
                     <div class="config-block">
-                        <p>继电器是一种电控开关，控制电路物理导通/断开的开关，无源输出，可控制交流230V以内或直流30V以内的负载设备。</p>
-                        <p><span class="config-label">常用于控制:</span> 照明、水泵、电磁阀、交流接触器、排气扇、风机、控制箱上的按钮、直流电机等设备。</p>
+                        <p>继电器是一种电控开关，用于控制电路的通断 (导通或断开)。它属于无源干节点输出。</p>
+                        <p>可直接控制交流 230V 以内或直流 30V 以内的负载设备。</p>
+                        <p><span class="config-label">常用于控制:</span> 照明灯具、水泵、电磁阀、交流接触器、排气扇、风机、控制柜按钮、直流电机等。</p>
                     </div>
                 </div>
 
-                <div class="power-group" style="margin-top: 1rem;">
+                <div class="power-group mt-4">
                     <strong class="group-title">· 每个继电器有三个端口：</strong>
                     <div class="config-block">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; text-align: center;">
-                            <div style="background: #e0f2fe; padding: 0.5rem; border-radius: 4px;">
-                                <span style="display: block; font-weight: bold; color: #0284c7; font-size: 0.9rem;">常开 (NO)</span>
-                                <span style="font-size: 0.75rem; color: #555;">常态(关)：与公共端口断开<br/>动作(开)：与公共端口导通</span>
+                        <div class="relay-port-legend">
+                            <div class="relay-port-item no">
+                                <span class="relay-port-title">常开 (NO)</span>
+                                <span class="relay-port-desc">常态(关)：与公共端口断开<br/>动作(开)：与公共端口导通</span>
                             </div>
-                            <div style="background: #f3f4f6; padding: 0.5rem; border-radius: 4px;">
-                                <span style="display: block; font-weight: bold; color: #4b5563; font-size: 0.9rem;">公共 (COM)</span>
-                                <span style="font-size: 0.75rem; color: #555;">常态(关)：与常开端口断开，与常闭端口导通<br/>动作(开)：与常开端口导通，与常闭端口断开</span>
+                            <div class="relay-port-item com">
+                                <span class="relay-port-title">公共 (COM)</span>
+                                <span class="relay-port-desc">常态(关)：与常开端口断开，与常闭端口导通<br/>动作(开)：与常开端口导通，与常闭端口断开</span>
                             </div>
-                            <div style="background: #fee2e2; padding: 0.5rem; border-radius: 4px;">
-                                <span style="display: block; font-weight: bold; color: #dc2626; font-size: 0.9rem;">常闭 (NC)</span>
-                                <span style="font-size: 0.75rem; color: #555;">常态(关)：与公共端口导通<br/>动作(开)：与公共端口断开</span>
+                            <div class="relay-port-item nc">
+                                <span class="relay-port-title">常闭 (NC)</span>
+                                <span class="relay-port-desc">常态(关)：与公共端口导通<br/>动作(开)：与公共端口断开</span>
                             </div>
                         </div>
                         <div class="wiring-examples">
@@ -601,20 +602,20 @@ const interfaces = [
                     </div>
                 </div>
 
-                <div class="power-group" style="margin-top: 1rem;">
+                <div class="power-group mt-4">
                     <strong class="group-title">· 电气参数</strong>
                     <div class="config-block">
-                        <p><span class="config-label">最大阻性负载:</span> AC 220V/9A (约1.9kW) 或 DC 30V/9A (约270W)； 电性负载如：发热棒，电热丝，白炽灯等</p>
-                        <p><span class="config-label">最大感性/容性负载:</span> AC 220V/2A (约440W) 或 DC 30V/2A (约60W)； 感性/容性负载如：电磁阀，交流接触器，排气扇，电机，水泵，LED灯等</p>
-                        <p><span class="config-label">使用寿命:</span> 机械/电气开关寿命约 10 万次</p>
-                        <p><span class="config-label">自身功耗:</span> 约 0.36W (5V*72mA)</p>
-                        <div class="info-card warning" style="margin: 0.5rem 0 0 0; padding: 0.75rem; font-size: 0.85rem; border-left: 3px solid #f97316; background: #fff7ed;">
+                        <p><span class="config-label">最大阻性负载:</span> AC 220V/9A (约 1.9kW) 或 DC 30V/9A (约 270W)。<br/>(阻性负载示例：加热棒、电热丝、白炽灯等)</p>
+                        <p><span class="config-label">最大感性/容性负载:</span> AC 220V/2A (约 440W) 或 DC 30V/2A (约 60W)。<br/>(感性/容性负载示例：电磁阀、交流接触器、电机、水泵、LED 驱动电源等)</p>
+                        <p><span class="config-label">使用寿命:</span> 电气寿命约 10 万次，机械寿命约 100 万次。</p>
+                        <p><span class="config-label">线圈功耗:</span> 约 0.36W (5V/72mA)。</p>
+                        <div class="info-card warning compact-warning">
                             <strong>⚠️ 安全警告:</strong> 高压接线必须由专业电工操作。大功率负载请务必外接大功率的继电器或交流接触器使用。
                         </div>
                     </div>
                 </div>
 
-                <div class="power-group" style="margin-top: 1rem;">
+                <div class="power-group mt-4">
                     <strong class="group-title">· 接线示例</strong>
                 </div>
                 <div class="wiring-examples">
@@ -650,7 +651,7 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>实时显示各路继电器的当前开关状态。·O1表示继电器1/开关1，·O2表示继电器2/开关2，依此类推。</p>
+                <p>实时显示各路继电器的当前开关状态。<br/>·O1 表示继电器1 / 开关1，·O2 表示继电器2 / 开关2，依此类推。</p>
             </div>
         `,
     },
@@ -664,9 +665,9 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>此功能为选配，用于支持发送433MHz标准的遥控信号。</p>
-                <p><span class="config-label">常用于控制:</span> 无线开关、电动车库门、电动道闸、无线推杆等设备。</p>
-                <div class="power-group" style="margin-top: 1rem;">
+                <p>选配功能。支持发送 433MHz 标准遥控信号。</p>
+                <p><span class="config-label">常用于控制:</span> 无线开关、电动车库门、电动道闸、无线推杆等。</p>
+                <div class="power-group mt-4">
                     <strong class="group-title">· App中433MHz信号发送相关界面:</strong>
                 </div>
                 <div class="screenshot-gallery">
@@ -690,15 +691,15 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>此功能为选配，用于支持接收433MHz标准的遥控信号。</p>
-                <p><span class="config-label">常用于接收:</span> 433MHz遥控器、随意贴开关、433MHz无线传感器等设备的信号。根据这些信号配置执行相关的控制逻辑。</p>
-                <p><span class="config-label">方便老人、小孩通过遥控器控制相关设备</span>。</p>
+                <p>选配功能。支持接收 433MHz 标准遥控信号。</p>
+                <p><span class="config-label">常用于接收:</span> 433MHz 遥控器、无线随意贴、无线传感器等设备信号，并触发相应的控制逻辑。</p>
+                <p><span class="config-label">特别适合老人方便地通过实体遥控器控制设备。</span></p>
                 <div class="screenshot-gallery">
                     <div class="gallery-item">
                         <img src="/images/screenshot/params.jpg" alt="433MHz信号接收界面" loading="lazy" />
-                        <div style="position: absolute; top: 92%; left: 30%; width: 23%; height: 8%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;" ></div>
-                        <div style="position: absolute; top: 12%; left: 54%; width: 26%; height: 6%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
-                        <div style="position: absolute; top: 31%; left: 43%; width: 56%; height: 11%; border: 3px solid #4ecdc4; background: rgba(78,205,196,0.1); border-radius: 0.25rem; z-index: 10;"></div>
+                        <div class="highlight-box" style="top: 92%; left: 30%; width: 23%; height: 8%;"></div>
+                        <div class="highlight-box" style="top: 12%; left: 54%; width: 26%; height: 6%;"></div>
+                        <div class="highlight-box" style="top: 31%; left: 43%; width: 56%; height: 11%;"></div>
                     </div>
                     <div class="gallery-item">
                         <img src="/images/433rt.jpg" alt="遥控器配置界面" loading="lazy" />
@@ -868,49 +869,49 @@ const interfaces = [
     }
 
     /* Screenshot Highlight Area Styles */
-    .highlight-area {
+    :global(.highlight-box) {
         position: absolute;
         border: 3px solid #4ecdc4;
-        background: rgba(78, 205, 196, 0.3);
+        background: rgba(78, 205, 196, 0.1);
         border-radius: 0.25rem;
-        pointer-events: none;
         z-index: 10;
-        box-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+        pointer-events: none;
     }
 
     /* Zoom Box Styles */
-    .zoom-box {
-        position: absolute;
-        z-index: 100;
+    :global(.zoom-detail-card) {
         background: white;
         border-radius: 18px;
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         border: 3px solid #4ecdc4;
         padding: 0.5rem;
-    }
-
-    .zoom-box-inline {
-        background: white;
-        border-radius: 18px;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        border: 3px solid #4ecdc4;
-        padding: 0.5rem;
-        width: 30%;
+        width: 35%;
         flex-shrink: 0;
     }
 
-    .zoom-img-container {
+    :global(.zoom-viewport) {
         overflow: hidden;
         position: relative;
         width: 100%;
     }
 
-    .zoom-img {
+    :global(.zoom-image) {
         position: absolute;
-        width: 175%;
+        width: 100%;
         height: auto;
         display: block;
-        transform: scale(2);
+    }
+
+    :global(.params-flex) {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    :global(.screenshot-thumb) {
+        position: relative;
+        width: 20%;
+        flex-shrink: 0;
     }
 
     /* Description Text Styles */
@@ -936,20 +937,20 @@ const interfaces = [
     }
 
     /* Status Indicator Box */
-    .status-indicator {
+    :global(.status-dot) {
         display: inline-block;
-        width: 1rem;
-        height: 0.625rem;
+        width: 1.2rem;
+        height: 1rem;
         border-radius: 0.125rem;
         vertical-align: middle;
         margin: 0 0.125rem;
     }
 
-    .status-indicator-active {
-        background: #4ecdc4;
+    :global(.status-dot.active) {
+        background: #87ceeb;
     }
 
-    .status-indicator-inactive {
+    :global(.status-dot.inactive) {
         background: white;
         border: 1px solid #d1d5db;
     }
@@ -1341,6 +1342,14 @@ const interfaces = [
         font-size: 0.75rem;
     }
 
+    :global(.power-group + .power-group) {
+        margin-top: 1rem;
+    }
+
+    :global(.mt-4) {
+        margin-top: 1rem;
+    }
+
     /* 使用 :global() 以确保样式能应用到通过 set:html 注入的动态 HTML 中 */
     :global(.group-title) {
         display: block;
@@ -1602,6 +1611,58 @@ const interfaces = [
         color: var(--primary);
     }
 
+    /* Relay Port Legend */
+    :global(.relay-port-legend) {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    :global(.relay-port-item) {
+        padding: 0.5rem;
+        border-radius: 4px;
+    }
+    :global(.relay-port-title) {
+        display: block;
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+    :global(.relay-port-desc) {
+        font-size: 0.75rem;
+        color: #555;
+    }
+    :global(.relay-port-item.no) {
+        background: #e0f2fe;
+    }
+    :global(.relay-port-item.no .relay-port-title) {
+        color: #0284c7;
+    }
+
+    :global(.relay-port-item.com) {
+        background: #f3f4f6;
+    }
+    :global(.relay-port-item.com .relay-port-title) {
+        color: #4b5563;
+    }
+
+    :global(.relay-port-item.nc) {
+        background: #fee2e2;
+    }
+    :global(.relay-port-item.nc .relay-port-title) {
+        color: #dc2626;
+    }
+
+    :global(.relay-port-item.nc .relay-port-title) {
+        color: #dc2626;
+    }
+
+    :global(.compact-warning) {
+        margin: 0.5rem 0 0 0 !important;
+        padding: 0.75rem !important;
+        font-size: 0.85rem;
+        border-left-width: 3px !important;
+    }
+
     /* Feature List */
     .feature-list {
         list-style: none;
@@ -1659,14 +1720,6 @@ const interfaces = [
     .btn-primary:hover {
         transform: translateY(-2px);
         color: white;
-    }
-
-    .imagecover {
-        position: absolute;
-        border: 3px solid #4ecdc4;
-        background: rgba(78, 205, 196, 0.1);
-        border-radius: 0.25rem;
-        z-index: 10;
     }
 
     /* 回到顶部按钮样式 */
