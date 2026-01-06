@@ -402,7 +402,7 @@ const interfaces = [
         labelPos: { top: "35%", left: "100%" },
         align: "right",
         vAlign: "down",
-       detail: `
+        detail: `
             <div class="detail-content">
                 <div class="power-group">
                     <strong class="group-title">· A+/温度 端口</strong>
@@ -540,7 +540,7 @@ const interfaces = [
     },
     {
         id: "relay",
-        name: "12、继电器输出",
+        name: "12、继电器/开关 输出",
         labelName: "·常开1 ·公共1 ·常闭1 ... ·常开6 ·公共6 ·常闭6",
         area: { top: "85%", left: "15.5%", width: "64%", height: "18%" },
         labelPos: { top: "113%", left: "45%" },
@@ -1018,6 +1018,23 @@ const interfaces = [
             </section>
         </main>
     </div>
+
+    <!-- 回到顶部按钮 -->
+    <button id="back-to-top" class="back-to-top-btn" aria-label="回到顶部">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <path d="M18 15l-6-6-6 6"></path>
+        </svg>
+    </button>
 </Layout>
 
 <style>
@@ -1625,11 +1642,11 @@ const interfaces = [
         :global(.wiring-examples) {
             grid-template-columns: 1fr;
         }
-        
+
         :global(.screenshot-gallery) {
             grid-template-columns: repeat(2, 1fr);
         }
-        
+
         :global(.gallery-item:hover img) {
             transform: scale(2);
         }
@@ -1822,8 +1839,108 @@ const interfaces = [
     .imagecover {
         position: absolute;
         border: 3px solid #4ecdc4;
-        background: rgba(78,205,196,0.1);
+        background: rgba(78, 205, 196, 0.1);
         border-radius: 0.25rem;
         z-index: 10;
     }
+
+    /* 回到顶部按钮样式 */
+    .back-to-top-btn {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+        color: white;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(100px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+    }
+
+    .back-to-top-btn.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .back-to-top-btn:hover {
+        background: linear-gradient(135deg, #0052a3 0%, #003d7a 100%);
+        box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+        transform: translateY(-3px);
+    }
+
+    .back-to-top-btn:active {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(0, 102, 204, 0.3);
+    }
+
+    .back-to-top-btn svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+        .back-to-top-btn {
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        .back-to-top-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    }
 </style>
+
+<script>
+    // 回到顶部按钮功能
+    document.addEventListener("DOMContentLoaded", () => {
+        const backToTopBtn = document.getElementById("back-to-top");
+
+        if (!backToTopBtn) return;
+
+        // 监听滚动事件，控制按钮显示/隐藏
+        const toggleButtonVisibility = () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add("show");
+            } else {
+                backToTopBtn.classList.remove("show");
+            }
+        };
+
+        // 使用节流优化滚动性能
+        let scrollTimeout: number | undefined;
+        window.addEventListener("scroll", () => {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(
+                toggleButtonVisibility,
+            );
+        });
+
+        // 点击按钮平滑滚动到顶部
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        });
+
+        // 初始化检查
+        toggleButtonVisibility();
+    });
+</script>
