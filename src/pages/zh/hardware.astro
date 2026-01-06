@@ -35,11 +35,13 @@ const interfaces = [
                         <img src="/images/pwrdc.jpg" alt="直流宽电压供电" loading="lazy" />
                         <span class="example-title">直流宽电压DC 9-60V供电</span>
                     </div>
-                    <div class="example-item">
+                    <div class="example-item example-item-wide">
                         <img src="/images/pwrac.jpg" alt="交流AC供电" loading="lazy" />
                         <span class="example-title">交流AC220/交流AC110V供电</span>
                     </div>
-                    <div class="example-item">
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
                         <img src="/images/pwr5v.jpg" alt="5V供电" loading="lazy" />
                         <span class="example-title">5V供电</span>
                     </div>
@@ -58,27 +60,31 @@ const interfaces = [
         detail: `
             <div class="detail-content">
                 <div class="power-group">
-                    <strong class="group-title">2.1、标准 PWM</strong>
+                    <strong class="group-title">· 标准 PWM</strong>
                     <div class="config-block">
                         <p>基于 N-MOS 开漏输出，Pn 端口上拉 DC 5V。支持频率控制：0.025Hz ~ 150kHz，占空比控制：0.00% ~ 100.00%，支持线性加减速控制</p>
                         <p><span class="config-label">端口定义:</span> ·Pn 表示 PWM 输出正极，·Gn 表示负极 (GND)。</p>
                         <p><span class="config-label">负载能力:</span> 单路支持最高 DC 36V 10A 开关负载或 DC 36V 8A PWM 负载。</p>
                     </div>
-                    
+                    <div class="power-group" style="margin-top: 1rem;">
+                        <strong class="group-title">· 接线示例</strong>
+                    </div>
                     <div class="wiring-examples">
-                        <div class="example-item">
+                        <div class="example-item example-item-wide">
                             <img src="/images/pwm_in_pcb.jpg" alt="PWM接口内部简化电路图" loading="lazy" />
                             <span class="example-title">PWM接口内部简化电路图</span>
                         </div>
-                        <div class="example-item">
+                        <div class="example-item example-item-wide">
                             <img src="/images/pwm_led.jpg" alt="LED灯明亮/直流电机快慢控制 接线示例" loading="lazy" />
                             <span class="example-title">LED灯明亮/直流电机快慢控制 接线示例</span>
                         </div>
-                        <div class="example-item">
+                    </div>
+                    <div class="wiring-examples">
+                        <div class="example-item example-item-wide">
                             <img src="/images/pwm_steper.jpg" alt="步进电机速度控制 接线示例" loading="lazy" />
                             <span class="example-title">步进电机速度控制 接线示例</span>
                         </div>
-                        <div class="example-item">
+                        <div class="example-item example-item-wide">
                             <img src="/images/pwm_steper2.jpg" alt="舵机角度控制 接线示例" loading="lazy" />
                             <span class="example-title">舵机角度控制 接线示例</span>
                         </div>
@@ -243,15 +249,17 @@ const interfaces = [
                     <strong class="group-title">· 接线示例</strong>
                 </div>
                 <div class="wiring-examples">
-                    <div class="example-item">
+                    <div class="example-item example-item-wide">
                         <img src="/images/input_btn.jpg" alt="开关/按钮 接线示例" loading="lazy" />
                         <span class="example-title">开关/按钮 接线示例</span>
                     </div>
-                    <div class="example-item  example-item-wide">
+                    <div class="example-item example-item-wide">
                         <img src="/images/input_npn.jpg" alt="NPN信号传感器 接线示例" loading="lazy" />
                         <span class="example-title">NPN信号传感器 接线示例</span>
                     </div>
-                    <div class="example-item">
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
                         <img src="/images/input_reply.jpg" alt="继电器作为输入 接线示例" loading="lazy" />
                         <span class="example-title">继电器作为输入 接线示例</span>
                     </div>
@@ -341,19 +349,21 @@ const interfaces = [
                     <strong class="group-title">· 接线示例</strong>
                 </div>
                 <div class="wiring-examples">
-                    <div class="example-item">
+                    <div class="example-item example-item-wide">
                         <img src="/images/adc2.jpg" alt="2线制4-20mA传感器" loading="lazy" />
                         <span class="example-title">2线制4-20mA传感器 接线示例</span>
                     </div>
-                    <div class="example-item">
+                    <div class="example-item example-item-wide">
                         <img src="/images/adc3.jpg" alt="3线制4-20mA或0-10V传感器" loading="lazy" />
                         <span class="example-title">3线制4-20mA或0-10V传感器</span>
                     </div>
-                    <div class="example-item">
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
                         <img src="/images/adc4.jpg" alt="4线制4-20mA传感器" loading="lazy" />
                         <span class="example-title">4线制4-20mA传感器</span>
                     </div>
-                    <div class="example-item">
+                    <div class="example-item example-item-wide">
                         <img src="/images/adc1_5.jpg" alt="检测48V电池电压(自定义ADC)" loading="lazy" />
                         <span class="example-title">检测48V电池电压(自定义ADC)-电阻分压到1.5V</span>
                     </div>
@@ -489,15 +499,17 @@ const interfaces = [
                     <strong class="group-title">· 接线示例</strong>
                 </div>
                 <div class="wiring-examples">
-                    <div class="example-item">
+                    <div class="example-item example-item-wide">
                         <img src="/images/iict.jpg" alt="SHT30温湿度传感器" loading="lazy" />
                         <span class="example-title">SHT30温湿度传感器</span>
                     </div>
-                    <div class="example-item">
+                    <div class="example-item example-item-wide">
                         <img src="/images/iicl.jpg" alt="光照度传感器" loading="lazy" />
                         <span class="example-title">光照度传感器</span>
                     </div>
-                    <div class="example-item  example-item-wide">
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
                         <img src="/images/iicn.jpg" alt="多路IIC传感器" loading="lazy" />
                         <span class="example-title">多路IIC传感器</span>
                     </div>
@@ -535,6 +547,12 @@ const interfaces = [
         detail: `
             <div class="detail-content">
                 <p>为小功率传感器提供直流 3V 供电。输出最大负载电流30mA, "·3V输出"端口为正极, "·公共地"端口为负极</p>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="/images/o3v.jpg" alt="直流3V输出" loading="lazy" />
+                        <span class="example-title">直流3V输出</span>
+                    </div>
+                </div>
             </div>
         `,
     },
@@ -548,7 +566,76 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>高品质大功率继电器，AC 220V 10A 支持。</p>
+                <div class="power-group">
+                    <strong class="group-title">· 继电器输出定义</strong>
+                    <div class="config-block">
+                        <p>继电器是一种电控开关，控制电路物理导通/断开的开关，无源输出，可控制交流230V以内或直流30V以内的负载设备。</p>
+                        <p><span class="config-label">常用于控制:</span> 照明、水泵、电磁阀、交流接触器、排气扇、风机、控制箱上的按钮、直流电机等设备。</p>
+                    </div>
+                </div>
+
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· 每个继电器有三个端口：</strong>
+                    <div class="config-block">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; text-align: center;">
+                            <div style="background: #e0f2fe; padding: 0.5rem; border-radius: 4px;">
+                                <span style="display: block; font-weight: bold; color: #0284c7; font-size: 0.9rem;">常开 (NO)</span>
+                                <span style="font-size: 0.75rem; color: #555;">常态(关)：与公共端口断开<br/>动作(开)：与公共端口导通</span>
+                            </div>
+                            <div style="background: #f3f4f6; padding: 0.5rem; border-radius: 4px;">
+                                <span style="display: block; font-weight: bold; color: #4b5563; font-size: 0.9rem;">公共 (COM)</span>
+                                <span style="font-size: 0.75rem; color: #555;">常态(关)：与常开端口断开，与常闭端口导通<br/>动作(开)：与常开端口导通，与常闭端口断开</span>
+                            </div>
+                            <div style="background: #fee2e2; padding: 0.5rem; border-radius: 4px;">
+                                <span style="display: block; font-weight: bold; color: #dc2626; font-size: 0.9rem;">常闭 (NC)</span>
+                                <span style="font-size: 0.75rem; color: #555;">常态(关)：与公共端口导通<br/>动作(开)：与公共端口断开</span>
+                            </div>
+                        </div>
+                        <div class="wiring-examples">
+                            <div class="example-item example-item-wide">
+                                <img src="/images/relay.jpg" alt="继电器状态" loading="lazy" />
+                                <span class="example-title">常态(关)（左图）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动作(开)（右图）</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· 电气参数</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">最大阻性负载:</span> AC 220V/9A (约1.9kW) 或 DC 30V/9A (约270W)； 电性负载如：发热棒，电热丝，白炽灯等</p>
+                        <p><span class="config-label">最大感性/容性负载:</span> AC 220V/2A (约440W) 或 DC 30V/2A (约60W)； 感性/容性负载如：电磁阀，交流接触器，排气扇，电机，水泵，LED灯等</p>
+                        <p><span class="config-label">使用寿命:</span> 机械/电气开关寿命约 10 万次</p>
+                        <p><span class="config-label">自身功耗:</span> 约 0.36W (5V*72mA)</p>
+                        <div class="info-card warning" style="margin: 0.5rem 0 0 0; padding: 0.75rem; font-size: 0.85rem; border-left: 3px solid #f97316; background: #fff7ed;">
+                            <strong>⚠️ 安全警告:</strong> 高压接线必须由专业电工操作。大功率负载请务必外接大功率的继电器或交流接触器使用。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· 接线示例</strong>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="/images/relayw1.jpg" alt="照明/水泵/电磁阀" loading="lazy" />
+                        <span class="example-title">照明/水泵/电磁阀</span>
+                    </div>
+                    <div class="example-item example-item-wide">
+                        <img src="/images/relayw2.jpg" alt="直流电机正反转" loading="lazy" />
+                        <span class="example-title">直流电机正反转</span>
+                    </div>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="/images/relayw3.jpg" alt="电控箱常闭按钮改造" loading="lazy" />
+                        <span class="example-title">电控箱常闭按钮改造</span>
+                    </div>
+                    <div class="example-item example-item-wide">
+                        <img src="/images/relayw4.jpg" alt="电控箱常开按钮改造" loading="lazy" />
+                        <span class="example-title">电控箱常开按钮改造</span>
+                    </div>
+                </div>
             </div>
         `,
     },
