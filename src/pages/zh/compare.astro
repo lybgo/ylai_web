@@ -11,10 +11,8 @@ const lang = "zh";
 >
     <div class="page-header">
         <div class="container">
-            <h1 class="page-title">对比选型指南</h1>
-            <p class="page-subtitle">
-                一图看懂宜启智控的核心优势，选择最适合您的型号
-            </p>
+            <h1 class="page-title">优势对比</h1>
+            <p class="page-subtitle">一图一表看懂宜启智控的核心优势</p>
         </div>
     </div>
 
@@ -22,10 +20,13 @@ const lang = "zh";
         <!-- Radar Chart Section -->
         <section class="radar-section">
             <h2 class="section-title">六维度对比分析</h2>
-            <div class="radar-container" x-data="radarChart()">
+            <div
+                class="radar-container"
+                x-data="{ activeProduct: 'yiqi', hoveredProduct: '' }"
+            >
                 <!-- SVG Radar Chart -->
                 <div class="radar-chart">
-                    <svg viewBox="0 0 400 400" class="radar-svg">
+                    <svg viewBox="-50 -25 500 450" class="radar-svg">
                         <!-- Background hexagons -->
                         <g class="radar-grid">
                             {
@@ -114,46 +115,52 @@ const lang = "zh";
                         <!-- Data areas -->
                         <!-- YiQi Smart -->
                         <polygon
-                            :class="{ 'active': activeProduct === 'yiqi' }"
+                            :class="{ 'active': hoveredProduct === 'yiqi' }"
                             class="radar-area yiqi"
                             points="200,30 344,108 344,287 200,370 56,287 56,108"
-                            @mouseenter="activeProduct = 'yiqi'"></polygon>
+                        ></polygon>
                         <!-- PLC -->
                         <polygon
-                            :class="{ 'active': activeProduct === 'plc' }"
+                            :class="{ 'active': hoveredProduct === 'plc' }"
                             class="radar-area plc"
                             points="200,100 275,155 310,252 200,300 90,252 125,155"
-                            @mouseenter="activeProduct = 'plc'"></polygon>
+                        ></polygon>
                         <!-- MCU -->
                         <polygon
-                            :class="{ 'active': activeProduct === 'mcu' }"
+                            :class="{ 'active': hoveredProduct === 'mcu' }"
                             class="radar-area mcu"
                             points="200,165 245,178 280,230 200,265 120,230 155,178"
-                            @mouseenter="activeProduct = 'mcu'"></polygon>
+                        ></polygon>
                     </svg>
                 </div>
 
                 <!-- Legend -->
                 <div class="radar-legend">
                     <button
-                        :class="{ 'active': activeProduct === 'yiqi' }"
+                        :class="{ 'active': hoveredProduct === 'yiqi' }"
                         @click="activeProduct = 'yiqi'"
+                        @mouseenter="hoveredProduct = 'yiqi'; activeProduct = 'yiqi'"
+                        @mouseleave="hoveredProduct = ''"
                         class="legend-item yiqi"
                     >
                         <span class="legend-dot"></span>
-                        宜启智控Pro
+                        宜启智控
                     </button>
                     <button
-                        :class="{ 'active': activeProduct === 'plc' }"
+                        :class="{ 'active': hoveredProduct === 'plc' }"
                         @click="activeProduct = 'plc'"
+                        @mouseenter="hoveredProduct = 'plc'; activeProduct = 'plc'"
+                        @mouseleave="hoveredProduct = ''"
                         class="legend-item plc"
                     >
                         <span class="legend-dot"></span>
                         传统PLC
                     </button>
                     <button
-                        :class="{ 'active': activeProduct === 'mcu' }"
+                        :class="{ 'active': hoveredProduct === 'mcu' }"
                         @click="activeProduct = 'mcu'"
+                        @mouseenter="hoveredProduct = 'mcu'; activeProduct = 'mcu'"
+                        @mouseleave="hoveredProduct = ''"
                         class="legend-item mcu"
                     >
                         <span class="legend-dot"></span>
@@ -323,94 +330,6 @@ const lang = "zh";
             </div>
         </section>
 
-        <!-- Model Selection -->
-        <section class="models-section">
-            <h2 class="section-title">型号选型指南</h2>
-            <div class="models-grid">
-                <div class="model-card">
-                    <div class="model-header">
-                        <h3>2路款</h3>
-                        <span class="model-badge">入门首选</span>
-                    </div>
-                    <img
-                        src="/images/products/2路正面.png"
-                        alt="2路款"
-                        class="model-image"
-                    />
-                    <ul class="model-specs">
-                        <li>2路继电器输出</li>
-                        <li>2路PWM输出</li>
-                        <li>2路开关量输入</li>
-                        <li>1路模拟量输入</li>
-                    </ul>
-                    <p class="model-usage">适用：简单控制、DIY项目、学习入门</p>
-                </div>
-
-                <div class="model-card">
-                    <div class="model-header">
-                        <h3>3+2路款</h3>
-                        <span class="model-badge secondary">教学推荐</span>
-                    </div>
-                    <img
-                        src="/images/products/3+2路正面.png"
-                        alt="3+2路款"
-                        class="model-image"
-                    />
-                    <ul class="model-specs">
-                        <li>3路继电器输出</li>
-                        <li>2路PWM输出</li>
-                        <li>3路开关量输入</li>
-                        <li>2路模拟量输入</li>
-                    </ul>
-                    <p class="model-usage">
-                        适用：中型项目、教学实验、智能家居
-                    </p>
-                </div>
-
-                <div class="model-card">
-                    <div class="model-header">
-                        <h3>4路款</h3>
-                        <span class="model-badge">通用之选</span>
-                    </div>
-                    <img
-                        src="/images/products/4路正面.png"
-                        alt="4路款"
-                        class="model-image"
-                    />
-                    <ul class="model-specs">
-                        <li>4路继电器输出</li>
-                        <li>4路PWM输出</li>
-                        <li>4路开关量输入</li>
-                        <li>2路模拟量输入</li>
-                    </ul>
-                    <p class="model-usage">
-                        适用：通用控制、小型工程、智慧农业
-                    </p>
-                </div>
-
-                <div class="model-card featured">
-                    <div class="model-header">
-                        <h3>6+4路款</h3>
-                        <span class="model-badge accent">专业首选</span>
-                    </div>
-                    <img
-                        src="/images/products/6+4路正面.png"
-                        alt="6+4路款"
-                        class="model-image"
-                    />
-                    <ul class="model-specs">
-                        <li>6路继电器输出</li>
-                        <li>4路PWM输出</li>
-                        <li>6路开关量输入</li>
-                        <li>3路模拟量输入</li>
-                    </ul>
-                    <p class="model-usage">
-                        适用：复杂场景、工业控制、专业项目
-                    </p>
-                </div>
-            </div>
-        </section>
-
         <!-- CTA -->
         <section class="cta-section">
             <div class="cta-container">
@@ -425,14 +344,6 @@ const lang = "zh";
         </section>
     </div>
 </Layout>
-
-<script>
-    function radarChart() {
-        return {
-            activeProduct: "yiqi",
-        };
-    }
-</script>
 
 <style>
     .page-header {
@@ -480,15 +391,17 @@ const lang = "zh";
     }
 
     .radar-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-        align-items: start;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem 1rem;
     }
 
     @media (max-width: 1024px) {
         .radar-container {
-            grid-template-columns: 1fr;
+            flex-direction: column;
+            gap: 2rem;
         }
     }
 
@@ -498,8 +411,9 @@ const lang = "zh";
     }
 
     .radar-svg {
-        max-width: 400px;
-        width: 100%;
+        width: 500px;
+        max-width: 100%;
+        height: auto;
     }
 
     .radar-area {
@@ -507,41 +421,29 @@ const lang = "zh";
     }
 
     .radar-area.yiqi {
-        fill: rgba(0, 102, 204, 0.2);
+        fill: rgba(0, 102, 204, 0.1);
         stroke: #0066cc;
-        stroke-width: 2;
-    }
-
-    .radar-area.yiqi.active {
-        fill: rgba(0, 102, 204, 0.4);
+        stroke-width: 1;
     }
 
     .radar-area.plc {
-        fill: rgba(139, 92, 246, 0.15);
+        fill: rgba(139, 92, 246, 0.1);
         stroke: #8b5cf6;
-        stroke-width: 2;
-    }
-
-    .radar-area.plc.active {
-        fill: rgba(139, 92, 246, 0.35);
+        stroke-width: 1;
     }
 
     .radar-area.mcu {
-        fill: rgba(34, 197, 94, 0.15);
+        fill: rgba(34, 197, 94, 0.1);
         stroke: #22c55e;
-        stroke-width: 2;
-    }
-
-    .radar-area.mcu.active {
-        fill: rgba(34, 197, 94, 0.35);
+        stroke-width: 1;
     }
 
     .radar-legend {
         display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-top: 1.5rem;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 0;
+        align-items: flex-start;
     }
 
     .legend-item {
@@ -584,6 +486,8 @@ const lang = "zh";
 
     .radar-details {
         min-height: 300px;
+        width: 100%;
+        max-width: 800px;
     }
 
     .detail-card {
@@ -831,5 +735,23 @@ const lang = "zh";
     .btn-outline:hover {
         background: var(--primary);
         color: white;
+    }
+</style>
+
+<style is:global>
+    /* Active states for Radar Chart - Global to ensure they apply to dynamically added classes */
+    .radar-area.yiqi.active {
+        fill: rgba(0, 102, 204, 0.6) !important;
+        stroke-width: 3 !important;
+    }
+
+    .radar-area.plc.active {
+        fill: rgba(139, 92, 246, 0.6) !important;
+        stroke-width: 3 !important;
+    }
+
+    .radar-area.mcu.active {
+        fill: rgba(34, 197, 94, 0.6) !important;
+        stroke-width: 3 !important;
     }
 </style>
