@@ -128,35 +128,47 @@ const lang = "zh";
                 <div class="contact-info-grid">
                     <div class="info-group">
                         <div class="info-icon">👤</div>
-                        <h3>技术支持</h3>
-                        <p>刘先生：<br />+86-13631528007</p>
+                        <div class="info-content">
+                            <h3>技术支持</h3>
+                            <p>刘先生：+86-13631528007</p>
+                            <p>Email：liuyuanbin@ylznc.com</p>
+                        </div>
                     </div>
                     <div class="info-group">
                         <div class="info-icon">💼</div>
-                        <h3>商务合作</h3>
-                        <p>张女士：<br />+86-18675562528</p>
+                        <div class="info-content">
+                            <h3>商务合作</h3>
+                            <p>张女士：+86-18675562528</p>
+                            <p>Email：zhangcaixian@ylznc.com</p>
+                        </div>
                     </div>
                     <div class="info-group">
                         <div class="info-qr">
                             <img src="/images/wechat.png" alt="微信二维码" />
                         </div>
-                        <h3>添加微信</h3>
-                        <p>微信号：yqzkyy</p>
+                        <div class="info-content">
+                            <h3>添加微信</h3>
+                            <p>微信号：yqzkyy</p>
+                        </div>
                     </div>
                     <div class="info-group">
                         <div class="info-qr">
                             <img src="/images/bilibili.png" alt="B站二维码" />
                         </div>
-                        <h3>关注B站</h3>
-                        <p>搜索：宜启智控</p>
+                        <div class="info-content">
+                            <h3>关注B站</h3>
+                            <p>搜索：宜启智控</p>
+                        </div>
                     </div>
-                    <div class="info-group">
+                    <div class="info-group full-width">
                         <div class="info-icon">📍</div>
-                        <h3>公司地址</h3>
-                        <p>
-                            中国广东省<br
-                            />深圳市龙华区民治街道滢水山庄一区27栋A单元1楼103
-                        </p>
+                        <div class="info-content">
+                            <h3>公司地址</h3>
+                            <p>
+                                中国 广东省 深圳市 龙华区 民治街道 滢水山庄一区
+                                27栋A单元1楼103
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -434,27 +446,24 @@ const lang = "zh";
 
     .contact-info-grid {
         display: grid;
-        grid-template-columns: repeat(
-            5,
-            1fr
-        ); /* Updated to 5 columns for new layout */
-        gap: 1.25rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
         margin-bottom: 2rem;
     }
 
     .info-qr {
-        width: 160px; /* Enlarged size */
-        height: 160px;
-        margin-bottom: 0.5rem;
-        padding: 0.75rem;
+        width: 130px;
+        height: 130px;
+        padding: 0.5rem;
         background: white;
         border: 1px solid var(--border-light);
-        border-radius: 16px;
+        border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         display: flex;
         align-items: center;
         justify-content: center;
         transition: transform 0.3s ease;
+        flex-shrink: 0;
     }
 
     .info-qr:hover {
@@ -469,23 +478,28 @@ const lang = "zh";
 
     .info-group {
         background: white;
-        padding: 1.5rem 1rem;
-        border-radius: 28px;
+        padding: 1rem;
+        border-radius: 24px;
         border: 1px solid var(--border-light);
         transition: all 0.3s ease;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
+        gap: 1rem;
+        text-align: left;
+    }
+
+    .info-group.full-width {
+        grid-column: 1 / -1;
     }
 
     .info-group:hover {
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-        transform: translateY(-8px);
+        transform: translateY(-5px);
     }
 
     .info-icon {
         font-size: 2.5rem;
-        margin-bottom: 0.5rem;
         background: var(--bg-light);
         width: 80px;
         height: 80px;
@@ -493,12 +507,17 @@ const lang = "zh";
         align-items: center;
         justify-content: center;
         border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .info-content {
+        flex: 1;
     }
 
     .info-group h3 {
         font-size: 1.35rem;
         color: var(--text-dark);
-        margin: 0 0 0.25rem;
+        margin: 0 0 0.5rem;
         font-weight: 700;
     }
 
@@ -506,8 +525,7 @@ const lang = "zh";
         margin: 0;
         color: var(--text-muted);
         font-size: 1.05rem;
-        line-height: 1.5;
-        text-align: center;
+        line-height: 1.6;
     }
 
     .contact-footer {
