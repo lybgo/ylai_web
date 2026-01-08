@@ -22,6 +22,7 @@ const lang = "zh";
         <nav class="sidebar">
             <h3 class="sidebar-title">目录</h3>
             <ul class="sidebar-nav">
+                <li><a href="#app-screenshots">App 配置截图</a></li>
                 <li><a href="#overview">协议概述</a></li>
                 <li><a href="#report">数据上报格式</a></li>
                 <li><a href="#control">控制命令格式</a></li>
@@ -38,43 +39,74 @@ const lang = "zh";
         </nav>
 
         <main class="main-content">
+            <!-- App Screenshots -->
+            <section id="app-screenshots" class="doc-section">
+                <h2>通过App快速配置MQTT</h2>
+                <p>
+                    在宜启智控 App 中，您可以轻松配置 MQTT
+                    服务器参数，以及数据项主动上报规则。
+                </p>
+                <div class="screenshot-grid">
+                    <div class="screenshot-card">
+                        <div class="screenshot-wrapper">
+                            <img src="/images/mqtt1.jpg" alt="MQTT 配置入口" />
+                            <div
+                                class="highlight-box"
+                                style="top: 85.5%; left: 0%; width: 100%; height: 8%;"
+                            >
+                            </div>
+                            <div
+                                class="highlight-box"
+                                style="top: 53.2%; left: 0%; width: 100%; height: 8%;"
+                            >
+                            </div>
+                        </div>
+                        <p class="screenshot-caption">MQTT 配置入口</p>
+                    </div>
+                    <div class="screenshot-card">
+                        <div class="screenshot-wrapper">
+                            <img src="/images/mqtt2.jpg" alt="MQTT 配置页面" />
+                        </div>
+                        <p class="screenshot-caption">MQTT 配置页面</p>
+                    </div>
+                    <div class="screenshot-card">
+                        <div class="screenshot-wrapper">
+                            <img
+                                src="/images/mqtt3.jpg"
+                                alt="SSL / TLS 证书配置"
+                            />
+                        </div>
+                        <p class="screenshot-caption">SSL / TLS 证书配置</p>
+                    </div>
+                    <div class="screenshot-card">
+                        <div class="screenshot-wrapper">
+                            <img
+                                src="/images/mqtt4.jpg"
+                                alt="数据项主动上报规则"
+                            />
+                        </div>
+                        <p class="screenshot-caption">数据项主动上报规则</p>
+                    </div>
+                </div>
+            </section>
+
             <!-- Overview -->
             <section id="overview" class="doc-section">
                 <h2>协议概述</h2>
                 <p>
-                    宜启智控Pro支持标准MQTT协议，可对接任意MQTT Broker，包括：
+                    宜启智控支持标准MQTT协议，MQTT版本：V3.1.1，QoS等级：QoS
+                    0，可对接任意MQTT Broker，包括：
                 </p>
-                <ul class="feature-list">
-                    <li>阿里云IoT、腾讯云IoT</li>
-                    <li>巴法云、ThingsCloud、ThingsBoard</li>
-                    <li>Home Assistant、EMQX</li>
+                <ul class="tag-list">
+                    <li>阿里云IoT</li>
+                    <li>腾讯云IoT</li>
+                    <li>巴法云</li>
+                    <li>ThingsCloud</li>
+                    <li>ThingsBoard</li>
+                    <li>Home Assistant</li>
+                    <li>EMQX</li>
                     <li>自建私有MQTT服务器</li>
                 </ul>
-
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h4>📌 连接参数</h4>
-                        <ul>
-                            <li><strong>MQTT版本：</strong>V3.1.1</li>
-                            <li>
-                                <strong>QoS等级：</strong>QoS 0
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="info-card">
-                        <h4>📌 设备命名规则</h4>
-                        <p>设备名格式：<code>yq_MainId_subId</code></p>
-                        <ul>
-                            <li><code>yq</code>：固定前缀</li>
-                            <li><code>MainId</code>：16进制设备ID</li>
-                            <li><code>subId</code>：16进制Mesh子设备ID</li>
-                        </ul>
-                        <p>
-                            示例：<code>yq_123456_22222</code> 表示主设备123456的子设备22222
-                        </p>
-                    </div>
-                </div>
             </section>
 
             <!-- Data Report -->
@@ -605,6 +637,86 @@ const lang = "zh";
         min-width: 0;
     }
 
+    /* Screenshots Section */
+    .screenshot-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        margin: 2.5rem 0;
+    }
+
+    @media (max-width: 1024px) {
+        .screenshot-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .screenshot-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+    }
+
+    :global(.highlight-box) {
+        position: absolute;
+        border: 2px solid #4ecdc4;
+        background: rgba(78, 205, 196, 0.1);
+        border-radius: 0.25rem;
+        z-index: 10;
+        pointer-events: none;
+    }
+
+    .screenshot-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .screenshot-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 9/20;
+        border-radius: 1rem;
+        border: 3px solid var(--text-dark);
+        overflow: hidden;
+        background: #f1f5f9;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        /* 使用 ease-in-out 代替复杂的 cubic-bezier 避免缩回时的渲染计算错误 */
+        transition:
+            transform 0.3s ease-in-out,
+            box-shadow 0.3s ease-in-out;
+        z-index: 1;
+        /* 强制指定缩放中心 */
+        transform-origin: center center;
+        /* 提前告知浏览器将有变换，预留渲染资源 */
+        will-change: transform;
+        /* 保持 3D 转换上下文 */
+        transform: translateZ(0);
+    }
+
+    .screenshot-wrapper:hover {
+        transform: scale(1.6) translateZ(0);
+        z-index: 50;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .screenshot-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .screenshot-caption {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        margin-top: 1rem;
+        text-align: center;
+    }
+
     .doc-section {
         margin-bottom: 4rem;
     }
@@ -665,24 +777,31 @@ const lang = "zh";
     }
 
     /* Feature List */
-    .feature-list {
-        list-style: none;
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
         padding: 0;
-        margin: 1rem 0;
+        margin: 1.5rem 0;
+        list-style: none;
     }
 
-    .feature-list li {
-        padding: 0.5rem 0 0.5rem 1.5rem;
-        position: relative;
-        color: var(--text-muted);
+    .tag-list li {
+        background: var(--primary-light);
+        color: var(--primary-dark);
+        padding: 0.4rem 1rem;
+        border-radius: 2rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        border: 1px solid var(--border-light);
     }
 
-    .feature-list li::before {
-        content: "✓";
-        position: absolute;
-        left: 0;
-        color: var(--primary);
-        font-weight: 600;
+    .tag-list li:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
     }
 
     /* Info Cards */
