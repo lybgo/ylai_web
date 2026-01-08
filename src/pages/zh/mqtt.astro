@@ -51,27 +51,29 @@ const lang = "zh";
                     <li>自建私有MQTT服务器</li>
                 </ul>
 
-                <div class="info-card">
-                    <h4>📌 连接参数</h4>
-                    <ul>
-                        <li><strong>MQTT版本：</strong>V3.1.1</li>
-                        <li>
-                            <strong>QoS等级：</strong>QoS 0
-                        </li>
-                    </ul>
-                </div>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>📌 连接参数</h4>
+                        <ul>
+                            <li><strong>MQTT版本：</strong>V3.1.1</li>
+                            <li>
+                                <strong>QoS等级：</strong>QoS 0
+                            </li>
+                        </ul>
+                    </div>
 
-                <div class="info-card">
-                    <h4>📌 设备命名规则</h4>
-                    <p>设备名格式：<code>yq_MainId_subId</code></p>
-                    <ul>
-                        <li><code>yq</code>：固定前缀</li>
-                        <li><code>MainId</code>：16进制设备ID</li>
-                        <li><code>subId</code>：16进制Mesh子设备ID</li>
-                    </ul>
-                    <p>
-                        示例：<code>yq_123456_22222</code> 表示主设备123456的子设备22222
-                    </p>
+                    <div class="info-card">
+                        <h4>📌 设备命名规则</h4>
+                        <p>设备名格式：<code>yq_MainId_subId</code></p>
+                        <ul>
+                            <li><code>yq</code>：固定前缀</li>
+                            <li><code>MainId</code>：16进制设备ID</li>
+                            <li><code>subId</code>：16进制Mesh子设备ID</li>
+                        </ul>
+                        <p>
+                            示例：<code>yq_123456_22222</code> 表示主设备123456的子设备22222
+                        </p>
+                    </div>
                 </div>
             </section>
 
@@ -631,7 +633,8 @@ const lang = "zh";
 
     /* Code Blocks */
     .code-block {
-        background: #1e293b;
+        background: var(--bg-light);
+        border: 1px solid var(--border-light);
         border-radius: 12px;
         padding: 1.5rem;
         margin: 1rem 0;
@@ -643,7 +646,7 @@ const lang = "zh";
     }
 
     .code-block code {
-        color: #e2e8f0;
+        color: var(--text-dark);
         font-family: "Cascadia Code", "Fira Code", monospace;
         font-size: 0.9rem;
         line-height: 1.6;
@@ -683,12 +686,25 @@ const lang = "zh";
     }
 
     /* Info Cards */
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+    }
+
+    @media (max-width: 768px) {
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
     .info-card {
         background: var(--bg-light);
         padding: 1.5rem;
         border-radius: 12px;
         margin: 1.5rem 0;
-        border-left: 4px solid var(--primary);
+        border: 1px solid var(--border-light);
     }
 
     .info-card h4 {
@@ -709,7 +725,7 @@ const lang = "zh";
 
     .info-card.warning {
         background: #fff7ed;
-        border-left-color: #f97316;
+        border: 1px solid #fed7aa;
     }
 
     .info-card.warning h4 {

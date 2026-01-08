@@ -436,7 +436,7 @@ const interfaces = [
                     <div class="config-block">
                         <p>宜启智控作为 RS485 主站 (Master)，支持读取和控制各类 RS485 从站 (Slave) 设备。</p>
                         <p><span class="config-label">协议标准:</span> Modbus RTU</p>
-                        <p><span class="config-label">波特率:</span> 1200 ~ 38400bps</p>
+                        <p><span class="config-label">波特率:</span> 1200 ~ 38400bps，数据位：8，停止位：1，校验位：无</p>
                         <p><span class="config-label">读取功能码:</span> 01H, 02H, 03H, 04H</p>
                         <p><span class="config-label">写入功能码:</span> 05H, 06H, 0FH, 10H</p>
                         <p><span class="config-label">设备容量:</span> 最多支持 16 个从站。支持读取 32 个数据寄存器和 32 个状态位 (线圈/离散)。</p>
@@ -495,7 +495,10 @@ const interfaces = [
         vAlign: "down",
         detail: `
             <div class="detail-content">
-                <p>支持 IIC 设备读写。内置 SHT30 温湿度传感器和光照度传感器协议解析，即插即用。<br/>SHT30 检测的温度值对应 APP 中的“温度2”。IIC 通信电平为 3.3V。</p>
+                <p>支持 IIC 设备读写。内置 SHT30 温湿度传感器和光照度传感器协议解析，即插即用。
+                <br/>IIC 通信电平为 3.3V。
+                <br/>SHT30 检测的温度值对应 APP 中的“温度2”。
+                <br/>光照度数据默认对应 APP 中的“计数器8”。</p>
                 <div class="power-group mt-4">
                     <strong class="group-title">· 接线示例</strong>
                 </div>

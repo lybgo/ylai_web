@@ -57,11 +57,11 @@ const t = content[lang as keyof typeof content] || content.zh;
             <div class="footer-brand">
                 <a href={`/${lang}/`} class="brand-logo">
                     <img
-                        src="/images/logo.png"
+                        src="/images/logos/ylai.svg"
                         alt="宜启智控"
                         class="brand-img"
                     />
-                    <span class="brand-text">宜启智控Pro</span>
+                    <span class="brand-text">宜启智控</span>
                 </a>
                 <p class="brand-tagline">{t.tagline}</p>
             </div>
@@ -164,6 +164,7 @@ const t = content[lang as keyof typeof content] || content.zh;
     .brand-img {
         height: 36px;
         width: auto;
+        border-radius: 8px;
     }
 
     .brand-text {
