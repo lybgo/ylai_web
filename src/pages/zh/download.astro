@@ -57,31 +57,36 @@ const getQrUrl = (url: string) => {
         <div class="apps-grid">
             <!-- 源来智能 APP -->
             <div class="app-card">
-                <img
-                    src="/images/logos/ylai.svg"
-                    alt="源来智能"
-                    class="app-logo"
-                />
-
-                <h2>源来智能APP</h2>
-                <p class="app-desc">
-                    宜启智控官方APP，支持通过蓝牙连接设备，控制设备，配置自动化逻辑、查看设备/传感器数据。
-                </p>
-
-                <div class="app-features">
-                    <span>✓ 蓝牙本地控制</span>
-                    <span>✓ 本地时间控制</span>
-                    <span>✓ 一键执行配置</span>
-                    <span>✓ 自动化配置</span>
-                    <span>✓ 逻辑导入导出</span>
-                    <span>✓ Mesh组网配置</span>
-                    <span>✓ MQTT配置</span>
-                    <span>✓ 更多其它本地功能配置</span>
+                <div class="app-col-info">
+                    <img
+                        src="/images/logos/ylai.svg"
+                        alt="源来智能"
+                        class="app-logo"
+                    />
+                    <h2>源来智能APP</h2>
                 </div>
 
-                <p class="search-hint">
-                    可在手机应用市场搜索 <strong>“源来智能”</strong> 安装
-                </p>
+                <div class="app-col-content">
+                    <p class="app-desc">
+                        宜启智控官方APP，支持通过蓝牙连接设备，控制设备，配置自动化逻辑、查看设备/传感器数据。
+                    </p>
+
+                    <div class="app-features">
+                        <span>蓝牙本地控制</span>
+                        <span>本地时间控制</span>
+                        <span>一键执行配置</span>
+                        <span>自动化配置</span>
+                        <span>逻辑导入导出</span>
+                        <span>Mesh组网配置</span>
+                        <span>MQTT配置</span>
+                        <span>更多其它本地功能配置</span>
+                    </div>
+
+                    <p class="search-hint">
+                        可在手机应用市场搜索 <strong>“源来智能”</strong> 安装
+                    </p>
+                </div>
+
                 <div class="download-buttons">
                     {
                         ylaiApps.map((app) => (
@@ -133,7 +138,9 @@ const getQrUrl = (url: string) => {
                                         alt={`${app.name} QR Code`}
                                         loading="lazy"
                                     />
-                                    <span>扫码下载</span>
+                                    {app.name !== "APP操作指南" && (
+                                        <span>扫码下载</span>
+                                    )}
                                 </div>
                             </div>
                         ))
@@ -143,25 +150,31 @@ const getQrUrl = (url: string) => {
 
             <!-- 涂鸦智能 APP -->
             <div class="app-card">
-                <img
-                    src="/images/logos/tuya.png"
-                    alt="涂鸦APP"
-                    class="app-logo"
-                />
-                <h2>涂鸦APP</h2>
-                <p class="app-desc">
-                    全球领先的物联网平台，支持远程控制、智能场景、云端联动、短信/电话报警
-                </p>
-
-                <div class="app-features">
-                    <span>✓ 全球远程控制</span>
-                    <span>✓ 智能场景联动</span>
-                    <span>✓ 短信电话报警</span>
+                <div class="app-col-info">
+                    <img
+                        src="/images/logos/tuya.png"
+                        alt="涂鸦APP"
+                        class="app-logo"
+                    />
+                    <h2>涂鸦APP</h2>
                 </div>
 
-                <p class="search-hint">
-                    可在手机应用市场搜索 <strong>“涂鸦智能”</strong> 安装
-                </p>
+                <div class="app-col-content">
+                    <p class="app-desc">
+                        全球领先的物联网平台，支持远程控制、智能场景、云端联动、短信/电话报警
+                    </p>
+
+                    <div class="app-features">
+                        <span>全球远程控制</span>
+                        <span>智能场景联动</span>
+                        <span>短信电话报警</span>
+                    </div>
+
+                    <p class="search-hint">
+                        可在手机应用市场搜索 <strong>“涂鸦智能”</strong> 安装
+                    </p>
+                </div>
+
                 <div class="download-buttons">
                     {
                         tuyaApps.map((app) => (
@@ -213,7 +226,9 @@ const getQrUrl = (url: string) => {
                                         alt={`${app.name} QR Code`}
                                         loading="lazy"
                                     />
-                                    <span>扫码下载</span>
+                                    {app.name !== "APP操作指南" && (
+                                        <span>扫码下载</span>
+                                    )}
                                 </div>
                             </div>
                         ))
@@ -253,14 +268,14 @@ const getQrUrl = (url: string) => {
     }
 
     .content-container {
-        max-width: 1000px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 4rem 1.5rem;
     }
 
     .apps-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 2rem;
         margin-bottom: 5rem;
     }
@@ -278,7 +293,26 @@ const getQrUrl = (url: string) => {
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         border: 2px solid transparent;
         transition: all 0.3s ease;
+        text-align: left;
+        display: grid;
+        grid-template-columns: 180px 1fr 240px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* Column 1: Info */
+    .app-col-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
+    }
+
+    /* Column 2: Content */
+    .app-col-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .app-card:hover {
@@ -306,15 +340,17 @@ const getQrUrl = (url: string) => {
     }
 
     .app-card h2 {
-        font-size: 1.75rem;
-        margin: 0 0 0.75rem;
+        font-size: 1.5rem;
+        margin: 0;
         color: var(--text-dark);
+        font-weight: 700;
     }
 
     .app-desc {
         color: var(--text-muted);
         line-height: 1.6;
         margin: 0 0 1.5rem;
+        font-size: 1.05rem;
     }
 
     .app-features {
@@ -322,7 +358,7 @@ const getQrUrl = (url: string) => {
         flex-wrap: wrap;
         gap: 0.75rem;
         margin-bottom: 1.5rem;
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .app-features span {
@@ -337,18 +373,47 @@ const getQrUrl = (url: string) => {
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        width: 100%;
+        justify-content: center;
     }
 
     .download-link-group {
         position: relative;
         width: 100%;
+        max-width: 210px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 1024px) {
+        .app-card {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 2rem;
+        }
+
+        .app-col-info {
+            margin-bottom: 0;
+        }
+
+        .app-col-content {
+            align-items: center;
+        }
+
+        .app-features {
+            justify-content: center;
+        }
+
+        .download-link-group {
+            max-width: 400px;
+            margin: 0 auto;
+        }
     }
 
     .qr-popup {
         position: absolute;
-        left: 102%; /* 从 105% 减少到 102%，使其更靠近按钮 */
+        right: 102%;
         top: 50%;
-        transform: translateY(-50%) translateX(10px);
+        transform: translateY(-50%) translateX(-10px);
         background: white;
         padding: 1rem;
         border-radius: 12px;
@@ -394,17 +459,6 @@ const getQrUrl = (url: string) => {
 
     .btn:hover .icon-qr {
         opacity: 1;
-    }
-
-    /* 适应2列布局，右侧卡片的二维码向左弹出 */
-    .apps-grid .app-card:nth-child(even) .qr-popup {
-        left: auto; /* 重置 left 属性 */
-        right: 102%; /* 从 105% 减少到 102% */
-        transform: translateY(-50%) translateX(-10px);
-    }
-
-    .apps-grid .app-card:nth-child(even) .download-link-group:hover .qr-popup {
-        transform: translateY(-50%) translateX(0);
     }
 
     @media (max-width: 1024px) {
