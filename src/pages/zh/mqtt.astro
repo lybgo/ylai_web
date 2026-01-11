@@ -22,7 +22,7 @@ const lang = "zh";
         <nav class="sidebar">
             <h3 class="sidebar-title">目录</h3>
             <ul class="sidebar-nav">
-                <li><a href="#app-screenshots">App 配置截图</a></li>
+                <li><a href="#app-screenshots">App快速配置MQTT</a></li>
                 <li><a href="#overview">协议概述</a></li>
                 <li><a href="#report">数据上报格式</a></li>
                 <li><a href="#control">控制命令格式</a></li>
@@ -41,7 +41,7 @@ const lang = "zh";
         <main class="main-content">
             <!-- App Screenshots -->
             <section id="app-screenshots" class="doc-section">
-                <h2>通过App快速配置MQTT</h2>
+                <h2>App快速配置MQTT</h2>
                 <p>
                     在宜启智控 App 中，您可以轻松配置 MQTT
                     服务器参数，以及数据项主动上报规则。
@@ -112,135 +112,67 @@ const lang = "zh";
             <!-- Data Report -->
             <section id="report" class="doc-section">
                 <h2>数据上报格式</h2>
-                <p>设备主动上报数据采用JSON格式，各字段含义如下：</p>
+                <p class="feature-intro">
+                    设备上报采用 <strong>JSON</strong> 格式，并遵循以下数据同步规范：
+                </p>
+                <div class="feature-steps">
+                    <div class="step-item">
+                        <span class="step-badge">初始化</span>
+                        <span class="step-text"
+                            >首次连接成功后，立即上报<strong>全量数据</strong
+                            >。</span
+                        >
+                    </div>
+                    <div class="step-item">
+                        <span class="step-badge">增量更新</span>
+                        <span class="step-text"
+                            >仅在数据点发生变化时，主动上报<strong
+                                >变更字段</strong
+                            >。</span
+                        >
+                    </div>
+                    <div class="step-item">
+                        <span class="step-badge">自定义</span>
+                        <span class="step-text"
+                            >上报逻辑可通过 App 内<strong>“数据同步云端”</strong
+                            >精准配置。</span
+                        >
+                    </div>
+                </div>
 
-                <div class="code-block">
+                <div class="code-block full-width">
                     <pre><code>{`{
-  "yq_123456_0": [{
-    "o": [states, size],      // 开关输出状态
-    "p": [onoffs, inverses, p0, h0, pr0, hr0, ...],  // PWM状态
-    "i": [onoffs, pulse0, hz0, ...],  // 输入状态
-    "t": [t1, t2, humidity],  // 温湿度
-    "a": [a1, a2, a3],        // ADC模拟量
-    "c": [c1, c2, ..., c16],  // 计数器
-    "m": [size, idxs, d1...], // Mesh子设备通用数据
-    "r": rfValue,             // 433MHz接收信号
-    "s": states,              // 设备内部状态
-    "mb": [states, size],     // Modbus线圈/离散输入状态
-    "mv": [v1, v2, ...],      // Modbus寄存器数值
-    "mp": [hexData],          // Modbus透传回复
-    "v": [FrameworkVer, UserBinVer, DriverVer]  // 版本号
+  "devNameA": [{              `}<span class="tok-comment">// 设备名称，格式：yq_MainId_subId；其中yq为固定字符串，</span>{`
+                              `}<span class="tok-comment">// MainId:为16进制的宜启智控设备ID，subId:为16进制Mesh子设备ID；eg：yq_A755_0</span>{`
+    "o": [states, size],      `}<span class="tok-comment">// states: 开关状态，二进制位代表一个输出的状态，0：关闭，1：开启；size:输出路数</span>{`
+    "p": [onoffs,inverses,p0,h0,pr0,hr0,...,pN,hN,prN,hrN],`}<span class="tok-comment" />{`
+                              `}<span class="tok-comment">// PWM状态，onoffs: 开关状态，二进制位代表输出的状态，0：关闭，1：开启；</span>{`
+                              `}<span class="tok-comment">// inverses：占空比反向，二进制位代表输出的状态，0：正向，1：反向；</span>{`
+                              `}<span class="tok-comment">// pN:第N路占空比(放大100倍)；hN:第N路频率；prN:第N路占空比加减速速率；hrN:第N路频率加减速速率</span>{`
+    "i": [onoffs,pulse0,hz0,...,pulseN,hzN],`}<span class="tok-comment" />{`
+                              `}<span class="tok-comment">// 输入状态，onoffs: 开关量开关状态，二进制位代表输出的状态，0：静默，1：激活;</span>{`
+                              `}<span class="tok-comment">// pulseN:第N路脉冲计数；hzN:第N路频率值；</span>{`
+    "t": [t1, t2, humi],      `}<span class="tok-comment">// 环境数据。t1:温度1（DS18B20）；t2:温度2(SHT30)；humi:湿度(SHT30)</span>{`
+    "a": [a1, a2, a3],        `}<span class="tok-comment">// 模拟量输入映射值(放大了100倍)，a1:模拟量1；a2:模拟量2；a3:模拟量3</span>{`
+    "c": [c1, c2, ..., c16],  `}<span class="tok-comment">// 计数器值。16个Int32类型的计数器当前值</span>{`
+    "r": rfValue,             `}<span class="tok-comment">// 接收到的433MHz遥控信号。高20位为遥控器ID，低4位为按键值</span>{`
+    "s": states,              `}<span class="tok-comment">// 设备内部状态。bit0:启动, bit1:蓝牙连接, bit2:蓝牙断开</span>{`
+    "mb": [states, size],     `}<span class="tok-comment">// RS485读取到的线圈/离散量输入状态，states: 二进制位代表状态，0：关闭，1：开启; size:数量</span>{`
+    "mv": [v1, v2, ...,valN], `}<span class="tok-comment">// RS485读取到的保持/输入寄存器数值，valN:第N个值</span>{`
+    "v": [fVer, uVer, dVer]   `}<span class="tok-comment">// 版本号。fVer：框架固件；uVer：用户逻辑；dVer：驱动固件；(仅首次连接成功上报)</span>{`
   }]
 }`}</code></pre>
                 </div>
-
-                <h3>字段详解</h3>
-                <table class="spec-table">
-                    <thead>
-                        <tr>
-                            <th>字段</th>
-                            <th>类型</th>
-                            <th>说明</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>o</code></td>
-                            <td>Array</td>
-                            <td
-                                >开关输出状态。states为UInt16位掩码，一位代表一路，0:关,
-                                1:开；size为总路数。</td
-                            >
-                        </tr>
-                        <tr>
-                            <td><code>p</code></td>
-                            <td>Array</td>
-                            <td
-                                >PWM状态。包含开关状态掩码、反控掩码、各路占空比(x100)、频率、加减速率。</td
-                            >
-                        </tr>
-                        <tr>
-                            <td><code>i</code></td>
-                            <td>Array</td>
-                            <td
-                                >输入状态。包含开关掩码(0:静默,
-                                1:激活)、脉冲计数、频率值。</td
-                            >
-                        </tr>
-                        <tr>
-                            <td><code>t</code></td>
-                            <td>Array</td>
-                            <td>环境数据。温度1、温度2(Int16)、湿度。</td>
-                        </tr>
-                        <tr>
-                            <td><code>a</code></td>
-                            <td>Array</td>
-                            <td
-                                >ADC映射值。Int32，已映射为实际物理量并放大了100倍。</td
-                            >
-                        </tr>
-                        <tr>
-                            <td><code>c</code></td>
-                            <td>Array</td>
-                            <td>计数器。16个Int32类型的计数器当前值。</td>
-                        </tr>
-                        <tr>
-                            <td><code>m</code></td>
-                            <td>Array</td>
-                            <td
-                                >Mesh数据。size为数据个数，idxs为上报字段的位掩码。</td
-                            >
-                        </tr>
-                        <tr>
-                            <td><code>r</code></td>
-                            <td>UInt32</td>
-                            <td
-                                >433MHz信号。高20位为遥控器ID，低4位为按键值。</td
-                            >
-                        </tr>
-                        <tr>
-                            <td><code>s</code></td>
-                            <td>UInt32</td>
-                            <td
-                                >设备状态。bit0:启动, bit1:蓝牙连接,
-                                bit2:蓝牙断开。</td
-                            >
-                        </tr>
-                        <tr>
-                            <td><code>mb</code></td>
-                            <td>Array</td>
-                            <td>RS485 Modbus读取到的开关/离散量状态。</td>
-                        </tr>
-                        <tr>
-                            <td><code>mv</code></td>
-                            <td>Array</td>
-                            <td>RS485 Modbus读取到的寄存器数值。</td>
-                        </tr>
-                        <tr>
-                            <td><code>mp</code></td>
-                            <td>Array</td>
-                            <td>Modbus透传命令回复的原始十六进制数据。</td>
-                        </tr>
-                        <tr>
-                            <td><code>v</code></td>
-                            <td>Array</td>
-                            <td
-                                >版本号。框架固件、用户逻辑、驱动版本。仅在首次连接成功时上报。</td
-                            >
-                        </tr>
-                    </tbody>
-                </table>
             </section>
 
             <!-- Control Commands -->
             <section id="control" class="doc-section">
-                <h2>控制命令格式</h2>
-                <p>下发控制命令的JSON格式：</p>
+                <h2>下发控制命令格式</h2>
 
                 <h3>单个命令</h3>
                 <div class="code-block">
                     <pre><code>{`{
-  "device": "yq_123456_0",
+  "device": "yq_A755_0",
   "data": {
     "id": 1,
     "method": "so",
@@ -252,7 +184,7 @@ const lang = "zh";
                 <h3>多个命令</h3>
                 <div class="code-block">
                     <pre><code>{`{
-  "device": "yq_123456_0",
+  "device": "yq_A755_0",
   "data": [
     { "id": 1, "method": "so", "params": [228, 0] },
     { "id": 2, "method": "sp", "params": [0, 1, 0, 5000, 1000, 0, 0] }
@@ -574,7 +506,7 @@ const lang = "zh";
         max-width: 1200px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: 250px 1fr;
+        grid-template-columns: 180px 1fr;
         gap: 3rem;
         padding: 3rem 1.5rem;
     }
@@ -594,7 +526,51 @@ const lang = "zh";
 
     @media (max-width: 1024px) {
         .sidebar {
-            position: static;
+            position: sticky;
+            top: 64px; /* 调整为 Header 的高度 */
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            margin: 0 -1.5rem 2rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-light);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .sidebar-title {
+            display: none;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            overflow-x: auto;
+            padding: 0 1.5rem;
+            gap: 0.6rem;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .sidebar-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0;
+            flex-shrink: 0;
+        }
+
+        .sidebar-nav a {
+            padding: 0.4rem 1rem;
+            background: var(--bg-light);
+            font-size: 0.875rem;
+            border: 1px solid var(--border-light);
+            border-radius: 2rem;
+            color: var(--text-dark);
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
         }
     }
 
@@ -630,6 +606,70 @@ const lang = "zh";
     .sidebar-nav a:hover {
         color: var(--primary);
         background: var(--primary-light);
+    }
+
+    /* Report Feature Steps */
+    .feature-intro {
+        margin: 0.5rem 0 1.25rem !important;
+        color: var(--text-muted) !important;
+        font-size: 0.9rem;
+    }
+
+    .feature-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 1024px) {
+        .feature-steps {
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+    }
+
+    .step-item {
+        background: var(--bg-light);
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
+        border: 1px solid var(--border-light);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: all 0.2s ease;
+    }
+
+    .step-item:hover {
+        border-color: var(--primary-light);
+        background: white;
+        transform: translateY(-1px);
+    }
+
+    .step-badge {
+        flex-shrink: 0;
+        background: var(--primary-light);
+        color: var(--primary-dark);
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 700;
+    }
+
+    .step-text {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.4;
+    }
+
+    .step-text strong {
+        color: var(--text-dark);
+        font-weight: 600;
+    }
+
+    /* Report Grid Layout (Removed in favor of full-width code) */
+    .code-block.full-width {
+        max-width: 100%;
     }
 
     /* Main Content */
@@ -762,6 +802,36 @@ const lang = "zh";
         font-family: "Cascadia Code", "Fira Code", monospace;
         font-size: 0.9rem;
         line-height: 1.6;
+        display: block;
+    }
+
+    .tok-comment {
+        color: #334155;
+        opacity: 0.8;
+        font-family: inherit;
+        font-size: 0.85rem;
+        font-style: normal;
+        margin-left: 1rem;
+        font-weight: 350;
+        transition: all 0.2s ease;
+    }
+
+    .code-block:hover .tok-comment {
+        opacity: 1;
+        color: var(--primary); /* 悬停时变为品牌蓝色，清晰且具有引导性 */
+        font-weight: 400; /* 悬停时略微加粗，增加可读性 */
+    }
+
+    @media (max-width: 1024px) {
+        .tok-comment {
+            display: block;
+            margin-left: 1.5rem;
+            margin-top: 0.1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 0.75rem;
+        }
     }
 
     /* Inline Code */
