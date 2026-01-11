@@ -160,6 +160,25 @@ const lang = "zh";
     "mb": [states, size],     `}<span class="tok-comment">// RS485读取到的线圈/离散量输入状态，states: 二进制位代表状态，0：关闭，1：开启; size:数量</span>{`
     "mv": [v1, v2, ...,valN], `}<span class="tok-comment">// RS485读取到的保持/输入寄存器数值，valN:第N个值</span>{`
     "v": [fVer, uVer, dVer]   `}<span class="tok-comment">// 版本号。fVer：框架固件；uVer：用户逻辑；dVer：驱动固件；(仅首次连接成功上报)</span>{`
+  }],
+        ...,
+    "devNameN":[{...}],
+}`}</code></pre>
+                </div>
+
+                <h3>上报报文示例</h3>
+                <div class="code-block full-width">
+                    <pre><code>{`{
+  "yq_6809_0": [{
+    "o": [10, 6],
+    "i": [4, 0, 0, 0, 0, 28, 0, 0, 0, 0, 0, 0, 0],
+    "c": [500, 500, 0, 0, 0, 0, 0, 398, 0, 0, 0, 0, 0, 0, 0, 0],
+    "p": [1, 0, 0, 500, 0, 0, 10000, 500, 0, 0, 10000, 500, 0, 0, 10000, 500, 0, 0],
+    "t": [0, 16, 43],
+    "a": [115, 0, 0],
+    "v": [83, 1767745693, 3],
+    "mb": [0, 0],
+    "mv": []
   }]
 }`}</code></pre>
                 </div>
@@ -167,27 +186,26 @@ const lang = "zh";
 
             <!-- Control Commands -->
             <section id="control" class="doc-section">
-                <h2>下发控制命令格式</h2>
+                <h2>下发控制命令</h2>
 
-                <h3>单个命令</h3>
+                <h3>下发控制数据格式(单个控制命令)</h3>
                 <div class="code-block">
                     <pre><code>{`{
-  "device": "yq_A755_0",
+  "device": "devName",`}<span class="tok-comment">// devName:设备名，示例："yq_6809_0"</span>{`
   "data": {
-    "id": 1,
-    "method": "so",
-    "params": {}
-  }
+    "id": 1,`}<span class="tok-comment">// 消息ID，自增</span>{`
+    "method": "",`}<span class="tok-comment">// 控制方法，示例："so"</span>{`
+    "params": {}`}<span class="tok-comment">// 控制参数，根据控制方法不同而不同</span>{`
 }`}</code></pre>
                 </div>
 
-                <h3>多个命令</h3>
+                <h3>下发控制数据格式(多个控制命令)</h3>
                 <div class="code-block">
                     <pre><code>{`{
   "device": "yq_A755_0",
   "data": [
-    { "id": 1, "method": "so", "params": [228, 0] },
-    { "id": 2, "method": "sp", "params": [0, 1, 0, 5000, 1000, 0, 0] }
+    { "id": 1, "method": "so", "params": [228, 0] },`}<span class="tok-comment">// 控制命令1</span>{`
+    { "id": 2, "method": "sp", "params": [0, 1, 0, 5000, 1000, 0, 0] }`}<span class="tok-comment">// 控制命令2</span>{`
   ]
 }`}</code></pre>
                 </div>
@@ -200,22 +218,26 @@ const lang = "zh";
 
                 <div class="code-block">
                     <pre><code>{`"method": "so",
-"params": [value0, value1]
-
-// value0: 前16个开关的控制值
-// value1: 16-32开关的控制值
-// 2位对应1个输出: 00=不动作, 01=关, 10=开, 11=切换`}</code></pre>
+"params": [value0, value1]`}<span class="tok-comment">//value0：0-16个开关控制值，value1：保留，默认0。
+    //value0的2进制值每2位对应1个输出: 00=不动作, 01=关, 10=开, 11=切换
+    //示例：value0 = 228 = 0b 11 10 01 00
+    //开关1: 00 = 不动作
+    //开关2: 01 = 关闭
+    //开关3: 10 = 打开  
+    //开关4: 11 = 切换
+    //其它开关：00 = 不动作
+</span></code></pre>
                 </div>
-
-                <h3>示例：控制前4个开关</h3>
                 <div class="code-block">
-                    <pre><code>{`// value0 = 228 = 0b11100100
-// 开关1: 00 = 不动作
-// 开关2: 01 = 关闭
-// 开关3: 10 = 打开  
-// 开关4: 11 = 切换
-
-"params": [228, 0]`}</code></pre>
+                    <pre><code><span class="tok-comment">// 下发控制命令示例</span>
+{`{
+	"device": "yq_6809_0",
+	"data": {
+		"id": 1,
+		"method": "so",
+		"params": [32, 0]
+	}
+}`}</code></pre>
                 </div>
             </section>
 
