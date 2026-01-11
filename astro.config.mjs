@@ -8,7 +8,7 @@ export default defineConfig({
   // 替换为你的 GitHub 域名
   site: 'https://lybgo.github.io',
   // 替换为你的仓库名称
-  base: '/ylai_web',
+  base: '/',
   vite: {
     plugins: [tailwindcss()]
   }
