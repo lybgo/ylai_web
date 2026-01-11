@@ -25,16 +25,29 @@ const lang = "zh";
                 <li><a href="#app-screenshots">App快速配置MQTT</a></li>
                 <li><a href="#overview">协议概述</a></li>
                 <li><a href="#report">数据上报格式</a></li>
-                <li><a href="#control">控制命令格式</a></li>
+                <li><a href="#control">下发控制命令</a></li>
                 <li><a href="#switch">开关控制 (so)</a></li>
                 <li><a href="#pwm">PWM控制 (sp)</a></li>
                 <li><a href="#counter">计数器控制 (sc)</a></li>
-                <li><a href="#modbus">Modbus/RS485</a></li>
                 <li><a href="#rf433">RF433遥控器</a></li>
-                <li><a href="#task">任务控制</a></li>
-                <li><a href="#system">系统命令</a></li>
-                <li><a href="#examples">常用示例</a></li>
-                <li><a href="#ota">OTA升级</a></li>
+                <li><a href="#getData">获取全量数据</a></li>
+                <li>
+                    <a href="#task">任务与自动化</a>
+                    <ul class="submenu">
+                        <li><a href="#task-ro">一键执行任务</a></li>
+                        <li><a href="#task-se">启用/禁用任务</a></li>
+                        <li><a href="#task-sd">中止延时任务</a></li>
+                        <li><a href="#task-cp">脉冲计数清零</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#system">系统命令</a>
+                    <ul class="submenu">
+                        <li><a href="#system-rb">重启设备</a></li>
+                        <li><a href="#system-sk">修改控制密码</a></li>
+                        <li><a href="#ota">OTA远程升级</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
 
@@ -213,23 +226,24 @@ const lang = "zh";
 
             <!-- Switch Control -->
             <section id="switch" class="doc-section">
-                <h2>开关控制 (so)</h2>
-                <p>控制继电器开关输出状态。</p>
-
+                <h3>
+                    开关控制 (so) <span class="section-subtitle"
+                        >控制继电器开关输出状态</span
+                    >
+                </h3>
                 <div class="code-block">
-                    <pre><code>{`"method": "so",
-"params": [value0, value1]`}<span class="tok-comment">//value0：0-16个开关控制值，value1：保留，默认0。
+                    <pre><code>{`"method": "so",`}<span class="tok-comment">// set output </span>{`
+"params": [value0, value1]`}
+    <span class="tok-comment">//value0：0-16个开关控制值，value1：保留，默认0。
     //value0的2进制值每2位对应1个输出: 00=不动作, 01=关, 10=开, 11=切换
     //示例：value0 = 228 = 0b 11 10 01 00
     //开关1: 00 = 不动作
     //开关2: 01 = 关闭
     //开关3: 10 = 打开  
     //开关4: 11 = 切换
-    //其它开关：00 = 不动作
-</span></code></pre>
-                </div>
-                <div class="code-block">
-                    <pre><code><span class="tok-comment">// 下发控制命令示例</span>
+    //其它开关：00 = 不动作<br />
+    //示例代码：控制开关3打开，其它开关不动作   
+</span>
 {`{
 	"device": "yq_6809_0",
 	"data": {
@@ -243,121 +257,187 @@ const lang = "zh";
 
             <!-- PWM Control -->
             <section id="pwm" class="doc-section">
-                <h2>PWM控制 (sp)</h2>
-                <p>控制PWM输出的占空比、频率及渐变速率。</p>
+                <h3>
+                    PWM控制 (sp) <span class="section-subtitle"
+                        >控制PWM输出的占空比、频率及渐变速率</span
+                    >
+                </h3>
 
                 <div class="code-block">
-                    <pre><code>{`"method": "sp",
-"params": [idx, onoff, inverse, pwm, hz, pwmRate, hzRate]
-
-// idx: PWM索引 (0开始)
-// onoff: 0=关, 1=开, 2=切换
-// inverse: 0=正向, 1=反向
-// pwm: 占空比 0-10000 (实际0-100.00%)
-// hz: 频率 1-100000Hz
-// pwmRate: 占空比渐变速率 0-10000/s
-// hzRate: 频率渐变速率 0-100000Hz/s
-// 设为-1表示保持原值`}</code></pre>
-                </div>
-
-                <h3>示例：渐变调光到50%</h3>
-                <div class="code-block">
-                    <pre><code>{`"method": "sp",
-"params": [0, 1, 0, 5000, 1000, 100, 0]
-// 第1路PWM, 打开, 正向, 50%占空比, 1000Hz, 渐变速率1%/s`}</code></pre>
+                    <pre><code>{`"method": "sp",`}<span class="tok-comment">// set pwm </span>{`
+"params": [idx, onoff, inverse, pwm, hz, pwmRate, hzRate]`}
+    <span class="tok-comment">// idx: PWM索引 (0开始)
+    // onoff: 0=关, 1=开, 2=切换
+    // inverse: 0=正向, 1=反向
+    // pwm: 占空比 0-10000 (实际0-100.00%)
+    // hz: 频率 1-150000Hz
+    // pwmRate: 占空比渐变速率 0-10000/s(实际0-100.00%/s)
+    // hzRate: 频率渐变速率 0-100000Hz/s
+    // 设为-1表示保持原值<br />
+//示例代码：控制PWM1点空比为80%，其它参数保持原值
+</span>
+{`{
+	"device": "yq_6809_0",
+	"data": {
+		"id": 1,
+		"method": "sp",
+		"params": [1, -1, -1, 8000, -1, -1, -1]
+	}
+}`}
+</code></pre>
                 </div>
             </section>
 
             <!-- Counter Control -->
             <section id="counter" class="doc-section">
-                <h2>计数器控制 (sc)</h2>
-                <p>设置或修改设备内部的16个计数器值。</p>
+                <h3>
+                    计数器控制 (sc) <span class="section-subtitle"
+                        >设置或修改设备内部的16个计数器值(参数值)</span
+                    >
+                </h3>
 
                 <div class="code-block">
-                    <pre><code>{`"method": "sc",
-"params": [idx, type, value, ...]
-
-// idx: 计数器索引 0-15
-// type: 0=直接设置数值, 1=在当前值基础上递增, 2=在当前值基础上递减
-// value: 操作的具体数值 (Int32)`}</code></pre>
-                </div>
-
-                <h3>示例：将计数器3递增10</h3>
-                <div class="code-block">
-                    <pre><code>{`// 假设计数器3当前为100
-{
-  "device": "yq_123456_0",
-  "data": {
-    "id": 12,
-    "method": "sc",
-    "params": [2, 1, 10]
-  }
-}
-// 执行后计数器3变为110`}</code></pre>
-                </div>
-            </section>
-
-            <!-- Modbus Control -->
-            <section id="modbus" class="doc-section">
-                <h2>Modbus/RS485 控制</h2>
-                <p>设备支持通过RS485接口与外部Modbus从站通信。</p>
-
-                <h3>清除开关量输入脉冲 (cp)</h3>
-                <div class="code-block">
-                    <pre><code>{`"method": "cp",
-"params": idx  // 要清零的开关量输入索引值 (0开始)`}</code></pre>
+                    <pre><code>{`"method": "sc",`}<span class="tok-comment">// set counter </span>{`
+"params": [idxN,typeN,valueN,...]`}
+    <span class="tok-comment">// idx: 计数器索引 0-15
+    // type: 操作类型 0=设置,直接设置数值; 1=递增，在当前值基础上递增； 2=递减，在当前值基础上递减
+    // value: 操作的具体数值 (Int32)<br />
+//示例代码：计数器3设置为12345，计数器4递增8899
+</span>
+{`{
+	"device": "yq_6809_0",
+	"data": {
+		"id": 1,
+		"method": "sc",
+		"params": [2, 0, 12345, 3, 1, 8899]
+	}
+}`}
+</code>
+                </pre>
                 </div>
             </section>
 
             <!-- RF433 Control -->
             <section id="rf433" class="doc-section">
-                <h2>RF433遥控器控制 (sr)</h2>
-                <p>发送射频信号以控制433MHz接收设备或模拟遥控器按钮。</p>
+                <h3>
+                    RF433遥控器控制 (sr) <span class="section-subtitle"
+                        >发送433MHz的射频信号以遥控控制相应的接收设备或模拟遥控器按钮</span
+                    >
+                </h3>
 
                 <div class="code-block">
-                    <pre><code>{`"method": "sr",
-"params": [idx, rfValue]
+                    <pre><code>{`"method": "sr",`}<span class="tok-comment">// set RF </span>{`
+"params": [idx, rfValue]`}
+    <span class="tok-comment">// idx: 遥控器索引
+    //0~9: 对应硬件预设遥控器1~10
+    //10~19: 对应设备学习到的遥控器11~19
+    //-1: 使用自定义rfValue (高20位ID + 低4位键值)
+    //rfValue: 433MHz按键值 (0~15)<br />
+//示例代码：按下遥控器3的按钮3
+</span>
+{`{
+	"device": "yq_6809_0",
+	"data": {
+		"id": 1,
+		"method": "sr",
+		"params": [2, 3]
+	}
+}`}</code></pre>
+                </div>
+            </section>
 
-// idx: 遥控器索引
-//   0~9: 对应硬件预设遥控器1~10
-//   10~19: 对应设备学习到的遥控器11~20
-//   -1: 使用自定义rfValue (高20位ID + 低4位键值)
-// rfValue: 433MHz按键值 (0~15)`}</code></pre>
+            <section id="getData" class="doc-section">
+                <h3>
+                    获取全量数据 (gd) <span class="section-subtitle"
+                        >获取设备的所有数据</span
+                    >
+                </h3>
+
+                <div class="code-block">
+                    <pre><code>{`"method": "gd",`}<span class="tok-comment">// get data </span>{`
+"params": dataType`}
+    <span class="tok-comment">// dataType: 想要获取的数据类型，以全量数据上报
+    //0: 基础数据 (开关、输入、PWM、温湿度、ADC、计数器、Modbus数据)<br />
+//示例代码：获取基础数据
+</span>
+{`{
+	"device": "yq_6809_0",
+	"data": {
+		"id": 1,
+		"method": "gd",
+		"params": 0
+	}
+}`}</code></pre>
                 </div>
             </section>
 
             <!-- Task Control -->
             <section id="task" class="doc-section">
-                <h2>任务与自动化控制</h2>
-
-                <h3>获取最新数据 (gd)</h3>
-                <p>主动触发设备立即上报指定类型的数据。</p>
+                <h3 id="task-ro">执行"一键执行"任务 (ro)</h3>
                 <div class="code-block">
-                    <pre><code>{`"method": "gd",
-"params": dataType
-
-// dataType 含义:
-// 0: 基本数据 (开关、输入、PWM、温湿度、ADC、计数器)
-// 6: 一键执行任务列表
-// 7: 自动化任务列表`}</code></pre>
+                    <pre><code>{`"method": "ro",`}<span class="tok-comment">// run oneKeyTask </span>{`
+"params": taskId `}<span class="tok-comment">// 任务ID (在APP中可见)<br />
+//示例代码：执行任务ID为12的"一键执行"任务
+</span>
+{`{
+	"device": "yq_6809_0",
+	"data": {
+		"id": 1,
+		"method": "ro",
+		"params": 12
+	}
+}`}</code></pre>
                 </div>
 
-                <h3>执行"一键执行"任务 (ro)</h3>
+                <h3 id="task-se">启用/禁用自动化任务或时间任务 (se)</h3>
                 <div class="code-block">
-                    <pre><code>{`"method": "ro",
-"params": id  // 任务ID (在APP中可见)`}</code></pre>
+                    <pre><code>{`"method": "se",`}<span class="tok-comment">//set enable </span>{`
+"params": [taskId, enable]  `}<span class="tok-comment">//taskId:要控制的任务ID； enable: 0:禁用，1启用<br />
+//示例代码：禁用任务ID为13的任务
+</span>
+{`{
+	"device": "yq_6809_0",
+	"data": {
+		"id": 1,
+		"method": "se",
+		"params": [13,0]
+	}
+}`}
+</code></pre>
                 </div>
 
-                <h3>启用/禁用自动化任务 (se)</h3>
+                <h3 id="task-sd">中止正在执行延时的任务 (sd)</h3>
                 <div class="code-block">
-                    <pre><code>{`"method": "se",
-"params": [id, enable]  // enable: 0=禁用, 1=启用`}</code></pre>
+                    <pre><code>{`"method": "sd",`}<span class="tok-comment">//stop delay </span>{`
+"params": id  `}<span class="tok-comment">// 要中止的任务ID, 若此任务没在执行，则无效果<br />
+//示例代码：中止任务ID为14的任务
+</span>
+{`{
+	"device": "yq_6809_0",
+	"data": {
+		"id": 1,
+		"method": "sd",
+		"params": 14
+	}
+}`}
+</code>
+                </pre>
                 </div>
-
-                <h3>中止延时任务 (sd)</h3>
+                <h3 id="task-cp">开关量输入的脉冲计数清零 (cp)</h3>
                 <div class="code-block">
-                    <pre><code>{`"method": "sd",
-"params": id  // 要中止的任务ID`}</code></pre>
+                    <pre><code>{`"method": "cp",`}<span class="tok-comment">//clear pulse </span>{`
+"params": idx  `}<span class="tok-comment">//要清零的开关量输入索引值<br />
+//示例代码：清零输入2的脉冲计数
+</span>
+{`{
+	"device": "yq_6809_0",
+	"data": {
+		"id": 1,
+		"method": "cp",
+		"params": 1
+	}
+}`}
+</code></pre>
                 </div>
             </section>
 
@@ -365,96 +445,39 @@ const lang = "zh";
             <section id="system" class="doc-section">
                 <h2>系统命令</h2>
 
-                <h3>重启设备 (rb)</h3>
+                <h3 id="system-rb">重启设备 (rb)</h3>
                 <div class="code-block">
-                    <pre><code>{`"method": "rb",
-"params": 1`}</code></pre>
+                    <pre><code>{`"method": "rb",`}<span class="tok-comment">//reboot </span>{`
+"params": 1`}<span class="tok-comment">//1:重启<br />
+//示例代码：重启设备
+</span>
+{`{
+	"device": "yq_6809_0",
+	"data": {
+		"id": 1,
+		"method": "rb",
+		"params": 1
+	}
+}`}
+</code></pre>
                 </div>
 
-                <h3>设置/修改控制密码 (sk)</h3>
-                <p>
-                    设置源来智能APP访问设备时所需的密码。设置任意一个为0则清除密码。
-                </p>
+                <h3 id="system-sk">设置/修改源来智能APP设备使用的密码(sk)</h3>
                 <div class="code-block">
-                    <pre><code>{`"method": "sk",
-"params": [adminPassword, userPassword]`}</code></pre>
-                </div>
-
-                <h3>清除脉冲计数 (cp)</h3>
-                <div class="code-block">
-                    <pre><code>{`"method": "cp",
-"params": idx  // 输入索引`}</code></pre>
-                </div>
-
-                <h3>发送433MHz信号 (sr)</h3>
-                <div class="code-block">
-                    <pre><code>{`"method": "sr",
-"params": [idx, rfValue]
-// idx: 遥控器索引 0-9硬件, 10-19学习到的
-// idx=-1时rfValue包含完整遥控器信息`}</code></pre>
-                </div>
-            </section>
-
-            <!-- Usage Examples -->
-            <section id="examples" class="doc-section">
-                <h2>常用示例例程</h2>
-                <p>以下是一些常见的控制场景及其对应的 MQTT 消息负载。</p>
-
-                <h3>1. 开启第1路和第3路继电器</h3>
-                <div class="code-block">
-                    <pre><code>{`{
-  "device": "yq_123456_0",
-  "data": {
-    "id": 1,
-    "method": "so",
-    "params": [34, 0] 
-  }
-}
-// 34 = 0b100010 (第1路位10=开, 第2路位00=不动作, 第3路位10=开)`}</code></pre>
-                </div>
-
-                <h3>2. 设置第1路PWM为50%亮度，并在2秒内渐变</h3>
-                <div class="code-block">
-                    <pre><code>{`{
-  "device": "yq_123456_0",
-  "data": {
-    "id": 2,
-    "method": "sp",
-    "params": [0, 1, 0, 5000, 1000, 2500, 0]
-  }
-}
-// 占空比5000(50%), 速率2500/s (即2秒从0%到50%)`}</code></pre>
-                </div>
-
-                <h3>3. 立即获取当前的传感器数据</h3>
-                <div class="code-block">
-                    <pre><code>{`{
-  "device": "yq_123456_0",
-  "data": {
-    "id": 3,
-    "method": "gd",
-    "params": 0
-  }
+                    <pre><code>{`"method": "sk",`}<span class="tok-comment">//set key </span>{`
+"params": [admin, user]`}<span class="tok-comment">//admin: 管理员密码，user: 用户密码;若任意一个设置为0，则清除密码<br />
+//示例代码：设置管理员密码为123456，用户密码为654321
+</span>
+{`{
+	"device": "yq_6809_0",
+	"data": {
+		"id": 1,
+		"method": "sk",
+		"params": [123456, 654321]
+	}
 }`}</code></pre>
                 </div>
-
-                <h3>4. 触发一个已定义的场景任务</h3>
-                <div class="code-block">
-                    <pre><code>{`{
-  "device": "yq_123456_0",
-  "data": {
-    "id": 4,
-    "method": "ro",
-    "params": 5
-  }
-}
-// 触发ID为5的"一键执行"任务`}</code></pre>
-                </div>
-            </section>
-
-            <!-- OTA -->
-            <section id="ota" class="doc-section">
-                <h2>OTA远程升级 (ot)</h2>
+                <h3>OTA远程升级 (ot)</h3>
                 <div class="info-card warning">
                     <h4>⚠️ 谨慎操作</h4>
                     <ul>
@@ -464,23 +487,32 @@ const lang = "zh";
                             升级过程中必须保证网络（2.4G WiFi）和供电极其稳定。
                         </li>
                         <li>
-                            更新用户逻辑固件时，固件需包含MQTT配置，否则可能丢失连接。
+                            MQTT版本的设备更新用户逻辑固件时，固件需包含MQTT配置，否则会导致丢失连接。
                         </li>
                     </ul>
                 </div>
 
                 <div class="code-block">
-                    <pre><code>{`"method": "ot",
-"params": [binType, url, wifiName, wifiPsw]
-
-// binType: 固件类型
-//   "0": Framework框架固件 (要求版本号 > 82)
-//   "1": 用户逻辑固件 (更新后会连接固件内的MQTT)
-//   "2": 用户逻辑固件 (永久生效)
-//   "3": 驱动固件
-// url: 固件文件的下载直链地址
-// wifiName: 现场2.4G WiFi名称
-// wifiPsw: 现场WiFi密码`}</code></pre>
+                    <pre><code>{`"method": "ot",`}<span class="tok-comment">//ota </span>{`
+"params": [binType, url, wifiName, wifiPsw]`}
+    <span class="tok-comment">// binType: 固件类型
+    //  "0": Framework框架固件 (要求版本号 > 82)
+    //  "1": 用户逻辑固件 (更新后会连接固件内的MQTT)
+    //  "2": 用户逻辑固件 (永久生效)
+    //  "3": 驱动固件
+    // url: 固件文件的下载直链地址
+    // wifiName: 现场2.4G WiFi名称
+    // wifiPsw: 现场WiFi密码<br />
+//示例代码：升级用户逻辑固件
+</span>
+{`{
+	"device": "yq_6809_0",
+	"data": {
+		"id": 1,
+		"method": "ot",
+		"params": ["1", "http://example.com/firmware.bin", "WiFiName", "WiFiPassword"]
+	}
+}`}</code></pre>
                 </div>
 
                 <p>
@@ -495,519 +527,551 @@ const lang = "zh";
                 >
             </div>
         </main>
+
+        <style>
+            .page-header {
+                background: var(--bg-light);
+                color: var(--text-dark);
+                padding: 1.25rem 1.5rem;
+                text-align: center;
+                border-bottom: 1px solid var(--border-light);
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+                font-weight: 700;
+                margin: 0 0 1rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.25rem;
+                opacity: 0.9;
+                margin: 0;
+            }
+
+            .content-wrapper {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 180px 1fr;
+                gap: 3rem;
+                padding: 3rem 1.5rem;
+            }
+
+            @media (max-width: 1024px) {
+                .content-wrapper {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            /* Sidebar */
+            .sidebar {
+                position: sticky;
+                top: 80px;
+                height: fit-content;
+            }
+
+            @media (max-width: 1024px) {
+                .sidebar {
+                    position: sticky;
+                    top: 64px; /* 调整为 Header 的高度 */
+                    z-index: 100;
+                    background: rgba(255, 255, 255, 0.95);
+                    backdrop-filter: blur(10px);
+                    margin: 0 -1.5rem 2rem;
+                    padding: 0.75rem 0;
+                    border-bottom: 1px solid var(--border-light);
+                    border-top: 1px solid var(--border-light);
+                }
+
+                .sidebar-title {
+                    display: none;
+                }
+
+                .sidebar-nav {
+                    display: flex;
+                    overflow-x: auto;
+                    padding: 0 1.5rem;
+                    gap: 0.6rem;
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+
+                .sidebar-nav::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .sidebar-nav li {
+                    margin-bottom: 0;
+                    flex-shrink: 0;
+                }
+
+                .sidebar-nav a {
+                    padding: 0.4rem 1rem;
+                    background: var(--bg-light);
+                    font-size: 0.875rem;
+                    border: 1px solid var(--border-light);
+                    border-radius: 2rem;
+                    color: var(--text-dark);
+                }
+
+                .sidebar-nav a:hover {
+                    background: var(--primary-light);
+                    border-color: var(--primary);
+                }
+            }
+
+            .sidebar-title {
+                font-size: 0.875rem;
+                font-weight: 600;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                margin: 0 0 1rem;
+            }
+
+            .sidebar-nav {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .sidebar-nav li {
+                margin-bottom: 0.25rem;
+            }
+
+            .submenu {
+                list-style: none;
+                padding-left: 1.25rem;
+                margin: 0.25rem 0 0.5rem;
+                border-left: 1px solid var(--border-light);
+            }
+
+            .submenu a {
+                padding: 0.25rem 0.75rem !important;
+                font-size: 0.85rem !important;
+                color: var(--text-muted) !important;
+            }
+
+            .submenu a:hover {
+                color: var(--primary) !important;
+                background: transparent !important;
+            }
+
+            .sidebar-nav a {
+                display: block;
+                padding: 0.5rem 1rem;
+                color: var(--text-muted);
+                text-decoration: none;
+                border-radius: 6px;
+                font-size: 0.95rem;
+                transition: all 0.2s ease;
+            }
+
+            .sidebar-nav a:hover {
+                color: var(--primary);
+                background: var(--primary-light);
+            }
+
+            /* Report Feature Steps */
+            .feature-intro {
+                margin: 0.5rem 0 1.25rem !important;
+                color: var(--text-muted) !important;
+                font-size: 0.9rem;
+            }
+
+            .feature-steps {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                margin-bottom: 2.5rem;
+            }
+
+            @media (max-width: 1024px) {
+                .feature-steps {
+                    grid-template-columns: 1fr;
+                    gap: 0.75rem;
+                }
+            }
+
+            .step-item {
+                background: var(--bg-light);
+                padding: 0.75rem 1rem;
+                border-radius: 10px;
+                border: 1px solid var(--border-light);
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                transition: all 0.2s ease;
+            }
+
+            .step-item:hover {
+                border-color: var(--primary-light);
+                background: white;
+                transform: translateY(-1px);
+            }
+
+            .step-badge {
+                flex-shrink: 0;
+                background: var(--primary-light);
+                color: var(--primary-dark);
+                padding: 0.2rem 0.5rem;
+                border-radius: 4px;
+                font-size: 0.7rem;
+                font-weight: 700;
+            }
+
+            .step-text {
+                font-size: 0.85rem;
+                color: var(--text-muted);
+                line-height: 1.4;
+            }
+
+            .step-text strong {
+                color: var(--text-dark);
+                font-weight: 600;
+            }
+
+            /* Report Grid Layout (Removed in favor of full-width code) */
+            .code-block.full-width {
+                max-width: 100%;
+            }
+
+            /* Main Content */
+            .main-content {
+                min-width: 0;
+            }
+
+            /* Screenshots Section */
+            .screenshot-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2rem;
+                margin: 2.5rem 0;
+            }
+
+            @media (max-width: 1024px) {
+                .screenshot-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1.5rem;
+                }
+            }
+
+            @media (max-width: 640px) {
+                .screenshot-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                }
+            }
+
+            :global(.highlight-box) {
+                position: absolute;
+                border: 2px solid #4ecdc4;
+                background: rgba(78, 205, 196, 0.1);
+                border-radius: 0.25rem;
+                z-index: 10;
+                pointer-events: none;
+            }
+
+            .screenshot-card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .screenshot-wrapper {
+                position: relative;
+                width: 100%;
+                aspect-ratio: 9/20;
+                border-radius: 1rem;
+                border: 3px solid var(--text-dark);
+                overflow: hidden;
+                background: #f1f5f9;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                /* 使用 ease-in-out 代替复杂的 cubic-bezier 避免缩回时的渲染计算错误 */
+                transition:
+                    transform 0.3s ease-in-out,
+                    box-shadow 0.3s ease-in-out;
+                z-index: 1;
+                /* 强制指定缩放中心 */
+                transform-origin: center center;
+                /* 提前告知浏览器将有变换，预留渲染资源 */
+                will-change: transform;
+                /* 保持 3D 转换上下文 */
+                transform: translateZ(0);
+            }
+
+            .screenshot-wrapper:hover {
+                transform: scale(1.6) translateZ(0);
+                z-index: 50;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            }
+
+            .screenshot-wrapper img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .screenshot-caption {
+                font-size: 0.85rem;
+                color: var(--text-muted);
+                font-weight: 500;
+                margin-top: 1rem;
+                text-align: center;
+            }
+
+            .doc-section {
+                margin-bottom: 4rem;
+            }
+
+            .doc-section h2,
+            .doc-section h3 {
+                display: flex;
+                align-items: baseline;
+            }
+
+            .doc-section h2 {
+                font-size: 1.75rem;
+                font-weight: 700;
+                color: var(--text-dark);
+                margin: 0 0 1.5rem;
+                padding-bottom: 0.75rem;
+                border-bottom: 2px solid var(--primary-light);
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+                font-weight: 500;
+                color: var(--text-muted);
+                margin-left: 1rem;
+            }
+
+            .doc-section h3 {
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: var(--text-dark);
+                margin: 2rem 0 1rem;
+            }
+
+            .doc-section p {
+                color: var(--text-muted);
+                line-height: 1.7;
+                margin: 0 0 1rem;
+            }
+
+            /* Code Blocks */
+            .code-block {
+                background: var(--bg-light);
+                border: 1px solid var(--border-light);
+                border-radius: 12px;
+                padding: 1.5rem;
+                margin: 1rem 0;
+                overflow-x: auto;
+            }
+
+            .code-block pre {
+                margin: 0;
+            }
+
+            .code-block code {
+                color: var(--text-dark);
+                font-family: "Cascadia Code", "Fira Code", monospace;
+                font-size: 0.9rem;
+                line-height: 1.6;
+                display: block;
+            }
+
+            .tok-comment {
+                color: #334155;
+                opacity: 0.8;
+                font-family: inherit;
+                font-size: 0.85rem;
+                font-style: normal;
+                font-weight: 350;
+                transition: all 0.2s ease;
+            }
+
+            .code-block:hover .tok-comment {
+                opacity: 1;
+                color: var(
+                    --primary
+                ); /* 悬停时变为品牌蓝色，清晰且具有引导性 */
+                font-weight: 400; /* 悬停时略微加粗，增加可读性 */
+            }
+
+            @media (max-width: 1024px) {
+                .tok-comment {
+                    display: block;
+                    margin-left: 1.5rem;
+                    margin-top: 0.1rem;
+                    margin-bottom: 0.5rem;
+                    font-size: 0.8rem;
+                    border-left: 2px solid #e2e8f0;
+                    padding-left: 0.75rem;
+                }
+            }
+
+            /* Inline Code */
+            p code,
+            li code,
+            td code {
+                background: var(--primary-light);
+                color: var(--primary-dark);
+                padding: 0.125rem 0.375rem;
+                border-radius: 4px;
+                font-family: "Cascadia Code", "Fira Code", monospace;
+                font-size: 0.875em;
+            }
+
+            /* Feature List */
+            .tag-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.75rem;
+                padding: 0;
+                margin: 1.5rem 0;
+                list-style: none;
+            }
+
+            .tag-list li {
+                background: var(--primary-light);
+                color: var(--primary-dark);
+                padding: 0.4rem 1rem;
+                border-radius: 2rem;
+                font-size: 0.9rem;
+                font-weight: 500;
+                transition: all 0.2s ease;
+                border: 1px solid var(--border-light);
+            }
+
+            .tag-list li:hover {
+                background: var(--primary);
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+            }
+
+            /* Info Cards */
+            .info-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+                margin: 1.5rem 0;
+            }
+
+            @media (max-width: 768px) {
+                .info-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .info-card {
+                background: var(--bg-light);
+                padding: 1.5rem;
+                border-radius: 12px;
+                margin: 1.5rem 0;
+                border: 1px solid var(--border-light);
+            }
+
+            .info-card h4 {
+                margin: 0 0 0.75rem;
+                color: var(--text-dark);
+            }
+
+            .info-card p,
+            .info-card li {
+                color: var(--text-muted);
+                margin: 0.5rem 0;
+            }
+
+            .info-card ul {
+                padding-left: 1.25rem;
+                margin: 0.5rem 0;
+            }
+
+            .info-card.warning {
+                background: #fff7ed;
+                border: 1px solid #fed7aa;
+            }
+
+            .info-card.warning h4 {
+                color: #c2410c;
+            }
+
+            .info-card.warning p,
+            .info-card.warning li {
+                color: #9a3412;
+            }
+
+            /* Tables */
+            .spec-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 1rem 0;
+                font-size: 0.95rem;
+            }
+
+            .spec-table th,
+            .spec-table td {
+                padding: 0.875rem 1rem;
+                text-align: left;
+                border-bottom: 1px solid var(--border-light);
+            }
+
+            .spec-table th {
+                background: var(--bg-light);
+                font-weight: 600;
+                color: var(--text-dark);
+            }
+
+            .spec-table td {
+                color: var(--text-muted);
+            }
+
+            /* CTA Box */
+            .cta-box {
+                background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+                padding: 2rem;
+                border-radius: 16px;
+                text-align: center;
+                margin-top: 2rem;
+            }
+
+            .cta-box p {
+                font-size: 1.125rem;
+                color: var(--text-dark);
+                margin: 0 0 1rem;
+            }
+
+            .btn {
+                display: inline-flex;
+                padding: 0.75rem 1.5rem;
+                font-weight: 600;
+                border-radius: 10px;
+                text-decoration: none;
+                transition: all 0.2s ease;
+            }
+
+            .btn-primary {
+                background: linear-gradient(
+                    135deg,
+                    var(--primary) 0%,
+                    var(--primary-dark) 100%
+                );
+                color: white;
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                color: white;
+            }
+        </style>
     </div>
 </Layout>
-
-<style>
-    .page-header {
-        background: var(--bg-light);
-        color: var(--text-dark);
-        padding: 1.25rem 1.5rem;
-        text-align: center;
-        border-bottom: 1px solid var(--border-light);
-    }
-
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .page-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin: 0 0 1rem;
-    }
-
-    .page-subtitle {
-        font-size: 1.25rem;
-        opacity: 0.9;
-        margin: 0;
-    }
-
-    .content-wrapper {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 180px 1fr;
-        gap: 3rem;
-        padding: 3rem 1.5rem;
-    }
-
-    @media (max-width: 1024px) {
-        .content-wrapper {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    /* Sidebar */
-    .sidebar {
-        position: sticky;
-        top: 80px;
-        height: fit-content;
-    }
-
-    @media (max-width: 1024px) {
-        .sidebar {
-            position: sticky;
-            top: 64px; /* 调整为 Header 的高度 */
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            margin: 0 -1.5rem 2rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border-light);
-            border-top: 1px solid var(--border-light);
-        }
-
-        .sidebar-title {
-            display: none;
-        }
-
-        .sidebar-nav {
-            display: flex;
-            overflow-x: auto;
-            padding: 0 1.5rem;
-            gap: 0.6rem;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        .sidebar-nav::-webkit-scrollbar {
-            display: none;
-        }
-
-        .sidebar-nav li {
-            margin-bottom: 0;
-            flex-shrink: 0;
-        }
-
-        .sidebar-nav a {
-            padding: 0.4rem 1rem;
-            background: var(--bg-light);
-            font-size: 0.875rem;
-            border: 1px solid var(--border-light);
-            border-radius: 2rem;
-            color: var(--text-dark);
-        }
-
-        .sidebar-nav a:hover {
-            background: var(--primary-light);
-            border-color: var(--primary);
-        }
-    }
-
-    .sidebar-title {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin: 0 0 1rem;
-    }
-
-    .sidebar-nav {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .sidebar-nav li {
-        margin-bottom: 0.5rem;
-    }
-
-    .sidebar-nav a {
-        display: block;
-        padding: 0.5rem 1rem;
-        color: var(--text-muted);
-        text-decoration: none;
-        border-radius: 6px;
-        font-size: 0.95rem;
-        transition: all 0.2s ease;
-    }
-
-    .sidebar-nav a:hover {
-        color: var(--primary);
-        background: var(--primary-light);
-    }
-
-    /* Report Feature Steps */
-    .feature-intro {
-        margin: 0.5rem 0 1.25rem !important;
-        color: var(--text-muted) !important;
-        font-size: 0.9rem;
-    }
-
-    .feature-steps {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-        margin-bottom: 2.5rem;
-    }
-
-    @media (max-width: 1024px) {
-        .feature-steps {
-            grid-template-columns: 1fr;
-            gap: 0.75rem;
-        }
-    }
-
-    .step-item {
-        background: var(--bg-light);
-        padding: 0.75rem 1rem;
-        border-radius: 10px;
-        border: 1px solid var(--border-light);
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        transition: all 0.2s ease;
-    }
-
-    .step-item:hover {
-        border-color: var(--primary-light);
-        background: white;
-        transform: translateY(-1px);
-    }
-
-    .step-badge {
-        flex-shrink: 0;
-        background: var(--primary-light);
-        color: var(--primary-dark);
-        padding: 0.2rem 0.5rem;
-        border-radius: 4px;
-        font-size: 0.7rem;
-        font-weight: 700;
-    }
-
-    .step-text {
-        font-size: 0.85rem;
-        color: var(--text-muted);
-        line-height: 1.4;
-    }
-
-    .step-text strong {
-        color: var(--text-dark);
-        font-weight: 600;
-    }
-
-    /* Report Grid Layout (Removed in favor of full-width code) */
-    .code-block.full-width {
-        max-width: 100%;
-    }
-
-    /* Main Content */
-    .main-content {
-        min-width: 0;
-    }
-
-    /* Screenshots Section */
-    .screenshot-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
-        margin: 2.5rem 0;
-    }
-
-    @media (max-width: 1024px) {
-        .screenshot-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-    }
-
-    @media (max-width: 640px) {
-        .screenshot-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-    }
-
-    :global(.highlight-box) {
-        position: absolute;
-        border: 2px solid #4ecdc4;
-        background: rgba(78, 205, 196, 0.1);
-        border-radius: 0.25rem;
-        z-index: 10;
-        pointer-events: none;
-    }
-
-    .screenshot-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .screenshot-wrapper {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 9/20;
-        border-radius: 1rem;
-        border: 3px solid var(--text-dark);
-        overflow: hidden;
-        background: #f1f5f9;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-        /* 使用 ease-in-out 代替复杂的 cubic-bezier 避免缩回时的渲染计算错误 */
-        transition:
-            transform 0.3s ease-in-out,
-            box-shadow 0.3s ease-in-out;
-        z-index: 1;
-        /* 强制指定缩放中心 */
-        transform-origin: center center;
-        /* 提前告知浏览器将有变换，预留渲染资源 */
-        will-change: transform;
-        /* 保持 3D 转换上下文 */
-        transform: translateZ(0);
-    }
-
-    .screenshot-wrapper:hover {
-        transform: scale(1.6) translateZ(0);
-        z-index: 50;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    }
-
-    .screenshot-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .screenshot-caption {
-        font-size: 0.85rem;
-        color: var(--text-muted);
-        font-weight: 500;
-        margin-top: 1rem;
-        text-align: center;
-    }
-
-    .doc-section {
-        margin-bottom: 4rem;
-    }
-
-    .doc-section h2 {
-        font-size: 1.75rem;
-        font-weight: 700;
-        color: var(--text-dark);
-        margin: 0 0 1.5rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 2px solid var(--primary-light);
-    }
-
-    .doc-section h3 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--text-dark);
-        margin: 2rem 0 1rem;
-    }
-
-    .doc-section p {
-        color: var(--text-muted);
-        line-height: 1.7;
-        margin: 0 0 1rem;
-    }
-
-    /* Code Blocks */
-    .code-block {
-        background: var(--bg-light);
-        border: 1px solid var(--border-light);
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin: 1rem 0;
-        overflow-x: auto;
-    }
-
-    .code-block pre {
-        margin: 0;
-    }
-
-    .code-block code {
-        color: var(--text-dark);
-        font-family: "Cascadia Code", "Fira Code", monospace;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        display: block;
-    }
-
-    .tok-comment {
-        color: #334155;
-        opacity: 0.8;
-        font-family: inherit;
-        font-size: 0.85rem;
-        font-style: normal;
-        margin-left: 1rem;
-        font-weight: 350;
-        transition: all 0.2s ease;
-    }
-
-    .code-block:hover .tok-comment {
-        opacity: 1;
-        color: var(--primary); /* 悬停时变为品牌蓝色，清晰且具有引导性 */
-        font-weight: 400; /* 悬停时略微加粗，增加可读性 */
-    }
-
-    @media (max-width: 1024px) {
-        .tok-comment {
-            display: block;
-            margin-left: 1.5rem;
-            margin-top: 0.1rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.8rem;
-            border-left: 2px solid #e2e8f0;
-            padding-left: 0.75rem;
-        }
-    }
-
-    /* Inline Code */
-    p code,
-    li code,
-    td code {
-        background: var(--primary-light);
-        color: var(--primary-dark);
-        padding: 0.125rem 0.375rem;
-        border-radius: 4px;
-        font-family: "Cascadia Code", "Fira Code", monospace;
-        font-size: 0.875em;
-    }
-
-    /* Feature List */
-    .tag-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        padding: 0;
-        margin: 1.5rem 0;
-        list-style: none;
-    }
-
-    .tag-list li {
-        background: var(--primary-light);
-        color: var(--primary-dark);
-        padding: 0.4rem 1rem;
-        border-radius: 2rem;
-        font-size: 0.9rem;
-        font-weight: 500;
-        transition: all 0.2s ease;
-        border: 1px solid var(--border-light);
-    }
-
-    .tag-list li:hover {
-        background: var(--primary);
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
-    }
-
-    /* Info Cards */
-    .info-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-        margin: 1.5rem 0;
-    }
-
-    @media (max-width: 768px) {
-        .info-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .info-card {
-        background: var(--bg-light);
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin: 1.5rem 0;
-        border: 1px solid var(--border-light);
-    }
-
-    .info-card h4 {
-        margin: 0 0 0.75rem;
-        color: var(--text-dark);
-    }
-
-    .info-card p,
-    .info-card li {
-        color: var(--text-muted);
-        margin: 0.5rem 0;
-    }
-
-    .info-card ul {
-        padding-left: 1.25rem;
-        margin: 0.5rem 0;
-    }
-
-    .info-card.warning {
-        background: #fff7ed;
-        border: 1px solid #fed7aa;
-    }
-
-    .info-card.warning h4 {
-        color: #c2410c;
-    }
-
-    .info-card.warning p,
-    .info-card.warning li {
-        color: #9a3412;
-    }
-
-    /* Tables */
-    .spec-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 1rem 0;
-        font-size: 0.95rem;
-    }
-
-    .spec-table th,
-    .spec-table td {
-        padding: 0.875rem 1rem;
-        text-align: left;
-        border-bottom: 1px solid var(--border-light);
-    }
-
-    .spec-table th {
-        background: var(--bg-light);
-        font-weight: 600;
-        color: var(--text-dark);
-    }
-
-    .spec-table td {
-        color: var(--text-muted);
-    }
-
-    /* CTA Box */
-    .cta-box {
-        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
-        padding: 2rem;
-        border-radius: 16px;
-        text-align: center;
-        margin-top: 2rem;
-    }
-
-    .cta-box p {
-        font-size: 1.125rem;
-        color: var(--text-dark);
-        margin: 0 0 1rem;
-    }
-
-    .btn {
-        display: inline-flex;
-        padding: 0.75rem 1.5rem;
-        font-weight: 600;
-        border-radius: 10px;
-        text-decoration: none;
-        transition: all 0.2s ease;
-    }
-
-    .btn-primary {
-        background: linear-gradient(
-            135deg,
-            var(--primary) 0%,
-            var(--primary-dark) 100%
-        );
-        color: white;
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        color: white;
-    }
-</style>
