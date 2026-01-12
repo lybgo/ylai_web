@@ -21,7 +21,7 @@ const content = {
             { href: `/${lang}/about`, label: "关于我们" },
             { href: `/${lang}/buy`, label: "购买渠道" },
         ],
-        copyright: "© 2025 宜启智控 版权所有",
+        copyright: "© 2026 宜启智控 • 深圳市源来智能设备有限公司",
         tagline: "让控制变得简单 · 让万物互联触手可及",
     },
     en: {
@@ -66,52 +66,33 @@ const t = content[lang as keyof typeof content] || content.zh;
                 <p class="brand-tagline">{t.tagline}</p>
             </div>
 
-            <!-- Product Links -->
-            <div class="footer-section">
-                <h4 class="footer-title">{t.product}</h4>
-                <ul class="footer-links">
+            <!-- All Links in Grid -->
+            <nav class="footer-nav">
+                <ul class="footer-links-grid">
                     {
-                        t.links.map((link) => (
-                            <li>
-                                <a href={link.href}>{link.label}</a>
-                            </li>
-                        ))
+                        [...t.links, ...t.resourceLinks, ...t.companyLinks].map(
+                            (link) => (
+                                <li>
+                                    <a href={link.href}>{link.label}</a>
+                                </li>
+                            ),
+                        )
                     }
                 </ul>
-            </div>
-
-            <!-- Resources -->
-            <div class="footer-section">
-                <h4 class="footer-title">{t.resources}</h4>
-                <ul class="footer-links">
-                    {
-                        t.resourceLinks.map((link) => (
-                            <li>
-                                <a href={link.href}>{link.label}</a>
-                            </li>
-                        ))
-                    }
-                </ul>
-            </div>
-
-            <!-- Company -->
-            <div class="footer-section">
-                <h4 class="footer-title">{t.company}</h4>
-                <ul class="footer-links">
-                    {
-                        t.companyLinks.map((link) => (
-                            <li>
-                                <a href={link.href}>{link.label}</a>
-                            </li>
-                        ))
-                    }
-                </ul>
-            </div>
+            </nav>
         </div>
 
         <!-- Copyright -->
         <div class="footer-bottom">
-            <p class="copyright">{t.copyright}</p>
+            <p class="copyright">
+                {t.copyright}
+                <a
+                    href="http://beian.miit.gov.cn/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="icp-link">粤ICP备2022134117号</a
+                >
+            </p>
         </div>
     </div>
 </footer>
@@ -131,14 +112,15 @@ const t = content[lang as keyof typeof content] || content.zh;
 
     .footer-grid {
         display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr;
-        gap: 3rem;
+        grid-template-columns: 1.5fr 3fr;
+        gap: 4rem;
+        align-items: start;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
         .footer-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            grid-template-columns: 1fr;
+            gap: 3rem;
         }
     }
 
@@ -179,39 +161,37 @@ const t = content[lang as keyof typeof content] || content.zh;
         line-height: 1.6;
     }
 
-    .footer-section {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+    .footer-nav {
+        flex: 1;
     }
 
-    .footer-title {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: #1e293b;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin: 0;
-    }
-
-    .footer-links {
+    .footer-links-grid {
         list-style: none;
         padding: 0;
         margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem 2rem;
     }
 
-    .footer-links a {
-        font-size: 0.9rem;
+    .footer-links-grid a {
+        font-size: 0.95rem;
         color: #64748b;
         text-decoration: none;
-        transition: color 0.2s ease;
+        transition: all 0.2s ease;
+        display: inline-block;
     }
 
-    .footer-links a:hover {
+    .footer-links-grid a:hover {
         color: #0066cc;
+        transform: translateX(4px);
+    }
+
+    @media (max-width: 640px) {
+        .footer-links-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
     }
 
     .footer-bottom {
@@ -225,5 +205,16 @@ const t = content[lang as keyof typeof content] || content.zh;
         font-size: 0.875rem;
         color: #94a3b8;
         margin: 0;
+    }
+
+    .icp-link {
+        color: #94a3b8;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        margin-left: 1rem;
+    }
+
+    .icp-link:hover {
+        color: #0066cc;
     }
 </style>

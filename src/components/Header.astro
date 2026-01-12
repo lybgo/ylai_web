@@ -38,7 +38,12 @@ const switchLabel = lang === "zh" ? "EN" : "中文";
         <!-- Logo -->
         <a href={`/${lang}/`} class="logo">
             <img src="/images/logos/ylai.svg" alt="宜启智控" class="logo-img" />
-            <span class="logo-text">宜启智控</span>
+            <div class="logo-info">
+                <span class="logo-text">源来智能 • 宜启智控</span>
+                <span class="logo-subtitle"
+                    >让你以最简单便捷的方式实现智能物联网自动化控制</span
+                >
+            </div>
         </a>
 
         <!-- Desktop Navigation -->
@@ -173,6 +178,27 @@ const switchLabel = lang === "zh" ? "EN" : "中文";
         font-size: 1.25rem;
         font-weight: 700;
         color: #0066cc;
+        line-height: 1.2;
+    }
+
+    .logo-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .logo-subtitle {
+        font-size: 0.95rem;
+        color: #64748b;
+        font-weight: 400;
+        white-space: nowrap;
+        display: none;
+    }
+
+    @media (min-width: 640px) {
+        .logo-subtitle {
+            display: block;
+        }
     }
 
     .nav-desktop {
