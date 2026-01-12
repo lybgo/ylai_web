@@ -9,11 +9,31 @@ interface Props {
 	lang?: "zh" | "en";
 }
 
-const {
-	title = "宜启智控Pro - 智能物联网自动化控制器",
-	description = "无需编程的智能物联网自动化万能控制器，手机APP轻松配置，支持95%市场传感器",
-	lang = "zh",
-} = Astro.props;
+const { lang = "zh" } = Astro.props;
+
+const defaults = {
+	zh: {
+		title: "宜启智控 - 智能物联网自动化控制器",
+		description:
+			"无需编程的智能物联网自动化万能控制器，手机APP轻松配置，支持95%市场传感器",
+		keywords: "宜启智控,物联网,自动化控制器,智能控制,MQTT,IoT,PLC替代",
+	},
+	en: {
+		title: "IOTAutoMate - Smart IoT Automation Controller",
+		description:
+			"No-code smart IoT automation universal controller, easy mobile app configuration, supports 95% of market sensors",
+		keywords:
+			"IOTAutoMate,IoT,Automation Controller,Smart Control,MQTT,PLC Alternative",
+	},
+}[lang] || {
+	title: "宜启智控 - 智能物联网自动化控制器",
+	description:
+		"无需编程的智能物联网自动化万能控制器，手机APP轻松配置，支持95%市场传感器",
+	keywords: "宜启智控,物联网,自动化控制器,智能控制,MQTT,IoT,PLC替代",
+};
+
+const { title = defaults.title, description = defaults.description } =
+	Astro.props;
 ---
 
 <!doctype html>
@@ -23,10 +43,7 @@ const {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="description" content={description} />
-		<meta
-			name="keywords"
-			content="宜启智控,物联网,自动化控制器,智能控制,MQTT,IoT,PLC替代"
-		/>
+		<meta name="keywords" content={defaults.keywords} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 

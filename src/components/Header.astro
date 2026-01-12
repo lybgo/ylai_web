@@ -37,12 +37,26 @@ const switchLabel = lang === "zh" ? "EN" : "中文";
     <div class="header-container">
         <!-- Logo -->
         <a href={`/${lang}/`} class="logo">
-            <img src="/images/logos/ylai.svg" alt="宜启智控" class="logo-img" />
+            <img
+                src="/images/logos/ylai.svg"
+                alt={lang === "zh" ? "宜启智控" : "IOTAutoMate"}
+                class="logo-img"
+            />
             <div class="logo-info">
-                <span class="logo-text">源来智能 • 宜启智控</span>
-                <span class="logo-subtitle"
-                    >让你以最简单便捷的方式实现智能物联网自动化控制</span
-                >
+                <span class="logo-text">
+                    {
+                        lang === "zh"
+                            ? "源来智能 • 宜启智控"
+                            : "YLAI • IOTAutoMate"
+                    }
+                </span>
+                <span class="logo-subtitle">
+                    {
+                        lang === "zh"
+                            ? "让你以最简单便捷的方式实现智能物联网自动化控制"
+                            : "The simplest way to achieve smart IoT automation control"
+                    }
+                </span>
             </div>
         </a>
 

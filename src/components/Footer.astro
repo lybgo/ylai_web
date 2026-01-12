@@ -42,7 +42,7 @@ const content = {
             { href: `/${lang}/about`, label: "About Us" },
             { href: `/${lang}/buy`, label: "Where to Buy" },
         ],
-        copyright: "© 2025 YiQi Smart Control. All rights reserved.",
+        copyright: "© 2025 IOTAutoMate. All rights reserved.",
         tagline: "Making Control Simple · Connecting Everything",
     },
 };
@@ -58,10 +58,12 @@ const t = content[lang as keyof typeof content] || content.zh;
                 <a href={`/${lang}/`} class="brand-logo">
                     <img
                         src="/images/logos/ylai.svg"
-                        alt="宜启智控"
+                        alt={lang === "zh" ? "宜启智控" : "IOTAutoMate"}
                         class="brand-img"
                     />
-                    <span class="brand-text">宜启智控</span>
+                    <span class="brand-text">
+                        {lang === "zh" ? "宜启智控" : "IOTAutoMate"}
+                    </span>
                 </a>
                 <p class="brand-tagline">{t.tagline}</p>
             </div>
