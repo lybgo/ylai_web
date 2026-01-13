@@ -1,0 +1,917 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+    tutorialSectionsEn as tutorialSections,
+    chaptersEn as chapters,
+} from "../../data/tutorialDataEn";
+
+const lang = "en";
+
+// Group by chapter
+const groupedSections = chapters.map((chapter) => ({
+    ...chapter,
+    sections: tutorialSections.filter((s) => s.chapterNum === chapter.num),
+}));
+---
+
+<Layout
+    title="Product Tutorial - IOTAutoMate"
+    description="Getting started in 1 day with zero experience: Automation control and IoT tutorials with no programming required. IOTAutoMate controller guide."
+    lang={lang}
+>
+    <div class="content-wrapper">
+        <nav class="sidebar">
+            <h3 class="sidebar-title">Contents</h3>
+            <div class="sidebar-nav">
+                {
+                    groupedSections.map((chapter) => (
+                        <div class="chapter-group">
+                            <div class="chapter-title">{chapter.title}</div>
+                            <ul class="section-list">
+                                {chapter.sections.map((s) => (
+                                    <li>
+                                        <a
+                                            href={`/en/tutorials/${s.slug}`}
+                                            class="section-link"
+                                        >
+                                            <span class="section-num">
+                                                {s.num}
+                                            </span>
+                                            <span class="section-name">
+                                                {s.title}
+                                            </span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))
+                }
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <!-- Course Intro -->
+            <section class="intro-section">
+                <div class="page-header">
+                    <h1 class="page-title">
+                        Getting Started in 1 Day with Zero Experience:<br
+                        />Automation & IoT Application Tutorial (No Programming)<br
+                        />
+                        & IOTAutoMate Controller User Guide
+                    </h1>
+                </div>
+                <div class="intro-card">
+                    <h2>🎯 Course Objectives</h2>
+                    <p>
+                        Using the IOTAutoMate Demonstration Kit, students or
+                        engineers can systematically master no-code automation
+                        logic configuration, sensor data acquisition, cloud
+                        communication, and multi-platform integration. Build
+                        smart projects or upgrade traditional equipment rapidly.
+                    </p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value">43</span>
+                        <span class="stat-label">Lessons</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">4</span>
+                        <span class="stat-label">Chapters</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">~13h</span>
+                        <span class="stat-label">Video Content</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">1 Day</span>
+                        <span class="stat-label">Quick Start</span>
+                    </div>
+                </div>
+            </section>
+            <!-- Showcase Section -->
+            <section class="kit-section">
+                <div class="kit-container">
+                    <!-- Left Side: Text Content -->
+                    <div class="kit-info-side">
+                        <h2 class="section-title">🛠️ Demo Kit Overview</h2>
+                        <p class="section-desc">
+                            Equipped with a rich set of sensors and actuators to
+                            help you complete practical exercises quickly.
+                        </p>
+
+                        <div class="info-groups">
+                            <div class="info-group input-group">
+                                <h3 class="group-title">
+                                    <span class="dot input"></span> Sensors & Inputs
+                                </h3>
+                                <ul class="device-list">
+                                    {
+                                        [
+                                            {
+                                                name: "Water Level Switch",
+                                                model: "Input 1 (Digital)",
+                                            },
+                                            {
+                                                name: "Rain Sensor",
+                                                model: "Input 2 (NPN)",
+                                            },
+                                            {
+                                                name: "Vibration Sensor",
+                                                model: "Input 3 (NPN)",
+                                            },
+                                            {
+                                                name: "Photoelectric Switch",
+                                                model: "Input 4 (NPN)",
+                                            },
+                                            {
+                                                name: "Stepper Left Limit",
+                                                model: "Input 5 (Digital)",
+                                            },
+                                            {
+                                                name: "Stepper Right Limit",
+                                                model: "Input 6 (Digital)",
+                                            },
+                                            {
+                                                name: "Combustible Gas Sensor",
+                                                model: "Analog 1 (0-10V)",
+                                            },
+                                            {
+                                                name: "Light Intensity Sensor",
+                                                model: "IIC Interface",
+                                            },
+                                            {
+                                                name: "Temp & Humidity Sensor",
+                                                model: "IIC Interface",
+                                            },
+                                            {
+                                                name: "Remote Control",
+                                                model: "433MHz RF",
+                                            },
+                                        ].map((item) => (
+                                            <li>
+                                                <span class="device-name">
+                                                    <span class="check-icon">
+                                                        ✓
+                                                    </span>{" "}
+                                                    {item.name}
+                                                </span>
+                                                <span class="device-model">
+                                                    {item.model}
+                                                </span>
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
+
+                            <div class="info-group output-group">
+                                <h3 class="group-title">
+                                    <span class="dot output"></span> Actuators & Outputs
+                                </h3>
+                                <ul class="device-list">
+                                    {
+                                        [
+                                            {
+                                                name: "LED Light 1",
+                                                model: "Switch 1 (DC12V)",
+                                            },
+                                            {
+                                                name: "LED Light 2",
+                                                model: "Switch 2 (DC12V)",
+                                            },
+                                            {
+                                                name: "Buzzer",
+                                                model: "Switch 3 (DC12V)",
+                                            },
+                                            {
+                                                name: "Fan",
+                                                model: "Switch 4 (DC12V)",
+                                            },
+                                            {
+                                                name: "Brushless Direction",
+                                                model: "Switch 5 (GND)",
+                                            },
+                                            {
+                                                name: "Stepper Direction",
+                                                model: "Switch 6 (GND)",
+                                            },
+                                            {
+                                                name: "Servo (5V)",
+                                                model: "PWM1 (Angle Control)",
+                                            },
+                                            {
+                                                name: "Brushless Motor",
+                                                model: "PWM2 (Speed Control)",
+                                            },
+                                            {
+                                                name: "Stepper Motor",
+                                                model: "PWM3 (Freq Control)",
+                                            },
+                                            {
+                                                name: "LED Light 3",
+                                                model: "PWM4 (Brightness)",
+                                            },
+                                        ].map((item) => (
+                                            <li>
+                                                <span class="device-name">
+                                                    <span class="check-icon">
+                                                        ✓
+                                                    </span>{" "}
+                                                    {item.name}
+                                                </span>
+                                                <span class="device-model">
+                                                    {item.model}
+                                                </span>
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Image + Side Magnifier -->
+                    <div class="kit-image-side">
+                        <div class="image-wrapper" id="kit-wrapper">
+                            <img
+                                src="/images/ystj.jpg"
+                                alt="Demo Kit Showcase"
+                                class="main-kit-image"
+                            />
+
+                            <!-- Magnifier Box (Side View) -->
+                            <div id="kit-magnifier" class="kit-magnifier-box">
+                                <img
+                                    id="kit-magnifier-img"
+                                    src="/images/ystj.jpg"
+                                    alt="Magnified Detail"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wiring Diagram -->
+                <div class="wiring-section">
+                    <div class="wiring-header">
+                        <h3>🔌 Demo Kit Wiring Overview</h3>
+                        <div class="wiring-divider"></div>
+                    </div>
+                    <div class="wiring-card">
+                        <img
+                            src="/images/ystj_jx.jpg"
+                            alt="Demo Kit Wiring Diagram"
+                            class="wiring-img"
+                        />
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="cta-section">
+                <h2>Ready to Start Learning?</h2>
+                <p>
+                    Get the IOTAutoMate Demo Kit and follow the tutorials with
+                    hands-on practice
+                </p>
+                <div class="cta-buttons">
+                    <a
+                        href={`/en/tutorials/${tutorialSections[0].slug}`}
+                        class="btn btn-primary btn-lg"
+                    >
+                        Start First Lesson →
+                    </a>
+                    <a href="/en/buy" class="btn btn-accent btn-lg"
+                        >Purchase Demo Kit</a
+                    >
+                </div>
+            </section>
+        </main>
+    </div>
+</Layout>
+
+<style>
+    .page-header {
+        padding: 3rem 1.5rem;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .page-title {
+        color: #0066cc;
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 0 0.5rem;
+    }
+
+    .page-subtitle {
+        font-size: 1rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    .content-wrapper {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 2rem;
+        padding: 2rem 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+        .content-wrapper {
+            grid-template-columns: 1fr;
+        }
+        .sidebar {
+            position: static !important;
+            max-height: none;
+            border-right: none;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1rem;
+        }
+    }
+
+    /* Sidebar */
+    .sidebar {
+        position: sticky;
+        top: 80px;
+        height: fit-content;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        padding-right: 1rem;
+        border-right: 1px solid var(--border-light);
+    }
+
+    .sidebar-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0 0 1rem;
+        padding-left: 0.5rem;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .chapter-group {
+        margin-bottom: 0.5rem;
+    }
+
+    .chapter-title {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--primary);
+        padding: 0.5rem;
+        background: var(--primary-light);
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+    }
+
+    .section-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .section-list li {
+        margin-bottom: 2px;
+    }
+
+    .section-link {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        line-height: 1.4;
+        transition: all 0.2s ease;
+    }
+
+    .section-link:hover {
+        color: var(--primary);
+        background: var(--bg-light);
+    }
+
+    .section-num {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        background: var(--border-light);
+        color: var(--text-muted);
+        font-size: 0.7rem;
+        font-weight: 600;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .section-name {
+        flex: 1;
+    }
+
+    /* Main Content */
+    .main-content {
+        min-width: 0;
+    }
+
+    /* Intro Section */
+    .intro-section {
+        margin-bottom: 2rem;
+    }
+
+    .intro-card {
+        background: var(--bg-light);
+        padding: 1.5rem;
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid var(--primary);
+    }
+
+    .intro-card h2 {
+        font-size: 1.25rem;
+        margin: 0 0 1rem;
+        color: var(--text-dark);
+    }
+
+    .intro-card p {
+        color: var(--text-muted);
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+
+    @media (max-width: 640px) {
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .stat-item {
+        background: white;
+        padding: 1.25rem;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-value {
+        display: block;
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--primary);
+    }
+
+    .stat-label {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 0.25rem;
+    }
+
+    /* Chapters Overview */
+    .chapters-overview {
+        margin-bottom: 2rem;
+    }
+
+    .chapters-overview > h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0 0 1.5rem;
+    }
+
+    .chapter-card {
+        background: white;
+        border-radius: 16px;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+
+    .chapter-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        background: var(--primary);
+        color: white;
+    }
+
+    .chapter-header h3 {
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    .chapter-duration {
+        font-size: 0.8rem;
+        opacity: 0.9;
+    }
+
+    .sections-list {
+        padding: 0.25rem 0;
+    }
+
+    .section-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1.5rem;
+        border-bottom: 1px solid var(--border-light);
+        transition: background 0.2s ease;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .section-item:last-child {
+        border-bottom: none;
+    }
+
+    .section-item:hover {
+        background: var(--bg-light);
+    }
+
+    .section-item .section-num {
+        width: 28px;
+        height: 28px;
+        background: var(--primary-light);
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 0.8rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .section-item .section-title {
+        flex: 1;
+        color: var(--text-dark);
+        font-size: 0.9rem;
+    }
+
+    .section-arrow {
+        color: var(--text-muted);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    .section-item:hover .section-arrow {
+        opacity: 1;
+        color: var(--primary);
+    }
+
+    /* CTA */
+    .cta-section {
+        background: var(--bg-light);
+        border-radius: 16px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        border: 1px solid var(--border-light);
+    }
+
+    .cta-section h2 {
+        font-size: 1.75rem;
+        color: var(--text-dark);
+        margin: 0 0 0.5rem;
+    }
+
+    .cta-section p {
+        font-size: 1rem;
+        color: var(--text-muted);
+        margin: 0 0 1.5rem;
+    }
+
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        display: inline-flex;
+        padding: 0.875rem 2rem;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn-lg {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        background: white;
+        color: var(--primary);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+    }
+
+    .btn-accent {
+        background: var(--accent);
+        color: white;
+    }
+
+    .btn-accent:hover {
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    /* Kit Showcase Styles */
+    .kit-section {
+        margin: 4rem 0;
+        background: transparent;
+        padding: 2rem 0;
+    }
+
+    .kit-container {
+        display: flex;
+        flex-direction: row;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    @media (max-width: 1024px) {
+        .kit-container {
+            flex-direction: column-reverse;
+            gap: 3rem;
+        }
+        .kit-section {
+            padding: 3rem 1.5rem;
+        }
+    }
+
+    .section-title {
+        font-size: 2.25rem;
+        font-weight: 800;
+        color: #1e293b;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: #64748b;
+        margin-bottom: 2.5rem;
+    }
+
+    /* Info Side */
+    .kit-info-side {
+        flex: 1.2;
+    }
+
+    .info-groups {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 640px) {
+        .info-groups {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .group-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+    .dot.input {
+        background: #ff6b35;
+        box-shadow: 0 0 10px rgba(255, 107, 53, 0.4);
+    }
+    .dot.output {
+        background: #0066cc;
+        box-shadow: 0 0 10px rgba(0, 102, 204, 0.4);
+    }
+
+    .device-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .device-list li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .device-name {
+        font-size: 0.95rem;
+        color: #1e293b;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .input-group .check-icon {
+        color: #ff6b35;
+        font-weight: 800;
+        font-size: 1.1rem;
+    }
+
+    .output-group .check-icon {
+        color: #0066cc;
+        font-weight: 800;
+        font-size: 1.1rem;
+    }
+
+    .device-model {
+        font-size: 0.8rem;
+        color: #94a3b8;
+        font-weight: 400;
+    }
+
+    .kit-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 1.5rem;
+        background: #f8fafc;
+        border-radius: 16px;
+        color: #1e293b;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border: 1px solid #e2e8f0;
+    }
+
+    /* Image Side & Magnifier */
+    .kit-image-side {
+        flex: 1;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .image-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        cursor: crosshair;
+    }
+
+    .main-kit-image {
+        width: 100%;
+        height: auto;
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        display: block;
+    }
+
+    .kit-magnifier-box {
+        position: absolute;
+        top: 50%;
+        right: calc(100% + 2rem);
+        transform: translateY(-50%);
+        width: 700px;
+        height: 500px;
+        background: white;
+        border: 2px solid rgba(0, 102, 204, 0.2);
+        border-radius: 24px;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 100;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+        transition:
+            opacity 0.2s ease,
+            visibility 0.2s ease;
+        pointer-events: none;
+    }
+
+    @media (max-width: 1280px) {
+        .kit-magnifier-box {
+            width: 500px;
+            height: 400px;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .kit-magnifier-box {
+            display: none !important;
+        }
+    }
+
+    #kit-magnifier-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transform: scale(2.5);
+    }
+
+    .wiring-section {
+        margin-top: 4rem;
+    }
+
+    .wiring-header {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .wiring-header h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1e293b;
+        white-space: nowrap;
+    }
+
+    .wiring-divider {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, #e2e8f0, transparent);
+    }
+
+    .wiring-card {
+        background: white;
+        padding: 1rem;
+        border-radius: 24px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .wiring-img {
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        display: block;
+    }
+</style>
+
+<script is:inline>
+    (() => {
+        const wrapper = document.getElementById("kit-wrapper");
+        const magnifier = document.getElementById("kit-magnifier");
+        const magnifierImage = document.getElementById("kit-magnifier-img");
+
+        if (wrapper && magnifier && magnifierImage) {
+            wrapper.addEventListener("mouseenter", () => {
+                magnifier.style.opacity = "1";
+                magnifier.style.visibility = "visible";
+            });
+
+            wrapper.addEventListener("mouseleave", () => {
+                magnifier.style.opacity = "0";
+                magnifier.style.visibility = "hidden";
+            });
+
+            wrapper.addEventListener("mousemove", (e) => {
+                const rect = wrapper.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xPercent = (x / rect.width) * 100;
+                const yPercent = (y / rect.height) * 100;
+
+                magnifierImage.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+                magnifierImage.style.objectPosition = `${xPercent}% ${yPercent}%`;
+            });
+        }
+    })();
+</script>
