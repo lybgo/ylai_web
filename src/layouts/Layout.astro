@@ -64,10 +64,15 @@ const { title = defaults.title, description = defaults.description } =
 			if (typeof window !== "undefined") {
 				const STORAGE_KEY = "tutorialSidebarScroll";
 				window.addEventListener("load", () => {
-					if (!window.location.pathname.startsWith("/zh/tutorials"))
-						return;
+					const isTutorialPage = /^\/(zh|en)\/tutorials/.test(
+						window.location.pathname,
+					);
+					if (!isTutorialPage) return;
+
 					const sidebar = document.querySelector(".sidebar");
 					if (!(sidebar instanceof HTMLElement)) return;
+
+					// 1. 恢复之前的滚动位置（针对刷新或手动浏览）
 					const saved = window.sessionStorage.getItem(STORAGE_KEY);
 					if (saved !== null) {
 						const value = parseInt(saved, 10);
@@ -75,6 +80,22 @@ const { title = defaults.title, description = defaults.description } =
 							sidebar.scrollTop = value;
 						}
 					}
+
+					// 2. 自动定位到当前选中的小节（针对页面切换）
+					// 如果是新页面跳转，且没有保存的滚动位置或滚动位置为0，则尝试定位
+					const activeLink = sidebar.querySelector(
+						".section-link.active",
+					);
+					if (activeLink instanceof HTMLElement) {
+						// 只有当没有保存的非零位置时，才强制滚动到活跃项
+						// 或者您可以选择总是确保活跃项在视图中
+						activeLink.scrollIntoView({
+							block: "nearest",
+							behavior: "auto",
+						});
+					}
+
+					// 3. 记录滚动位置
 					sidebar.addEventListener("scroll", () => {
 						window.sessionStorage.setItem(
 							STORAGE_KEY,
