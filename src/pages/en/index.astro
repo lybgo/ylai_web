@@ -207,6 +207,7 @@ const outputHighlights = [
         theme="blue"
         highlights={inputHighlights}
         reverseBottom={false}
+        moreLabel="More..."
     />
 
     <!-- 2. Output Interface Section -->
@@ -222,6 +223,7 @@ const outputHighlights = [
         theme="green"
         highlights={outputHighlights}
         reverseBottom={true}
+        moreLabel="More..."
     />
 
     <!-- 3. Automation Logic Section -->
@@ -897,40 +899,37 @@ const outputHighlights = [
             <div class="flex flex-wrap justify-center gap-4">
                 <a
                     href="/en/tutorials"
-                    class="inline-flex items-center justify-center rounded-lg bg-[#0066cc] px-10 py-4 text-lg font-bold text-white shadow-lg transition-all hover:bg-[#0052a3] hover:shadow-xl active:scale-95"
+                    class="inline-flex items-center justify-center rounded-[10px] bg-[#0066cc]/10 px-8 py-4 text-lg font-semibold text-[#0066cc] transition-all hover:-translate-y-0.5 hover:bg-[#0066cc]/20 hover:text-[#0066cc]"
                 >
-                    Explore Tutorials
-                </a>
-                <a
-                    href="/en/buy"
-                    class="inline-flex items-center justify-center rounded-lg border-2 border-[#0066cc] px-10 py-4 text-lg font-bold text-[#0066cc] transition-all hover:bg-[#0066cc]/5 active:scale-95"
-                >
-                    Buy Now
+                    Explore Tutorials →
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer CTA -->
-    <section class="bg-white py-24 px-6 text-center border-t border-slate-100">
-        <div class="mx-auto max-w-[800px]">
-            <h2 class="mb-6 text-4xl font-bold text-[#1e293b]">
-                Let Intelligence Empower Your Products
+    <!-- CTA Section -->
+    <section
+        class="border-t border-[#0066cc]/10 bg-[#f8fafc] py-12 px-6 text-center"
+    >
+        <div class="mx-auto max-w-[1000px]">
+            <h2 class="mb-4 text-[2rem] font-bold text-[#1e293b]">
+                Still struggling with complex control logic?
             </h2>
-            <p class="mb-10 text-xl text-[#64748b]">
-                Join thousands of users who chose IOTAutoMate for easy
-                automation.
+            <p class="mb-8 text-xl text-[#64748b]">
+                IOTAutoMate makes automation control and remote monitoring
+                effortless. Launch your project in as fast as 1 day!
             </p>
-            <div class="flex flex-wrap justify-center gap-6">
-                <div class="flex items-center gap-2 text-[#64748b]">
-                    <span class="text-[#22c55e] font-bold">✓</span> No Programming
-                </div>
-                <div class="flex items-center gap-2 text-[#64748b]">
-                    <span class="text-[#22c55e] font-bold">✓</span> Industry Tested
-                </div>
-                <div class="flex items-center gap-2 text-[#64748b]">
-                    <span class="text-[#22c55e] font-bold">✓</span> Global Connectivity
-                </div>
+            <div class="flex justify-center gap-4 flex-wrap">
+                <a
+                    href="/en/buy"
+                    class="inline-flex items-center justify-center rounded-[10px] bg-[#0066cc]/10 px-8 py-4 text-lg font-semibold text-[#0066cc] transition-all hover:-translate-y-0.5 hover:bg-[#0066cc]/20 hover:text-[#0066cc]"
+                    >Buy Now</a
+                >
+                <a
+                    href="/en/compare"
+                    class="inline-flex items-center justify-center rounded-[10px] bg-[#0066cc]/10 px-8 py-4 text-lg font-semibold text-[#0066cc] transition-all hover:-translate-y-0.5 hover:bg-[#0066cc]/20 hover:text-[#0066cc]"
+                    >VS PLC/MCU Advantages</a
+                >
             </div>
         </div>
     </section>

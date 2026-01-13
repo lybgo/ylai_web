@@ -43,13 +43,14 @@ const switchLabel = lang === "zh" ? "EN" : "中文";
                 class="logo-img"
             />
             <div class="logo-info">
-                <span class="logo-text">
-                    {
-                        lang === "zh"
-                            ? "源来智能 • 宜启智控"
-                            : "YLAI • IOTAutoMate"
-                    }
-                </span>
+                <div class="logo-text">
+                    <span class="brand-main"
+                        >{lang === "zh" ? "源来智能" : "YLAI"}</span
+                    >
+                    <span class="brand-sub"
+                        >{lang === "zh" ? "宜启智控" : "IOTAutoMate"}</span
+                    >
+                </div>
                 <span class="logo-subtitle">
                     {
                         lang === "zh"
@@ -309,11 +310,42 @@ const switchLabel = lang === "zh" ? "EN" : "中文";
     }
 
     .logo-text {
-        font-size: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+        min-width: 0;
+    }
+
+    .brand-main,
+    .brand-sub {
+        font-size: 1.1rem;
         font-weight: 700;
         color: #0066cc;
-        line-height: 1.2;
         white-space: nowrap;
+    }
+
+    .brand-sub::before {
+        display: none;
+    }
+
+    @media (min-width: 640px) {
+        .logo-text {
+            flex-direction: row;
+            align-items: baseline;
+            gap: 0.4rem;
+            line-height: 1.2;
+        }
+        .brand-main,
+        .brand-sub {
+            font-size: 1.25rem;
+        }
+        .brand-sub::before {
+            content: "•";
+            display: inline-block;
+            margin-right: 0.4rem;
+            color: #0066cc;
+            font-weight: 400;
+        }
     }
 
     .logo-info {

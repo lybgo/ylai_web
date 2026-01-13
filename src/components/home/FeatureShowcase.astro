@@ -25,6 +25,7 @@ interface Props {
     theme?: "blue" | "green";
     highlights: Highlight[];
     reverseBottom?: boolean;
+    moreLabel?: string;
 }
 
 const {
@@ -39,6 +40,7 @@ const {
     theme = "blue",
     highlights,
     reverseBottom = false,
+    moreLabel = "更多...",
 } = Astro.props;
 
 const isGreen = theme === "green";
@@ -154,24 +156,31 @@ const magnifierImgId = `magnifier-img-${uid}`;
 
                         <!-- More Items -->
                         <div
-                            class="flex flex-col items-center gap-2 text-sm font-medium text-[#1e293b] group cursor-default"
+                            class="relative flex flex-col items-center gap-2 text-sm font-medium text-[#1e293b] group cursor-default"
                         >
                             <div
-                                class="flex h-[120px] w-[120px] md:h-[140px] md:w-[140px] flex-col justify-center overflow-hidden rounded-2xl transition-all px-1 pb-1 pt-0 md:px-2 md:pb-2 md:pt-0"
+                                class="h-[120px] w-[120px] md:h-[140px] md:w-[140px] flex items-center justify-center"
                             >
-                                <ul
-                                    class="columns-2 gap-x-2 text-[10px] md:text-xs leading-[1.8] text-[#64748b] text-left w-full"
+                                <div
+                                    class="absolute left-1/2 top-0 z-10 flex h-[120px] w-[120px] -translate-x-1/2 flex-col justify-center overflow-hidden rounded-2xl transition-all duration-300 px-1 pb-1 pt-0 md:px-2 md:pb-2 md:pt-0 md:h-[140px] md:w-[140px] group-hover:h-auto group-hover:min-h-[140px] group-hover:w-[280px] md:group-hover:w-[350px] group-hover:bg-white group-hover:p-4 group-hover:shadow-2xl group-hover:ring-1 group-hover:ring-black/5"
                                 >
-                                    {
-                                        moreItems.map((m) => (
-                                            <li class="mb-0.5 whitespace-nowrap">
-                                                {m}
-                                            </li>
-                                        ))
-                                    }
-                                </ul>
+                                    <ul
+                                        class="columns-2 gap-x-4 text-[10px] md:text-xs leading-[1.8] text-[#64748b] text-left w-full"
+                                    >
+                                        {
+                                            moreItems.map((m) => (
+                                                <li
+                                                    class="mb-0.5 truncate group-hover:whitespace-normal group-hover:overflow-visible"
+                                                    title={m}
+                                                >
+                                                    {m}
+                                                </li>
+                                            ))
+                                        }
+                                    </ul>
+                                </div>
                             </div>
-                            <span class={t.moreContentText}>更多...</span>
+                            <span class={t.moreContentText}>{moreLabel}</span>
                         </div>
                     </div>
                 </div>
