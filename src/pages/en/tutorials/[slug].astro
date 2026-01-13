@@ -25,14 +25,14 @@ const { section } = Astro.props;
 const currentChapter = getChapterByNum(section.chapterNum);
 
 const contentModules = import.meta.glob(
-    "../../../components/tutorials/*.astro",
+    "../../../components/tutorials/*/*.astro",
     {
         eager: true,
     },
 );
 
 const getContentModule = (slug: string) => {
-    const path = `../../../components/tutorials/${slug}.astro`;
+    const path = `../../../components/tutorials/${lang}/${slug}.astro`;
     return contentModules[path] as any;
 };
 
