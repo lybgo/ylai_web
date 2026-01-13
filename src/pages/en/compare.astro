@@ -1,0 +1,1202 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const lang = "en";
+---
+
+<Layout
+    title="Comparison - IOTAutoMate Pro vs PLC vs MCU"
+    description="Comprehensive comparison of IOTAutoMate Pro vs Traditional PLC and MCU, 6-Dimension Radar Analysis, Selection Guide"
+    lang={lang}
+>
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">Advantage Comparison</h1>
+            <p class="page-subtitle">
+                Understand the core advantages of IOTAutoMate with one chart and
+                one table
+            </p>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <!-- Radar Chart Section -->
+        <section class="radar-section">
+            <h2 class="section-title">6-Dimension Analysis</h2>
+            <div
+                class="radar-container"
+                x-data="{ activeProduct: 'yiqi', hoveredProduct: '', activeDimension: null }"
+            >
+                <!-- SVG Radar Chart -->
+                <div class="radar-chart">
+                    <svg viewBox="-80 -35 560 470" class="radar-svg">
+                        <!-- Background hexagons -->
+                        <g class="radar-grid">
+                            {
+                                [5, 4, 3, 2, 1].map((level) => (
+                                    <polygon
+                                        points={`200,${200 - level * 35} ${200 + level * 30.3},${200 - level * 17.5} ${200 + level * 30.3},${200 + level * 17.5} 200,${200 + level * 35} ${200 - level * 30.3},${200 + level * 17.5} ${200 - level * 30.3},${200 - level * 17.5}`}
+                                        fill="none"
+                                        stroke="#e2e8f0"
+                                        stroke-width="1"
+                                    />
+                                ))
+                            }
+                        </g>
+
+                        <!-- Axis lines -->
+                        <g class="radar-axes">
+                            <line
+                                x1="200"
+                                y1="200"
+                                x2="200"
+                                y2="25"
+                                stroke="#cbd5e1"
+                                stroke-width="1"></line>
+                            <line
+                                x1="200"
+                                y1="200"
+                                x2="351.5"
+                                y2="112.5"
+                                stroke="#cbd5e1"
+                                stroke-width="1"></line>
+                            <line
+                                x1="200"
+                                y1="200"
+                                x2="351.5"
+                                y2="287.5"
+                                stroke="#cbd5e1"
+                                stroke-width="1"></line>
+                            <line
+                                x1="200"
+                                y1="200"
+                                x2="200"
+                                y2="375"
+                                stroke="#cbd5e1"
+                                stroke-width="1"></line>
+                            <line
+                                x1="200"
+                                y1="200"
+                                x2="48.5"
+                                y2="287.5"
+                                stroke="#cbd5e1"
+                                stroke-width="1"></line>
+                            <line
+                                x1="200"
+                                y1="200"
+                                x2="48.5"
+                                y2="112.5"
+                                stroke="#cbd5e1"
+                                stroke-width="1"></line>
+                        </g>
+
+                        <!-- Labels -->
+                        <g
+                            class="radar-labels"
+                            font-size="14"
+                            fill="#374151"
+                            font-weight="500"
+                            style="cursor: help;"
+                        >
+                            <text
+                                x="200"
+                                y="10"
+                                text-anchor="middle"
+                                :class="{ 'active': activeDimension === 'usability' }"
+                                @mouseenter="activeDimension = 'usability'"
+                                @mouseleave="activeDimension = null"
+                                >Usability</text
+                            >
+                            <text
+                                x="375"
+                                y="115"
+                                text-anchor="start"
+                                :class="{ 'active': activeDimension === 'iot' }"
+                                @mouseenter="activeDimension = 'iot'"
+                                @mouseleave="activeDimension = null"
+                                >IoT Capability</text
+                            >
+                            <text
+                                x="375"
+                                y="295"
+                                text-anchor="start"
+                                :class="{ 'active': activeDimension === 'scalability' }"
+                                @mouseenter="activeDimension = 'scalability'"
+                                @mouseleave="activeDimension = null"
+                                >Scalability</text
+                            >
+                            <text
+                                x="200"
+                                y="415"
+                                text-anchor="middle"
+                                :class="{ 'active': activeDimension === 'deployment' }"
+                                @mouseenter="activeDimension = 'deployment'"
+                                @mouseleave="activeDimension = null"
+                                >Deployment</text
+                            >
+                            <text
+                                x="25"
+                                y="295"
+                                text-anchor="end"
+                                :class="{ 'active': activeDimension === 'maintenance' }"
+                                @mouseenter="activeDimension = 'maintenance'"
+                                @mouseleave="activeDimension = null"
+                                >Maintainability</text
+                            >
+                            <text
+                                x="25"
+                                y="115"
+                                text-anchor="end"
+                                :class="{ 'active': activeDimension === 'cost' }"
+                                @mouseenter="activeDimension = 'cost'"
+                                @mouseleave="activeDimension = null"
+                                >Cost Efficiency</text
+                            >
+                        </g>
+
+                        <!-- Data areas -->
+                        <!-- IOTAutoMate -->
+                        <polygon
+                            :class="{ 'active': hoveredProduct === 'yiqi' }"
+                            class="radar-area yiqi"
+                            points="200,30 344,108 344,287 200,370 56,287 56,108"
+                        ></polygon>
+                        <!-- PLC -->
+                        <polygon
+                            :class="{ 'active': hoveredProduct === 'plc' }"
+                            class="radar-area plc"
+                            points="200,100 275,155 310,252 200,300 90,252 125,155"
+                        ></polygon>
+                        <!-- MCU -->
+                        <polygon
+                            :class="{ 'active': hoveredProduct === 'mcu' }"
+                            class="radar-area mcu"
+                            points="200,165 245,178 280,230 200,265 120,230 155,178"
+                        ></polygon>
+                    </svg>
+
+                    <!-- Tooltips -->
+                    <div
+                        class="dim-tooltip tooltip-top"
+                        x-show="activeDimension === 'usability'"
+                        x-transition.opacity
+                    >
+                        <h4>Usability</h4>
+                        <table class="tooltip-table">
+                            <tr>
+                                <td class="label">IOTAutoMate (High)</td>
+                                <td>App Config, No Code, Plug & Play</td>
+                            </tr>
+                            <tr>
+                                <td class="label">PLC (Medium)</td>
+                                <td
+                                    >Requires Ladder/Instruction List, Complex
+                                    Config</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="label">MCU (Low)</td>
+                                <td
+                                    >Requires C/C++ Coding, Hardware Development</td
+                                >
+                            </tr>
+                        </table>
+                    </div>
+                    <div
+                        class="dim-tooltip tooltip-right-top"
+                        x-show="activeDimension === 'iot'"
+                        x-transition.opacity
+                    >
+                        <h4>IoT Capability</h4>
+                        <table class="tooltip-table">
+                            <tr>
+                                <td class="label">IOTAutoMate (Strong)</td>
+                                <td
+                                    >Built-in WiFi/4G, Tuya/MQTT, Ready to use</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="label">PLC (Medium)</td>
+                                <td
+                                    >Requires external module & complex config</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="label">MCU (Weak)</td>
+                                <td
+                                    >Requires protocol development & hardware
+                                    design</td
+                                >
+                            </tr>
+                        </table>
+                    </div>
+                    <div
+                        class="dim-tooltip tooltip-right-bottom"
+                        x-show="activeDimension === 'scalability'"
+                        x-transition.opacity
+                    >
+                        <h4>Scalability</h4>
+                        <table class="tooltip-table">
+                            <tr>
+                                <td class="label">IOTAutoMate (Strong)</td>
+                                <td
+                                    >Mesh Networking, 500m Wireless, No Wiring</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="label">PLC (Medium)</td>
+                                <td
+                                    >Wired stacking, complex long-range
+                                    expansion</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="label">MCU (Weak)</td>
+                                <td>Fixed hardware, poor scalability</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div
+                        class="dim-tooltip tooltip-bottom"
+                        x-show="activeDimension === 'deployment'"
+                        x-transition.opacity
+                    >
+                        <h4>Deployment</h4>
+                        <table class="tooltip-table">
+                            <tr>
+                                <td class="label">IOTAutoMate (Fast)</td>
+                                <td
+                                    >1-Day mastery, Plug & Play, Easy logic
+                                    change</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="label">PLC (Medium)</td>
+                                <td>Weeks to learn & deploy, complex changes</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="label">MCU (Slow)</td>
+                                <td>3-6 Months Dev cycle, complex changes</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div
+                        class="dim-tooltip tooltip-left-bottom"
+                        x-show="activeDimension === 'maintenance'"
+                        x-transition.opacity
+                    >
+                        <h4>Maintainability</h4>
+                        <table class="tooltip-table">
+                            <tr>
+                                <td class="label">IOTAutoMate (Good)</td>
+                                <td
+                                    >Mobile logic edit, Instant update, Remote
+                                    OTA</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="label">PLC (Medium)</td>
+                                <td
+                                    >On-site debugging with laptop, no remote
+                                    update</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="label">MCU (Poor)</td>
+                                <td
+                                    >Hard to maintain, relies on source/hardware
+                                    updates</td
+                                >
+                            </tr>
+                        </table>
+                    </div>
+                    <div
+                        class="dim-tooltip tooltip-left-top"
+                        x-show="activeDimension === 'cost'"
+                        x-transition.opacity
+                    >
+                        <h4>Total Cost</h4>
+                        <table class="tooltip-table">
+                            <tr>
+                                <td class="label">IOTAutoMate (Low)</td>
+                                <td
+                                    >Low HW cost, short dev cycle, low
+                                    maintenance</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="label">PLC (Medium)</td>
+                                <td>High HW cost + Medium dev/maint cost</td>
+                            </tr>
+                            <tr>
+                                <td class="label">MCU (Very High)</td>
+                                <td>Lowest HW cost, but very high R&D cost</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Sidebar: Legend + Details -->
+                <div class="radar-sidebar">
+                    <!-- Legend -->
+                    <div class="radar-legend">
+                        <button
+                            :class="{ 'active': hoveredProduct === 'yiqi' }"
+                            @click="activeProduct = 'yiqi'"
+                            @mouseenter="hoveredProduct = 'yiqi'; activeProduct = 'yiqi'"
+                            @mouseleave="hoveredProduct = ''"
+                            class="legend-item yiqi"
+                        >
+                            <span class="legend-dot"></span>
+                            IOTAutoMate
+                        </button>
+                        <button
+                            :class="{ 'active': hoveredProduct === 'plc' }"
+                            @click="activeProduct = 'plc'"
+                            @mouseenter="hoveredProduct = 'plc'; activeProduct = 'plc'"
+                            @mouseleave="hoveredProduct = ''"
+                            class="legend-item plc"
+                        >
+                            <span class="legend-dot"></span>
+                            Traditional PLC
+                        </button>
+                        <button
+                            :class="{ 'active': hoveredProduct === 'mcu' }"
+                            @click="activeProduct = 'mcu'"
+                            @mouseenter="hoveredProduct = 'mcu'; activeProduct = 'mcu'"
+                            @mouseleave="hoveredProduct = ''"
+                            class="legend-item mcu"
+                        >
+                            <span class="legend-dot"></span>
+                            MCU/Dev Board
+                        </button>
+                    </div>
+                    <!-- Details Panel -->
+                    <div class="radar-details">
+                        <div
+                            class="detail-card yiqi"
+                            :class="{ 'active': activeProduct === 'yiqi' }"
+                        >
+                            <h3>IOTAutoMate</h3>
+                            <table class="detail-table">
+                                <tr>
+                                    <td class="label">Usability (High)</td>
+                                    <td>Plug & Play, No Coding, App Config</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">IoT (Strong)</td>
+                                    <td
+                                        >Built-in WiFi/4G, Tuya/MQTT, Ready to
+                                        use</td
+                                    >
+                                </tr>
+                                <tr>
+                                    <td class="label">Scalability (Strong)</td>
+                                    <td
+                                        >Mesh Networking, 500m Wireless, No
+                                        Wiring</td
+                                    >
+                                </tr>
+                                <tr>
+                                    <td class="label">Deployment (Fast)</td>
+                                    <td
+                                        >1-Day mastery, Fast Deploy, Easy logic
+                                        change</td
+                                    >
+                                </tr>
+                                <tr>
+                                    <td class="label">Maintenance (Good)</td>
+                                    <td
+                                        >Mobile logic edit, instant update,
+                                        Remote OTA</td
+                                    >
+                                </tr>
+                                <tr>
+                                    <td class="label">Total Cost (Low)</td>
+                                    <td
+                                        >Low HW cost, short dev cycle, low
+                                        maintenance</td
+                                    >
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div
+                            class="detail-card plc"
+                            :class="{ 'active': activeProduct === 'plc' }"
+                        >
+                            <h3>Traditional PLC</h3>
+                            <table class="detail-table">
+                                <tr>
+                                    <td class="label">Usability (Medium)</td>
+                                    <td
+                                        >Requires Ladder/Instruction List,
+                                        Complex Config</td
+                                    >
+                                </tr>
+                                <tr>
+                                    <td class="label">IoT (Medium)</td>
+                                    <td
+                                        >Requires external module & complex
+                                        config</td
+                                    >
+                                </tr>
+                                <tr>
+                                    <td class="label">Scalability (Medium)</td>
+                                    <td
+                                        >Wired stacking, complex long-range
+                                        expansion</td
+                                    >
+                                </tr>
+                                <tr>
+                                    <td class="label">Deployment (Medium)</td>
+                                    <td
+                                        >Weeks to learn & deploy, complex
+                                        changes</td
+                                    >
+                                </tr>
+                                <tr>
+                                    <td class="label">Maintenance (Medium)</td>
+                                    <td
+                                        >On-site debugging with laptop, no
+                                        remote update</td
+                                    >
+                                </tr>
+                                <tr>
+                                    <td class="label">Total Cost (Medium)</td>
+                                    <td>High HW cost + Medium dev/maint cost</td
+                                    >
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div
+                            class="detail-card mcu"
+                            :class="{ 'active': activeProduct === 'mcu' }"
+                        >
+                            <h3>MCU/Dev Board</h3>
+                            <table class="detail-table">
+                                <tr>
+                                    <td class="label">Usability (Low)</td>
+                                    <td>Requires C/C++ Coding, Hardware Dev</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">IoT (Weak)</td>
+                                    <td
+                                        >Requires protocol dev & hardware design</td
+                                    >
+                                </tr>
+                                <tr>
+                                    <td class="label">Scalability (Weak)</td>
+                                    <td>Fixed hardware, poor scalability</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Deployment (Slow)</td>
+                                    <td
+                                        >3-6 Months dev cycle, complex changes</td
+                                    >
+                                </tr>
+                                <tr>
+                                    <td class="label">Maintenance (Poor)</td>
+                                    <td
+                                        >Hard to maintain, relies on
+                                        source/hardware updates</td
+                                    >
+                                </tr>
+                                <tr>
+                                    <td class="label">Total Cost (Very High)</td
+                                    >
+                                    <td
+                                        >Lowest HW cost, but very high R&D cost</td
+                                    >
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="table-section">
+            <h2 class="section-title">Detailed Comparison Table</h2>
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="highlight">Dimension</th>
+                            <th>IOTAutoMate</th>
+                            <th>Traditional PLC</th>
+                            <th>MCU/Dev Board</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="highlight">Programming</td>
+                            <td>✅ No Coding (Simple)</td>
+                            <td>❌ Ladder/Instruction List (Complex)</td>
+                            <td>❌ C/C++/Python (Very Complex)</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Configuration</td>
+                            <td>📱 Mobile App Drag-n-Drop (Simple)</td>
+                            <td>💻 Specialized Software (Complex)</td>
+                            <td>💻 IDE Development (Very Complex)</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Learning Curve</td>
+                            <td>⭐ 1 Day (Fast)</td>
+                            <td>⭐⭐⭐ Weeks-Months (Medium)</td>
+                            <td>⭐⭐⭐⭐ Months (Slow)</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">IoT Capability</td>
+                            <td>✅ Built-in WiFi/4G/MQTT (Simple)</td>
+                            <td>⚠️ External Module (Complex)</td>
+                            <td>⚠️ Self-Development (Very Complex)</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Remote Control</td>
+                            <td>✅ Out-of-the-box (Simple)</td>
+                            <td>⚠️ Extra Config Required (Complex)</td>
+                            <td>⚠️ Cloud Dev Required (Very Complex)</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Maintenance</td>
+                            <td>⬇️ Remote App Maint (Simple)</td>
+                            <td>⬆️ Professional Needed (Complex)</td>
+                            <td>⬆️⬆️ Source Code Maint (Very Complex)</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Total Cost</td>
+                            <td>💰 Economical (Low)</td>
+                            <td>💰💰💰 High (Medium)</td>
+                            <td>💰💰💰💰💰 High R&D Cost (High)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>Have questions? Contact us for professional advice</h2>
+            <div class="cta-buttons">
+                <a href="/en/buy" class="btn btn-accent btn-lg">Buy Now</a>
+                <a href="/en/tutorials" class="btn btn-outline btn-lg"
+                    >View Tutorials</a
+                >
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .page-header {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding: 1.25rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 0 0 3rem;
+            color: var(--text-dark);
+        }
+
+        /* Radar Section */
+        .radar-section {
+            margin-bottom: 5rem;
+        }
+
+        .radar-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .radar-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .radar-sidebar {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            .radar-details {
+                max-width: 100%;
+            }
+        }
+
+        .radar-chart {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .radar-svg {
+            width: 500px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .radar-area {
+            transition: all 0.3s ease;
+        }
+
+        .radar-area.yiqi {
+            fill: rgba(0, 102, 204, 0.1);
+            stroke: #0066cc;
+            stroke-width: 1;
+        }
+
+        .radar-area.plc {
+            fill: rgba(139, 92, 246, 0.1);
+            stroke: #8b5cf6;
+            stroke-width: 1;
+        }
+
+        .radar-area.mcu {
+            fill: rgba(34, 197, 94, 0.1);
+            stroke: #22c55e;
+            stroke-width: 1;
+        }
+
+        .radar-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 0;
+            align-items: flex-start;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            background: var(--bg-light);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .legend-item:hover,
+        .legend-item.active {
+            border-color: currentColor;
+        }
+
+        .legend-item.yiqi {
+            color: #0066cc;
+        }
+
+        .legend-item.plc {
+            color: #8b5cf6;
+        }
+
+        .legend-item.mcu {
+            color: #22c55e;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .radar-sidebar {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .radar-details {
+            min-height: 480px;
+            flex: 1;
+            max-width: 450px;
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: start;
+        }
+
+        .detail-card {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 2rem;
+            border-left: 4px solid;
+            grid-row: 1;
+            grid-column: 1;
+            opacity: 0;
+            visibility: hidden;
+            transition:
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+        }
+
+        .detail-card.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .detail-card.yiqi {
+            border-color: #0066cc;
+        }
+
+        .detail-card.plc {
+            border-color: #8b5cf6;
+        }
+
+        .detail-card.mcu {
+            border-color: #22c55e;
+        }
+
+        .detail-card h3 {
+            margin: 0 0 1rem;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+        }
+
+        .detail-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .detail-table td {
+            padding: 0.75rem 0.5rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-light);
+            vertical-align: top;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .detail-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .detail-table .label {
+            white-space: nowrap;
+            font-weight: 700;
+            color: var(--text-dark);
+            width: 1px; /* Fit content */
+            padding-right: 1rem;
+            padding-left: 0;
+        }
+
+        /* Comparison Table */
+        .table-section {
+            margin-bottom: 5rem;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .comparison-table th {
+            background: var(--bg-light);
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .comparison-table th.highlight {
+            background: var(--primary);
+            color: white;
+        }
+
+        .comparison-table td {
+            color: var(--text-muted);
+        }
+
+        .comparison-table td.highlight {
+            background: rgba(0, 102, 204, 0.05);
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Models Section */
+        .models-section {
+            margin-bottom: 5rem;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .models-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .model-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .model-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+
+        .model-card.featured {
+            border-color: var(--primary);
+            box-shadow: 0 4px 20px rgba(0, 102, 204, 0.15);
+        }
+
+        .model-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .model-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+        }
+
+        .model-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            background: var(--primary);
+            color: white;
+        }
+
+        .model-badge.secondary {
+            background: #8b5cf6;
+        }
+
+        .model-badge.accent {
+            background: var(--accent);
+        }
+
+        .model-image {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+
+        .model-specs {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1rem;
+        }
+
+        .model-specs li {
+            padding: 0.375rem 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .model-specs li:last-child {
+            border-bottom: none;
+        }
+
+        .model-usage {
+            font-size: 0.875rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            border: 1px solid var(--border-light);
+        }
+
+        .cta-container h2 {
+            color: var(--text-dark);
+            margin: 0 0 2rem;
+            font-size: 1.75rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            padding: 0.875rem 2rem;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-lg {
+            padding: 1rem 2.5rem;
+            font-size: 1.125rem;
+        }
+
+        .btn-accent {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+
+    <style is:global>
+        /* Active states for Radar Chart - Global to ensure they apply to dynamically added classes */
+        .radar-area.yiqi.active {
+            fill: rgba(0, 102, 204, 0.6) !important;
+            stroke-width: 3 !important;
+        }
+
+        .radar-area.plc.active {
+            fill: rgba(139, 92, 246, 0.6) !important;
+            stroke-width: 3 !important;
+        }
+
+        .radar-area.mcu.active {
+            fill: rgba(34, 197, 94, 0.6) !important;
+            stroke-width: 3 !important;
+        }
+
+        /* Tooltip Styles */
+        .dim-tooltip {
+            position: absolute;
+            /* Reset positioning to prevent jumps/inheritance issues */
+            top: auto;
+            bottom: auto;
+            left: auto;
+            right: auto;
+            margin: 0;
+            transform: none;
+
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 500px;
+            z-index: 20;
+            pointer-events: none;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-light);
+            text-align: left;
+        }
+
+        .dim-tooltip h4 {
+            margin: 0 0 0.5rem;
+            color: var(--primary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 0.25rem;
+        }
+
+        .dim-tooltip p {
+            margin: 0.25rem 0;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .dim-tooltip .highlight {
+            /* Old style override - keeping for safety but resetting */
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        .tooltip-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .tooltip-table td {
+            padding: 6px 8px;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            line-height: 1.3;
+            vertical-align: top;
+        }
+
+        .tooltip-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tooltip-table tr.highlight td {
+            color: var(--primary); /* Use primary color for highlight text */
+            background: rgba(
+                0,
+                102,
+                204,
+                0.08
+            ); /* Slightly darker/more visible bg */
+            font-weight: 600;
+        }
+
+        .tooltip-table tr.highlight td:first-child {
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+        }
+
+        .tooltip-table tr.highlight td:last-child {
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+
+        .tooltip-table .label {
+            white-space: nowrap;
+            font-weight: 700;
+            color: var(--text-dark);
+            width: 1px; /* Shrink to fit content */
+            padding-right: 12px;
+        }
+
+        /* Tooltip Positions - Explicit !important to override any defaults */
+        .tooltip-top {
+            bottom: 100% !important;
+            left: 50% !important;
+            margin-left: -250px !important;
+            margin-bottom: 15px !important;
+        }
+
+        .tooltip-bottom {
+            top: 100% !important;
+            left: 50% !important;
+            margin-left: -250px !important;
+            margin-top: 15px !important;
+        }
+
+        .tooltip-right-top {
+            top: 15% !important;
+            left: 100% !important;
+            margin-left: 15px !important;
+        }
+
+        .tooltip-right-bottom {
+            top: 55% !important;
+            left: 100% !important;
+            margin-left: 15px !important;
+        }
+
+        .tooltip-left-top {
+            top: 15% !important;
+            right: 100% !important;
+            margin-right: 15px !important;
+        }
+
+        .tooltip-left-bottom {
+            top: 55% !important;
+            right: 100% !important;
+            margin-right: 15px !important;
+        }
+
+        @media (max-width: 640px) {
+            .dim-tooltip {
+                display: none !important; /* Hide hover tooltips on mobile to avoid blocking */
+            }
+        }
+
+        /* Radar Label Highlighting */
+        .radar-labels text {
+            transition: all 0.2s ease;
+        }
+
+        .radar-labels text.active {
+            fill: var(--primary) !important;
+            font-weight: 700;
+            font-size: 16px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</Layout>
