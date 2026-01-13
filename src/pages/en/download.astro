@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-const lang = "zh";
+const lang = "en";
 
 const ylaiApps = [
     {
@@ -13,77 +13,82 @@ const ylaiApps = [
         url: "https://play.google.com/store/apps/details?id=com.yuanlai.app.yl_ai",
     },
     {
-        name: "应用宝",
+        name: "Tencent MyApp",
         url: "https://sj.qq.com/appdetail/com.yuanlai.app.yl_ai",
     },
     {
-        name: "APP操作指南",
-        url: "/zh/tutorials/07-initial-setup",
+        name: "User Guide",
+        url: "/en/tutorials/07-initial-setup",
     },
 ];
 
 const tuyaApps = [
     {
-        name: "涂鸦APP",
+        name: "Tuya App",
         url: "https://smartapp.tuya.com/tuyasmart/",
     },
     {
-        name: "APP操作指南",
-        url: "/zh/tutorials/13-tuya-app",
+        name: "User Guide",
+        url: "/en/tutorials/13-tuya-app",
     },
 ];
 
 const getQrUrl = (url: string) => {
-    // 如果 URL 以 / 开头，则它是相对路径，需要添加当前站点的 Host
-    // 在 Astro 模板中可以使用 Astro.url.origin
+    // If the URL starts with /, it is a relative path and needs the current site Host added
+    // In Astro templates, you can use Astro.url.origin
     const absoluteUrl = url.startsWith("/") ? `${Astro.url.origin}${url}` : url;
     return `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(absoluteUrl)}`;
 };
 ---
 
 <Layout
-    title="APP下载 - 宜启智控"
-    description="下载源来智能APP和涂鸦智能APP，开始控制您的宜启智控设备"
+    title="App Download - IOTAutoMate Pro"
+    description="Download the IOTAutoMate App and Tuya Smart App to start controlling your IOTAutoMate Pro devices."
     lang={lang}
 >
     <div class="page-header">
         <div class="container">
-            <h1 class="page-title">APP下载</h1>
-            <p class="page-subtitle">下载官方APP，开启智能控制之旅</p>
+            <h1 class="page-title">App Download</h1>
+            <p class="page-subtitle">
+                Download the official app to start your smart control journey
+            </p>
         </div>
     </div>
 
     <div class="content-container">
         <div class="apps-grid">
-            <!-- 源来智能 APP -->
+            <!-- YLAI App -->
             <div class="app-card">
                 <div class="app-col-info">
                     <img
                         src="/images/logos/ylai.svg"
-                        alt="源来智能"
+                        alt="YLAI"
                         class="app-logo"
                     />
-                    <h2>源来智能APP</h2>
+                    <h2>YLAI App</h2>
                 </div>
 
                 <div class="app-col-content">
                     <p class="app-desc">
-                        宜启智控官方APP，支持通过蓝牙连接设备，控制设备，配置自动化逻辑、查看设备/传感器数据。
+                        YLAI Official App. Supports connecting devices via
+                        Bluetooth, controlling devices, configuring automation
+                        logic, and viewing device/sensor data.
                     </p>
 
                     <div class="app-features">
-                        <span>蓝牙本地控制</span>
-                        <span>本地时间控制</span>
-                        <span>一键执行配置</span>
-                        <span>自动化配置</span>
-                        <span>逻辑导入导出</span>
-                        <span>Mesh组网配置</span>
-                        <span>MQTT配置</span>
-                        <span>更多其它本地功能配置</span>
+                        <span>Local Bluetooth Control</span>
+                        <span>Local Time Control</span>
+                        <span>One-click Execution</span>
+                        <span>Automation Configuration</span>
+                        <span>Logic Import/Export</span>
+                        <span>Mesh Networking</span>
+                        <span>MQTT Configuration</span>
+                        <span>More Local Features</span>
                     </div>
 
                     <p class="search-hint">
-                        可在手机应用市场搜索 <strong>“源来智能”</strong> 安装
+                        Search for <strong>"源来智能"</strong> in the app store to
+                        install
                     </p>
                 </div>
 
@@ -138,8 +143,8 @@ const getQrUrl = (url: string) => {
                                         alt={`${app.name} QR Code`}
                                         loading="lazy"
                                     />
-                                    {app.name !== "APP操作指南" && (
-                                        <span>扫码下载</span>
+                                    {app.name !== "User Guide" && (
+                                        <span>Scan to Download</span>
                                     )}
                                 </div>
                             </div>
@@ -148,30 +153,32 @@ const getQrUrl = (url: string) => {
                 </div>
             </div>
 
-            <!-- 涂鸦智能 APP -->
+            <!-- Tuya Smart App -->
             <div class="app-card">
                 <div class="app-col-info">
                     <img
                         src="/images/logos/tuya.png"
-                        alt="涂鸦APP"
+                        alt="Tuya App"
                         class="app-logo"
                     />
-                    <h2>涂鸦APP</h2>
+                    <h2>Tuya App</h2>
                 </div>
 
                 <div class="app-col-content">
                     <p class="app-desc">
-                        全球领先的物联网平台，支持远程控制、智能场景、云端联动、短信/电话报警
+                        World-leading IoT platform, supporting remote control,
+                        smart scenes, cloud linkage, and SMS/phone alerts.
                     </p>
 
                     <div class="app-features">
-                        <span>全球远程控制</span>
-                        <span>智能场景联动</span>
-                        <span>短信电话报警</span>
+                        <span>Global Remote Control</span>
+                        <span>Smart Scene Linkage</span>
+                        <span>SMS & Phone Alerts</span>
                     </div>
 
                     <p class="search-hint">
-                        可在手机应用市场搜索 <strong>“涂鸦智能”</strong> 安装
+                        Search for <strong>"Tuya Smart"</strong> in the app store
+                        to install
                     </p>
                 </div>
 
@@ -226,8 +233,8 @@ const getQrUrl = (url: string) => {
                                         alt={`${app.name} QR Code`}
                                         loading="lazy"
                                     />
-                                    {app.name !== "APP操作指南" && (
-                                        <span>扫码下载</span>
+                                    {app.name !== "User Guide" && (
+                                        <span>Scan to Download</span>
                                     )}
                                 </div>
                             </div>
