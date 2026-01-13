@@ -1,0 +1,86 @@
+---
+/**
+ * Section 26 Detailed Explanation of Task Execution Mechanism for "One-Click Execution" and "Auto Task"
+ * slug: 26-task-execution
+ */
+---
+
+<section>
+    <div class="description">
+        <p>
+            Become familiar with and master executable task items to configure
+            complex logical tasks.
+        </p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 Learning Points</h2>
+        <ul>
+            <li>
+                Serial and Parallel Execution of Tasks: Detailed explanation of
+                the execution order and time relationship of each step in the
+                task list
+            </li>
+            <li>
+                Delay and Cyclic Reference: Detailed explanation of application
+                scenarios and configuration methods for delay operations and
+                delay references
+            </li>
+            <li>Task Abort and Recovery</li>
+            <li>Priority and Conflict Resolution Mechanisms</li>
+        </ul>
+    </div>
+</section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

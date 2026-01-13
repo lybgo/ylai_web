@@ -1,0 +1,93 @@
+---
+/**
+ * Section 24 Analog Sensor Access and Data Processing
+ * slug: 24-analog-sensors
+ */
+---
+
+<section>
+    <div class="description">
+        <p>
+            Master the wiring, range conversion, and automation applications of
+            analog sensors (current, voltage).
+        </p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 Learning Points</h2>
+        <ul>
+            <li>
+                Analog Concept: What analog signals are and the difference from
+                digital signals
+            </li>
+            <li>
+                4-20mA Current Signal Sensors: Wiring methods (two-wire,
+                three-wire), physical range settings corresponding to 4mA and
+                20mA
+            </li>
+            <li>
+                0-10V Voltage Signal Sensors: Wiring methods, physical range
+                settings corresponding to 0V and 10V
+            </li>
+            <li>
+                Custom ADC (Analog-to-Digital Conversion): Introduce how to
+                access 0-1.5V or other customized voltage signals, and the use
+                of voltage divider resistors (such as 10KΩ and 1.5KΩ)
+            </li>
+            <li>Application of Analog Data in Automation Control</li>
+        </ul>
+    </div>
+</section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

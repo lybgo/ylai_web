@@ -1,0 +1,91 @@
+---
+/**
+ * Section 38 Remote Control and Data Acquisition of Variable Frequency Drives (VFD)
+ * slug: 38-vfd-control
+ */
+---
+
+<section>
+    <div class="description">
+        <p>
+            Master remote start/stop, speed regulation, and status monitoring of
+            industrial VFDs through IOTAutoMate's RS485 interface.
+        </p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 Learning Points</h2>
+        <ul>
+            <li>
+                VFD Modbus Address: Find the Modbus communication addresses and
+                parameter registers of commonly used VFDs
+            </li>
+            <li>
+                RS485 Write Control: Configure Modbus write instructions to
+                remotely control the start/stop (RUN/STOP) and frequency
+                settings of the VFD
+            </li>
+            <li>
+                RS485 Data Reading: Read the running status, output frequency,
+                and fault codes of the VFD
+            </li>
+            <li>
+                Data Visualization and Remote Control: Utilize ThingsBoard or
+                Home Assistant to achieve data visualization and remote control
+            </li>
+        </ul>
+    </div>
+</section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

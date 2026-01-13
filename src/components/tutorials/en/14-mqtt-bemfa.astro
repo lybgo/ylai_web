@@ -1,0 +1,98 @@
+---
+/**
+ * Section 14 MQTT Protocol Basics and Bemfa Cloud Access Demonstration
+ * slug: 14-mqtt-bemfa
+ */
+---
+
+<section>
+    <div class="description">
+        <p>
+            Understand the principles of the MQTT protocol and master how
+            IOTAutoMate interacts with the cloud through MQTT.
+        </p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 Learning Points</h2>
+        <ul>
+            <li>
+                MQTT Protocol Principles: What is MQTT, Publish/Subscribe
+                pattern, QoS levels
+            </li>
+            <li>
+                Supported Platforms and Private Servers: Introduce that the
+                device supports connecting to mainstream MQTT Brokers (such as
+                Alibaba Cloud, Tencent Cloud, Emqx) and private servers
+            </li>
+            <li>
+                Bemfa Cloud Access Demonstration: Using Bemfa Cloud as an
+                example to demonstrate the configuration of MQTT connection
+                parameters (Broker address, ClientID, username, password)
+            </li>
+            <li>
+                Cloud Data Reporting Configuration: Configure the proactive
+                reporting cycle and format of sensor data (temperature/humidity,
+                analog, counters)
+            </li>
+            <li>
+                IOTAutoMate MQTT Data Format: Preliminary introduction to device
+                reporting data (JSON format) and receiving control instruction
+                formats
+            </li>
+        </ul>
+    </div>
+</section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>

@@ -1,0 +1,95 @@
+---
+/**
+ * Section 33 Detailed Explanation of MQTT Protocol Data Format
+ * slug: 33-mqtt-format
+ */
+---
+
+<section>
+    <div class="description">
+        <p>
+            Deeply understand the full MQTT protocol format for device reporting
+            and receiving control commands.
+        </p>
+    </div>
+    <div class="learning-points">
+        <h2>📚 Learning Points</h2>
+        <ul>
+            <li>
+                MQTT Protocol Command Set: Detailed analysis of IOTAutoMate's
+                MQTT control command format (e.g., JSON structure, method,
+                params)
+            </li>
+            <li>
+                Control Instruction Details: Parameter analysis of instructions
+                such as relay control (setOut), PWM control (setPWM), and task
+                execution (ro)
+            </li>
+            <li>
+                Reporting Data Format Analysis: Detailed analysis of the device
+                reporting JSON data structure (e.g., o for switch state, p for
+                PWM state, i for input state, adc for analog value, cnt for
+                counter)
+            </li>
+            <li>
+                Platform Integration Practice: Demonstrate how to send control
+                instructions and parse reported data in combination with
+                specific platforms
+            </li>
+        </ul>
+    </div>
+</section>
+<style>
+    .learning-points {
+        margin-bottom: 2rem;
+    }
+
+    .learning-points h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .learning-points ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .learning-points li {
+        position: relative;
+        padding: 0.875rem 0.875rem 0.875rem 2rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .learning-points li:last-child {
+        border-bottom: none;
+    }
+
+    .learning-points li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .description p {
+        margin: 0;
+    }
+</style>
