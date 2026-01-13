@@ -2,13 +2,14 @@
 import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // 替换为你的 GitHub 域名
-  //site: 'https://lybgo.github.io',
-  // 替换为你的仓库名称
+  // 替换为你的真实域名
+  site: 'https://ylznc.com',
   base: '/',
+  integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()]
   }
