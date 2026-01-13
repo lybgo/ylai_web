@@ -71,3 +71,36 @@ export const tutorialSectionsEn: TutorialSection[] = tutorialSectionsDataEn.map(
         num: index + 1,
     }),
 );
+
+// 辅助函数:根据slug获取章节
+export function getSectionBySlugEn(slug: string): TutorialSection | undefined {
+    return tutorialSectionsEn.find(s => s.slug === slug);
+}
+
+// 辅助函数:获取上一节
+export function getPrevSectionEn(currentSlug: string): TutorialSection | undefined {
+    const currentIndex = tutorialSectionsEn.findIndex(s => s.slug === currentSlug);
+    if (currentIndex > 0) {
+        return tutorialSectionsEn[currentIndex - 1];
+    }
+    return undefined;
+}
+
+// 辅助函数:获取下一节
+export function getNextSectionEn(currentSlug: string): TutorialSection | undefined {
+    const currentIndex = tutorialSectionsEn.findIndex(s => s.slug === currentSlug);
+    if (currentIndex >= 0 && currentIndex < tutorialSectionsEn.length - 1) {
+        return tutorialSectionsEn[currentIndex + 1];
+    }
+    return undefined;
+}
+
+// 辅助函数:获取所有slug用于静态生成
+export function getAllSlugsEn(): string[] {
+    return tutorialSectionsEn.map(s => s.slug);
+}
+
+// 辅助函数:根据章节编号获取章节信息
+export function getChapterByNumEn(chapterNum: number) {
+    return chaptersEn.find(c => c.num === chapterNum);
+}
