@@ -97,23 +97,34 @@ const outputHighlights = [
         <div
             class="mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-12 md:grid-cols-2 text-center md:text-left"
         >
-            <div class="relative z-10">
+            <div class="relative z-20">
                 <h1
-                    class="animate-fade-in-up mb-6 text-4xl font-bold leading-tight text-[#1e293b] md:text-[2.75rem]"
+                    class="animate-fade-in-up mb-6 flex flex-col items-center gap-4 whitespace-normal text-center md:flex-row md:items-center md:gap-6 md:text-left md:whitespace-nowrap"
                 >
-                    让自动化控制变得简单<br />
-                    <span class="text-[#0066cc]">让万物互联触手可及</span>
+                    <span
+                        class="rounded-xl bg-[#0066cc]/10 px-6 py-3 text-2xl font-bold tracking-wider text-[#0066cc] md:text-3xl"
+                    >
+                        宜启智控
+                    </span>
+                    <div
+                        class="flex flex-col text-4xl font-bold leading-tight text-[#1e293b] md:text-[2.75rem]"
+                    >
+                        <span>让自动化控制变得简单</span>
+                        <span class="text-[#0066cc]">让万物互联触手可及</span>
+                    </div>
                 </h1>
                 <p
-                    class="animate-fade-in-up mb-8 text-xl leading-relaxed text-[#64748b]"
+                    class="animate-fade-in-up mb-8 whitespace-normal text-xl leading-relaxed text-[#64748b] md:whitespace-nowrap"
                     style="animation-delay: 0.1s"
                 >
-                    无需编程，APP轻松配置控制逻辑<br
-                    />只需1天让你的产品实现智能化和自动化<br />
-                    ——宜启智控，您的智能物联网自动化万能控制器
+                    无需编程，APP轻松配置控制逻辑<br />
+                    只需<span class="mx-1 text-3xl font-bold text-[#0066cc]"
+                        >1天</span
+                    >让你的产品实现智能化和自动化<br />
+                    宜启智控，您的智能物联网自动化万能控制器
                 </p>
                 <ul
-                    class="animate-fade-in-up mb-8 grid grid-cols-1 justify-items-center gap-3 md:grid-cols-[max-content_max-content] md:justify-items-start"
+                    class="animate-fade-in-up mb-8 grid grid-cols-1 justify-items-center gap-3 md:grid-cols-[auto_auto] md:justify-items-start"
                     style="animation-delay: 0.15s"
                 >
                     {
@@ -121,8 +132,10 @@ const outputHighlights = [
                             ["🏭", "让传统设备 · 快速智能化"],
                             ["💡", "让智能硬件创意 · 极速落地"],
                             ["⚡", "让智慧工程项目 · 高效交付"],
-                        ].map(([icon, text]) => (
-                            <li class="flex w-fit items-center gap-3 rounded-xl bg-white/70 px-5 py-2.5 text-[1.1rem] font-semibold text-[#1e293b] shadow-sm backdrop-blur-sm transition-all hover:translate-x-1 hover:bg-white/90 hover:shadow-md">
+                        ].map(([icon, text], index) => (
+                            <li
+                                class={`flex w-fit items-center gap-3 rounded-xl bg-white/70 px-5 py-2.5 text-[1.1rem] font-semibold text-[#1e293b] shadow-sm backdrop-blur-sm transition-all hover:translate-x-1 hover:bg-white/90 hover:shadow-md whitespace-nowrap ${index === 0 ? "md:col-span-2" : ""}`}
+                            >
                                 <span class="text-xl">{icon}</span> {text}
                             </li>
                         ))
