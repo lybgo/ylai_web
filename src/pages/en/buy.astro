@@ -1,44 +1,46 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-const lang = "zh";
+const lang = "en";
 ---
 
 <Layout
-    title="购买渠道 - 宜启智控"
-    description="通过淘宝、亚马逊、TikTok Shop购买宜启智控智能物联网控制器"
+    title="Purchase Channels - IOTAutoMate"
+    description="Purchase IOTAutoMate intelligent IoT controllers through Taobao, Amazon, and TikTok Shop"
     lang={lang}
 >
     <div class="page-header">
         <div class="container">
-            <h1 class="page-title">购买渠道</h1>
-            <p class="page-subtitle">选择您方便的渠道，获取宜启智控</p>
+            <h1 class="page-title">Purchase Channels</h1>
+            <p class="page-subtitle">
+                Choose your preferred channel to get IOTAutoMate
+            </p>
         </div>
     </div>
 
     <div class="content-container" x-data="{ showModal: false, modalImg: '' }">
         <div class="channels-grid">
-            <!-- 淘宝 -->
+            <!-- Taobao -->
             <a
                 href="https://item.taobao.com/item.htm?id=839596046491"
                 class="channel-card taobao"
                 target="_blank"
             >
                 <div class="channel-icon">
-                    <img src="/images/logos/taobao.svg" alt="淘宝" />
+                    <img src="/images/logos/taobao.svg" alt="Taobao" />
                 </div>
-                <h2>淘宝</h2>
-                <span class="channel-tag">中国</span>
+                <h2>Taobao</h2>
+                <span class="channel-tag">China</span>
             </a>
 
-            <!-- 亚马逊 -->
+            <!-- Amazon -->
             <a href="#" class="channel-card amazon" target="_blank">
                 <div class="channel-icon">
                     <img src="/images/logos/amazon.svg" alt="Amazon" />
                 </div>
                 <h2>Amazon</h2>
                 <span class="spec-hint">Coming Soon</span>
-                <span class="channel-tag secondary">国际</span>
+                <span class="channel-tag secondary">International</span>
             </a>
 
             <!-- TikTok -->
@@ -48,18 +50,18 @@ const lang = "zh";
                 </div>
                 <h2>TikTok Shop</h2>
                 <span class="spec-hint">Coming Soon</span>
-                <span class="channel-tag accent">国际</span>
+                <span class="channel-tag accent">International</span>
             </a>
         </div>
 
         <!-- Product Models -->
         <section class="products-section">
-            <h2 class="section-title">型号与配置</h2>
+            <h2 class="section-title">Models & Configurations</h2>
             <div class="comparison-table-wrapper">
                 <table class="comparison-table">
                     <thead>
                         <tr>
-                            <th class="spec-header">参数</th>
+                            <th class="spec-header">Specs</th>
                             <th>
                                 <a
                                     href="/images/products/2o.png"
@@ -67,11 +69,11 @@ const lang = "zh";
                                 >
                                     <img
                                         src="/images/products/2o.png"
-                                        alt="2路款"
+                                        alt="2-Channel Model"
                                         class="table-thumb"
                                     />
                                 </a>
-                                <div>2路/2o</div>
+                                <div>2-CH / 2o</div>
                             </th>
                             <th>
                                 <a
@@ -80,11 +82,11 @@ const lang = "zh";
                                 >
                                     <img
                                         src="/images/products/4o.png"
-                                        alt="4路款"
+                                        alt="4-Channel Model"
                                         class="table-thumb"
                                     />
                                 </a>
-                                <div>4路/4o</div>
+                                <div>4-CH / 4o</div>
                             </th>
                             <th>
                                 <a
@@ -93,144 +95,173 @@ const lang = "zh";
                                 >
                                     <img
                                         src="/images/products/3o2w.png"
-                                        alt="3+2路款"
+                                        alt="3+2-Channel Model"
                                         class="table-thumb"
                                     />
                                 </a>
-                                <div>3+2路/3o2w</div>
+                                <div>3+2-CH / 3o2w</div>
                             </th>
                             <th class="featured-col">
-                                <span class="hot-tag">热销</span>
+                                <span class="hot-tag">Bestseller</span>
                                 <a
                                     href="/images/products/6o4wzm.png"
                                     @click.prevent="modalImg = $el.href; showModal = true"
                                 >
                                     <img
                                         src="/images/products/6o4wzm.png"
-                                        alt="6+4路款"
+                                        alt="6+4-Channel Model"
                                         class="table-thumb"
                                     />
                                 </a>
-                                <div>6+4路/6o4w</div>
+                                <div>6+4-CH / 6o4w</div>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="spec-name">继电器输出</td>
-                            <td>2路</td>
-                            <td>4路</td>
-                            <td>3路</td>
-                            <td class="featured-col">6路</td>
+                            <td class="spec-name">Relay Output</td>
+                            <td>2 Channels</td>
+                            <td>4 Channels</td>
+                            <td>3 Channels</td>
+                            <td class="featured-col">6 Channels</td>
                         </tr>
                         <tr>
-                            <td class="spec-name">PWM输出</td>
+                            <td class="spec-name">PWM Output</td>
                             <td>-</td>
                             <td>-</td>
                             <td
-                                >2路<br /><span class="spec-hint"
-                                    >可选配为0-10V/4-20mA输出</span
+                                >2 Channels<br /><span class="spec-hint"
+                                    >Optional 0-10V/4-20mA output</span
                                 ></td
                             >
                             <td class="featured-col"
-                                >4路<br /><span class="spec-hint"
-                                    >可选配为0-10V/4-20mA输出</span
+                                >4 Channels<br /><span class="spec-hint"
+                                    >Optional 0-10V/4-20mA output</span
                                 ></td
                             >
                         </tr>
                         <tr>
-                            <td class="spec-name">开关量输入</td>
-                            <td>3路</td>
-                            <td>4路</td>
-                            <td>4路</td>
-                            <td class="featured-col">6路</td>
+                            <td class="spec-name">Digital Input</td>
+                            <td>3 Channels</td>
+                            <td>4 Channels</td>
+                            <td>4 Channels</td>
+                            <td class="featured-col">6 Channels</td>
                         </tr>
                         <tr>
-                            <td class="spec-name">模拟量输入</td>
-                            <td>2路</td>
-                            <td colspan="3">3路</td>
+                            <td class="spec-name">Analog Input</td>
+                            <td>2 Channels</td>
+                            <td colspan="3">3 Channels</td>
                         </tr>
                         <tr>
-                            <td class="spec-name">温度传感器<br />DS18B20</td>
-                            <td colspan="4">1路(若选配RS485接口，则无此接口)</td
+                            <td class="spec-name">Temp Sensor<br />DS18B20</td>
+                            <td colspan="4"
+                                >1 Channel (Unavailable if RS485 is selected)</td
                             >
                         </tr>
                         <tr>
-                            <td class="spec-name">IIC接口</td>
-                            <td colspan="4">1路</td>
+                            <td class="spec-name">IIC Interface</td>
+                            <td colspan="4">1 Channel</td>
                         </tr>
                         <tr>
-                            <td class="spec-name">尺寸(长宽高)</td>
+                            <td class="spec-name">Dimensions (L*W*H)</td>
                             <td>90*90*40mm</td>
                             <td colspan="2">115*90*40mm</td>
                             <td class="featured-col">145*90*40mm</td>
                         </tr>
                         <tr class="category-row">
-                            <td colspan="5">可选配置 (全系支持)</td>
+                            <td colspan="5"
+                                >Optional Configurations (All Models)</td
+                            >
                         </tr>
                         <tr>
-                            <td class="spec-name">通信方式</td>
+                            <td class="spec-name">Communication</td>
                             <td colspan="4">
                                 <div class="tags-wrapper">
                                     <span class="spec-tag"
-                                        >蓝牙版（默认标配）</span
+                                        >Bluetooth (Standard)</span
                                     >
                                     <span class="spec-tag">WiFi+BLE</span>
                                     <span class="spec-tag"
-                                        >4G(中国境内免费送5年流量)+BLE</span
+                                        >4G (China version includes 5 yrs data)
+                                        + BLE</span
                                     >
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="spec-name">物联网平台</td>
+                            <td class="spec-name">IoT Platform</td>
                             <td colspan="4">
                                 <div class="tags-wrapper">
-                                    <span class="spec-tag">涂鸦智能</span>
+                                    <span class="spec-tag">Tuya Smart</span>
                                     <span class="spec-tag">MQTT</span>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="spec-name">供电电压</td>
+                            <td class="spec-name">Power Supply</td>
                             <td colspan="4">
                                 <div class="tags-wrapper">
                                     <span class="spec-tag"
-                                        >直流 DC 5V USB (默认标配)</span
+                                        >DC 5V USB (Standard)</span
                                     >
-                                    <span class="spec-tag">9-48V 宽压</span>
                                     <span class="spec-tag"
-                                        >交流 AC 110-220V</span
+                                        >9-48V Wide Voltage</span
                                     >
+                                    <span class="spec-tag">AC 110-220V</span>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="spec-name">其它选配</td>
+                            <td class="spec-name">Other Options</td>
                             <td colspan="4">
                                 <div class="tags-wrapper">
                                     <span class="spec-tag"
-                                        >RS485 Modbus接口</span
+                                        >RS485 Modbus Interface</span
                                     >
                                     <span class="spec-tag"
-                                        >433MHz无线收发模块</span
+                                        >433MHz Wireless Module</span
                                     >
-                                    <span class="spec-tag">定制外置天线</span>
+                                    <span class="spec-tag"
+                                        >Custom External Antenna</span
+                                    >
                                 </div>
                             </td>
                         </tr>
                         <tr class="price-row">
-                            <td class="spec-name" rowspan="2">价格</td>
-                            <td><span class="price">¥239+</span></td>
-                            <td><span class="price">¥279+</span></td>
-                            <td><span class="price">¥289+</span></td>
-                            <td class="featured-col"
-                                ><span class="price">¥379+</span></td
-                            >
+                            <td class="spec-name" rowspan="2">Price</td>
+                            <td>
+                                <div class="price-wrapper">
+                                    <span class="price">¥239+</span>
+                                    <span class="price-separator">|</span>
+                                    <span class="price-usd">$34+</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="price-wrapper">
+                                    <span class="price">¥279+</span>
+                                    <span class="price-separator">|</span>
+                                    <span class="price-usd">$40+</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="price-wrapper">
+                                    <span class="price">¥289+</span>
+                                    <span class="price-separator">|</span>
+                                    <span class="price-usd">$41+</span>
+                                </div>
+                            </td>
+                            <td class="featured-col">
+                                <div class="price-wrapper">
+                                    <span class="price">¥379+</span>
+                                    <span class="price-separator">|</span>
+                                    <span class="price-usd">$54+</span>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="4"
-                                >批量购买请联系商务，可提供更具“性价比”的价格</td
+                                >For bulk orders, please contact sales for
+                                better pricing.</td
                             >
                         </tr>
                     </tbody>
@@ -249,7 +280,7 @@ const lang = "zh";
             style="display: none;"
         >
             <div class="modal-content" @click.stop>
-                <img :src="modalImg" alt="产品高清图" />
+                <img :src="modalImg" alt="Product High-Res Image" />
                 <button class="modal-close" @click="showModal = false"
                     >&times;</button
                 >
@@ -566,6 +597,26 @@ const lang = "zh";
         font-weight: 400;
         margin-top: 0.25rem;
         line-height: 1.2;
+    }
+
+    .price-wrapper {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+    }
+
+    .price-separator {
+        color: var(--border-light);
+        font-weight: 300;
+        font-size: 0.9rem;
+    }
+
+    .price-usd {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        font-weight: 500;
     }
 
     .category-row td {
