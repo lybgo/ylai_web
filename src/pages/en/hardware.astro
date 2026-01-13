@@ -1,0 +1,1831 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const lang = "en";
+
+const interfaces = [
+    {
+        id: "power",
+        name: "1. Power Interface",
+        labelName: "·L/36V ·N/GND ·5V ·GND",
+        area: { top: "0%", left: "16.5%", width: "9.8%", height: "15%" },
+        labelPos: { top: "5%", left: "0%" },
+        align: "left",
+        vAlign: "up",
+        detail: `
+            <div class="detail-content">
+                <div class="power-group">
+                    <strong class="group-title">· L/36V · N/GND Port</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">AC Version (Optional):</span> Connect AC 70-270V (47-63Hz) or DC 100-380V. No L/N distinction.</p>
+                        <p><span class="config-label">DC Wide Voltage Version (Optional):</span> Supports DC 9-60V (Power >9W). L/36V terminal connects to positive, N/GND terminal to negative.</p>
+                        <p><span class="config-label">DC 5V Standard Version:</span> This port is invalid.</p>
+                    </div>
+                </div>
+                <div class="power-group">
+                    <strong class="group-title">· 5V · GND Port</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">Input Mode:</span> For Standard DC 5V Version. DC 5V (Current >1A), GND connects to negative.</p>
+                        <p><span class="config-label">Output Mode:</span> For AC / Wide Voltage Version, this port outputs 5V (Current <100mA), can power small sensors.</p>
+                    </div>
+                </div>
+                <strong class="group-title"><br/>· Wiring Examples:</strong>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="${import.meta.env.BASE_URL}images/pwrdc.jpg" alt="DC Wide Voltage Power Supply" loading="lazy" />
+                        <span class="example-title">DC Wide Voltage DC 9-60V Power Supply</span>
+                    </div>
+                    <div class="example-item example-item-wide">
+                        <img src="${import.meta.env.BASE_URL}images/pwrac.jpg" alt="AC Power Supply" loading="lazy" />
+                        <span class="example-title">AC 220V / AC 110V Power Supply</span>
+                    </div>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="${import.meta.env.BASE_URL}images/pwr5v.jpg" alt="5V Power Supply" loading="lazy" />
+                        <span class="example-title">5V Power Supply</span>
+                    </div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "pwm",
+        name: "2. PWM Output",
+        labelName: "·P4 ·G4 ·P3 ·G3 ·P2 ·G2 ·P1 ·G1",
+        area: { top: "0%", left: "26.6%", width: "19%", height: "15%" },
+        labelPos: { top: "-18%", left: "30%" },
+        align: "center",
+        vAlign: "up",
+        detail: `
+            <div class="detail-content">
+                <div class="power-group">
+                    <strong class="group-title">· Standard PWM</strong>
+                    <div class="config-block">
+                        <p>Uses N-MOS open-drain output, Pn port pulled up to DC 5V. Supports frequency control: 0.025Hz ~ 150kHz, duty cycle control: 0.00% ~ 100.00%, supports linear acceleration and deceleration control.</p>
+                        <p><span class="config-label">Port Definition:</span> ·Pn represents PWM output positive, ·Gn represents negative (GND).</p>
+                        <p><span class="config-label">Load Capacity:</span> Single channel supports max DC 36V 10A switching load or DC 36V 8A PWM load.</p>
+                        <p><span class="config-label">Commonly Used For:</span> DC motor speed control, stepper/servo motor pulse control, servo angle, light brightness adjustment, inverter frequency, valve opening, etc.</p>
+                    </div>
+                    <div class="power-group">
+                        <strong class="group-title">· Wiring Examples</strong>
+                    </div>
+                    <div class="wiring-examples">
+                        <div class="example-item example-item-wide">
+                            <img src="${import.meta.env.BASE_URL}images/pwm_in_pcb.jpg" alt="PWM Interface Simplified Internal Circuit" loading="lazy" />
+                            <span class="example-title">PWM Interface Simplified Internal Circuit</span>
+                        </div>
+                        <div class="example-item example-item-wide">
+                            <img src="${import.meta.env.BASE_URL}images/pwm_led.jpg" alt="LED Brightness / DC Motor Speed Control" loading="lazy" />
+                            <span class="example-title">LED Brightness / DC Motor Speed Control</span>
+                        </div>
+                    </div>
+                    <div class="wiring-examples">
+                        <div class="example-item example-item-wide">
+                            <img src="${import.meta.env.BASE_URL}images/pwm_steper.jpg" alt="Stepper Motor Speed Control" loading="lazy" />
+                            <span class="example-title">Stepper Motor Speed Control</span>
+                        </div>
+                        <div class="example-item example-item-wide">
+                            <img src="${import.meta.env.BASE_URL}images/pwm_steper2.jpg" alt="Servo Angle Control" loading="lazy" />
+                            <span class="example-title">Servo Angle Control</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="power-group">
+                    <strong class="group-title">2.2, 0-10V Signal Output (Custom)</strong>
+                    <div class="config-block">
+                        <p>Pn is output voltage positive, Gn is voltage negative, max load current is 10mA.</p>
+                    </div>
+                    <div class="wiring-examples">
+                        <div class="example-item example-item-wide">
+                            <img src="${import.meta.env.BASE_URL}images/pwm_10v.jpg" alt="0-10V Inverter Control Wiring Example" loading="lazy" />
+                            <span class="example-title">0-10V Inverter Control Wiring Example</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="power-group">
+                    <strong class="group-title">2.3, 0-20mA Signal Output (Custom)</strong>
+                    <div class="config-block">
+                        <p>Pn is current output port, Gn is current input port.</p>
+                    </div>
+                    <div class="wiring-examples">
+                        <div class="example-item example-item-wide">
+                            <img src="${import.meta.env.BASE_URL}images/pwm_20ma.jpg" alt="0-20mA Device Control Wiring Example" loading="lazy" />
+                            <span class="example-title">0-20mA Device Control Wiring Example</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "pwmled",
+        name: "3. PWM Indicators",
+        labelName: "·P1 ·P2 ·P3 ·P4",
+        area: { top: "0%", left: "46.8%", width: "2%", height: "15%" },
+        labelPos: { top: "30%", left: "0%" },
+        align: "left",
+        vAlign: "down",
+        detail: `
+            <div class="detail-content">
+                <p>Real-time display of PWM1~4 channel output status. Can observe switching and brightness status.<br />·P1 represents PWM1 channel output status, P2 represents PWM2 channel output status, and so on.</p>
+            </div>
+        `,
+    },
+    {
+        id: "usb",
+        name: "4. USB Power Port",
+        labelName: "·USB Pwr",
+        area: { top: "0%", left: "49.1%", width: "5%", height: "12%" },
+        labelPos: { top: "45%", left: "0%" },
+        align: "left",
+        vAlign: "down",
+        detail: `
+            <div class="detail-content">
+                <p>Micro USB (Old) / Type-C (New) interface, for convenient 5V power supply to the device, requires current > 1.5A.<br /> <span class="hint">Note: Please use high-quality cables to avoid voltage drop due to high resistance, causing insufficient power supply and device malfunction.</span></p>
+            </div>
+        `,
+    },
+    {
+        id: "reset",
+        name: "5. Reset Button",
+        labelName: "·Reboot/Reset RST",
+        area: { top: "13%", left: "50%", width: "3%", height: "4%" },
+        labelPos: { top: "60%", left: "0%" },
+        align: "left",
+        vAlign: "down",
+        detail: `
+            <div class="detail-content">
+                <div class="power-group">
+                    <strong class="group-title">· Reboot: Short press 1 time</strong>
+                    <div class="config-block">
+                        <p>Device power cycle reboot.</p>
+                    </div>
+                </div>
+        
+                <div class="power-group">
+                    <strong class="group-title">· Reset: Continuous short press 7 times</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">Operation:</span> Short press 7 times continuously: press 1s, release 1s each time.</p>
+                        <p><span class="config-label">Function:</span> Restore factory settings, clear all user configurations, restore device to factory default state.</p>
+                        <p class="hint">⚠️ Please use this function with caution.</p>
+                    </div>
+                </div>
+        
+                <div class="power-group">
+                    <strong class="group-title">· APP Operation</strong>
+                    <div class="config-block">
+                        <p>In the App, enter the device details page, click "Reset" or "Reboot" button in the "Settings" interface.</p>
+                    </div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "ledrun",
+        name: "6. Power/Run/Net Indicators",
+        labelName: "·PWR ·RUN ·NET",
+        area: { top: "0%", left: "54.2%", width: "2%", height: "15%" },
+        labelPos: { top: "75%", left: "0%" },
+        align: "left",
+        vAlign: "down",
+        detail: `
+            <div class="detail-content">
+                <div class="power-group">
+                    <strong class="group-title">· Power Indicator (PWR)</strong>
+                    <div class="config-block">
+                        <p>Always on indicates normal power supply.</p>
+                    </div>
+                </div>
+
+                <div class="power-group">
+                    <strong class="group-title">· Run Status (RUN)</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">Slow Flash (2s/time):</span> System running normally.</p>
+                        <p><span class="config-label">Fast Flash (0.5s/time):</span> Bluetooth connecting (App interacting).</p>
+                        <p><span class="config-label">Double Flash (2 fast flashes every 2s):</span> MQTT version network connected.</p>
+                        <p><span class="config-label">Always On/Off:</span> Running abnormally, please try to power cycle; if still abnormal, it may be a hardware fault.</p>
+                    </div>
+                </div>
+
+                <div class="power-group">
+                    <strong class="group-title">· Network Status (NET)</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">Tuya WIFI Version:</span> Fast flash=Waiting for pairing; Always on=Connected; Always off=Connection failed/Connecting.</p>
+                        <p><span class="config-label">Tuya 4G / 4G MQTT Version:</span> Slow flash=Connected to base station; Always off=Searching or abnormal.</p>
+                        <p><span class="config-label">WIFI MQTT Version:</span> Reserved (No actual function).</p>
+                    </div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "di",
+        name: "7. Switch/NPN/Frequency/Pulse Input",
+        labelName: "·In1 ·In2 ·In3 ·In4 ·In5 ·In6",
+        area: { top: "-1%", left: "57.1%", width: "11.4%", height: "18%" },
+        labelPos: { top: "-8%", left: "53%" },
+        align: "center",
+        vAlign: "up",
+        detail: `
+            <div class="detail-content">
+                <div class="power-group">
+                    <strong class="group-title">· Signal Types</strong>
+                    <div class="config-block">
+                        <p>Supports Switch, NPN, Frequency, Pulse signal inputs.</p>
+                        <p><span class="config-label">Signal Features:</span> Low level / Negative / GND signal is valid.</p>
+                        <p><span class="config-label">High Speed Counting:</span> Supports 20kHz frequency input.</p>
+                        <p><span class="config-label">Voltage Withstand:</span> Input port withstand voltage 1KV.</p>
+                    </div>
+                </div>
+
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· Supported Devices</strong>
+                    <div class="config-block">
+                        <p>Relays, Buttons, Switches, PIR sensors, Limit switches, Photoelectric switches, Magnetic switches, Water level switches, Proximity switches, Infrared beam sensors, etc.</p>
+                    </div>
+                </div>
+
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· Wiring Examples</strong>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="/images/input_btn.jpg" alt="开关/按钮 接线示例" loading="lazy" />
+                        <span class="example-title">Switch/Button Wiring Example</span>
+                    </div>
+                    <div class="example-item example-item-wide">
+                        <img src="/images/input_npn.jpg" alt="NPN信号传感器 接线示例" loading="lazy" />
+                        <span class="example-title">NPN Sensor Wiring Example</span>
+                    </div>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="/images/input_reply.jpg" alt="继电器作为输入 接线示例" loading="lazy" />
+                        <span class="example-title">Relay as Input Wiring Example</span>
+                    </div>
+                </div>
+                <div class="power-group mt-4">
+                    <strong class="group-title">· View Input Status in App</strong>
+                    <div class="params-flex">
+                        <!-- 图片容器 -->
+                        <div class="screenshot-thumb">
+                            <img src="/images/screenshot/params.jpg" alt="开关量输入状态" loading="lazy" 
+                                 style="width: 100%; height: auto; display: block; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);" />
+                            <!-- 高亮区域 -->
+                            <div class="highlight-box" style="top: 92%; left: 30%; width: 23%; height: 8%;"></div>
+                            <div class="highlight-box" style="top: 12%; left: 54%; width: 26%; height: 6%;"></div>
+                            <div class="highlight-box" style="top: 19%; left: 43%; width: 57%; height: 13%;"></div>
+                        </div>
+                        <!-- 局部放大图 -->
+                        <div class="zoom-detail-card">
+                            <div class="zoom-viewport" style="aspect-ratio: 50 / 25;">
+                                <img src="/images/screenshot/params.jpg" alt="输入状态局部放大" loading="lazy" class="zoom-image"
+                                     style="top: 23%; left: -39%; transform: scale(1.8);" />
+                            </div>
+                            <div class="mt-2 py-1 text-center">
+                                <div class="text-left bg-gray-50 p-2 px-3 rounded-md mt-2">
+                                    <div class="mb-1.5">
+                                        <span class="desc-text">1. Swipe left/right to view more input statuses.</span>
+                                    </div>
+                                    <div class="mb-1.5">
+                                        <span class="desc-text-highlight">2. </span>
+                                        <span class="desc-text">Example 3rd input status: </span>
+                                        <code class="desc-code">"3~0 2546"</code>
+                                        <span class="desc-text"> means Input 3, current frequency 0Hz, accumulated pulses 2546.</span>
+                                    </div>
+                                    <div class="mb-0">
+                                        <span class="desc-text-highlight">3. </span>
+                                        <span class="desc-text">Status Colors: </span>
+
+                                        <span class="status-dot active"></span>
+                                        <span class="desc-text"> Blue: "Active" (Signal present), </span>
+                                        <span class="status-dot inactive"></span>
+                                        <span class="desc-text"> White: "Silent" (No signal).</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "ai",
+        name: "8. Analog Input",
+        labelName: "·Analog1 ·Analog2 ·Analog3",
+        area: { top: "-1%", left: "68.3%", width: "5.5%", height: "18%" },
+        labelPos: { top: "-18%", left: "73%" },
+        align: "right",
+        vAlign: "up",
+        detail: `
+            <div class="detail-content">
+                <div class="power-group">
+                    <strong class="group-title">· Signal Types</strong>
+                    <div class="config-block">
+                        <p>Supports 0-20mA / 0-10V / Custom ADC etc. analog signal inputs.</p>
+                        <p><span class="config-label">Applicable Devices:</span> Level transmitters, Pressure transmitters, Current transmitters, Temperature transmitters, Displacement sensors, Wind speed sensors, etc.</p>
+                    </div>
+                </div>
+        
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· Supported Range per Gear</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">0-20mA Gear:</span> Supports 0-20mA, 4-20mA, 0-40mA (New HW)</p>
+                        <p><span class="config-label">0-10V Gear:</span> Supports 0-10V, 0-5V, 1-10V, 0-24V (New HW)</p>
+                        <p><span class="config-label">Custom ADC Gear:</span> Supports 0-1.5V, 0-3V (New HW) voltage sampling</p>
+                    </div>
+                </div>
+        
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· Gear Switching (Physical)</strong>
+                    <div class="config-block">
+                        <p>Device has a 3-position toggle switch on the side for different signal types.</p>
+                        <p><span class="config-label">As shown:</span> Analog 1 is Custom ADC, Analog 2 is 0-10V, Analog 3 is 0-20mA.</p>
+                        <img src="/images/adc.jpg" alt="模拟量挡位切换示例" loading="lazy" style="width: 100%; max-width: 500px; margin-top: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+                    </div>
+                </div>
+                <div class="power-group" style="margin-top: 1rem;">
+                    <strong class="group-title">· Wiring Examples</strong>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="/images/adc2.jpg" alt="2线制4-20mA传感器" loading="lazy" />
+                        <span class="example-title">2-wire 4-20mA Sensor Wiring</span>
+                    </div>
+                    <div class="example-item example-item-wide">
+                        <img src="/images/adc3.jpg" alt="3线制4-20mA或0-10V传感器" loading="lazy" />
+                        <span class="example-title">3-wire 4-20mA or 0-10V Sensor</span>
+                    </div>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="/images/adc4.jpg" alt="4线制4-20mA传感器" loading="lazy" />
+                        <span class="example-title">4-wire 4-20mA Sensor</span>
+                    </div>
+                    <div class="example-item example-item-wide">
+                        <img src="/images/adc1_5.jpg" alt="检测48V电池电压(自定义ADC)" loading="lazy" />
+                        <span class="example-title">Detect 48V Battery (Custom ADC) - Divider to 1.5V</span>
+                    </div>
+                </div>
+                <div class="power-group mt-4">
+                    <strong class="group-title">· View Input Status in App</strong>
+                    <div class="params-flex">
+                        <!-- 图片容器 -->
+                        <div class="screenshot-thumb">
+                            <img src="/images/screenshot/params.jpg" alt="开关量输入状态" loading="lazy" 
+                                 style="width: 100%; height: auto; display: block; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);" />
+                            <!-- 高亮区域 -->
+                            <div class="highlight-box" style="top: 92%; left: 30%; width: 23%; height: 8%;"></div>
+                            <div class="highlight-box" style="top: 12%; left: 54%; width: 26%; height: 6%;"></div>
+                            <div class="highlight-box" style="top: 53%; left: 1%; width: 98%; height: 15%;"></div>
+                        </div>
+                        <!-- 局部放大图 -->
+                        <div class="zoom-detail-card">
+                            <div class="zoom-viewport" style="aspect-ratio: 50 / 15;">
+                                <img src="/images/screenshot/params.jpg" alt="模拟量状态局部放大" loading="lazy" class="zoom-image"
+                                     style="top: -400%; left: 0%" />
+                            </div>
+                            <div class="mt-2 py-1 text-center">
+                                <div class="text-left bg-gray-50 p-2 px-3 rounded-md mt-2">
+                                    <div class="desc-text">1. This area has 3 columns, corresponding to Analog Inputs 1 ~ 3.</div>
+                                    <div class="desc-text">2. Example (Analog 1): "14.74 0.74V" means Analog 1 converted value (Engineering Unit) is 14.74, raw voltage is 0.74V.</div>
+                                    <div class="desc-text">3. Click gear icon on the right to enter parameter settings (as right image).</div>
+                                    <div class="desc-text">4. <span class="hint">Note: App "Mode" setting must match physical toggle switch.</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screenshot-thumb">
+                            <img src="/images/adc_setting.jpg" alt="模拟量输入参数设置" loading="lazy" 
+                                 style="width: 100%; height: auto; display: block; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "rs485",
+        name: "9. RS485/Termperature",
+        labelName: "·485B- ·A+/Temp",
+        area: { top: "-1%", left: "74%", width: "3.5%", height: "18%" },
+        labelPos: { top: "35%", left: "100%" },
+        align: "right",
+        vAlign: "down",
+        detail: `
+            <div class="detail-content">
+                <div class="power-group">
+                    <strong class="group-title">· A+/Temp Port</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">Default Function:</span> Supports DS18B20 temperature sensor, reading corresponds to "Temperature 1" in App.</p>
+                        <p><span class="config-label">Note:</span> Sensor cable length suggested ≤ 2 meters; too long may cause interference and read failure.</p>
+                        <p><span class="config-label">When RS485 Option Selected:</span> This port acts as RS485 A+ port, DS18B20 function unavailable.</p>
+                        <div class="wiring-examples">
+                            <div class="example-item example-item-wide">
+                                <img src="${import.meta.env.BASE_URL}images/ds18b20.jpg" alt="DS18B20温度传感器" loading="lazy" />
+                                <span class="example-title">DS18B20 Temperature Sensor Wiring Example</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+       
+                <div class="power-group mt-4">
+                    <strong class="group-title">· RS485 Modbus RTU (Optional)</strong>
+                    <div class="config-block">
+                        <p>IOTAutoMate acts as RS485 Master, supports reading/controlling various RS485 Slave devices.</p>
+                        <p><span class="config-label">Protocol:</span> Modbus RTU</p>
+                        <p><span class="config-label">Baud Rate:</span> 1200 ~ 38400bps, Data bits: 8, Stop bits: 1, Parity: None</p>
+                        <p><span class="config-label">Read Function Codes:</span> 01H, 02H, 03H, 04H</p>
+                        <p><span class="config-label">Write Function Codes:</span> 05H, 06H, 0FH, 10H</p>
+                        <p><span class="config-label">Device Capacity:</span> Supports up to 16 slaves. Reads 32 data registers and 32 status bits (Coils/Discrete).</p>
+                        <p><span class="config-label">Read Cycle:</span> Auto-cycle read every 0.5 seconds.</p>
+                        <p><span class="config-label">Slave Address:</span> Supports address range 1 ~ 31.</p>
+                        <p><span class="config-label">Supported Devices:</span> PLC, HMI, Smart Meters, Weather Stations, Relay Modules, Servo Motors, Inverters, PH Sensors, Dissolved Oxygen Sensors, etc.</p>
+                        <p><span class="config-label">Correct Wiring Example:</span></p>
+                        <div class="wiring-examples">
+                            <div class="example-item example-item-wide">
+                                <img src="${import.meta.env.BASE_URL}images/rs485_1.jpg" alt="单个RS485设备接线示例" loading="lazy" />
+                                <span class="example-title">Single Device RS485 Wiring Example</span>
+                            </div>
+                            <div class="example-item example-item-wide">
+                                <img src="${import.meta.env.BASE_URL}images/rs485_n.jpg" alt="多个RS485设备接线示例" loading="lazy" />
+                                <span class="example-title">Multiple RS485 Devices — Daisy Chain (Bus) Wiring (Correct)</span>
+                            </div>
+                        </div>
+                        <p><span class="config-label"><br/>Not Recommended (Prone to Interferance) Wiring Examples:</span></p>
+                        <div class="wiring-examples">
+                            <div class="example-item example-item-wide">
+                                <img src="${import.meta.env.BASE_URL}images/rs485_ne1.jpg" alt="多个RS485设备接线示例" loading="lazy" />
+                                <span class="example-title">Multiple RS485 - T-Junction (Prone to Interference)</span>
+                            </div>
+                            <div class="example-item example-item-wide">
+                                <img src="${import.meta.env.BASE_URL}images/rs485_ne2.jpg" alt="多个RS485设备接线示例" loading="lazy" />
+                                <span class="example-title">Multiple RS485 - Star Topology (Prone to Interference)</span>
+                            </div>
+                        </div>
+                        <p><span class="config-label"><br/>RS485 App Interfaces:</span></p>
+                        <div class="screenshot-gallery">
+                            <div class="gallery-item">
+                                <img src="${import.meta.env.BASE_URL}images/rs485s1.jpg" alt="RS485设备配置界面" loading="lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <img src="${import.meta.env.BASE_URL}images/rs485s2.jpg" alt="RS485数据读取界面" loading="lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <img src="${import.meta.env.BASE_URL}images/rs485s3.jpg" alt="RS485参数设置" loading="lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <img src="${import.meta.env.BASE_URL}images/rs485s4.jpg" alt="RS485状态监控" loading="lazy" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "iic",
+        name: "10. IIC Interface",
+        labelName: "·SCL ·SDA",
+        area: { top: "-1%", left: "77.5%", width: "3.5%", height: "18%" },
+        labelPos: { top: "20%", left: "100%" },
+        align: "right",
+        vAlign: "down",
+        detail: `
+            <div class="detail-content">
+                <p>Supports IIC device read/write. Built-in SHT30 temp/humidity sensor and light sensor protocol parsing, plug and play.
+                <br/>IIC communication level is 3.3V.
+                <br/>SHT30 temperature value corresponds to "Temperature 2" in App.
+                <br/>Light intensity data defaults to "Counter 8" in App.</p>
+                <div class="power-group mt-4">
+                    <strong class="group-title">· 接线示例</strong>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="${import.meta.env.BASE_URL}images/iict.jpg" alt="SHT30温湿度传感器" loading="lazy" />
+                        <span class="example-title">SHT30 Temp/Humidity Sensor</span>
+                    </div>
+                    <div class="example-item example-item-wide">
+                        <img src="${import.meta.env.BASE_URL}images/iicl.jpg" alt="光照度传感器" loading="lazy" />
+                        <span class="example-title">Light Intensity Sensor</span>
+                    </div>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="${import.meta.env.BASE_URL}images/iicn.jpg" alt="多路IIC传感器" loading="lazy" />
+                        <span class="example-title">Multiple IIC Sensors</span>
+                    </div>
+                </div>
+                <div class="power-group mt-4">
+                    <strong class="group-title">· App IIC Related Interfaces:</strong>
+                </div>
+                <div class="screenshot-gallery">
+                    <div class="gallery-item">
+                        <img src="${import.meta.env.BASE_URL}images/screenshot/params.jpg" alt="IIC设备参数界面" loading="lazy" />
+                        <div class="highlight-box" style="top: 92%; left: 30%; width: 23%; height: 8%;"></div>
+                        <div class="highlight-box" style="top: 12%; left: 54%; width: 26%; height: 6%;"></div>
+                        <div class="highlight-box" style="top: 31%; left: 2%; width: 41%; height: 11%;"></div>
+                        <div class="highlight-box" style="top: 46.5%; left: 16.5%; width: 12%; height: 7%;"></div>
+                        <div class="highlight-box" style="top: 41%; left: 44%; width: 55%; height: 13%;"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="${import.meta.env.BASE_URL}images/iics1.jpg" alt="IIC数据读取界面" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="${import.meta.env.BASE_URL}images/iics2.jpg" alt="IIC数据写入界面" loading="lazy" />
+                    </div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "dc3v",
+        name: "11. 3V Power Output",
+        labelName: "·GND ·3V Out",
+        area: { top: "-1%", left: "81%", width: "3.5%", height: "18%" },
+        labelPos: { top: "-3%", left: "100%" },
+        align: "right",
+        vAlign: "up",
+        detail: `
+            <div class="detail-content">
+                <p>Provides DC 3V power for low-power sensors. Max load current 30mA.<br/>"·3V Out" terminal is positive, "·GND" terminal is negative.</p>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="${import.meta.env.BASE_URL}images/o3v.jpg" alt="直流3V输出" loading="lazy" />
+                        <span class="example-title">DC 3V Output</span>
+                    </div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "relay",
+        name: "12. Relay/Switch Output",
+        labelName: "·NO1 ·COM1 ·NC1 ... ·NO6 ·COM6 ·NC6",
+        area: { top: "85%", left: "15.5%", width: "64%", height: "18%" },
+        labelPos: { top: "113%", left: "45%" },
+        align: "center",
+        vAlign: "down",
+        detail: `
+            <div class="detail-content">
+                <div class="power-group">
+                    <strong class="group-title">· Relay Output Definition</strong>
+                    <div class="config-block">
+                        <p>Relay is an electrically operated switch for circuit on/off control. It is a dry contact output.</p>
+                        <p>Directly controls loads within AC 230V or DC 30V.</p>
+                        <p><span class="config-label">Common Uses:</span> Lighting, Water Pumps, Solenoid Valves, AC Contactors, Exhaust Fans, Blowers, Control Cabinet Buttons, DC Motors, etc.</p>
+                    </div>
+                </div>
+
+                <div class="power-group mt-4">
+                    <strong class="group-title">· Each Relay Has 3 Ports:</strong>
+                    <div class="config-block">
+                        <div class="relay-port-legend">
+                            <div class="relay-port-item no">
+                                <span class="relay-port-title">Normally Open (NO)</span>
+                                <span class="relay-port-desc">Normal (OFF): Disconnected from COM<br/>Active (ON): Connected to COM</span>
+                            </div>
+                            <div class="relay-port-item com">
+                                <span class="relay-port-title">Common (COM)</span>
+                                <span class="relay-port-desc">Normal (OFF): Open from NO, Closed to NC<br/>Active (ON): Closed to NO, Open from NC</span>
+                            </div>
+                            <div class="relay-port-item nc">
+                                <span class="relay-port-title">Normally Closed (NC)</span>
+                                <span class="relay-port-desc">Normal (OFF): Connected to COM<br/>Active (ON): Disconnected from COM</span>
+                            </div>
+                        </div>
+                        <div class="wiring-examples">
+                            <div class="example-item example-item-wide">
+                                <img src="/images/relay.jpg" alt="继电器状态" loading="lazy" />
+                                <span class="example-title">Normal (OFF) (Left) &nbsp;&nbsp;|&nbsp;&nbsp; Active (ON) (Right)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="power-group mt-4">
+                    <strong class="group-title">· Electrical Parameters</strong>
+                    <div class="config-block">
+                        <p><span class="config-label">Max Resistive Load:</span> AC 220V/9A (~1.9kW) or DC 30V/9A (~270W).<br/>(Resistive examples: Heaters, Heating wires, Incandescent lamps)</p>
+                        <p><span class="config-label">Max Inductive/Capacitive Load:</span> AC 220V/2A (~440W) or DC 30V/2A (~60W).<br/>(Inductive/Capacitive examples: Solenoid valves, AC Contactors, Motors, Pumps, LED Drivers)</p>
+                        <p><span class="config-label">Lifespan:</span> Electrical ~100k cycles, Mechanical ~1M cycles.</p>
+                        <p><span class="config-label">Coil Power:</span> ~0.36W (5V/72mA).</p>
+                        <div class="info-card warning compact-warning">
+                            <strong>⚠️ SAFETY WARNING:</strong> High voltage wiring must be done by professional electricians. For high power loads, MUST use external high-power relays or AC contactors.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="power-group mt-4">
+                    <strong class="group-title">· 接线示例</strong>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="/images/relayw1.jpg" alt="照明/水泵/电磁阀" loading="lazy" />
+                        <span class="example-title">Lighting / Pump / Solenoid Valve</span>
+                    </div>
+                    <div class="example-item example-item-wide">
+                        <img src="/images/relayw2.jpg" alt="直流电机正反转" loading="lazy" />
+                        <span class="example-title">DC Motor Forward/Reverse</span>
+                    </div>
+                </div>
+                <div class="wiring-examples">
+                    <div class="example-item example-item-wide">
+                        <img src="/images/relayw3.jpg" alt="电控箱常闭按钮改造" loading="lazy" />
+                        <span class="example-title">Control Box NC Button Retrofit</span>
+                    </div>
+                    <div class="example-item example-item-wide">
+                        <img src="/images/relayw4.jpg" alt="电控箱常开按钮改造" loading="lazy" />
+                        <span class="example-title">Control Box NO Button Retrofit</span>
+                    </div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "outled",
+        name: "13. Relay Indicators",
+        labelName: "·O1 ·O2 ·O3 ·O4 ·O5 ·O6",
+        area: { top: "85%", left: "79.5%", width: "5%", height: "18%" },
+        labelPos: { top: "113%", left: "82%" },
+        align: "center",
+        vAlign: "down",
+        detail: `
+            <div class="detail-content">
+                <p>Real-time display of relay status.<br/>·O1 indicates Relay 1 / Switch 1, ·O2 indicates Relay 2, and so on.</p>
+            </div>
+        `,
+    },
+    {
+        id: "rf433Tx",
+        name: "14. RF 433MHz Transmit (Optional)",
+        labelName: "·433MHz Tx",
+        area: { top: "30%", left: "75%", width: "10%", height: "5%" },
+        labelPos: { top: "50%", left: "100%" },
+        align: "right",
+        vAlign: "down",
+        detail: `
+            <div class="detail-content">
+                <p>Optional. Supports sending 433MHz standard RF signals.</p>
+                <p><span class="config-label">Commonly controls:</span> Wireless switches, Garage doors, Gates, Wireless actuators, etc.</p>
+                <div class="power-group mt-4">
+                    <strong class="group-title">· App 433MHz Tx Interfaces:</strong>
+                </div>
+                <div class="screenshot-gallery">
+                    <div class="gallery-item">
+                        <img src="${import.meta.env.BASE_URL}images/433rt.jpg" alt="Remote Configuration Interface" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="${import.meta.env.BASE_URL}images/433t.jpg" alt="As Automation Task" loading="lazy" />
+                    </div>
+                </div>
+            </div>
+        `,
+    },
+    {
+        id: "rf433Rx",
+        name: "15. RF 433MHz Receive (Optional)",
+        labelName: "·433MHz Rx",
+        area: { top: "45%", left: "75%", width: "10%", height: "5%" },
+        labelPos: { top: "65%", left: "100%" },
+        align: "right",
+        vAlign: "down",
+        detail: `
+            <div class="detail-content">
+                <p>Optional. Supports receiving 433MHz standard RF signals.</p>
+                <p><span class="config-label">Commonly receives:</span> 433MHz Remotes, Wireless switches, Wireless sensors, triggering control logic.</p>
+                <p><span class="config-label">Especially suitable for elderly people to control devices via physical remote.</span></p>
+                <div class="screenshot-gallery">
+                    <div class="gallery-item">
+                        <img src="${import.meta.env.BASE_URL}images/screenshot/params.jpg" alt="433MHz Rx Interface" loading="lazy" />
+                        <div class="highlight-box" style="top: 92%; left: 30%; width: 23%; height: 8%;"></div>
+                        <div class="highlight-box" style="top: 12%; left: 54%; width: 26%; height: 6%;"></div>
+                        <div class="highlight-box" style="top: 31%; left: 43%; width: 56%; height: 11%;"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="${import.meta.env.BASE_URL}images/433rt.jpg" alt="Remote Configuration Interface" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="${import.meta.env.BASE_URL}images/433r.jpg" alt="As Automation Trigger" loading="lazy" />
+                    </div>
+                </div>
+            </div>
+        `,
+    },
+];
+---
+
+<Layout
+    title="Hardware Interfaces & Electrical Parameters - IOTAutoMate Pro"
+    description="Detailed guide to IOTAutoMate Pro hardware interfaces, including Relay Output, PWM Output, Digital Input, Analog Input, RS485 Modbus, IIC specifications, etc."
+    lang={lang}
+>
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">
+                Hardware Interfaces & Electrical Parameters
+            </h1>
+            <p class="page-subtitle">
+                Discover the powerful interface capabilities of IOTAutoMate Pro,
+                meeting 95% of sensor connection needs
+            </p>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section id="overview" class="doc-section">
+                <h2>Interface Overview</h2>
+                <div class="interface-container">
+                    <div class="interface-map" id="hardware-map">
+                        <img
+                            src={import.meta.env.BASE_URL +
+                                "images/products/6o4wzm.png"}
+                            alt="IOTAutoMate Pro Hardware Interface Diagram"
+                        />
+
+                        {/* SVG Leader Line Layer */}
+                        <svg
+                            class="leader-lines-svg"
+                            viewBox="0 0 100 100"
+                            preserveAspectRatio="none"
+                        >
+                            {
+                                interfaces.map((item) => {
+                                    const startX =
+                                        parseFloat(item.area.left) +
+                                        parseFloat(item.area.width) / 2;
+                                    const startY =
+                                        parseFloat(item.area.top) +
+                                        parseFloat(item.area.height) / 2;
+                                    const endX = parseFloat(item.labelPos.left);
+                                    const endY = parseFloat(item.labelPos.top);
+                                    return (
+                                        <line
+                                            x1={startX}
+                                            y1={startY}
+                                            x2={endX}
+                                            y2={endY}
+                                            class="leader-line-path"
+                                            id={`line-${item.id}`}
+                                        />
+                                    );
+                                })
+                            }
+                        </svg>
+
+                        {/* Interactive Marker Layer */}
+                        {
+                            interfaces.map((item) => (
+                                <div
+                                    class={`interface-marker v-align-${item.vAlign || "up"}`}
+                                    data-id={item.id}
+                                    onmouseenter={`document.getElementById('line-${item.id}').classList.add('active')`}
+                                    onmouseleave={`document.getElementById('line-${item.id}').classList.remove('active')`}
+                                >
+                                    {/* Interface Rect Area */}
+                                    <a
+                                        href={`#detail-${item.id}`}
+                                        class="interface-area"
+                                        style={`top: ${item.area.top}; left: ${item.area.left}; width: ${item.area.width}; height: ${item.area.height};`}
+                                        title={`Click to view ${item.name} details`}
+                                    />
+
+                                    {/* Outer Label & Tooltip */}
+                                    <a
+                                        href={`#detail-${item.id}`}
+                                        class={`external-label align-${item.align}`}
+                                        style={`top: ${item.labelPos.top}; left: ${item.labelPos.left};`}
+                                    >
+                                        <div class="label-text">
+                                            {item.name}
+                                        </div>
+                                        <div class="point-tooltip">
+                                            <h5>{item.name}</h5>
+                                            {item.labelName && (
+                                                <div class="tooltip-port-row">
+                                                    <span class="tooltip-badge">
+                                                        {item.labelName}
+                                                    </span>
+                                                </div>
+                                            )}
+                                            <div
+                                                class="tooltip-body"
+                                                set:html={item.detail}
+                                            />
+                                        </div>
+                                    </a>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detailed Interface List -->
+            <section id="interface-details" class="doc-section">
+                <h2>Detailed Specifications</h2>
+                <div class="details-grid">
+                    {
+                        interfaces.map((item) => (
+                            <div class="detail-card" id={`detail-${item.id}`}>
+                                <h3>
+                                    {item.name}
+                                    {item.labelName && (
+                                        <span class="card-badge">
+                                            {item.labelName}
+                                        </span>
+                                    )}
+                                </h3>
+                                <div
+                                    class="detail-full"
+                                    set:html={item.detail}
+                                />
+                            </div>
+                        ))
+                    }
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top-btn" aria-label="Back to Top">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <path d="M18 15l-6-6-6 6"></path>
+        </svg>
+    </button>
+</Layout>
+
+<style>
+    :root {
+        --primary-rgb: 0, 102, 204;
+    }
+
+    /* Screenshot Highlight Area Styles */
+    :global(.highlight-box) {
+        position: absolute;
+        border: 3px solid #4ecdc4;
+        background: rgba(78, 205, 196, 0.1);
+        border-radius: 0.25rem;
+        z-index: 10;
+        pointer-events: none;
+    }
+
+    /* Zoom Box Styles */
+    :global(.zoom-detail-card) {
+        background: white;
+        border-radius: 18px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border: 3px solid #4ecdc4;
+        padding: 0.5rem;
+        width: 35%;
+        flex-shrink: 0;
+    }
+
+    :global(.zoom-viewport) {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+    }
+
+    :global(.zoom-image) {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    :global(.params-flex) {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    :global(.screenshot-thumb) {
+        position: relative;
+        width: 20%;
+        flex-shrink: 0;
+    }
+
+    /* Description Text Styles */
+    .desc-text {
+        font-size: 0.7rem;
+        color: #555;
+        line-height: 1.625;
+    }
+
+    .desc-text-highlight {
+        font-size: 0.7rem;
+        color: #4ecdc4;
+        font-weight: 700;
+    }
+
+    .desc-code {
+        font-size: 0.65rem;
+        background: #e8f5f3;
+        color: #4ecdc4;
+        padding: 0.125rem 0.25rem;
+        border-radius: 0.25rem;
+        font-family: monospace;
+    }
+
+    /* Status Indicator Box */
+    :global(.status-dot) {
+        display: inline-block;
+        width: 1.2rem;
+        height: 1rem;
+        border-radius: 0.125rem;
+        vertical-align: middle;
+        margin: 0 0.125rem;
+    }
+
+    :global(.status-dot.active) {
+        background: #87ceeb;
+    }
+
+    :global(.status-dot.inactive) {
+        background: white;
+        border: 1px solid #d1d5db;
+    }
+
+    .page-header {
+        background: var(--bg-light);
+        color: var(--text-dark);
+        padding: 1.25rem 1.5rem;
+        text-align: center;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0 0 1rem;
+    }
+
+    .page-subtitle {
+        font-size: 1.25rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    .content-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+    }
+
+    /* Main Content */
+    .main-content {
+        min-width: 0;
+    }
+
+    .doc-section {
+        margin-bottom: 4rem;
+        position: relative;
+    }
+
+    /* 确保当前正在交互的章节处于最顶层，防止浮层被后续章节的标题遮挡 */
+    .doc-section:has(.interface-marker:hover) {
+        z-index: 1000;
+    }
+
+    .doc-section h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0 0 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--primary-light);
+    }
+
+    .doc-section h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 2rem 0 1rem;
+    }
+
+    .doc-section p {
+        color: var(--text-muted);
+        line-height: 1.7;
+        margin: 0 0 1rem;
+    }
+
+    /* Interface Map & Interactive UI */
+    .interface-container {
+        position: relative;
+        z-index: 10;
+        margin: 6rem 0 4rem 0; /* 增加顶部间距给上方标签留出空间 */
+        padding: 5rem 3rem; /* 增加内边距 */
+    }
+
+    .interface-container:hover {
+        z-index: 500;
+    }
+
+    .interface-map {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .interface-map img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .interface-marker {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    .interface-marker:hover {
+        z-index: 1000;
+    }
+
+    /* SVG Leader Lines */
+    .leader-lines-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+        pointer-events: none;
+        overflow: visible;
+    }
+
+    .leader-line-path {
+        stroke: var(--primary);
+        stroke-width: 1.5px;
+        vector-effect: non-scaling-stroke;
+        stroke-dasharray: 4 4;
+        opacity: 0.4;
+        transition: all 0.3s ease;
+    }
+
+    .leader-line-path.active {
+        stroke-width: 2.5px;
+        stroke-dasharray: 0;
+        opacity: 1;
+        filter: drop-shadow(0 0 3px var(--primary));
+    }
+
+    /* Interface Area Styling */
+    .interface-area {
+        position: absolute;
+        background: rgba(var(--primary-rgb), 0.1);
+        border: 1.5px dashed rgba(var(--primary-rgb), 0.4);
+        border-radius: 4px;
+        pointer-events: auto;
+        cursor: help;
+        transition: all 0.3s ease;
+    }
+
+    .interface-area:hover,
+    .interface-marker:hover .interface-area {
+        background: rgba(var(--primary-rgb), 0.2);
+        border: 2.5px solid var(--primary);
+        box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.4);
+    }
+
+    /* External Labels */
+    .external-label {
+        position: absolute;
+        background: white;
+        color: var(--primary);
+        border: 1.5px solid var(--primary);
+        padding: 4px 16px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        white-space: nowrap;
+        pointer-events: auto;
+        cursor: pointer;
+        z-index: 40;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.1);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .port-badge {
+        font-size: 0.7rem;
+        background: var(--primary-light);
+        color: var(--primary);
+        padding: 1px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+    }
+
+    .external-label:hover .port-badge,
+    .interface-marker:hover .port-badge {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+
+    .external-label:hover,
+    .interface-marker:hover .external-label {
+        background: var(--primary);
+        color: white;
+        box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.4);
+    }
+
+    /* Highlight line on hover */
+    .interface-marker[data-id]:hover ~ .leader-lines-svg .leader-line-path,
+    .interface-area:hover ~ .leader-line-path,
+    .external-label:hover ~ .leader-line-path {
+        /* CSS alone can't easily target a specific line by id from another sibling context 
+           if the line is inside the SVG. We'll use JS if necessary, but for now 
+           let's make all lines slightly more visible or use a general rule. */
+    }
+
+    .point-tooltip {
+        position: absolute;
+        width: 650px;
+        max-height: 350px; /* 添加最大高度限制 */
+        overflow-y: auto; /* 超出高度出现滚动条 */
+        background: white;
+        color: var(--text-dark);
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1100;
+        border: 1px solid var(--border-light);
+        white-space: normal;
+        font-weight: normal;
+    }
+
+    /* 自定义浮层滚动条样式 */
+    .point-tooltip::-webkit-scrollbar {
+        width: 5px;
+    }
+    .point-tooltip::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .point-tooltip::-webkit-scrollbar-thumb {
+        background: var(--primary-light);
+        border-radius: 10px;
+    }
+    .point-tooltip::-webkit-scrollbar-thumb:hover {
+        background: var(--primary);
+    }
+
+    .external-label:hover .point-tooltip,
+    .interface-marker:hover .point-tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Improved Alignment Logic */
+    .external-label.align-left .point-tooltip {
+        left: 0;
+        transform: translateX(0) translateY(0);
+    }
+    .external-label.align-center .point-tooltip {
+        left: 50%;
+        transform: translateX(-50%) translateY(0);
+    }
+    .external-label.align-right .point-tooltip {
+        right: 0;
+        transform: translateX(0) translateY(0);
+    }
+
+    .interface-marker.v-align-up .point-tooltip {
+        bottom: 100%;
+        margin-bottom: 15px;
+    }
+    .interface-marker.v-align-down .point-tooltip {
+        top: 100%;
+        margin-top: 15px;
+    }
+
+    /* Hover animation per alignment */
+    .interface-marker.v-align-up:hover .external-label .point-tooltip {
+        transform: translateX(0) translateY(-10px);
+    }
+    .interface-marker.v-align-up:hover
+        .external-label.align-center
+        .point-tooltip {
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    .interface-marker.v-align-down:hover .external-label .point-tooltip {
+        transform: translateX(0) translateY(10px);
+    }
+    .interface-marker.v-align-down:hover
+        .external-label.align-center
+        .point-tooltip {
+        transform: translateX(-50%) translateY(10px);
+    }
+
+    .point-tooltip h5 {
+        margin: 0 0 0.5rem;
+        color: var(--primary);
+        font-size: 1rem;
+        font-weight: 700;
+        border: none;
+        padding: 0;
+    }
+
+    .detail-card h3 {
+        margin: 0 0 1.25rem;
+        color: var(--primary);
+        font-size: 1.125rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .tooltip-port-row {
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--primary-light);
+        display: flex;
+        align-items: center;
+    }
+
+    .tooltip-badge {
+        font-size: 0.75rem;
+        background: var(--primary-light);
+        color: var(--primary);
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-family: monospace;
+        font-weight: 700;
+    }
+
+    .card-badge {
+        font-size: 0.8rem;
+        background: var(--primary-light);
+        color: var(--primary);
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-family: monospace;
+        font-weight: 700;
+    }
+
+    .tooltip-body {
+        text-align: left;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .detail-full {
+        text-align: left;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .detail-content p {
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .detail-list {
+        padding-left: 1.25rem;
+        margin: 0.5rem 0;
+    }
+
+    .detail-list li {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-bottom: 0.25rem;
+        list-style-type: disc;
+    }
+
+    .detail-grid-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        background: var(--bg-light);
+        padding: 0.75rem;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+    }
+
+    .inner-item {
+        font-size: 0.8rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .inner-item strong {
+        color: var(--text-dark);
+        font-size: 0.75rem;
+    }
+
+    :global(.power-group + .power-group) {
+        margin-top: 1rem;
+    }
+
+    :global(.mt-4) {
+        margin-top: 1rem;
+    }
+
+    /* 使用 :global() 以确保样式能应用到通过 set:html 注入的动态 HTML 中 */
+    :global(.group-title) {
+        display: block;
+        font-size: 0.95rem;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+    }
+
+    :global(.config-block) {
+        background: var(--bg-light);
+        padding: 0.75rem;
+        border-radius: 8px;
+        border-left: 3px solid var(--primary-light);
+    }
+
+    :global(.config-block) p {
+        margin-bottom: 0.4rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    :global(.config-block) p:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    :global(.config-label) {
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-right: 4px;
+    }
+
+    .hint {
+        color: #f59e0b !important;
+        font-weight: 600;
+        font-size: 0.8rem !important;
+    }
+
+    /* Wiring examples styling */
+    :global(.wiring-examples) {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    :global(.example-item) {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        background: #fdfdfd;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        padding: 8px;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    :global(.example-title) {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        opacity: 0.9;
+        margin-bottom: 4px;
+    }
+
+    :global(.example-item img) {
+        width: 100%;
+        height: 120px; /* 统一高度 */
+        object-fit: contain;
+        border-radius: 4px;
+        transition: transform 0.3s ease;
+    }
+
+    /* RS485接线图专用样式 - 更宽的宽高比 */
+    :global(.example-item-wide) {
+        grid-column: span 2; /* 占据2列宽度 */
+    }
+
+    :global(.example-item:hover) {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.15);
+    }
+
+    /* Screenshot Gallery - 可放大的截图画廊 */
+    :global(.screenshot-gallery) {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    :global(.gallery-item) {
+        position: relative;
+        background: #fdfdfd;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        padding: 8px;
+        overflow: visible;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    :global(.gallery-item img) {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+
+    :global(.gallery-item:hover) {
+        z-index: 1000;
+    }
+
+    :global(.gallery-item:hover img) {
+        transform: scale(1.5);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        position: relative;
+        z-index: 1001;
+    }
+
+    @media (max-width: 768px) {
+        :global(.wiring-examples) {
+            grid-template-columns: 1fr;
+        }
+
+        :global(.screenshot-gallery) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        :global(.gallery-item:hover img) {
+            transform: scale(2);
+        }
+    }
+
+    /* Details Grid */
+    .details-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+        margin-top: 1rem;
+    }
+
+    .detail-card {
+        background: transparent;
+        border: none;
+        padding: 2rem 1.5rem;
+        margin: 0 -1.5rem;
+        transition: all 0.3s ease;
+        scroll-margin-top: 100px;
+        text-decoration: none;
+        display: block;
+        border-radius: 8px;
+    }
+
+    .detail-card:hover {
+        background: rgba(var(--primary-rgb), 0.05);
+    }
+
+    .detail-card h3 {
+        /* Styles unified above */
+    }
+
+    .detail-desc {
+        font-weight: 600;
+        color: var(--primary) !important;
+        margin-bottom: 0.5rem !important;
+        font-size: 0.9rem;
+    }
+
+    .overview-intro {
+        text-align: center;
+        max-width: 800px;
+        margin: 2rem auto !important;
+        font-size: 1.1rem !important;
+    }
+
+    /* Fix image centering in diagram */
+    .interface-diagram {
+        display: none; /* Replaced by interface-container */
+    }
+
+    /* Specs Overview */
+    .specs-overview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .spec-item {
+        background: var(--bg-light);
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .spec-label {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+    }
+
+    .spec-value {
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+
+    /* Info Cards */
+    .info-card {
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        margin: 1.5rem 0;
+    }
+
+    .info-card.warning {
+        background: #fff7ed;
+        border-left: 4px solid #f97316;
+    }
+
+    .info-card h4 {
+        margin: 0 0 0.5rem;
+        color: #c2410c;
+    }
+
+    .info-card p {
+        margin: 0;
+        color: #9a3412;
+    }
+
+    /* Tables */
+    .spec-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        font-size: 0.95rem;
+    }
+
+    .spec-table th,
+    .spec-table td {
+        padding: 0.875rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .spec-table th {
+        background: var(--bg-light);
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+
+    .spec-table td {
+        color: var(--text-muted);
+    }
+
+    .models-table td:first-child {
+        color: var(--primary);
+    }
+
+    /* Relay Port Legend */
+    :global(.relay-port-legend) {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    :global(.relay-port-item) {
+        padding: 0.5rem;
+        border-radius: 4px;
+    }
+    :global(.relay-port-title) {
+        display: block;
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+    :global(.relay-port-desc) {
+        font-size: 0.75rem;
+        color: #555;
+    }
+    :global(.relay-port-item.no) {
+        background: #e0f2fe;
+    }
+    :global(.relay-port-item.no .relay-port-title) {
+        color: #0284c7;
+    }
+
+    :global(.relay-port-item.com) {
+        background: #f3f4f6;
+    }
+    :global(.relay-port-item.com .relay-port-title) {
+        color: #4b5563;
+    }
+
+    :global(.relay-port-item.nc) {
+        background: #fee2e2;
+    }
+    :global(.relay-port-item.nc .relay-port-title) {
+        color: #dc2626;
+    }
+
+    :global(.relay-port-item.nc .relay-port-title) {
+        color: #dc2626;
+    }
+
+    :global(.compact-warning) {
+        margin: 0.5rem 0 0 0 !important;
+        padding: 0.75rem !important;
+        font-size: 0.85rem;
+        border-left-width: 3px !important;
+    }
+
+    /* Feature List */
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0;
+    }
+
+    .feature-list li {
+        padding: 0.5rem 0 0.5rem 1.5rem;
+        position: relative;
+        color: var(--text-muted);
+    }
+
+    .feature-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    /* CTA Box */
+    .cta-box {
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+        padding: 2rem;
+        border-radius: 16px;
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .cta-box p {
+        font-size: 1.125rem;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+    }
+
+    .btn {
+        display: inline-flex;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+        background: linear-gradient(
+            135deg,
+            var(--primary) 0%,
+            var(--primary-dark) 100%
+        );
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    /* 回到顶部按钮样式 */
+    .back-to-top-btn {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+        color: white;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(100px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+    }
+
+    .back-to-top-btn.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .back-to-top-btn:hover {
+        background: linear-gradient(135deg, #0052a3 0%, #003d7a 100%);
+        box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+        transform: translateY(-3px);
+    }
+
+    .back-to-top-btn:active {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(0, 102, 204, 0.3);
+    }
+
+    .back-to-top-btn svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+        .back-to-top-btn {
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        .back-to-top-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    }
+</style>
+
+<script>
+    // 回到顶部按钮功能
+    document.addEventListener("DOMContentLoaded", () => {
+        const backToTopBtn = document.getElementById("back-to-top");
+
+        if (!backToTopBtn) return;
+
+        // 监听滚动事件，控制按钮显示/隐藏
+        const toggleButtonVisibility = () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add("show");
+            } else {
+                backToTopBtn.classList.remove("show");
+            }
+        };
+
+        // 使用节流优化滚动性能
+        let scrollTimeout: number | undefined;
+        window.addEventListener("scroll", () => {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(
+                toggleButtonVisibility,
+            );
+        });
+
+        // 点击按钮平滑滚动到顶部
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        });
+
+        // 初始化检查
+        toggleButtonVisibility();
+    });
+</script>
