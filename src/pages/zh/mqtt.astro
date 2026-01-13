@@ -624,6 +624,10 @@ const lang = "zh";
                     background: var(--primary-light);
                     border-color: var(--primary);
                 }
+
+                .submenu {
+                    display: none;
+                }
             }
 
             .sidebar-title {
@@ -759,13 +763,19 @@ const lang = "zh";
                 .screenshot-grid {
                     grid-template-columns: repeat(2, 1fr);
                     gap: 1.5rem;
+                    max-width: 500px; /* 限制平板和中等屏幕的截图总宽度 */
+                    margin-left: 0;
+                    margin-right: auto;
                 }
             }
 
             @media (max-width: 640px) {
                 .screenshot-grid {
                     grid-template-columns: repeat(2, 1fr);
-                    gap: 1rem;
+                    gap: 1.5rem 1rem;
+                    max-width: 440px; /* 限制总宽度，防止在大屏幕手机上显得过大 */
+                    margin-left: 0;
+                    margin-right: auto;
                 }
             }
 
@@ -782,6 +792,8 @@ const lang = "zh";
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                width: 100%;
+                /* 移除最大宽度限制，让 1fr 自动分配空间 */
             }
 
             .screenshot-wrapper {
@@ -811,6 +823,12 @@ const lang = "zh";
                 transform: scale(1.6) translateZ(0);
                 z-index: 50;
                 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            }
+
+            @media (max-width: 640px) {
+                .screenshot-wrapper:hover {
+                    transform: scale(1.3) translateZ(0);
+                }
             }
 
             .screenshot-wrapper img {
