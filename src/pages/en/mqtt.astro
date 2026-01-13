@@ -1,51 +1,52 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-const lang = "zh";
+const lang = "en";
 ---
 
 <Layout
-    title="MQTT协议文档 - 宜启智控"
-    description="宜启智控 MQTT协议详解，包括数据上报格式、控制命令、JSON报文示例等完整技术文档"
+    title="MQTT Protocol Documentation - IOTAutoMate"
+    description="IOTAutoMate MQTT protocol documentation, including data reporting format, control commands, JSON message examples and complete technical documentation"
     lang={lang}
 >
     <div class="page-header">
         <div class="container">
-            <h1 class="page-title">MQTT协议文档</h1>
+            <h1 class="page-title">MQTT Protocol Documentation</h1>
             <p class="page-subtitle">
-                通过MQTT协议实现设备远程控制与数据采集，对接各类物联网平台
+                Implement remote device control and data collection via MQTT
+                protocol, integrate with various IoT platforms
             </p>
         </div>
     </div>
 
     <div class="content-wrapper">
         <nav class="sidebar">
-            <h3 class="sidebar-title">目录</h3>
+            <h3 class="sidebar-title">Table of Contents</h3>
             <ul class="sidebar-nav">
-                <li><a href="#app-screenshots">App快速配置MQTT</a></li>
-                <li><a href="#overview">协议概述</a></li>
-                <li><a href="#report">数据上报格式</a></li>
-                <li><a href="#control">下发控制命令</a></li>
-                <li><a href="#switch">开关控制 (so)</a></li>
-                <li><a href="#pwm">PWM控制 (sp)</a></li>
-                <li><a href="#counter">计数器控制 (sc)</a></li>
-                <li><a href="#rf433">RF433遥控器</a></li>
-                <li><a href="#getData">获取全量数据</a></li>
+                <li><a href="#app-screenshots">Quick MQTT Setup via App</a></li>
+                <li><a href="#overview">Protocol Overview</a></li>
+                <li><a href="#report">Data Reporting Format</a></li>
+                <li><a href="#control">Control Commands</a></li>
+                <li><a href="#switch">Switch Control (so)</a></li>
+                <li><a href="#pwm">PWM Control (sp)</a></li>
+                <li><a href="#counter">Counter Control (sc)</a></li>
+                <li><a href="#rf433">RF433 Remote</a></li>
+                <li><a href="#getData">Get Full Data</a></li>
                 <li>
-                    <a href="#task">任务与自动化</a>
+                    <a href="#task">Tasks & Automation</a>
                     <ul class="submenu">
-                        <li><a href="#task-ro">一键执行任务</a></li>
-                        <li><a href="#task-se">启用/禁用任务</a></li>
-                        <li><a href="#task-sd">中止延时任务</a></li>
-                        <li><a href="#task-cp">脉冲计数清零</a></li>
+                        <li><a href="#task-ro">Execute Task</a></li>
+                        <li><a href="#task-se">Enable/Disable Task</a></li>
+                        <li><a href="#task-sd">Stop Delay Task</a></li>
+                        <li><a href="#task-cp">Clear Pulse Count</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#system">系统命令</a>
+                    <a href="#system">System Commands</a>
                     <ul class="submenu">
-                        <li><a href="#system-rb">重启设备</a></li>
-                        <li><a href="#system-sk">修改控制密码</a></li>
-                        <li><a href="#ota">OTA远程升级</a></li>
+                        <li><a href="#system-rb">Reboot Device</a></li>
+                        <li><a href="#system-sk">Change Password</a></li>
+                        <li><a href="#ota">OTA Upgrade</a></li>
                     </ul>
                 </li>
             </ul>
@@ -54,15 +55,18 @@ const lang = "zh";
         <main class="main-content">
             <!-- App Screenshots -->
             <section id="app-screenshots" class="doc-section">
-                <h2>App快速配置MQTT</h2>
+                <h2>Quick MQTT Setup via App</h2>
                 <p>
-                    在源来智能 App 中，您可以轻松配置 MQTT
-                    服务器参数，以及数据项主动上报规则。
+                    In the YLAI App, you can easily configure MQTT server
+                    parameters and data item active reporting rules.
                 </p>
                 <div class="screenshot-grid">
                     <div class="screenshot-card">
                         <div class="screenshot-wrapper">
-                            <img src="/images/mqtt1.jpg" alt="MQTT 配置入口" />
+                            <img
+                                src="/images/mqtt1.jpg"
+                                alt="MQTT Configuration Entry"
+                            />
                             <div
                                 class="highlight-box"
                                 style="top: 85.5%; left: 0%; width: 100%; height: 8%;"
@@ -74,112 +78,127 @@ const lang = "zh";
                             >
                             </div>
                         </div>
-                        <p class="screenshot-caption">MQTT 配置入口</p>
+                        <p class="screenshot-caption">
+                            MQTT Configuration Entry
+                        </p>
                     </div>
                     <div class="screenshot-card">
                         <div class="screenshot-wrapper">
-                            <img src="/images/mqtt2.jpg" alt="MQTT 配置页面" />
+                            <img
+                                src="/images/mqtt2.jpg"
+                                alt="MQTT Configuration Page"
+                            />
                         </div>
-                        <p class="screenshot-caption">MQTT 配置页面</p>
+                        <p class="screenshot-caption">
+                            MQTT Configuration Page
+                        </p>
                     </div>
                     <div class="screenshot-card">
                         <div class="screenshot-wrapper">
                             <img
                                 src="/images/mqtt3.jpg"
-                                alt="SSL / TLS 证书配置"
+                                alt="SSL / TLS Certificate Configuration"
                             />
                         </div>
-                        <p class="screenshot-caption">SSL / TLS 证书配置</p>
+                        <p class="screenshot-caption">
+                            SSL / TLS Certificate Configuration
+                        </p>
                     </div>
                     <div class="screenshot-card">
                         <div class="screenshot-wrapper">
                             <img
                                 src="/images/mqtt4.jpg"
-                                alt="数据项主动上报规则"
+                                alt="Data Item Active Reporting Rules"
                             />
                         </div>
-                        <p class="screenshot-caption">数据项主动上报规则</p>
+                        <p class="screenshot-caption">
+                            Data Item Active Reporting Rules
+                        </p>
                     </div>
                 </div>
             </section>
 
             <!-- Overview -->
             <section id="overview" class="doc-section">
-                <h2>协议概述</h2>
+                <h2>Protocol Overview</h2>
                 <p>
-                    宜启智控支持标准MQTT协议，MQTT版本：V3.1.1，QoS等级：QoS
-                    0，可对接任意MQTT Broker，包括：
+                    IOTAutoMate supports standard MQTT protocol, MQTT version:
+                    V3.1.1, QoS level: QoS 0, can connect to any MQTT Broker,
+                    including:
                 </p>
                 <ul class="tag-list">
-                    <li>阿里云IoT</li>
-                    <li>腾讯云IoT</li>
-                    <li>巴法云</li>
+                    <li>Alibaba Cloud IoT</li>
+                    <li>Tencent Cloud IoT</li>
+                    <li>Bafayun</li>
                     <li>ThingsCloud</li>
                     <li>ThingsBoard</li>
                     <li>Home Assistant</li>
                     <li>EMQX</li>
-                    <li>自建私有MQTT服务器</li>
+                    <li>Self-hosted MQTT Server</li>
                 </ul>
             </section>
 
             <!-- Data Report -->
             <section id="report" class="doc-section">
-                <h2>数据上报格式</h2>
+                <h2>Data Reporting Format</h2>
                 <p class="feature-intro">
-                    设备上报采用 <strong>JSON</strong> 格式，并遵循以下数据同步规范：
+                    Device reporting uses <strong>JSON</strong> format and follows
+                    these data synchronization specifications:
                 </p>
                 <div class="feature-steps">
                     <div class="step-item">
-                        <span class="step-badge">初始化</span>
+                        <span class="step-badge">Initialization</span>
                         <span class="step-text"
-                            >首次连接成功后，立即上报<strong>全量数据</strong
-                            >。</span
+                            >Upon first connection, immediately report <strong
+                                >full data</strong
+                            >.</span
                         >
                     </div>
                     <div class="step-item">
-                        <span class="step-badge">增量更新</span>
+                        <span class="step-badge">Incremental Update</span>
                         <span class="step-text"
-                            >仅在数据点发生变化时，主动上报<strong
-                                >变更字段</strong
-                            >。</span
+                            >Only when data points change, actively report <strong
+                                >changed fields</strong
+                            >.</span
                         >
                     </div>
                     <div class="step-item">
-                        <span class="step-badge">自定义</span>
+                        <span class="step-badge">Customization</span>
                         <span class="step-text"
-                            >上报逻辑可通过 App 内<strong>“数据同步云端”</strong
-                            >精准配置。</span
+                            >Reporting logic can be precisely configured via <strong
+                                >"Data Sync to Cloud"</strong
+                            > in the App.</span
                         >
                     </div>
                 </div>
 
                 <div class="code-block full-width">
                     <pre><code>{`{
-  "devNameA": [{              `}<span class="tok-comment">// 设备名称，格式：yq_MainId_subId；其中yq为固定字符串，</span>{`
-                              `}<span class="tok-comment">// MainId:为16进制的宜启智控设备ID，subId:为16进制Mesh子设备ID；eg：yq_A755_0</span>{`
-    "o": [states, size],      `}<span class="tok-comment">// states: 开关状态，二进制位代表一个输出的状态，0：关闭，1：开启；size:输出路数</span>{`
+  "devNameA": [{              `}<span class="tok-comment">// Device name, format: yq_MainId_subId; where yq is a fixed string,</span>{`
+                              `}<span class="tok-comment">// MainId: hexadecimal IOTAutoMate device ID, subId: hexadecimal Mesh sub-device ID; eg: yq_A755_0</span>{`
+    "o": [states, size],      `}<span class="tok-comment">// states: switch states, binary bit represents output state, 0: off, 1: on; size: number of outputs</span>{`
     "p": [onoffs,inverses,p0,h0,pr0,hr0,...,pN,hN,prN,hrN],`}<span class="tok-comment" />{`
-                              `}<span class="tok-comment">// PWM状态，onoffs: 开关状态，二进制位代表输出的状态，0：关闭，1：开启；</span>{`
-                              `}<span class="tok-comment">// inverses：占空比反向，二进制位代表输出的状态，0：正向，1：反向；</span>{`
-                              `}<span class="tok-comment">// pN:第N路占空比(放大100倍)；hN:第N路频率；prN:第N路占空比加减速速率；hrN:第N路频率加减速速率</span>{`
+                              `}<span class="tok-comment">// PWM states, onoffs: switch states, binary bit represents output state, 0: off, 1: on;</span>{`
+                              `}<span class="tok-comment">// inverses: duty cycle inversion, binary bit represents output state, 0: normal, 1: inverted;</span>{`
+                              `}<span class="tok-comment">// pN: Nth channel duty cycle (scaled by 100); hN: Nth channel frequency; prN: Nth channel duty cycle ramp rate; hrN: Nth channel frequency ramp rate</span>{`
     "i": [onoffs,pulse0,hz0,...,pulseN,hzN],`}<span class="tok-comment" />{`
-                              `}<span class="tok-comment">// 输入状态，onoffs: 开关量开关状态，二进制位代表输出的状态，0：静默，1：激活;</span>{`
-                              `}<span class="tok-comment">// pulseN:第N路脉冲计数；hzN:第N路频率值；</span>{`
-    "t": [t1, t2, humi],      `}<span class="tok-comment">// 环境数据。t1:温度1（DS18B20）；t2:温度2(SHT30)；humi:湿度(SHT30)</span>{`
-    "a": [a1, a2, a3],        `}<span class="tok-comment">// 模拟量输入映射值(放大了100倍)，a1:模拟量1；a2:模拟量2；a3:模拟量3</span>{`
-    "c": [c1, c2, ..., c16],  `}<span class="tok-comment">// 计数器值。16个Int32类型的计数器当前值</span>{`
-    "r": rfValue,             `}<span class="tok-comment">// 接收到的433MHz遥控信号。高20位为遥控器ID，低4位为按键值</span>{`
-    "s": states,              `}<span class="tok-comment">// 设备内部状态。bit0:启动, bit1:蓝牙连接, bit2:蓝牙断开</span>{`
-    "mb": [states, size],     `}<span class="tok-comment">// RS485读取到的线圈/离散量输入状态，states: 二进制位代表状态，0：关闭，1：开启; size:数量</span>{`
-    "mv": [v1, v2, ...,valN], `}<span class="tok-comment">// RS485读取到的保持/输入寄存器数值，valN:第N个值</span>{`
-    "v": [fVer, uVer, dVer]   `}<span class="tok-comment">// 版本号。fVer：框架固件；uVer：用户逻辑；dVer：驱动固件；(仅首次连接成功上报)</span>{`
+                              `}<span class="tok-comment">// Input states, onoffs: digital input states, binary bit represents output state, 0: inactive, 1: active;</span>{`
+                              `}<span class="tok-comment">// pulseN: Nth channel pulse count; hzN: Nth channel frequency value;</span>{`
+    "t": [t1, t2, humi],      `}<span class="tok-comment">// Environmental data. t1: temperature 1 (DS18B20); t2: temperature 2 (SHT30); humi: humidity (SHT30)</span>{`
+    "a": [a1, a2, a3],        `}<span class="tok-comment">// Analog input mapped values (scaled by 100), a1: analog 1; a2: analog 2; a3: analog 3</span>{`
+    "c": [c1, c2, ..., c16],  `}<span class="tok-comment">// Counter values. 16 Int32 type counter current values</span>{`
+    "r": rfValue,             `}<span class="tok-comment">// Received 433MHz remote signal. High 20 bits are remote ID, low 4 bits are key value</span>{`
+    "s": states,              `}<span class="tok-comment">// Device internal states. bit0: startup, bit1: Bluetooth connected, bit2: Bluetooth disconnected</span>{`
+    "mb": [states, size],     `}<span class="tok-comment">// RS485 read coil/discrete input states, states: binary bit represents state, 0: off, 1: on; size: quantity</span>{`
+    "mv": [v1, v2, ...,valN], `}<span class="tok-comment">// RS485 read holding/input register values, valN: Nth value</span>{`
+    "v": [fVer, uVer, dVer]   `}<span class="tok-comment">// Version numbers. fVer: framework firmware; uVer: user logic; dVer: driver firmware; (only reported on first connection)</span>{`
   }],
         ...,
     "devNameN":[{...}],
 }`}</code></pre>
                 </div>
 
-                <h3>上报报文示例</h3>
+                <h3>Reporting Message Example</h3>
                 <div class="code-block full-width">
                     <pre><code>{`{
   "yq_6809_0": [{
@@ -199,26 +218,26 @@ const lang = "zh";
 
             <!-- Control Commands -->
             <section id="control" class="doc-section">
-                <h2>下发控制命令</h2>
+                <h2>Control Commands</h2>
 
-                <h3>下发控制数据格式(单个控制命令)</h3>
+                <h3>Control Data Format (Single Command)</h3>
                 <div class="code-block">
                     <pre><code>{`{
-  "device": "devName",`}<span class="tok-comment">// devName:设备名，示例："yq_6809_0"</span>{`
+  "device": "devName",`}<span class="tok-comment">// devName: device name, example: "yq_6809_0"</span>{`
   "data": {
-    "id": 1,`}<span class="tok-comment">// 消息ID，自增</span>{`
-    "method": "",`}<span class="tok-comment">// 控制方法，示例："so"</span>{`
-    "params": {}`}<span class="tok-comment">// 控制参数，根据控制方法不同而不同</span>{`
+    "id": 1,`}<span class="tok-comment">// Message ID, auto-increment</span>{`
+    "method": "",`}<span class="tok-comment">// Control method, example: "so"</span>{`
+    "params": {}`}<span class="tok-comment">// Control parameters, varies by control method</span>{`
 }`}</code></pre>
                 </div>
 
-                <h3>下发控制数据格式(多个控制命令)</h3>
+                <h3>Control Data Format (Multiple Commands)</h3>
                 <div class="code-block">
                     <pre><code>{`{
   "device": "yq_A755_0",
   "data": [
-    { "id": 1, "method": "so", "params": [228, 0] },`}<span class="tok-comment">// 控制命令1</span>{`
-    { "id": 2, "method": "sp", "params": [0, 1, 0, 5000, 1000, 0, 0] }`}<span class="tok-comment">// 控制命令2</span>{`
+    { "id": 1, "method": "so", "params": [228, 0] },`}<span class="tok-comment">// Control command 1</span>{`
+    { "id": 2, "method": "sp", "params": [0, 1, 0, 5000, 1000, 0, 0] }`}<span class="tok-comment">// Control command 2</span>{`
   ]
 }`}</code></pre>
                 </div>
@@ -227,22 +246,22 @@ const lang = "zh";
             <!-- Switch Control -->
             <section id="switch" class="doc-section">
                 <h3>
-                    开关控制 (so) <span class="section-subtitle"
-                        >控制继电器开关输出状态</span
+                    Switch Control (so) <span class="section-subtitle"
+                        >Control relay switch output states</span
                     >
                 </h3>
                 <div class="code-block">
                     <pre><code>{`"method": "so",`}<span class="tok-comment">// set output </span>{`
 "params": [value0, value1]`}
-    <span class="tok-comment">//value0：0-16个开关控制值，value1：保留，默认0。
-    //value0的2进制值每2位对应1个输出: 00=不动作, 01=关, 10=开, 11=切换
-    //示例：value0 = 228 = 0b 11 10 01 00
-    //开关1: 00 = 不动作
-    //开关2: 01 = 关闭
-    //开关3: 10 = 打开  
-    //开关4: 11 = 切换
-    //其它开关：00 = 不动作<br />
-    //示例代码：控制开关3打开，其它开关不动作   
+    <span class="tok-comment">//value0: 0-16 switch control values, value1: reserved, default 0.
+    //Each 2 bits in value0's binary value corresponds to 1 output: 00=no action, 01=off, 10=on, 11=toggle
+    //Example: value0 = 228 = 0b 11 10 01 00
+    //Switch 1: 00 = no action
+    //Switch 2: 01 = off
+    //Switch 3: 10 = on  
+    //Switch 4: 11 = toggle
+    //Other switches: 00 = no action<br />
+    //Example code: Turn on switch 3, other switches no action   
 </span>
 {`{
 	"device": "yq_6809_0",
@@ -258,23 +277,23 @@ const lang = "zh";
             <!-- PWM Control -->
             <section id="pwm" class="doc-section">
                 <h3>
-                    PWM控制 (sp) <span class="section-subtitle"
-                        >控制PWM输出的占空比、频率及渐变速率</span
+                    PWM Control (sp) <span class="section-subtitle"
+                        >Control PWM output duty cycle, frequency and ramp rate</span
                     >
                 </h3>
 
                 <div class="code-block">
                     <pre><code>{`"method": "sp",`}<span class="tok-comment">// set pwm </span>{`
 "params": [idx, onoff, inverse, pwm, hz, pwmRate, hzRate]`}
-    <span class="tok-comment">// idx: PWM索引 (0开始)
-    // onoff: 0=关, 1=开, 2=切换
-    // inverse: 0=正向, 1=反向
-    // pwm: 占空比 0-10000 (实际0-100.00%)
-    // hz: 频率 1-150000Hz
-    // pwmRate: 占空比渐变速率 0-10000/s(实际0-100.00%/s)
-    // hzRate: 频率渐变速率 0-100000Hz/s
-    // 设为-1表示保持原值<br />
-//示例代码：控制PWM1点空比为80%，其它参数保持原值
+    <span class="tok-comment">// idx: PWM index (starts from 0)
+    // onoff: 0=off, 1=on, 2=toggle
+    // inverse: 0=normal, 1=inverted
+    // pwm: duty cycle 0-10000 (actual 0-100.00%)
+    // hz: frequency 1-150000Hz
+    // pwmRate: duty cycle ramp rate 0-10000/s (actual 0-100.00%/s)
+    // hzRate: frequency ramp rate 0-100000Hz/s
+    // Set to -1 to keep original value<br />
+//Example code: Set PWM1 duty cycle to 80%, keep other parameters
 </span>
 {`{
 	"device": "yq_6809_0",
@@ -291,18 +310,19 @@ const lang = "zh";
             <!-- Counter Control -->
             <section id="counter" class="doc-section">
                 <h3>
-                    计数器控制 (sc) <span class="section-subtitle"
-                        >设置或修改设备内部的16个计数器值(参数值)</span
+                    Counter Control (sc) <span class="section-subtitle"
+                        >Set or modify the 16 internal counter values (parameter
+                        values)</span
                     >
                 </h3>
 
                 <div class="code-block">
                     <pre><code>{`"method": "sc",`}<span class="tok-comment">// set counter </span>{`
 "params": [idxN,typeN,valueN,...]`}
-    <span class="tok-comment">// idx: 计数器索引 0-15
-    // type: 操作类型 0=设置,直接设置数值; 1=递增，在当前值基础上递增； 2=递减，在当前值基础上递减
-    // value: 操作的具体数值 (Int32)<br />
-//示例代码：计数器3设置为12345，计数器4递增8899
+    <span class="tok-comment">// idx: counter index 0-15
+    // type: operation type 0=set, directly set value; 1=increment, increment from current value; 2=decrement, decrement from current value
+    // value: specific operation value (Int32)<br />
+//Example code: Set counter 3 to 12345, increment counter 4 by 8899
 </span>
 {`{
 	"device": "yq_6809_0",
@@ -312,28 +332,28 @@ const lang = "zh";
 		"params": [2, 0, 12345, 3, 1, 8899]
 	}
 }`}
-</code>
-                </pre>
+</code></pre>
                 </div>
             </section>
 
             <!-- RF433 Control -->
             <section id="rf433" class="doc-section">
                 <h3>
-                    RF433遥控器控制 (sr) <span class="section-subtitle"
-                        >发送433MHz的射频信号以遥控控制相应的接收设备或模拟遥控器按钮</span
+                    RF433 Remote Control (sr) <span class="section-subtitle"
+                        >Send 433MHz RF signals to remotely control receiving
+                        devices or simulate remote buttons</span
                     >
                 </h3>
 
                 <div class="code-block">
                     <pre><code>{`"method": "sr",`}<span class="tok-comment">// set RF </span>{`
 "params": [idx, rfValue]`}
-    <span class="tok-comment">// idx: 遥控器索引
-    //0~9: 对应硬件预设遥控器1~10
-    //10~19: 对应设备学习到的遥控器11~19
-    //-1: 使用自定义rfValue (高20位ID + 低4位键值)
-    //rfValue: 433MHz按键值 (0~15)<br />
-//示例代码：按下遥控器3的按钮3
+    <span class="tok-comment">// idx: remote index
+    //0~9: corresponds to hardware preset remotes 1~10
+    //10~19: corresponds to device learned remotes 11~19
+    //-1: use custom rfValue (high 20 bits ID + low 4 bits key value)
+    //rfValue: 433MHz key value (0~15)<br />
+//Example code: Press button 3 on remote 3
 </span>
 {`{
 	"device": "yq_6809_0",
@@ -348,17 +368,17 @@ const lang = "zh";
 
             <section id="getData" class="doc-section">
                 <h3>
-                    获取全量数据 (gd) <span class="section-subtitle"
-                        >获取设备的所有数据</span
+                    Get Full Data (gd) <span class="section-subtitle"
+                        >Get all device data</span
                     >
                 </h3>
 
                 <div class="code-block">
                     <pre><code>{`"method": "gd",`}<span class="tok-comment">// get data </span>{`
 "params": dataType`}
-    <span class="tok-comment">// dataType: 想要获取的数据类型，以全量数据上报
-    //0: 基础数据 (开关、输入、PWM、温湿度、ADC、计数器、Modbus数据)<br />
-//示例代码：获取基础数据
+    <span class="tok-comment">// dataType: data type to retrieve, reported as full data
+    //0: basic data (switches, inputs, PWM, temperature/humidity, ADC, counters, Modbus data)<br />
+//Example code: Get basic data
 </span>
 {`{
 	"device": "yq_6809_0",
@@ -373,11 +393,11 @@ const lang = "zh";
 
             <!-- Task Control -->
             <section id="task" class="doc-section">
-                <h3 id="task-ro">执行"一键执行"任务 (ro)</h3>
+                <h3 id="task-ro">Execute "One-Click" Task (ro)</h3>
                 <div class="code-block">
                     <pre><code>{`"method": "ro",`}<span class="tok-comment">// run oneKeyTask </span>{`
-"params": taskId `}<span class="tok-comment">// 任务ID (在APP中可见)<br />
-//示例代码：执行任务ID为12的"一键执行"任务
+"params": taskId `}<span class="tok-comment">// Task ID (visible in APP)<br />
+//Example code: Execute "one-click" task with ID 12
 </span>
 {`{
 	"device": "yq_6809_0",
@@ -389,11 +409,13 @@ const lang = "zh";
 }`}</code></pre>
                 </div>
 
-                <h3 id="task-se">启用/禁用自动化任务或时间任务 (se)</h3>
+                <h3 id="task-se">
+                    Enable/Disable Automation or Scheduled Task (se)
+                </h3>
                 <div class="code-block">
                     <pre><code>{`"method": "se",`}<span class="tok-comment">//set enable </span>{`
-"params": [taskId, enable]  `}<span class="tok-comment">//taskId:要控制的任务ID； enable: 0:禁用，1启用<br />
-//示例代码：禁用任务ID为13的任务
+"params": [taskId, enable]  `}<span class="tok-comment">//taskId: task ID to control; enable: 0: disable, 1: enable<br />
+//Example code: Disable task with ID 13
 </span>
 {`{
 	"device": "yq_6809_0",
@@ -406,11 +428,11 @@ const lang = "zh";
 </code></pre>
                 </div>
 
-                <h3 id="task-sd">中止正在执行延时的任务 (sd)</h3>
+                <h3 id="task-sd">Stop Executing Delay Task (sd)</h3>
                 <div class="code-block">
                     <pre><code>{`"method": "sd",`}<span class="tok-comment">//stop delay </span>{`
-"params": id  `}<span class="tok-comment">// 要中止的任务ID, 若此任务没在执行，则无效果<br />
-//示例代码：中止任务ID为14的任务
+"params": id  `}<span class="tok-comment">// Task ID to stop, no effect if task is not executing<br />
+//Example code: Stop task with ID 14
 </span>
 {`{
 	"device": "yq_6809_0",
@@ -420,14 +442,13 @@ const lang = "zh";
 		"params": 14
 	}
 }`}
-</code>
-                </pre>
+</code></pre>
                 </div>
-                <h3 id="task-cp">开关量输入的脉冲计数清零 (cp)</h3>
+                <h3 id="task-cp">Clear Digital Input Pulse Count (cp)</h3>
                 <div class="code-block">
                     <pre><code>{`"method": "cp",`}<span class="tok-comment">//clear pulse </span>{`
-"params": idx  `}<span class="tok-comment">//要清零的开关量输入索引值<br />
-//示例代码：清零输入2的脉冲计数
+"params": idx  `}<span class="tok-comment">//Digital input index to clear<br />
+//Example code: Clear pulse count for input 2
 </span>
 {`{
 	"device": "yq_6809_0",
@@ -436,20 +457,19 @@ const lang = "zh";
 		"method": "cp",
 		"params": 1
 	}
-}`}
-</code></pre>
+}`}</code></pre>
                 </div>
             </section>
 
             <!-- System Commands -->
             <section id="system" class="doc-section">
-                <h2>系统命令</h2>
+                <h2>System Commands</h2>
 
-                <h3 id="system-rb">重启设备 (rb)</h3>
+                <h3 id="system-rb">Reboot Device (rb)</h3>
                 <div class="code-block">
                     <pre><code>{`"method": "rb",`}<span class="tok-comment">//reboot </span>{`
-"params": 1`}<span class="tok-comment">//1:重启<br />
-//示例代码：重启设备
+"params": 1`}<span class="tok-comment">//1: reboot<br />
+//Example code: Reboot device
 </span>
 {`{
 	"device": "yq_6809_0",
@@ -462,11 +482,11 @@ const lang = "zh";
 </code></pre>
                 </div>
 
-                <h3 id="system-sk">设置/修改源来智能APP设备使用的密码(sk)</h3>
+                <h3 id="system-sk">Set/Modify App Device Password (sk)</h3>
                 <div class="code-block">
                     <pre><code>{`"method": "sk",`}<span class="tok-comment">//set key </span>{`
-"params": [admin, user]`}<span class="tok-comment">//admin: 管理员密码，user: 用户密码;若任意一个设置为0，则清除密码<br />
-//示例代码：设置管理员密码为123456，用户密码为654321
+"params": [admin, user]`}<span class="tok-comment">//admin: admin password, user: user password; if either is set to 0, password is cleared<br />
+//Example code: Set admin password to 123456, user password to 654321
 </span>
 {`{
 	"device": "yq_6809_0",
@@ -477,17 +497,26 @@ const lang = "zh";
 	}
 }`}</code></pre>
                 </div>
-                <h3>OTA远程升级 (ot)</h3>
+                <h3>OTA Remote Upgrade (ot)</h3>
                 <div class="info-card warning">
-                    <h4>⚠️ 谨慎操作</h4>
+                    <h4>⚠️ Proceed with Caution</h4>
                     <ul>
-                        <li>升级成功后设备将自动重启，请评估现场风险。</li>
-                        <li>请确保固件版本正确且稳定，避免死机或功能异常。</li>
                         <li>
-                            升级过程中必须保证网络（2.4G WiFi）和供电极其稳定。
+                            Device will automatically reboot after successful
+                            upgrade, please assess on-site risks.
                         </li>
                         <li>
-                            MQTT版本的设备更新用户逻辑固件时，固件需包含MQTT配置，否则会导致丢失连接。
+                            Ensure firmware version is correct and stable to
+                            avoid crashes or functional issues.
+                        </li>
+                        <li>
+                            During upgrade, network (2.4G WiFi) and power supply
+                            must be extremely stable.
+                        </li>
+                        <li>
+                            When updating user logic firmware on MQTT version
+                            devices, firmware must include MQTT configuration,
+                            otherwise connection will be lost.
                         </li>
                     </ul>
                 </div>
@@ -495,15 +524,15 @@ const lang = "zh";
                 <div class="code-block">
                     <pre><code>{`"method": "ot",`}<span class="tok-comment">//ota </span>{`
 "params": [binType, url, wifiName, wifiPsw]`}
-    <span class="tok-comment">// binType: 固件类型
-    //  "0": Framework框架固件 (要求版本号 > 82)
-    //  "1": 用户逻辑固件 (更新后会连接固件内的MQTT)
-    //  "2": 用户逻辑固件 (永久生效)
-    //  "3": 驱动固件
-    // url: 固件文件的下载直链地址
-    // wifiName: 现场2.4G WiFi名称
-    // wifiPsw: 现场WiFi密码<br />
-//示例代码：升级用户逻辑固件
+    <span class="tok-comment">// binType: firmware type
+    //  "0": Framework firmware (requires version > 82)
+    //  "1": User logic firmware (will connect to MQTT in firmware after update)
+    //  "2": User logic firmware (permanent)
+    //  "3": Driver firmware
+    // url: firmware file download direct link
+    // wifiName: on-site 2.4G WiFi name
+    // wifiPsw: on-site WiFi password<br />
+//Example code: Upgrade user logic firmware
 </span>
 {`{
 	"device": "yq_6809_0",
@@ -516,14 +545,16 @@ const lang = "zh";
                 </div>
 
                 <p>
-                    升级完成后，可通过设备上报的 <code>v</code> 字段验证版本号是否已更新，从而确认升级是否成功。
+                    After upgrade completion, you can verify the version number
+                    through the device's reported <code>v</code> field to confirm
+                    upgrade success.
                 </p>
             </section>
 
             <div class="cta-box">
-                <p>需要接入物联网平台？</p>
-                <a href="/zh/tutorials" class="btn btn-primary"
-                    >查看平台接入教程 →</a
+                <p>Need to integrate with IoT platforms?</p>
+                <a href="/en/tutorials" class="btn btn-primary"
+                    >View Platform Integration Tutorials →</a
                 >
             </div>
         </main>
@@ -579,7 +610,7 @@ const lang = "zh";
             @media (max-width: 1024px) {
                 .sidebar {
                     position: sticky;
-                    top: 64px; /* 调整为 Header 的高度 */
+                    top: 64px; /* Adjust to Header height */
                     z-index: 100;
                     background: rgba(255, 255, 255, 0.95);
                     backdrop-filter: blur(10px);
@@ -794,16 +825,16 @@ const lang = "zh";
                 background: #f1f5f9;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
                 cursor: pointer;
-                /* 使用 ease-in-out 代替复杂的 cubic-bezier 避免缩回时的渲染计算错误 */
+                /* Use ease-in-out instead of complex cubic-bezier to avoid rendering calculation errors when scaling back */
                 transition:
                     transform 0.3s ease-in-out,
                     box-shadow 0.3s ease-in-out;
                 z-index: 1;
-                /* 强制指定缩放中心 */
+                /* Force specify scaling center */
                 transform-origin: center center;
-                /* 提前告知浏览器将有变换，预留渲染资源 */
+                /* Pre-notify browser of transformation, reserve rendering resources */
                 will-change: transform;
-                /* 保持 3D 转换上下文 */
+                /* Maintain 3D transformation context */
                 transform: translateZ(0);
             }
 
@@ -902,8 +933,8 @@ const lang = "zh";
                 opacity: 1;
                 color: var(
                     --primary
-                ); /* 悬停时变为品牌蓝色，清晰且具有引导性 */
-                font-weight: 400; /* 悬停时略微加粗，增加可读性 */
+                ); /* Change to brand blue on hover, clear and guiding */
+                font-weight: 400; /* Slightly bolder on hover, increase readability */
             }
 
             @media (max-width: 1024px) {
