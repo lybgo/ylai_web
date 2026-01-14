@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 interface Props {
 	title?: string;
 	description?: string;
+	keywords?: string;
 	lang?: "zh" | "en";
 	ogType?: "website" | "article";
 }
@@ -17,25 +18,28 @@ const defaults = {
 		title: "宜启智控 - 智能物联网自动化控制器",
 		description:
 			"无需编程的智能物联网自动化万能控制器，手机APP轻松配置，支持95%市场传感器",
-		keywords: "宜启智控,物联网,自动化控制器,智能控制,MQTT,IoT,PLC替代",
+		keywords:
+			"宜启智控,物联网自动化控制器,零代码开发,无需编程,MQTT控制器,涂鸦智能,PLC替代,工业物联网,IIoT,逻辑控制器,智能家居,智慧农业,远程监控,传感器网关,Mesh组网,工业自动化,PID控制",
 	},
 	en: {
 		title: "IOTAutoMate - Smart IoT Automation Controller",
 		description:
 			"No-code smart IoT automation universal controller, easy mobile app configuration, supports 95% of market sensors",
 		keywords:
-			"IOTAutoMate,IoT,Automation Controller,Smart Control,MQTT,PLC Alternative",
+			"IOTAutoMate,IoT Automation Controller,No-code IoT,MQTT Controller,Tuya Smart,PLC Alternative,Industrial IoT,IIoT,Smart Home,Smart Agriculture,Remote Monitoring,Sensor Gateway,Mesh Networking,Industrial Automation,PID Control",
 	},
 }[lang] || {
 	title: "宜启智控 - 智能物联网自动化控制器",
 	description:
 		"无需编程的智能物联网自动化万能控制器，手机APP轻松配置，支持95%市场传感器",
-	keywords: "宜启智控,物联网,自动化控制器,智能控制,MQTT,IoT,PLC替代",
+	keywords:
+		"宜启智控,物联网自动化控制器,零代码开发,无需编程,MQTT控制器,涂鸦智能,PLC替代,工业物联网,IIoT,逻辑控制器,智能家居,智慧农业,远程监控,传感器网关,Mesh组网,工业自动化,PID控制",
 };
 
 const {
 	title = defaults.title,
 	description = defaults.description,
+	keywords = defaults.keywords,
 	ogType = "website",
 } = Astro.props;
 
@@ -58,7 +62,7 @@ const alternateURL = new URL(alternatePathname, siteUrl);
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="description" content={description} />
-		<meta name="keywords" content={defaults.keywords} />
+		<meta name="keywords" content={keywords} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 
