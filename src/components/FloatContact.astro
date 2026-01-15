@@ -1,0 +1,313 @@
+---
+interface Props {
+    lang?: "zh" | "en";
+}
+
+const { lang = "zh" } = Astro.props;
+
+const content = {
+    zh: {
+        contact: "联系",
+        techSupport: "技术支持",
+        wechat: "添加微信",
+        whatsapp: "WhatsApp",
+        name: "刘先生",
+        phone: "+86-13631528007",
+        email: "liuyuanbin@ylznc.com",
+        wechatId: "微信号：yqzkyy",
+        whatsappNum: "+86 15815519261",
+        whatsappName: "Iot Auto Mate",
+    },
+    en: {
+        contact: "Contact",
+        techSupport: "Technical Support",
+        wechat: "Add WeChat",
+        whatsapp: "WhatsApp",
+        name: "Mr. Liu",
+        phone: "+86-13631528007",
+        email: "liuyuanbin@ylznc.com",
+        wechatId: "ID: yqzkyy",
+        whatsappNum: "+86 15815519261",
+        whatsappName: "Iot Auto Mate",
+    },
+}[lang];
+---
+
+<div class="float-contact-container" id="floatContact">
+    <!-- Expanded Content -->
+    <div class="contact-panel">
+        <div class="panel-section">
+            <div class="section-title">
+                <span class="icon">👤</span>
+                {content.techSupport}
+            </div>
+            <div class="section-content tech-grid">
+                <div class="tech-name">
+                    <p class="name">{content.name}</p>
+                </div>
+                <div class="tech-info">
+                    <p class="phone">
+                        <a href={`tel:${content.phone.replace(/-/g, "")}`}
+                            >{content.phone}</a
+                        >
+                    </p>
+                    <p class="email">
+                        <a href={`mailto:${content.email}`}>{content.email}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-row">
+            <div class="panel-section">
+                <div class="section-title">
+                    {content.wechat}
+                </div>
+                <div class="section-content qr-row">
+                    <div class="qr-wrapper">
+                        <img src="/images/wechat.png" alt="WeChat QR" />
+                        <p class="id-text">{content.wechatId}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <div class="section-title">
+                    {content.whatsapp}
+                </div>
+                <div class="section-content qr-row">
+                    <div class="qr-wrapper">
+                        <img src="/images/whatsapp.jpg" alt="WhatsApp QR" />
+                        <p class="id-text">{content.whatsappNum}</p>
+                        <p class="sub-text">{content.whatsappName}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Button -->
+    <div class="contact-trigger" role="button" aria-label={content.contact}>
+        <svg
+            xmlns="http://www.w3.org/2003/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <path
+                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+            ></path>
+        </svg>
+        <span class="btn-text">{content.contact}</span>
+    </div>
+</div>
+
+<style>
+    .float-contact-container {
+        position: fixed;
+        right: 32px;
+        bottom: 32px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .contact-trigger {
+        width: 64px;
+        height: 64px;
+        border-radius: 32px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        box-shadow: 0 4px 20px rgba(0, 102, 204, 0.3);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+    }
+
+    .btn-text {
+        font-size: 12px;
+        font-weight: 600;
+        margin-top: 2px;
+    }
+
+    .contact-trigger:hover {
+        transform: scale(1.1);
+        background: var(--primary-dark);
+        box-shadow: 0 8px 30px rgba(0, 102, 204, 0.4);
+    }
+
+    .contact-panel {
+        position: absolute;
+        bottom: 80px;
+        right: 0;
+        width: 380px;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(0, 102, 204, 0.1);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px) scale(0.95);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-origin: bottom right;
+    }
+
+    .float-contact-container:hover .contact-panel {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+    }
+
+    .panel-section {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .panel-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        padding-top: 20px;
+    }
+
+    .panel-row .panel-section {
+        margin-bottom: 0;
+    }
+
+    .panel-row .section-title {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .panel-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .section-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding-bottom: 8px;
+    }
+
+    .icon {
+        font-size: 18px;
+    }
+
+    .section-content {
+        font-size: 14px;
+        color: var(--text-muted);
+    }
+
+    .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        padding: 0 10px;
+    }
+
+    .tech-name {
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        padding-right: 20px;
+    }
+
+    .tech-info p {
+        margin: 2px 0;
+    }
+
+    .section-content p {
+        margin: 4px 0;
+    }
+
+    .name {
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+
+    .phone a,
+    .email a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    .phone a:hover,
+    .email a:hover {
+        text-decoration: underline;
+    }
+
+    .qr-row {
+        display: flex;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .qr-wrapper {
+        text-align: center;
+    }
+
+    .qr-wrapper img {
+        width: 120px;
+        height: 120px;
+        border-radius: 8px;
+        margin-bottom: 2px;
+    }
+
+    .id-text {
+        font-weight: 600;
+        color: var(--text-dark);
+        font-size: 13px;
+        margin-top: 0 !important;
+    }
+
+    .sub-text {
+        font-size: 12px;
+        color: var(--text-light);
+        margin-top: 2px !important;
+    }
+
+    @media (max-width: 768px) {
+        .float-contact-container {
+            right: 20px;
+            bottom: 20px;
+        }
+
+        .contact-trigger {
+            width: 56px;
+            height: 56px;
+        }
+
+        .contact-panel {
+            width: calc(100vw - 40px);
+            max-width: 380px;
+            bottom: 72px;
+            padding: 20px;
+        }
+
+        .panel-row {
+            gap: 10px;
+        }
+    }
+</style>
